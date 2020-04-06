@@ -39,34 +39,38 @@ public class Player : MonoBehaviour
     void Start()
     {
         SetModeWait();
+
+        faceColor[0].material.color = Color.red;
     }
 
     private void SetModeWait()
     {
         DoAction = DoActionWait;
-
-        
     }
 
     private void DoActionWait()
     {
         if (Input.GetKeyDown(up))
         {
+            lastMove = MoveDir.up;
             orientation = Vector3.forward;
             SetModeMove();
         }
         else if (Input.GetKeyDown(down))
         {
+            lastMove = MoveDir.down;
             orientation = Vector3.back;
             SetModeMove();
         }
         else if (Input.GetKeyDown(right))
         {
+            lastMove = MoveDir.right;
             orientation = Vector3.right;
             SetModeMove();
         }
         else if (Input.GetKeyDown(left))
         {
+            lastMove = MoveDir.left;
             orientation = Vector3.left;
             SetModeMove();
         }
@@ -108,6 +112,8 @@ public class Player : MonoBehaviour
         {
             SetModeWait();
 
+            Cube.transform.eulerAngles = Vector3.zero;
+            UpdateColor(lastMove);
         }
     }
 
@@ -118,5 +124,41 @@ public class Player : MonoBehaviour
         else if (orientation == Vector3.back) axis = Vector3.left;
         else axis = Vector3.forward;
 
+    }
+
+    public Renderer[] faceColor;
+    public MoveDir lastMove;
+
+    private void UpdateColor(MoveDir moveDir)
+    {
+        Color tmpColor = faceColor[0].material.color;
+
+        switch (moveDir)
+        {
+            case MoveDir.down:
+                faceColor[0].material.color = faceColor[4].material.color;
+                faceColor[4].material.color = faceColor[1].material.color;
+                faceColor[1].material.color = faceColor[3].material.color;
+                faceColor[3].material.color = tmpColor;
+                break;
+            case MoveDir.up:
+                faceColor[0].material.color = faceColor[3].material.color;
+                faceColor[3].material.color = faceColor[1].material.color;
+                faceColor[1].material.color = faceColor[4].material.color;
+                faceColor[4].material.color = tmpColor;
+                break;
+            case MoveDir.left:
+                faceColor[0].material.color = faceColor[2].material.color;
+                faceColor[2].material.color = faceColor[1].material.color;
+                faceColor[1].material.color = faceColor[5].material.color;
+                faceColor[5].material.color = tmpColor;
+                break;
+            case MoveDir.right:
+                faceColor[0].material.color = faceColor[5].material.color;
+                faceColor[5].material.color = faceColor[1].material.color;
+                faceColor[1].material.color = faceColor[2].material.color;
+                faceColor[2].material.color = tmpColor;
+                break;
+        }
     }
 }

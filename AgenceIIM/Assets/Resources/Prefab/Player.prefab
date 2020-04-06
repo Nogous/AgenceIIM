@@ -52,6 +52,14 @@ MonoBehaviour:
   right: 100
   left: 113
   Cube: {fileID: 2519804550802159510}
+  faceColor:
+  - {fileID: 2519804549073736232}
+  - {fileID: 2519804550788158272}
+  - {fileID: 2519804548927062628}
+  - {fileID: 2519804549293759656}
+  - {fileID: 2519804550852881534}
+  - {fileID: 2519804549293775947}
+  lastMove: 0
 --- !u!1 &2519804548927062649
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +529,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2519804550802159511}
-  - component: {fileID: 2519804550802159508}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -549,29 +556,6 @@ Transform:
   m_Father: {fileID: 2519804548909918936}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2519804550802159508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2519804550802159510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f91a5df56a9c7d94198a815fe0a0d615, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  up: 119
-  down: 115
-  right: 100
-  left: 97
-  faceColor:
-  - {fileID: 2519804549073736232}
-  - {fileID: 2519804550788158272}
-  - {fileID: 2519804548927062628}
-  - {fileID: 2519804549293759656}
-  - {fileID: 2519804550852881534}
-  - {fileID: 2519804549293775947}
 --- !u!1 &2519804550852881523
 GameObject:
   m_ObjectHideFlags: 0
