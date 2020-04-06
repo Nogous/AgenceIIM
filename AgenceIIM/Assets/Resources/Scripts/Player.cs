@@ -50,25 +50,25 @@ public class Player : MonoBehaviour
 
     private void DoActionWait()
     {
-        if (Input.GetKeyDown(up))
+        if (Input.GetKey(up))
         {
             lastMove = MoveDir.up;
             orientation = Vector3.forward;
             SetModeMove();
         }
-        else if (Input.GetKeyDown(down))
+        else if (Input.GetKey(down))
         {
             lastMove = MoveDir.down;
             orientation = Vector3.back;
             SetModeMove();
         }
-        else if (Input.GetKeyDown(right))
+        else if (Input.GetKey(right))
         {
             lastMove = MoveDir.right;
             orientation = Vector3.right;
             SetModeMove();
         }
-        else if (Input.GetKeyDown(left))
+        else if (Input.GetKey(left))
         {
             lastMove = MoveDir.left;
             orientation = Vector3.left;
