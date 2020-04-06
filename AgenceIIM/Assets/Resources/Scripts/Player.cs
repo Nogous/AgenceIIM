@@ -26,6 +26,15 @@ public class Player : MonoBehaviour
 
     private Action DoAction;
 
+    [SerializeField] private KeyCode up = KeyCode.Z;
+    [SerializeField] private KeyCode down = KeyCode.S;
+    [SerializeField] private KeyCode right = KeyCode.D;
+    [SerializeField] private KeyCode left = KeyCode.Q;
+
+    [SerializeField] private GameObject Cube;
+
+    private Quaternion newCubeRot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,26 +44,28 @@ public class Player : MonoBehaviour
     private void SetModeWait()
     {
         DoAction = DoActionWait;
+
+        
     }
 
     private void DoActionWait()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(up))
         {
             orientation = Vector3.forward;
             SetModeMove();
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(down))
         {
             orientation = Vector3.back;
             SetModeMove();
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(right))
         {
             orientation = Vector3.right;
             SetModeMove();
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(left))
         {
             orientation = Vector3.left;
             SetModeMove();
@@ -73,10 +84,8 @@ public class Player : MonoBehaviour
 
         _elapsedTime = 0;
 
-        transform.rotation = zeroRot;
-
         direction = transform.position + orientation;
-        previousRot = transform.rotation;
+        previousRot = Cube.transform.rotation;
         addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
         previousPos = transform.position;
 
@@ -91,11 +100,15 @@ public class Player : MonoBehaviour
 
         transform.position = Vector3.Lerp(previousPos, direction, ratio);
 
-        transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
+        Cube.transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
 
         transform.position = new Vector3(transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), transform.position.z);
 
-        if (_elapsedTime >= _moveTime) SetModeWait();
+        if (_elapsedTime >= _moveTime)
+        {
+            SetModeWait();
+
+        }
     }
 
     private void RotationCheck()
