@@ -12,90 +12,88 @@ public enum MoveDir
 
 public class PlayerColor : MonoBehaviour
 {
-    // controles
-    public KeyCode up = KeyCode.W;
-    public KeyCode down = KeyCode.S;
-    public KeyCode right = KeyCode.D;
-    public KeyCode left = KeyCode.A;
+    public static PlayerColor instance = null;
 
-    // cube
-    public Renderer[] faceColor;
-    // top, bottom, left, up, down, right
-    //    3
-    //  2 0 5 1 
-    //    4
+    public Player player;
+    public Transform focusBottom;
 
-    private void Start()
+    private void Awake()
     {
-        faceColor[0].material.color = Color.red;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        if (Input.GetKeyDown(up))
+        //TestGround();
+    }
+
+    public void TestGround()
+    {
+        Ray ray = new Ray(player.transform.position, focusBottom.localPosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit ,1f))
         {
-            UpdateColor(MoveDir.up);
-            //    0
-            //  2 4 5 3
-            //    1
-        }
-        if (Input.GetKeyDown(down))
-        {
-            UpdateColor(MoveDir.down);
-            //    1
-            //  2 3 5 4
-            //    0
-        }
-        if (Input.GetKeyDown(right))
-        {
-            UpdateColor(MoveDir.right);
-            //    3
-            //  1 2 0 5 
-            //    4
-        }
-        if (Input.GetKeyDown(left))
-        {
-            UpdateColor(MoveDir.left);
-            //    3
-            //  0 5 1 2 
-            //    4
+            if (hit.transform.gameObject.CompareTag("Color"))
+            {
+                player.faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+            }
         }
     }
-    //    3
-    //  2 0 5 1 
-    //    4
 
-    public void UpdateColor(MoveDir moveDir)
+    public void TestNextTile(MoveDir moveDir)
     {
-        Color tmpColor = faceColor[0].material.color;
+        Ray ray = new Ray(player.transform.position, Vector3.forward);
+        Color tmpColor = player.faceColor[4].GetComponent<Renderer>().material.color;
+
+        Ray rayBottom = new Ray(player.transform.position, focusBottom.localPosition);
+        RaycastHit hitBottom;
+
+        if (Physics.Raycast(rayBottom, out hitBottom, 1f))
+        {
+            hitBottom.transform.gameObject.SetActive(false);
+        }
 
         switch (moveDir)
         {
-            case MoveDir.up:
-                faceColor[0].material.color = faceColor[4].material.color;
-                faceColor[4].material.color = faceColor[1].material.color;
-                faceColor[1].material.color = faceColor[3].material.color;
-                faceColor[3].material.color = tmpColor;
-                break;
             case MoveDir.down:
-                faceColor[0].material.color = faceColor[3].material.color;
-                faceColor[3].material.color = faceColor[1].material.color;
-                faceColor[1].material.color = faceColor[4].material.color;
-                faceColor[4].material.color = tmpColor;
+                ray = new Ray(player.transform.position, Vector3.back);
+                tmpColor = player.faceColor[3].GetComponent<Renderer>().material.color;
                 break;
             case MoveDir.right:
-                faceColor[0].material.color = faceColor[2].material.color;
-                faceColor[2].material.color = faceColor[1].material.color;
-                faceColor[1].material.color = faceColor[5].material.color;
-                faceColor[5].material.color = tmpColor;
+                ray = new Ray(player.transform.position, Vector3.right);
+                tmpColor = player.faceColor[2].GetComponent<Renderer>().material.color;
                 break;
             case MoveDir.left:
-                faceColor[0].material.color = faceColor[5].material.color;
-                faceColor[5].material.color = faceColor[1].material.color;
-                faceColor[1].material.color = faceColor[2].material.color;
-                faceColor[2].material.color = tmpColor;
+                ray = new Ray(player.transform.position, Vector3.left);
+                tmpColor = player.faceColor[5].GetComponent<Renderer>().material.color;
                 break;
+        }
+
+        Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (hit.transform.gameObject.CompareTag("Enemy"))
+            {
+                if (tmpColor == hit.transform.gameObject.GetComponent<Renderer>().material.color)
+                {
+                    hit.transform.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Debug.Log("You lose");
+                    player.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }
