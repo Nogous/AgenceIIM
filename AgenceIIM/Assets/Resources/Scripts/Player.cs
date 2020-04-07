@@ -55,24 +55,28 @@ public class Player : MonoBehaviour
             lastMove = MoveDir.up;
             orientation = Vector3.forward;
             SetModeMove();
+            PlayerColor.instance.TestNextTile(MoveDir.up);
         }
         else if (Input.GetKey(down))
         {
             lastMove = MoveDir.down;
             orientation = Vector3.back;
             SetModeMove();
+            PlayerColor.instance.TestNextTile(MoveDir.down);
         }
         else if (Input.GetKey(right))
         {
             lastMove = MoveDir.right;
             orientation = Vector3.right;
             SetModeMove();
+            PlayerColor.instance.TestNextTile(MoveDir.right);
         }
         else if (Input.GetKey(left))
         {
             lastMove = MoveDir.left;
             orientation = Vector3.left;
             SetModeMove();
+            PlayerColor.instance.TestNextTile(MoveDir.left);
         }
     }
 
@@ -114,6 +118,8 @@ public class Player : MonoBehaviour
 
             Cube.transform.eulerAngles = Vector3.zero;
             UpdateColor(lastMove);
+
+            PlayerColor.instance.TestGround();
         }
     }
 
