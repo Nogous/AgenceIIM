@@ -88,6 +88,11 @@ public class PlayerColor : MonoBehaviour
                 {
                     hit.transform.gameObject.SetActive(false);
                 }
+                else
+                {
+                    Debug.Log("You lose");
+                    player.gameObject.SetActive(false);
+                }
             }
         }
     }
