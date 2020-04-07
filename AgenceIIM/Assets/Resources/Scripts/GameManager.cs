@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(resetGameKey))
         {
-            player.Reset();
+            player.gameObject.SetActive(true);
+            player.ResetPlayer();
             ResetCubes();
         }
     }

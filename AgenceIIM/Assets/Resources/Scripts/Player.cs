@@ -68,13 +68,14 @@ public class Player : MonoBehaviour
         SetModeWait();
     }
 
-    public void Reset()
+    public void ResetPlayer()
     {
         for (int i = faceColor.Length; i-- > 0;)
         {
             faceColor[i].material.color = initColor[i];
         }
         transform.position = initPos;
+        SetModeWait();
     }
 
     private void SetModeWait()
