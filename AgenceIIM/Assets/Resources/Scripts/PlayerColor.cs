@@ -44,6 +44,12 @@ public class PlayerColor : MonoBehaviour
             if (hit.transform.gameObject.CompareTag("Color"))
             {
                 player.faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                hit.transform.gameObject.SetActive(false);
+            }
+
+            if (hit.transform.gameObject.CompareTag("Ground"))
+            {
+                hit.transform.gameObject.SetActive(false);
             }
         }
     }
@@ -51,17 +57,21 @@ public class PlayerColor : MonoBehaviour
     public void TestNextTile(MoveDir moveDir)
     {
         Ray ray = new Ray(player.transform.position, Vector3.forward);
+        Color tmpColor = player.faceColor[4].GetComponent<Renderer>().material.color;
 
         switch (moveDir)
         {
             case MoveDir.down:
                 ray = new Ray(player.transform.position, Vector3.back);
+                tmpColor = player.faceColor[3].GetComponent<Renderer>().material.color;
                 break;
             case MoveDir.right:
                 ray = new Ray(player.transform.position, Vector3.right);
+                tmpColor = player.faceColor[2].GetComponent<Renderer>().material.color;
                 break;
             case MoveDir.left:
                 ray = new Ray(player.transform.position, Vector3.left);
+                tmpColor = player.faceColor[5].GetComponent<Renderer>().material.color;
                 break;
         }
 
@@ -70,9 +80,12 @@ public class PlayerColor : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.CompareTag("Color"))
+            if (hit.transform.gameObject.CompareTag("Enemy"))
             {
-                player.faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                if (tmpColor == hit.transform.gameObject.GetComponent<Renderer>().material.color)
+                {
+                    hit.transform.gameObject.SetActive(false);
+                }
             }
         }
     }
