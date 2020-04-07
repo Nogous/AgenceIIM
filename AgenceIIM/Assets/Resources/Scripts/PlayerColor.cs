@@ -44,12 +44,6 @@ public class PlayerColor : MonoBehaviour
             if (hit.transform.gameObject.CompareTag("Color"))
             {
                 player.faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
-                hit.transform.gameObject.SetActive(false);
-            }
-
-            if (hit.transform.gameObject.CompareTag("Ground"))
-            {
-                hit.transform.gameObject.SetActive(false);
             }
         }
     }
@@ -58,6 +52,14 @@ public class PlayerColor : MonoBehaviour
     {
         Ray ray = new Ray(player.transform.position, Vector3.forward);
         Color tmpColor = player.faceColor[4].GetComponent<Renderer>().material.color;
+
+        Ray rayBottom = new Ray(player.transform.position, focusBottom.localPosition);
+        RaycastHit hitBottom;
+
+        if (Physics.Raycast(rayBottom, out hitBottom, 1f))
+        {
+            hitBottom.transform.gameObject.SetActive(false);
+        }
 
         switch (moveDir)
         {
