@@ -150,7 +150,7 @@ public class Player : MonoBehaviour
 
         Cube.transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
 
-        transform.position = new Vector3(transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), transform.position.z);
+        Cube.transform.position = new Vector3(Cube.transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), Cube.transform.position.z);
 
         if (_elapsedTime >= _moveTime)
         {
