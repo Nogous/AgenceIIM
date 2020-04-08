@@ -7,6 +7,13 @@ public class Cube : MonoBehaviour
     private Vector3 initPos;
     private Quaternion initRot;
 
+    [SerializeField] private bool isEnemy = false;
+
+    [SerializeField] private bool isBreakable = false;
+
+    [SerializeField] private int colorPotencial = 0;
+    [SerializeField] private Color color = Color.white;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -29,4 +36,61 @@ public class Cube : MonoBehaviour
         transform.position = initPos;
         transform.rotation = initRot;
     }
+
+    #region Explosion
+
+    [SerializeField] private float cubeSize = 0.2f;
+    [SerializeField] private int cubesInRow = 5;
+
+    public void Explode(bool isPlayer = false)
+    {
+        if (!isPlayer)
+        {
+            if (!isBreakable) return;
+
+            //make object disappear
+            gameObject.SetActive(false);
+        }
+
+        // loop 3 times to create 5x5x5 pices un x,y,z coordonate
+        for (int i = cubesInRow; i-->0;)
+        {
+            for (int j = cubesInRow; j-- > 0;)
+            {
+                for (int k = cubesInRow; k-- > 0;)
+                {
+                    CreatePiece(i, j, k);
+                }
+            }
+        }
+    }
+
+    public Color GetColor()
+    {
+        if (colorPotencial > 0)
+        {
+            colorPotencial--;
+            return color;
+        }
+        return Color.white;
+    }
+
+    private void CreatePiece(int x, int y, int z)
+    {
+        // create piece
+        GameObject piece;
+        piece = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        // set scale and position
+        piece.transform.position = transform.position + new Vector3(cubeSize *x, cubeSize * y, cubeSize * z);
+        piece.transform.localScale = Vector3.one * cubeSize;
+
+        // add rigidbody and mass
+        Rigidbody rb = piece.AddComponent<Rigidbody>();
+        rb.mass = cubeSize;
+
+        Destroy(piece, 1.5f);
+    }
+
+    #endregion
 }

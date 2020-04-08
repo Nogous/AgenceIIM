@@ -45,7 +45,8 @@ public class Player : MonoBehaviour
 
 
     [SerializeField] private Renderer[] faceColor = new Renderer[6];
-    private Color[] initColor = new Color[6];
+    private Color[] initColors = new Color[6];
+    [SerializeField] private Color baseColor = Color.white;
     private Vector3 initPos;
     private MoveDir lastMove;
 
@@ -60,7 +61,7 @@ public class Player : MonoBehaviour
         // initialisation depart
         for (int i = faceColor.Length; i-- > 0;)
         {
-            initColor[i] = faceColor[i].material.color;
+            initColors[i] = faceColor[i].material.color;
         }
         initPos = transform.position;
 
@@ -72,7 +73,7 @@ public class Player : MonoBehaviour
     {
         for (int i = faceColor.Length; i-- > 0;)
         {
-            faceColor[i].material.color = initColor[i];
+            faceColor[i].material.color = initColors[i];
         }
         transform.position = initPos;
         SetModeWait();
@@ -81,6 +82,11 @@ public class Player : MonoBehaviour
     private void SetModeWait()
     {
         DoAction = DoActionWait;
+    }
+
+    private void DoActionNull()
+    {
+
     }
 
     private void DoActionWait()
@@ -118,6 +124,21 @@ public class Player : MonoBehaviour
     private void DoActionFall()
     {
         transform.position += Vector3.down * Time.deltaTime;
+
+        DoAction = DoActionNull;
+        StartCoroutine(Death());
+    }
+
+    private IEnumerator Death()
+    {
+        if (gameObject.GetComponent<Cube>())
+        {
+            gameObject.GetComponent<Cube>().Explode(true);
+
+            yield return new WaitForSeconds(2f);
+        }
+
+        GameManager.instance.ResetParty();
     }
 
     // Update is called once per frame
@@ -174,7 +195,6 @@ public class Player : MonoBehaviour
 
     }
 
-
     private void UpdateColor(MoveDir moveDir)
     {
         Color tmpColor = faceColor[0].material.color;
@@ -208,7 +228,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     private void TestGround()
     {
         Ray ray = new Ray(transform.position, Vector3.down);
@@ -216,9 +235,24 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.CompareTag("Color"))
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                tmpCube.Explode();
+
+                Color tmpColor2 = tmpCube.GetColor();
+                if (tmpColor2 != Color.white)
+                {
+                    if (baseColor == faceColor[1].GetComponent<Renderer>().material.color)
+                    {
+                        faceColor[1].GetComponent<Renderer>().material.color = tmpColor2;
+                    }
+                    else
+                    {
+                        DoAction = DoActionNull;
+                        StartCoroutine(Death());
+                    }
+                }
             }
         }
         else
@@ -234,11 +268,6 @@ public class Player : MonoBehaviour
 
         Ray rayBottom = new Ray(transform.position, Vector3.down);
         RaycastHit hitBottom;
-
-        if (Physics.Raycast(rayBottom, out hitBottom, 1f))
-        {
-            hitBottom.transform.gameObject.SetActive(false);
-        }
 
         switch (moveDir)
         {
@@ -256,6 +285,17 @@ public class Player : MonoBehaviour
                 break;
         }
 
+        if (Physics.Raycast(rayBottom, out hitBottom, 1f))
+        {
+            if (hitBottom.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hitBottom.transform.gameObject.GetComponent<Cube>();
+                tmpCube.Explode();
+            }
+        }
+
+        
+
         Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
         RaycastHit hit;
 
@@ -265,12 +305,15 @@ public class Player : MonoBehaviour
             {
                 if (tmpColor == hit.transform.gameObject.GetComponent<Renderer>().material.color)
                 {
-                    hit.transform.gameObject.SetActive(false);
+                    if (hitBottom.transform.gameObject.GetComponent<Cube>())
+                    {
+                        hitBottom.transform.gameObject.GetComponent<Cube>().Explode();
+                    }
                 }
                 else
                 {
-                    Debug.Log("You lose");
-                    gameObject.SetActive(false);
+                    DoAction = DoActionNull;
+                    StartCoroutine(Death());
                 }
             }
         }
