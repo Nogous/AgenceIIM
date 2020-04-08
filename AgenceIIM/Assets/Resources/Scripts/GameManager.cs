@@ -27,10 +27,15 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(resetGameKey))
         {
-            player.gameObject.SetActive(true);
-            player.ResetPlayer();
-            ResetCubes();
+            ResetParty();
         }
+    }
+
+    public void ResetParty()
+    {
+        player.gameObject.SetActive(true);
+        player.ResetPlayer();
+        ResetCubes();
     }
 
     #region Cube

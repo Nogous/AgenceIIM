@@ -45,7 +45,8 @@ public class Player : MonoBehaviour
 
 
     [SerializeField] private Renderer[] faceColor = new Renderer[6];
-    private Color[] initColor = new Color[6];
+    private Color[] initColors = new Color[6];
+    [SerializeField] private Color baseColor;
     private Vector3 initPos;
     private MoveDir lastMove;
 
@@ -60,7 +61,7 @@ public class Player : MonoBehaviour
         // initialisation depart
         for (int i = faceColor.Length; i-- > 0;)
         {
-            initColor[i] = faceColor[i].material.color;
+            initColors[i] = faceColor[i].material.color;
         }
         initPos = transform.position;
 
@@ -72,7 +73,7 @@ public class Player : MonoBehaviour
     {
         for (int i = faceColor.Length; i-- > 0;)
         {
-            faceColor[i].material.color = initColor[i];
+            faceColor[i].material.color = initColors[i];
         }
         transform.position = initPos;
         SetModeWait();
@@ -118,6 +119,15 @@ public class Player : MonoBehaviour
     private void DoActionFall()
     {
         transform.position += Vector3.down * Time.deltaTime;
+
+        // feed back
+
+        DoAction = DoActionDeath;
+    }
+
+    private void DoActionDeath()
+    {
+        GameManager.instance.ResetParty();
     }
 
     // Update is called once per frame
@@ -172,7 +182,6 @@ public class Player : MonoBehaviour
 
     }
 
-
     private void UpdateColor(MoveDir moveDir)
     {
         Color tmpColor = faceColor[0].material.color;
@@ -206,7 +215,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     private void TestGround()
     {
         Ray ray = new Ray(transform.position, Vector3.down);
@@ -216,7 +224,18 @@ public class Player : MonoBehaviour
         {
             if (hit.transform.gameObject.CompareTag("Color"))
             {
-                faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
+                Debug.Log(tmpColor);
+                Debug.Log(baseColor);
+
+                if (baseColor == tmpColor)
+                {
+                    faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                }
+                else
+                {
+                    DoAction = DoActionDeath;
+                }
             }
         }
         else
@@ -267,8 +286,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("You lose");
-                    gameObject.SetActive(false);
+                    DoAction = DoActionDeath;
                 }
             }
         }
