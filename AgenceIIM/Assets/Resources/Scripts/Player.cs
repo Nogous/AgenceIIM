@@ -115,6 +115,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void DoActionFall()
+    {
+        transform.position += Vector3.down * Time.deltaTime;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -213,6 +218,10 @@ public class Player : MonoBehaviour
             {
                 faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
             }
+        }
+        else
+        {
+            DoAction = DoActionFall;
         }
     }
 
