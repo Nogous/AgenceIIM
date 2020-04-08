@@ -16,6 +16,8 @@ public class Cube : MonoBehaviour
     [SerializeField] private Color color = Color.white;
     private Color initColor;
 
+    [SerializeField] private GameObject stain = null;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -46,6 +48,15 @@ public class Cube : MonoBehaviour
         transform.rotation = initRot;
         colorPotencial = initColorPotencial;
         color = initColor;
+    }
+
+    public void ActivateStain(Color tint)
+    {
+        if(colorPotencial > 0)
+        {
+            stain.SetActive(true);
+            stain.GetComponent<Renderer>().material.color = tint;
+        }
     }
 
     #region Explosion

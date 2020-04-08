@@ -338,8 +338,7 @@ public class Player : MonoBehaviour
         {
             if(hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
-                hit.transform.GetChild(0).transform.gameObject.SetActive(true);
-                hit.transform.GetChild(0).transform.gameObject.GetComponent<Renderer>().material.color = faceColor[1].GetComponent<Renderer>().material.color;
+                hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
             }
         }
 
