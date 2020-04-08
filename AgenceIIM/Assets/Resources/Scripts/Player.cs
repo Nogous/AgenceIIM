@@ -159,6 +159,8 @@ public class Player : MonoBehaviour
             Cube.transform.eulerAngles = Vector3.zero;
             UpdateColor(lastMove);
 
+            SplashPaint();
+
             TestGround();
         }
     }
@@ -272,5 +274,19 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SplashPaint()
+    {
+
+        Ray ray = new Ray(Cube.transform.position, Vector3.down);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, 1f))
+        {
+            if(hit.transform.GetComponent<Renderer>().material.color != faceColor[1].GetComponent<Renderer>().material.color && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
+            hit.transform.GetComponent<Renderer>().material.color = faceColor[1].GetComponent<Renderer>().material.color;
+        }
+
     }
 }
