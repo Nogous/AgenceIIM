@@ -180,9 +180,9 @@ public class Player : MonoBehaviour
             Cube.transform.eulerAngles = Vector3.zero;
             UpdateColor(lastMove);
 
-            SplashPaint();
-
             TestGround();
+
+            SplashPaint();
         }
     }
 
@@ -241,8 +241,10 @@ public class Player : MonoBehaviour
                 tmpCube.Explode();
 
                 Color tmpColor2 = tmpCube.GetColor();
+
                 if (tmpColor2 != Color.white)
                 {
+
                     if (baseColor == faceColor[1].GetComponent<Renderer>().material.color)
                     {
                         faceColor[1].GetComponent<Renderer>().material.color = tmpColor2;
@@ -325,10 +327,13 @@ public class Player : MonoBehaviour
         Ray ray = new Ray(Cube.transform.position, Vector3.down);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit, 1f))
+        if (Physics.Raycast(ray, out hit, 1f))
         {
-            if(hit.transform.GetComponent<Renderer>().material.color != faceColor[1].GetComponent<Renderer>().material.color && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
-            hit.transform.GetComponent<Renderer>().material.color = faceColor[1].GetComponent<Renderer>().material.color;
+            if(hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
+            {
+                hit.transform.GetChild(0).transform.gameObject.SetActive(true);
+                hit.transform.GetChild(0).transform.gameObject.GetComponent<Renderer>().material.color = faceColor[1].GetComponent<Renderer>().material.color;
+            }
         }
 
     }
