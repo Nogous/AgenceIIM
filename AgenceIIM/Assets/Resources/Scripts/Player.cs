@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Renderer[] faceColor = new Renderer[6];
     private Color[] initColors = new Color[6];
-    [SerializeField] private Color baseColor;
+    [SerializeField] private Color baseColor = Color.white;
     private Vector3 initPos;
     private MoveDir lastMove;
 
@@ -82,6 +82,11 @@ public class Player : MonoBehaviour
     private void SetModeWait()
     {
         DoAction = DoActionWait;
+    }
+
+    private void DoActionNull()
+    {
+
     }
 
     private void DoActionWait()
@@ -120,13 +125,19 @@ public class Player : MonoBehaviour
     {
         transform.position += Vector3.down * Time.deltaTime;
 
-        // feed back
-
-        DoAction = DoActionDeath;
+        DoAction = DoActionNull;
+        StartCoroutine(Death());
     }
 
-    private void DoActionDeath()
+    private IEnumerator Death()
     {
+        if (gameObject.GetComponent<Cube>())
+        {
+            gameObject.GetComponent<Cube>().Explode(true);
+
+            yield return new WaitForSeconds(2f);
+        }
+
         GameManager.instance.ResetParty();
     }
 
@@ -222,19 +233,23 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.CompareTag("Color"))
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
-                Debug.Log(tmpColor);
-                Debug.Log(baseColor);
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                tmpCube.Explode();
 
-                if (baseColor == tmpColor)
+                Color tmpColor2 = tmpCube.GetColor();
+                if (tmpColor2 != Color.white)
                 {
-                    faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
-                }
-                else
-                {
-                    DoAction = DoActionDeath;
+                    if (baseColor == faceColor[1].GetComponent<Renderer>().material.color)
+                    {
+                        faceColor[1].GetComponent<Renderer>().material.color = tmpColor2;
+                    }
+                    else
+                    {
+                        DoAction = DoActionNull;
+                        StartCoroutine(Death());
+                    }
                 }
             }
         }
@@ -252,11 +267,6 @@ public class Player : MonoBehaviour
         Ray rayBottom = new Ray(transform.position, Vector3.down);
         RaycastHit hitBottom;
 
-        if (Physics.Raycast(rayBottom, out hitBottom, 1f))
-        {
-            hitBottom.transform.gameObject.SetActive(false);
-        }
-
         switch (moveDir)
         {
             case MoveDir.down:
@@ -273,6 +283,17 @@ public class Player : MonoBehaviour
                 break;
         }
 
+        if (Physics.Raycast(rayBottom, out hitBottom, 1f))
+        {
+            if (hitBottom.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hitBottom.transform.gameObject.GetComponent<Cube>();
+                tmpCube.Explode();
+            }
+        }
+
+        
+
         Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
         RaycastHit hit;
 
@@ -282,11 +303,15 @@ public class Player : MonoBehaviour
             {
                 if (tmpColor == hit.transform.gameObject.GetComponent<Renderer>().material.color)
                 {
-                    hit.transform.gameObject.SetActive(false);
+                    if (hitBottom.transform.gameObject.GetComponent<Cube>())
+                    {
+                        hitBottom.transform.gameObject.GetComponent<Cube>().Explode();
+                    }
                 }
                 else
                 {
-                    DoAction = DoActionDeath;
+                    DoAction = DoActionNull;
+                    StartCoroutine(Death());
                 }
             }
         }
