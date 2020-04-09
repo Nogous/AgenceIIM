@@ -216,6 +216,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 0
+  isBreakable: 0
+  colorPotencial: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  cubeSize: 0.2
+  cubesInRow: 5
 --- !u!1 &551800580
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,6 +326,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 0
+  isBreakable: 0
+  colorPotencial: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  cubeSize: 0.2
+  cubesInRow: 5
+--- !u!1 &699909736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 699909741}
+  - component: {fileID: 699909740}
+  - component: {fileID: 699909739}
+  - component: {fileID: 699909738}
+  - component: {fileID: 699909737}
+  m_Layer: 0
+  m_Name: Cube (10)
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &699909737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699909736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 1
+  isBreakable: 0
+  colorPotencial: 5
+  color: {r: 1, g: 0, b: 0, a: 1}
+  cubeSize: 0.2
+  cubesInRow: 5
+--- !u!65 &699909738
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699909736}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &699909739
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699909736}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &699909740
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699909736}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &699909741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699909736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: -1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &707459254
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +659,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 744079596}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1251786922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85e8db1d5a82d44478f31c7760c2d815, type: 3}
@@ -612,6 +734,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1251786922 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2519804548909918938, guid: 842e2c31424e86c4789bb65fd935067e,
+    type: 3}
+  m_PrefabInstance: {fileID: 744079596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1251786924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251786922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 0
+  isBreakable: 1
+  colorPotencial: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  cubeSize: 0.2
+  cubesInRow: 5
 --- !u!1 &1328134814
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +862,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 0
+  isBreakable: 0
+  colorPotencial: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  cubeSize: 0.2
+  cubesInRow: 5
 --- !u!1 &1393171132
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,6 +972,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 0
+  isBreakable: 1
+  colorPotencial: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  cubeSize: 0.2
+  cubesInRow: 5
 --- !u!1 &1710868593
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,6 +1082,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 0
+  isBreakable: 0
+  colorPotencial: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  cubeSize: 0.2
+  cubesInRow: 5
 --- !u!1 &1733067404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,6 +1192,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 0
+  isBreakable: 1
+  colorPotencial: 0
+  color: {r: 1, g: 0, b: 0, a: 1}
+  cubeSize: 0.2
+  cubesInRow: 5
 --- !u!1 &1741148472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,6 +1302,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 0
+  isBreakable: 0
+  colorPotencial: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  cubeSize: 0.2
+  cubesInRow: 5
 --- !u!1001 &2009963308248119568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1193,6 +1369,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: isEnemy
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2009963308243871468, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
@@ -1262,6 +1458,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4119042190230056089, guid: e3eaf28da5d96bb42a67f7c987c1d632,
+        type: 3}
+      propertyPath: color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4119042190230056089, guid: e3eaf28da5d96bb42a67f7c987c1d632,
+        type: 3}
+      propertyPath: color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4119042190230056089, guid: e3eaf28da5d96bb42a67f7c987c1d632,
+        type: 3}
+      propertyPath: color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4119042190230056089, guid: e3eaf28da5d96bb42a67f7c987c1d632,
+        type: 3}
+      propertyPath: colorPotencial
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4119042190230056092, guid: e3eaf28da5d96bb42a67f7c987c1d632,
         type: 3}
