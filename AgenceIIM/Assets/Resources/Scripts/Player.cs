@@ -13,6 +13,8 @@ public enum MoveDir
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement Settings")]
+
     private float _elapsedTime = 0;
 
     [SerializeField] private float _moveTime = 0.2f;
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
 
     private Quaternion newCubeRot;
 
+    [Header("Color Settings")]
 
     [SerializeField] private Renderer[] faceColor = new Renderer[6];
     private Color[] initColors = new Color[6];
@@ -67,6 +70,11 @@ public class Player : MonoBehaviour
         SetModeWait();
     }
 
+    void Update()
+    {
+        DoAction();
+    }
+
     public void ResetPlayer()
     {
         for (int i = faceColor.Length; i-- > 0;)
@@ -77,14 +85,18 @@ public class Player : MonoBehaviour
         SetModeWait();
     }
 
-    private void SetModeWait()
-    {
-        DoAction = DoActionWait;
-    }
+    #region Actions
 
     private void DoActionNull()
     {
 
+    }
+
+    #region Wait
+
+    private void SetModeWait()
+    {
+        DoAction = DoActionWait;
     }
 
     private void DoActionWait()
@@ -119,6 +131,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Fall
+
     private void DoActionFall()
     {
         transform.position += Vector3.down * Time.deltaTime;
@@ -126,6 +142,8 @@ public class Player : MonoBehaviour
         DoAction = DoActionNull;
         StartCoroutine(Death());
     }
+
+    #endregion
 
     private IEnumerator Death()
     {
@@ -145,10 +163,8 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        DoAction();
-    }
+
+    #region Move
 
     private void SetModeMove()
     {
@@ -177,7 +193,7 @@ public class Player : MonoBehaviour
 
         Cube.transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
 
-        transform.position = new Vector3(transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), transform.position.z);
+        Cube.transform.position = new Vector3(Cube.transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), Cube.transform.position.z);
 
         if (_elapsedTime >= _moveTime)
         {
@@ -188,6 +204,8 @@ public class Player : MonoBehaviour
             UpdateColor();
 
             TestTile();
+
+            SplashPaint();
         }
     }
 
@@ -199,6 +217,10 @@ public class Player : MonoBehaviour
         else axis = Vector3.forward;
 
     }
+
+    #endregion
+
+    #endregion
 
     private void UpdateColor()
     {
@@ -250,6 +272,7 @@ public class Player : MonoBehaviour
                 tmpColor = tmpCube.GetColor();
                 if (tmpColor != Color.white)
                 {
+
                     if (baseColor == faceColor[1].GetComponent<Renderer>().material.color)
                     {
                         faceColor[1].GetComponent<Renderer>().material.color = tmpColor;
@@ -339,5 +362,22 @@ public class Player : MonoBehaviour
         {
             DoAction = DoActionFall;
         }
+    }
+
+    private void SplashPaint()
+    {
+
+        Ray ray = new Ray(Cube.transform.position, Vector3.down);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if(hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
+            {
+                hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
+                
+            }
+        }
+
     }
 }
