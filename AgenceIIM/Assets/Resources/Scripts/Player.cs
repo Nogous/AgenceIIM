@@ -321,8 +321,11 @@ public class Player : MonoBehaviour
                 
                 if (tmpColor != baseColor)
                 {
-                    DoAction = DoActionNull;
-                    StartCoroutine(Death());
+                    if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
+                    {
+                        DoAction = DoActionNull;
+                        StartCoroutine(Death());
+                    }
                 }
                 else
                 {
