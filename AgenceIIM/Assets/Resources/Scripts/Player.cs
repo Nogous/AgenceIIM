@@ -386,7 +386,7 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
+            if (hit.transform.GetComponent<Cube>() != null && hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
                 hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
 
