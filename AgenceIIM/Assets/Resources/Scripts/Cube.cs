@@ -9,11 +9,12 @@ public class Cube : MonoBehaviour
     private Vector3 initPos;
     private Quaternion initRot;
 
-    [SerializeField] private bool isEnemy = false;
+    public bool isEnemy = false;
+    public Color enemyColor;
 
     [SerializeField] private bool isBreakable = false;
 
-    [SerializeField] private int colorPotencial = 0;
+    public int colorPotencial = 0;
     private int initColorPotencial;
     [SerializeField] private Color color = Color.white;
     private Color initColor;
@@ -41,6 +42,7 @@ public class Cube : MonoBehaviour
         initRot = transform.rotation;
         initColorPotencial = colorPotencial;
         initColor = color;
+        enemyColor = color;
 
         if (color != Color.white)
         {
