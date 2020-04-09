@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
+    [Header("General Settings")]
+
     private Vector3 initPos;
     private Quaternion initRot;
 
@@ -16,7 +18,16 @@ public class Cube : MonoBehaviour
     [SerializeField] private Color color = Color.white;
     private Color initColor;
 
+    [Header("Effect Settings")]
+
     [SerializeField] private GameObject stain = null;
+    private Vector3 stainScale = Vector3.one;
+    private Color stainColor = Color.white;
+
+    [SerializeField] private AnimationCurve fadeCurve = null;
+    [SerializeField] private AnimationCurve shrinkCurve = null;
+
+    private float elapsedTime = 0;
 
     // Start is called before the first frame update
     private void Awake()
@@ -40,6 +51,12 @@ public class Cube : MonoBehaviour
     private void Start()
     {
         GameManager.instance.AddCube(this);
+
+        if (!isEnemy)
+        {
+            stainScale = stain.transform.localScale;
+            stainColor = stain.GetComponent<Renderer>().material.color;
+        }
     }
 
     public void ResetCube()
@@ -50,14 +67,52 @@ public class Cube : MonoBehaviour
         color = initColor;
     }
 
+    #region Effects
+
     public void ActivateStain(Color tint)
     {
-        if(colorPotencial > 0)
+        if(colorPotencial == 0 && !isEnemy)
         {
             stain.SetActive(true);
             stain.GetComponent<Renderer>().material.color = tint;
+            StartCoroutine(StainRemove());
         }
     }
+
+    private IEnumerator StainRemove()
+    {
+        Color colorFade = stain.GetComponent<Renderer>().material.color;
+        Vector3 sizeShrink = stainScale;
+
+        while (stain.GetComponent<Renderer>().material.color.a > 0)
+        {           
+            elapsedTime += Time.deltaTime;
+
+            colorFade.a = fadeCurve.Evaluate(elapsedTime);
+            sizeShrink.x = shrinkCurve.Evaluate(elapsedTime);
+            sizeShrink.y = shrinkCurve.Evaluate(elapsedTime);
+
+            stain.transform.localScale = sizeShrink;
+            stain.GetComponent<Renderer>().material.color = colorFade;
+
+            yield return null;
+        }
+
+        StainReset();
+    }
+
+    private void StainReset()
+    {
+        StopCoroutine(StainRemove());
+
+        stain.GetComponent<Renderer>().material.color = stainColor;
+        stain.transform.localScale = stainScale;
+        elapsedTime = 0;
+
+        stain.SetActive(false);
+    }
+
+    #endregion
 
     #region Explosion
 

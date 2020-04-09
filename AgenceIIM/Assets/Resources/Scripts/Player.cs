@@ -13,6 +13,8 @@ public enum MoveDir
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement Settings")]
+
     private float _elapsedTime = 0;
 
     [SerializeField] private float _moveTime = 0.2f;
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
 
     private Quaternion newCubeRot;
 
+    [Header("Color Settings")]
 
     [SerializeField] private Renderer[] faceColor = new Renderer[6];
     private Color[] initColors = new Color[6];
@@ -67,6 +70,11 @@ public class Player : MonoBehaviour
         SetModeWait();
     }
 
+    void Update()
+    {
+        DoAction();
+    }
+
     public void ResetPlayer()
     {
         for (int i = faceColor.Length; i-- > 0;)
@@ -77,14 +85,18 @@ public class Player : MonoBehaviour
         SetModeWait();
     }
 
-    private void SetModeWait()
-    {
-        DoAction = DoActionWait;
-    }
+    #region Actions
 
     private void DoActionNull()
     {
 
+    }
+
+    #region Wait
+
+    private void SetModeWait()
+    {
+        DoAction = DoActionWait;
     }
 
     private void DoActionWait()
@@ -119,6 +131,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Fall
+
     private void DoActionFall()
     {
         transform.position += Vector3.down * Time.deltaTime;
@@ -126,6 +142,8 @@ public class Player : MonoBehaviour
         DoAction = DoActionNull;
         StartCoroutine(Death());
     }
+
+    #endregion
 
     private IEnumerator Death()
     {
@@ -145,10 +163,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        DoAction();
-    }
+    
 
     private void SetModeMove()
     {
@@ -201,6 +216,8 @@ public class Player : MonoBehaviour
         else axis = Vector3.forward;
 
     }
+
+    #endregion
 
     private void UpdateColor()
     {
@@ -339,6 +356,7 @@ public class Player : MonoBehaviour
             if(hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
                 hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
+                
             }
         }
 
