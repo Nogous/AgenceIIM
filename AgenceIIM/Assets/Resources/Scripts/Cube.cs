@@ -87,6 +87,11 @@ public class Cube : MonoBehaviour
         {
             stain.SetActive(true);
             stain.GetComponent<Renderer>().material.color = tint;
+
+            stain.transform.localScale = stainScale;
+            elapsedTime = 0;
+
+            StopCoroutine(StainRemove());
             StartCoroutine(StainRemove());
         }
     }

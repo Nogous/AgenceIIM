@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Color baseColor = Color.white;
     private MoveDir moveDir;
 
+    [SerializeField] private TrailRenderer trail;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +79,8 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer()
     {
+        trail.gameObject.SetActive(false);
+
         for (int i = faceColor.Length; i-- > 0;)
         {
             faceColor[i].gameObject.SetActive(true);
@@ -97,6 +101,7 @@ public class Player : MonoBehaviour
     private void SetModeWait()
     {
         DoAction = DoActionWait;
+        trail.gameObject.SetActive(true);
     }
 
     private void DoActionWait()
