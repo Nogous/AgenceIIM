@@ -163,7 +163,8 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    
+
+    #region Move
 
     private void SetModeMove()
     {
@@ -216,6 +217,8 @@ public class Player : MonoBehaviour
         else axis = Vector3.forward;
 
     }
+
+    #endregion
 
     #endregion
 
