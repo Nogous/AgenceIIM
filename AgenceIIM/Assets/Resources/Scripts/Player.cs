@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
     {
         for (int i = faceColor.Length; i-- > 0;)
         {
-            faceColor[i].gameObject.SetActive(true);
+            faceColor[i].gameObject.SetActive(false);
         }
 
         if (gameObject.GetComponent<Cube>())

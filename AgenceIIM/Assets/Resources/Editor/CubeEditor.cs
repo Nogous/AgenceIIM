@@ -11,13 +11,12 @@ public class CubeEditor : Editor
     SerializedProperty isBreakable;
     Color color;
 
-    Renderer renderer;
+    private Renderer renderer;
+
+    Cube myCube;
 
     void OnEnable()
     {
-        isEnemy = serializedObject.FindProperty("isEnemy");
-        isBreakable = serializedObject.FindProperty("isBreakable");
-        color = serializedObject.FindProperty("color").colorValue;
     }
 
     public override void OnInspectorGUI()
@@ -25,22 +24,25 @@ public class CubeEditor : Editor
         base.OnInspectorGUI();
         serializedObject.Update();
 
-        EditorGUILayout.PropertyField(isEnemy, new GUIContent("Is Enemy"));
-        EditorGUILayout.PropertyField(isBreakable, new GUIContent("IsBreakable"));
+
+        //isEnemy = serializedObject.FindProperty("isEnemy");
+        //isBreakable = serializedObject.FindProperty("isBreakable");
+
+        //EditorGUILayout.PropertyField(isEnemy, new GUIContent("Is Enemy"));
+        //EditorGUILayout.PropertyField(isBreakable, new GUIContent("IsBreakable"));
         EditorGUILayout.ColorField(color);
 
+        myCube = (Cube)target;
+        color = myCube.color;
+
+
+        renderer = ((Cube)target).GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            renderer.sharedMaterial.color = color;
+        }
 
         serializedObject.ApplyModifiedProperties();
-    }
-
-    void Colorize()
-    {
-        foreach (GameObject obj in Selection.gameObjects)
-        {
-            if (renderer != null)
-            {
-                renderer.sharedMaterial.color = color;
-            }
-        }
     }
 }

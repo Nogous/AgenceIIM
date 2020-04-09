@@ -16,7 +16,7 @@ public class Cube : MonoBehaviour
 
     public int colorPotencial = 0;
     private int initColorPotencial;
-    [SerializeField] private Color color = Color.white;
+    public Color color = Color.white;
     private Color initColor;
 
     [Header("Effect Settings")]
@@ -56,8 +56,17 @@ public class Cube : MonoBehaviour
 
         if (!isEnemy)
         {
-            stainScale = stain.transform.localScale;
-            stainColor = stain.GetComponent<Renderer>().material.color;
+            if (stain != null)
+            {
+                stainScale = stain.transform.localScale;
+                stainColor = stain.GetComponent<Renderer>().material.color;
+            }
+        }
+
+        if (isBreakable)
+        {
+            cubesPivotDistance = cubeSize * cubesInRow / 2;
+            cubesPivot = Vector3.one * cubesPivotDistance;
         }
     }
 
@@ -73,7 +82,8 @@ public class Cube : MonoBehaviour
 
     public void ActivateStain(Color tint)
     {
-        if(colorPotencial == 0 && !isEnemy)
+        if (stain == null) return;
+        if (colorPotencial == 0 && !isEnemy)
         {
             stain.SetActive(true);
             stain.GetComponent<Renderer>().material.color = tint;
@@ -116,6 +126,13 @@ public class Cube : MonoBehaviour
 
     #endregion
 
+    float cubesPivotDistance;
+    Vector3 cubesPivot;
+
+    public float explosionForce = 50f;
+    public float explosionRadius = 4f;
+    public float explosionUpward = 0.04f;
+
     #region Explosion
 
     [SerializeField] private float cubeSize = 0.2f;
@@ -142,6 +159,21 @@ public class Cube : MonoBehaviour
                 }
             }
         }
+
+        // get explosion position
+        Vector3 explosionPos = transform.position;
+        // get colliders in that position and radius
+        Collider[] colliders = Physics.OverlapSphere(explosionPos, explosionRadius);
+        //add explosion force to all colliders in that overlap sphere
+        foreach(Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                // addd explosion force
+                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, explosionUpward);
+            }
+        }
     }
 
     public Color GetColor()
@@ -161,7 +193,7 @@ public class Cube : MonoBehaviour
         piece = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
         // set scale and position
-        piece.transform.position = transform.position + new Vector3(cubeSize *x, cubeSize * y, cubeSize * z);
+        piece.transform.position = transform.position + new Vector3(cubeSize *x, cubeSize * y, cubeSize * z) - cubesPivot;
         piece.transform.localScale = Vector3.one * cubeSize;
 
         // add rigidbody and mass
