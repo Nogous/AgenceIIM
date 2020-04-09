@@ -235,8 +235,10 @@ public class Player : MonoBehaviour
 
     private void LeaveTile()
     {
+        // test destruction de la tile quiter par le joueur
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
+        Color tmpColor;
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
@@ -245,34 +247,20 @@ public class Player : MonoBehaviour
                 Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
                 tmpCube.Explode();
 
-                Color tmpColor2 = tmpCube.GetColor();
-                if (tmpColor2 != Color.white)
+                tmpColor = tmpCube.GetColor();
+                if (tmpColor != Color.white)
                 {
                     if (baseColor == faceColor[1].GetComponent<Renderer>().material.color)
                     {
-                        faceColor[1].GetComponent<Renderer>().material.color = tmpColor2;
-                    }
-                    else
-                    {
-                        DoAction = DoActionNull;
-                        StartCoroutine(Death());
+                        faceColor[1].GetComponent<Renderer>().material.color = tmpColor;
                     }
                 }
             }
         }
-        else
-        {
-            DoAction = DoActionFall;
-        }
-    }
 
-    private void TestTile()
-    {
-        Ray ray = new Ray(transform.position, Vector3.forward);
-        Color tmpColor = faceColor[4].GetComponent<Renderer>().material.color;
-
-        Ray rayBottom = new Ray(transform.position, Vector3.down);
-        RaycastHit hitBottom;
+        // test si enemy sur le passage du joueur
+        ray = new Ray(transform.position, Vector3.forward);
+        tmpColor = faceColor[4].GetComponent<Renderer>().material.color;
 
         switch (moveDir)
         {
@@ -290,37 +278,63 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        if (Physics.Raycast(rayBottom, out hitBottom, 1f))
+        Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
+        if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hitBottom.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                Cube tmpCube = hitBottom.transform.gameObject.GetComponent<Cube>();
-                tmpCube.Explode();
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                if (tmpCube.isEnemy)
+                {
+                    if (tmpColor == tmpCube.enemyColor)
+                    {
+                        tmpCube.Explode();
+                    }
+                    else
+                    {
+                        DoAction = DoActionNull;
+                        StartCoroutine(Death());
+                    }
+                }
             }
         }
+    }
 
-        
+    private void TestTile()
+    {
+        // test tile d'arriver
 
-        Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
+        Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.CompareTag("Enemy"))
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                if (tmpColor == hit.transform.gameObject.GetComponent<Renderer>().material.color)
-                {
-                    if (hitBottom.transform.gameObject.GetComponent<Cube>())
-                    {
-                        hitBottom.transform.gameObject.GetComponent<Cube>().Explode();
-                    }
-                }
-                else
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                if (tmpCube.colorPotencial <= 0) return;
+
+                Debug.Log("Color block");
+
+                Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
+                
+                if (tmpColor != baseColor)
                 {
                     DoAction = DoActionNull;
                     StartCoroutine(Death());
                 }
+                else
+                {
+                    faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                }
+
             }
+
+        }
+        else
+        {
+            DoAction = DoActionFall;
         }
     }
 }

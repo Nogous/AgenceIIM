@@ -29,7 +29,6 @@ public class CubeEditor : Editor
         EditorGUILayout.PropertyField(isBreakable, new GUIContent("IsBreakable"));
         EditorGUILayout.ColorField(color);
 
-        //EditorGUILayout.
 
         serializedObject.ApplyModifiedProperties();
     }
