@@ -15,9 +15,9 @@ public class Player : MonoBehaviour
 {
     [Header("Movement Settings")]
 
-    private float _elapsedTime = 0;
-
     [SerializeField] private float _moveTime = 0.2f;
+
+    private float _elapsedTime = 0;
 
     private Vector3 direction;
     public Vector3 orientation = Vector3.forward;
@@ -106,12 +106,16 @@ public class Player : MonoBehaviour
             orientation = Vector3.forward;
             moveDir = MoveDir.up;
 
+            ApplyStain();
+
             SetModeMove();
         }
         else if (Input.GetKey(down))
         {
             orientation = Vector3.back;
             moveDir = MoveDir.down;
+
+            ApplyStain();
 
             SetModeMove();
         }
@@ -120,13 +124,17 @@ public class Player : MonoBehaviour
             orientation = Vector3.right;
             moveDir = MoveDir.right;
 
+            ApplyStain();
+
             SetModeMove();
         }
         else if (Input.GetKey(left))
         {
             orientation = Vector3.left;
-
             moveDir = MoveDir.left;
+
+            ApplyStain();
+
             SetModeMove();
         }
     }
@@ -205,7 +213,7 @@ public class Player : MonoBehaviour
 
             TestTile();
 
-            SplashPaint();
+            
         }
     }
 
@@ -367,17 +375,22 @@ public class Player : MonoBehaviour
     private void SplashPaint()
     {
 
+        
+
+    }
+
+    private void ApplyStain()
+    {
         Ray ray = new Ray(Cube.transform.position, Vector3.down);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if(hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
+            if (hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
                 hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
-                
+
             }
         }
-
     }
 }
