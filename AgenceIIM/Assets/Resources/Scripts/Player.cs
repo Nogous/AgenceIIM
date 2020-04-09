@@ -47,8 +47,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Renderer[] faceColor = new Renderer[6];
     private Color[] initColors = new Color[6];
     [SerializeField] private Color baseColor = Color.white;
-    private Vector3 initPos;
-    private MoveDir lastMove;
+    private MoveDir moveDir;
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +62,6 @@ public class Player : MonoBehaviour
         {
             initColors[i] = faceColor[i].material.color;
         }
-        initPos = transform.position;
 
         // start move
         SetModeWait();
@@ -73,9 +71,9 @@ public class Player : MonoBehaviour
     {
         for (int i = faceColor.Length; i-- > 0;)
         {
+            faceColor[i].gameObject.SetActive(true);
             faceColor[i].material.color = initColors[i];
         }
-        transform.position = initPos;
         SetModeWait();
     }
 
@@ -93,31 +91,31 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(up))
         {
-            lastMove = MoveDir.up;
             orientation = Vector3.forward;
+            moveDir = MoveDir.up;
+
             SetModeMove();
-            TestNextTile(MoveDir.up);
         }
         else if (Input.GetKey(down))
         {
-            lastMove = MoveDir.down;
             orientation = Vector3.back;
+            moveDir = MoveDir.down;
+
             SetModeMove();
-            TestNextTile(MoveDir.down);
         }
         else if (Input.GetKey(right))
         {
-            lastMove = MoveDir.right;
             orientation = Vector3.right;
+            moveDir = MoveDir.right;
+
             SetModeMove();
-            TestNextTile(MoveDir.right);
         }
         else if (Input.GetKey(left))
         {
-            lastMove = MoveDir.left;
             orientation = Vector3.left;
+
+            moveDir = MoveDir.left;
             SetModeMove();
-            TestNextTile(MoveDir.left);
         }
     }
 
@@ -131,6 +129,11 @@ public class Player : MonoBehaviour
 
     private IEnumerator Death()
     {
+        for (int i = faceColor.Length; i-- > 0;)
+        {
+            faceColor[i].gameObject.SetActive(true);
+        }
+
         if (gameObject.GetComponent<Cube>())
         {
             gameObject.GetComponent<Cube>().Explode(true);
@@ -158,6 +161,9 @@ public class Player : MonoBehaviour
         addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
         previousPos = transform.position;
 
+        // init move
+        LeaveTile();
+
         DoAction = DoActionMove;
     }
 
@@ -175,12 +181,13 @@ public class Player : MonoBehaviour
 
         if (_elapsedTime >= _moveTime)
         {
+            // end move
             SetModeWait();
 
             Cube.transform.eulerAngles = Vector3.zero;
-            UpdateColor(lastMove);
+            UpdateColor();
 
-            TestGround();
+            TestTile();
         }
     }
 
@@ -193,7 +200,7 @@ public class Player : MonoBehaviour
 
     }
 
-    private void UpdateColor(MoveDir moveDir)
+    private void UpdateColor()
     {
         Color tmpColor = faceColor[0].material.color;
 
@@ -226,7 +233,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void TestGround()
+    private void LeaveTile()
     {
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
@@ -259,7 +266,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void TestNextTile(MoveDir moveDir)
+    private void TestTile()
     {
         Ray ray = new Ray(transform.position, Vector3.forward);
         Color tmpColor = faceColor[4].GetComponent<Renderer>().material.color;

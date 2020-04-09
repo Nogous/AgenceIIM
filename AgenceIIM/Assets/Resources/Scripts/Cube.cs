@@ -12,7 +12,9 @@ public class Cube : MonoBehaviour
     [SerializeField] private bool isBreakable = false;
 
     [SerializeField] private int colorPotencial = 0;
+    private int initColorPotencial;
     [SerializeField] private Color color = Color.white;
+    private Color initColor;
 
     // Start is called before the first frame update
     private void Awake()
@@ -24,6 +26,13 @@ public class Cube : MonoBehaviour
 
         transform.position = initPos;
         initRot = transform.rotation;
+        initColorPotencial = colorPotencial;
+        initColor = color;
+
+        if (color != Color.white)
+        {
+            gameObject.GetComponent<Renderer>().material.color = color;
+        }
     }
 
     private void Start()
@@ -35,6 +44,8 @@ public class Cube : MonoBehaviour
     {
         transform.position = initPos;
         transform.rotation = initRot;
+        colorPotencial = initColorPotencial;
+        color = initColor;
     }
 
     #region Explosion
