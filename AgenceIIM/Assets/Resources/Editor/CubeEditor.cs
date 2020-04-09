@@ -22,6 +22,7 @@ public class CubeEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(isEnemy, new GUIContent("Is Enemy"));
