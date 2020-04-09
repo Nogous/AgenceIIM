@@ -6,11 +6,11 @@ public class Cube : MonoBehaviour
 {
     [Header("General Settings")]
 
-    private Vector3 initPos;
-    private Quaternion initRot;
-
     public bool isEnemy = false;
     public Color enemyColor;
+
+    private Vector3 initPos;
+    private Quaternion initRot;
 
     [SerializeField] private bool isBreakable = false;
 
