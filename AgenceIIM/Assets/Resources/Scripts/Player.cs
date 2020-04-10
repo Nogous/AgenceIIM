@@ -13,9 +13,11 @@ public enum MoveDir
 
 public class Player : MonoBehaviour
 {
-    private float _elapsedTime = 0;
+    [Header("Movement Settings")]
 
     [SerializeField] private float _moveTime = 0.2f;
+
+    private float _elapsedTime = 0;
 
     private Vector3 direction;
     public Vector3 orientation = Vector3.forward;
@@ -43,12 +45,16 @@ public class Player : MonoBehaviour
 
     private Quaternion newCubeRot;
 
+    [Header("Color Settings")]
 
     [SerializeField] private Renderer[] faceColor = new Renderer[6];
     private Color[] initColors = new Color[6];
-    [SerializeField] private Color baseColor;
-    private Vector3 initPos;
-    private MoveDir lastMove;
+    [SerializeField] private Color baseColor = Color.white;
+    private MoveDir moveDir;
+
+    [SerializeField] private TrailRenderer trail;
+
+    [SerializeField] private ParticleSystem Splash;
 
     // Start is called before the first frame update
     void Start()
@@ -63,78 +69,117 @@ public class Player : MonoBehaviour
         {
             initColors[i] = faceColor[i].material.color;
         }
-        initPos = transform.position;
 
         // start move
         SetModeWait();
     }
 
+    void Update()
+    {
+        DoAction();
+    }
+
     public void ResetPlayer()
     {
+        trail.gameObject.SetActive(false);
+
         for (int i = faceColor.Length; i-- > 0;)
         {
+            faceColor[i].gameObject.SetActive(true);
             faceColor[i].material.color = initColors[i];
         }
-        transform.position = initPos;
         SetModeWait();
     }
+
+    #region Actions
+
+    private void DoActionNull()
+    {
+
+    }
+
+    #region Wait
 
     private void SetModeWait()
     {
         DoAction = DoActionWait;
+        trail.gameObject.SetActive(true);
     }
 
     private void DoActionWait()
     {
         if (Input.GetKey(up))
         {
-            lastMove = MoveDir.up;
             orientation = Vector3.forward;
+            moveDir = MoveDir.up;
+
+            ApplyStain();
+
             SetModeMove();
-            TestNextTile(MoveDir.up);
         }
         else if (Input.GetKey(down))
         {
-            lastMove = MoveDir.down;
             orientation = Vector3.back;
+            moveDir = MoveDir.down;
+
+            ApplyStain();
+
             SetModeMove();
-            TestNextTile(MoveDir.down);
         }
         else if (Input.GetKey(right))
         {
-            lastMove = MoveDir.right;
             orientation = Vector3.right;
+            moveDir = MoveDir.right;
+
+            ApplyStain();
+
             SetModeMove();
-            TestNextTile(MoveDir.right);
         }
         else if (Input.GetKey(left))
         {
-            lastMove = MoveDir.left;
             orientation = Vector3.left;
+            moveDir = MoveDir.left;
+
+            ApplyStain();
+
             SetModeMove();
-            TestNextTile(MoveDir.left);
         }
     }
+
+    #endregion
+
+    #region Fall
 
     private void DoActionFall()
     {
         transform.position += Vector3.down * Time.deltaTime;
 
-        // feed back
-
-        DoAction = DoActionDeath;
+        DoAction = DoActionNull;
+        StartCoroutine(Death());
     }
 
-    private void DoActionDeath()
+    #endregion
+
+    private IEnumerator Death()
     {
+        for (int i = faceColor.Length; i-- > 0;)
+        {
+            faceColor[i].gameObject.SetActive(false);
+        }
+
+        if (gameObject.GetComponent<Cube>())
+        {
+            gameObject.GetComponent<Cube>().Explode(true);
+
+            yield return new WaitForSeconds(2f);
+        }
+
         GameManager.instance.ResetParty();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        DoAction();
-    }
+
+    #region Move
 
     private void SetModeMove()
     {
@@ -146,6 +191,9 @@ public class Player : MonoBehaviour
         previousRot = Cube.transform.rotation;
         addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
         previousPos = transform.position;
+
+        // init move
+        LeaveTile();
 
         DoAction = DoActionMove;
     }
@@ -160,16 +208,19 @@ public class Player : MonoBehaviour
 
         Cube.transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
 
-        transform.position = new Vector3(transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), transform.position.z);
+        Cube.transform.position = new Vector3(Cube.transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), Cube.transform.position.z);
 
         if (_elapsedTime >= _moveTime)
         {
+            // end move
             SetModeWait();
 
             Cube.transform.eulerAngles = Vector3.zero;
-            UpdateColor(lastMove);
+            UpdateColor();
 
-            TestGround();
+            SplashPaint();
+
+            TestTile();
         }
     }
 
@@ -182,7 +233,11 @@ public class Player : MonoBehaviour
 
     }
 
-    private void UpdateColor(MoveDir moveDir)
+    #endregion
+
+    #endregion
+
+    private void UpdateColor()
     {
         Color tmpColor = faceColor[0].material.color;
 
@@ -215,47 +270,35 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void TestGround()
+    private void LeaveTile()
     {
+        // test destruction de la tile quiter par le joueur
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
+        Color tmpColor;
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.CompareTag("Color"))
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
-                Debug.Log(tmpColor);
-                Debug.Log(baseColor);
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                tmpCube.Explode();
 
-                if (baseColor == tmpColor)
+                tmpColor = tmpCube.GetColor();
+                if (tmpColor != Color.white)
                 {
-                    faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
-                }
-                else
-                {
-                    DoAction = DoActionDeath;
+
+                    if (baseColor == faceColor[1].GetComponent<Renderer>().material.color)
+                    {
+                        faceColor[1].GetComponent<Renderer>().material.color = tmpColor;
+                    }
                 }
             }
         }
-        else
-        {
-            DoAction = DoActionFall;
-        }
-    }
 
-    private void TestNextTile(MoveDir moveDir)
-    {
-        Ray ray = new Ray(transform.position, Vector3.forward);
-        Color tmpColor = faceColor[4].GetComponent<Renderer>().material.color;
-
-        Ray rayBottom = new Ray(transform.position, Vector3.down);
-        RaycastHit hitBottom;
-
-        if (Physics.Raycast(rayBottom, out hitBottom, 1f))
-        {
-            hitBottom.transform.gameObject.SetActive(false);
-        }
+        // test si enemy sur le passage du joueur
+        ray = new Ray(transform.position, Vector3.forward);
+        tmpColor = faceColor[4].GetComponent<Renderer>().material.color;
 
         switch (moveDir)
         {
@@ -274,20 +317,104 @@ public class Player : MonoBehaviour
         }
 
         Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                if (tmpCube.isEnemy)
+                {
+                    if (tmpColor == tmpCube.enemyColor)
+                    {
+                        tmpCube.Explode();
+                    }
+                    else
+                    {
+                        DoAction = DoActionNull;
+                        StartCoroutine(Death());
+                    }
+                }
+            }
+        }
+    }
+
+    private void TestTile()
+    {
+        // test tile d'arriver
+
+        Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.CompareTag("Enemy"))
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                if (tmpColor == hit.transform.gameObject.GetComponent<Renderer>().material.color)
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                if (tmpCube.colorPotencial > 0)
                 {
-                    hit.transform.gameObject.SetActive(false);
+
+                    Debug.Log("Color block");
+
+                    Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
+
+                    if (tmpColor != baseColor)
+                    {
+                        if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
+                        {
+                            DoAction = DoActionNull;
+                            StartCoroutine(Death());
+                        }
+                    }
+                    else
+                    {
+                        faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                    }
                 }
-                else
+                else if (tmpCube.isCliningBox)
                 {
-                    DoAction = DoActionDeath;
+                    faceColor[1].GetComponent<Renderer>().material.color = baseColor;
                 }
+
+            }
+
+        }
+        else
+        {
+            DoAction = DoActionFall;
+        }
+    }
+
+    private void SplashPaint()
+    {
+        Ray ray = new Ray(Cube.transform.position, Vector3.down);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (faceColor[1].GetComponent<Renderer>().material.color != Color.white)
+            {
+                ParticleSystem.MainModule main = Splash.main;
+                main.startColor = faceColor[1].GetComponent<Renderer>().material.color;
+
+                Splash.Play();
+
+            }
+        }
+
+    }
+
+    private void ApplyStain()
+    {
+        Ray ray = new Ray(Cube.transform.position, Vector3.down);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (hit.transform.GetComponent<Cube>() != null && hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
+            {
+                hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
+
             }
         }
     }

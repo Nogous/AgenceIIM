@@ -6,9 +6,9 @@ public class CameraHandler : MonoBehaviour
     bool travel;
     bool position;
     float progress = 0.0f;
-    GameObject cameraGO;
     Vector3 positionDépart;
-    [Header("Renseignez la position alternative de la caméra")]
+    [Header("Renseignez la caméra et sa position")]
+    public GameObject cameraGO;
     public Vector3 positionAlternatif;
     [Range(2, 100)] 
     public int slowFactor;
@@ -21,8 +21,19 @@ public class CameraHandler : MonoBehaviour
 
     public void Start()
     {
-        cameraGO = GameObject.Find("Camera");
+        try
+        {
+            cameraGO.name = "Camera";
+        }
+        catch (UnassignedReferenceException)
+        {
+            Debug.LogError("Aucune Camera renseignée ! Veuillez utiliser de préférence la caméra présente de le dossier Ressources/Prefab/Camera");
+        }
         positionDépart = cameraGO.transform.position;
+        if (positionAlternatif == new Vector3(0, 0, 0) || positionAlternatif == null)
+        {
+            Debug.LogError("La position alternative ne peut pas être à l'origine de la scene");
+        }
     }
     public void Update()
     {
@@ -30,7 +41,6 @@ public class CameraHandler : MonoBehaviour
         {
             Travel();
         }
-        Debug.Log(progress);
     }
 
     public void Travel()
