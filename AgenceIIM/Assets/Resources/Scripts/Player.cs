@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveTime = 0.2f;
 
     private float _elapsedTime = 0;
-
+    public Rewired.Player replayer;
     private Vector3 direction;
     public Vector3 orientation = Vector3.forward;
     private Vector3 axis = Vector3.right;
@@ -35,12 +35,6 @@ public class Player : MonoBehaviour
     public float speed = 5;
 
     private Action DoAction;
-
-    [SerializeField] private KeyCode up = KeyCode.Z;
-    [SerializeField] private KeyCode down = KeyCode.S;
-    [SerializeField] private KeyCode right = KeyCode.D;
-    [SerializeField] private KeyCode left = KeyCode.Q;
-
     [SerializeField] private GameObject Cube = null;
 
     private Quaternion newCubeRot;
@@ -106,42 +100,90 @@ public class Player : MonoBehaviour
 
     private void DoActionWait()
     {
-        if (Input.GetKey(up))
+        #region normal
+        if (!CameraHandler.instance.position)
         {
-            orientation = Vector3.forward;
-            moveDir = MoveDir.up;
+            
+            if (replayer.GetAxis("MoveVert") > 0.1f)
+            {
+                orientation = Vector3.forward;
+                moveDir = MoveDir.up;
 
-            ApplyStain();
+                ApplyStain();
 
-            SetModeMove();
+                SetModeMove();
+            }
+            else if (replayer.GetAxis("MoveVert") < -0.1f)
+            {
+                orientation = Vector3.back;
+                moveDir = MoveDir.down;
+
+                ApplyStain();
+
+                SetModeMove();
+            }
+            else if (replayer.GetAxis("MoveHor") > 0.1f)
+            {
+                orientation = Vector3.right;
+                moveDir = MoveDir.right;
+
+                ApplyStain();
+
+                SetModeMove();
+            }
+            else if (replayer.GetAxis("MoveHor") < -0.1f)
+            {
+                orientation = Vector3.left;
+                moveDir = MoveDir.left;
+
+                ApplyStain();
+
+                SetModeMove();
+            }
         }
-        else if (Input.GetKey(down))
+        #endregion
+        #region inverted
+        else
         {
-            orientation = Vector3.back;
-            moveDir = MoveDir.down;
+            
+            if (replayer.GetAxis("MoveVert")* -1 > 0.1f)
+            {
+                orientation = Vector3.forward;
+                moveDir = MoveDir.up;
 
-            ApplyStain();
+                ApplyStain();
 
-            SetModeMove();
+                SetModeMove();
+            }
+            else if (replayer.GetAxis("MoveVert") * -1 < -0.1f)
+            {
+                orientation = Vector3.back;
+                moveDir = MoveDir.down;
+
+                ApplyStain();
+
+                SetModeMove();
+            }
+            else if (replayer.GetAxis("MoveHor") * -1 > 0.1f)
+            {
+                orientation = Vector3.right;
+                moveDir = MoveDir.right;
+
+                ApplyStain();
+
+                SetModeMove();
+            }
+            else if (replayer.GetAxis("MoveHor") * -1 < -0.1f)
+            {
+                orientation = Vector3.left;
+                moveDir = MoveDir.left;
+
+                ApplyStain();
+
+                SetModeMove();
+            }
         }
-        else if (Input.GetKey(right))
-        {
-            orientation = Vector3.right;
-            moveDir = MoveDir.right;
-
-            ApplyStain();
-
-            SetModeMove();
-        }
-        else if (Input.GetKey(left))
-        {
-            orientation = Vector3.left;
-            moveDir = MoveDir.left;
-
-            ApplyStain();
-
-            SetModeMove();
-        }
+        #endregion
     }
 
     #endregion

@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Rewired;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-
-    [SerializeField] private KeyCode resetGameKey = KeyCode.R;
-
-    public Player player;
+    public Rewired.Player replayer;
+    public bool useWASDLayout;
+    public Player player = null;
     private List<Cube> cubes = new List<Cube>();
 
     private void Awake()
@@ -21,11 +21,30 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+    }
+
+    private void Start()
+    {
+        if (player == null)
+        {
+            player = FindObjectOfType<Player>();
+        }
+        replayer = ReInput.players.GetPlayer(0);
+        player.replayer = replayer;
+        if (!useWASDLayout)
+        {
+           replayer.controllers.maps.SetMapsEnabled(true, 0);
+        }
+        else
+        {
+           replayer.controllers.maps.SetMapsEnabled(true, 2);
+        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(resetGameKey))
+        if (replayer.GetButtonDown("Reset"))
         {
             ResetParty();
         }

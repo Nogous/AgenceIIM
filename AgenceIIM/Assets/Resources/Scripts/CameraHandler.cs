@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
+    public static CameraHandler instance = null;
     bool travel;
-    bool position;
+    public bool position;
     float progress = 0.0f;
     Vector3 positionDépart;
     [Header("Renseignez la caméra et sa position")]
@@ -14,11 +15,19 @@ public class CameraHandler : MonoBehaviour
     public int slowFactor;
     [Range(0.01f, 0.90f)] 
     public float cutoff;
-    public void TravelTick()
-    {
-        travel = true;
-    }
 
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     public void Start()
     {
         try
@@ -37,12 +46,16 @@ public class CameraHandler : MonoBehaviour
     }
     public void Update()
     {
+        if (GameManager.instance.replayer.GetButtonDown("Camera_Travel"))
+        {
+            travel = true;
+            
+        }
         if (travel)
         {
             Travel();
         }
     }
-
     public void Travel()
     {
         if (progress < cutoff)
@@ -53,12 +66,14 @@ public class CameraHandler : MonoBehaviour
                 {
                     progress += (Time.deltaTime / slowFactor);
                     cameraGO.transform.position = Vector3.Lerp(cameraGO.transform.position, positionDépart, progress);
+                    position = false;
                 }
                 break;
                 case false:
                 {
                     progress += (Time.deltaTime / slowFactor);
                     cameraGO.transform.position = Vector3.Lerp(cameraGO.transform.position, positionAlternatif, progress);
+                    position = true;
                 }
                 break;
             }
@@ -67,19 +82,16 @@ public class CameraHandler : MonoBehaviour
         {
             if (!position)
             {
-                position = true;
+                
                 cameraGO.transform.position = positionAlternatif;
-                Debug.Log("PosALT");
             }
             else
             {
-                position = false;
+                
                 cameraGO.transform.position = positionDépart;
-                Debug.Log("PosORG");
             }
-            progress = 0f;
             travel = false;
-            
+            progress = 0f;            
         }
     }
 }
