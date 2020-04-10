@@ -154,8 +154,8 @@ public class Cube : MonoBehaviour
         }
         else
         {
-            AudioManager.instance.Player("Splash");
-            AudioManager.instance.Player("ExplosionCube");
+            AudioManager.instance.Play("Splash");
+            AudioManager.instance.Play("ExplosionCube");
         }    
 
         // loop 3 times to create 5x5x5 pices un x,y,z coordonate
