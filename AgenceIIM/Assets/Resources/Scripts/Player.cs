@@ -351,23 +351,29 @@ public class Player : MonoBehaviour
             {
                 Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
-                if (tmpCube.colorPotencial <= 0) return;
-
-                Debug.Log("Color block");
-
-                Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
-                
-                if (tmpColor != baseColor)
+                if (tmpCube.colorPotencial > 0)
                 {
-                    if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
+
+                    Debug.Log("Color block");
+
+                    Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
+
+                    if (tmpColor != baseColor)
                     {
-                        DoAction = DoActionNull;
-                        StartCoroutine(Death());
+                        if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
+                        {
+                            DoAction = DoActionNull;
+                            StartCoroutine(Death());
+                        }
+                    }
+                    else
+                    {
+                        faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
                     }
                 }
-                else
+                else if (tmpCube.isCliningBox)
                 {
-                    faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                    faceColor[1].GetComponent<Renderer>().material.color = baseColor;
                 }
 
             }

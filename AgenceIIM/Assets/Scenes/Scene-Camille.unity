@@ -987,6 +987,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3894315184640427557, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: isCliningBox
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894315184640427557, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: color.r
+      value: 0.6698113
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894315184640427557, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: color.g
+      value: 0.5213154
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894315184640427557, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: color.b
+      value: 0.5213154
+      objectReference: {fileID: 0}
     - target: {fileID: 7993145178237273349, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1042,6 +1062,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7993145178237273351, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf40d14e54c323e44ad59ec3ab60bb78, type: 2}
     - target: {fileID: 7993145178237273369, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
         type: 3}
       propertyPath: m_Name
@@ -1137,6 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  isCliningBox: 0
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   isBreakable: 0
   colorPotencial: 0
@@ -6074,6 +6100,16 @@ PrefabInstance:
       propertyPath: baseColor.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: up
+      value: 119
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: left
+      value: 97
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
 --- !u!1001 &1846143060
@@ -6296,11 +6332,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 442703948, guid: c153899fc0feab241877cc83526b21fc, type: 3}
       propertyPath: sounds.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 442703948, guid: c153899fc0feab241877cc83526b21fc, type: 3}
       propertyPath: sounds.Array.data[0].name
-      value: Splash
+      value: ExplosionCube
       objectReference: {fileID: 0}
     - target: {fileID: 442703948, guid: c153899fc0feab241877cc83526b21fc, type: 3}
       propertyPath: sounds.Array.data[0].volume
@@ -6316,7 +6352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 442703948, guid: c153899fc0feab241877cc83526b21fc, type: 3}
       propertyPath: sounds.Array.data[1].name
-      value: Splash1
+      value: Splash
       objectReference: {fileID: 0}
     - target: {fileID: 442703948, guid: c153899fc0feab241877cc83526b21fc, type: 3}
       propertyPath: sounds.Array.data[1].volume
@@ -6342,6 +6378,14 @@ PrefabInstance:
       propertyPath: sounds.Array.data[2].loop
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 442703948, guid: c153899fc0feab241877cc83526b21fc, type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b95614a93f3616c4c97d52bb09d78df8, type: 3}
+    - target: {fileID: 442703948, guid: c153899fc0feab241877cc83526b21fc, type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b95614a93f3616c4c97d52bb09d78df8, type: 3}
     - target: {fileID: 2276547513290559370, guid: c153899fc0feab241877cc83526b21fc,
         type: 3}
       propertyPath: cameraGO

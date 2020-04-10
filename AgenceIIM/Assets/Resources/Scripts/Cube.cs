@@ -7,6 +7,7 @@ public class Cube : MonoBehaviour
     [Header("General Settings")]
 
     public bool isEnemy = false;
+    public bool isCliningBox = false;
     public Color enemyColor;
 
     private Vector3 initPos;
