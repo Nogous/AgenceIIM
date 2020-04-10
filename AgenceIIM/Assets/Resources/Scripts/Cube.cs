@@ -152,6 +152,11 @@ public class Cube : MonoBehaviour
             //make object disappear
             gameObject.SetActive(false);
         }
+        else
+        {
+            AudioManager.instance.Player("Splash");
+            AudioManager.instance.Player("ExplosionCube");
+        }    
 
         // loop 3 times to create 5x5x5 pices un x,y,z coordonate
         for (int i = cubesInRow; i-->0;)
