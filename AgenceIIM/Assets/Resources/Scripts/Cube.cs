@@ -7,6 +7,7 @@ public class Cube : MonoBehaviour
     [Header("General Settings")]
 
     public bool isEnemy = false;
+    public bool isCliningBox = false;
     public Color enemyColor;
 
     private Vector3 initPos;
@@ -152,6 +153,11 @@ public class Cube : MonoBehaviour
             //make object disappear
             gameObject.SetActive(false);
         }
+        else
+        {
+            AudioManager.instance.Play("Splash");
+            AudioManager.instance.Play("ExplosionCube");
+        }    
 
         // loop 3 times to create 5x5x5 pices un x,y,z coordonate
         for (int i = cubesInRow; i-->0;)

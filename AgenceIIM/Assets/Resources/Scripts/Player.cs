@@ -48,6 +48,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private TrailRenderer trail;
 
+    [SerializeField] private ParticleSystem Splash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -258,9 +260,9 @@ public class Player : MonoBehaviour
             Cube.transform.eulerAngles = Vector3.zero;
             UpdateColor();
 
-            TestTile();
+            SplashPaint();
 
-            
+            TestTile();
         }
     }
 
@@ -391,23 +393,29 @@ public class Player : MonoBehaviour
             {
                 Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
-                if (tmpCube.colorPotencial <= 0) return;
-
-                Debug.Log("Color block");
-
-                Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
-                
-                if (tmpColor != baseColor)
+                if (tmpCube.colorPotencial > 0)
                 {
-                    if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
+
+                    Debug.Log("Color block");
+
+                    Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
+
+                    if (tmpColor != baseColor)
                     {
-                        DoAction = DoActionNull;
-                        StartCoroutine(Death());
+                        if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
+                        {
+                            DoAction = DoActionNull;
+                            StartCoroutine(Death());
+                        }
+                    }
+                    else
+                    {
+                        faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
                     }
                 }
-                else
+                else if (tmpCube.isCliningBox)
                 {
-                    faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                    faceColor[1].GetComponent<Renderer>().material.color = baseColor;
                 }
 
             }
@@ -421,8 +429,20 @@ public class Player : MonoBehaviour
 
     private void SplashPaint()
     {
+        Ray ray = new Ray(Cube.transform.position, Vector3.down);
+        RaycastHit hit;
 
-        
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (faceColor[1].GetComponent<Renderer>().material.color != Color.white)
+            {
+                ParticleSystem.MainModule main = Splash.main;
+                main.startColor = faceColor[1].GetComponent<Renderer>().material.color;
+
+                Splash.Play();
+
+            }
+        }
 
     }
 
