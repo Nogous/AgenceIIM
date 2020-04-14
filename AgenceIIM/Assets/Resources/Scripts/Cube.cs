@@ -8,6 +8,8 @@ public class Cube : MonoBehaviour
 
     public bool isEnemy = false;
     public bool isCliningBox = false;
+    public bool isDashBox = false;
+
     public Color enemyColor;
 
     private Vector3 initPos;
