@@ -277,6 +277,53 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Dash
+
+    private void SetModeDash()
+    {
+        RotationCheck();
+
+        _elapsedTime = 0;
+
+        direction = transform.position + orientation*2;
+        previousRot = Cube.transform.rotation;
+        addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
+        previousPos = transform.position;
+
+        // init move
+        LeaveTile();
+
+        DoAction = DoActionDash;
+    }
+
+    private void DoActionDash()
+    {
+        _elapsedTime += Time.deltaTime;
+
+        float ratio = _elapsedTime / _moveTime;
+
+        transform.position = Vector3.Lerp(previousPos, direction, ratio);
+
+        Cube.transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
+
+        Cube.transform.position = new Vector3(Cube.transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), Cube.transform.position.z);
+
+        if (_elapsedTime >= _moveTime)
+        {
+            // end move
+            SetModeWait();
+
+            Cube.transform.eulerAngles = Vector3.zero;
+            UpdateColor();
+
+            SplashPaint();
+
+            TestTile();
+        }
+    }
+
+    #endregion
+
     #endregion
 
     private void UpdateColor()
@@ -413,9 +460,14 @@ public class Player : MonoBehaviour
                         faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
                     }
                 }
-                else if (tmpCube.isCliningBox)
+                else if (tmpCube.isCleaningBox)
                 {
                     faceColor[1].GetComponent<Renderer>().material.color = baseColor;
+                }
+
+                else if (tmpCube.isDashBox)
+                {
+                    SetModeDash();
                 }
 
             }
