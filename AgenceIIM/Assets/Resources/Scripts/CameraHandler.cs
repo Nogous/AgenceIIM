@@ -10,7 +10,7 @@ public class CameraHandler : MonoBehaviour
     Vector3 positionDépart;
     [Header("Renseignez la caméra et sa position")]
     public GameObject cameraGO;
-    public Vector3 positionAlternatif;
+    Vector3 positionAlternatif;
     [Range(2, 100)] 
     public int slowFactor;
     [Range(0.01f, 0.90f)] 
@@ -36,13 +36,15 @@ public class CameraHandler : MonoBehaviour
         }
         catch (UnassignedReferenceException)
         {
-            Debug.LogError("Aucune Camera renseignée ! Veuillez utiliser de préférence la caméra présente de le dossier Ressources/Prefab/Camera");
+            cameraGO = GameObject.Find("Camera");
         }
         positionDépart = cameraGO.transform.position;
-        if (positionAlternatif == new Vector3(0, 0, 0) || positionAlternatif == null)
+        positionAlternatif = GameObject.Find("Point_Probe").transform.position;
+        if (GameObject.Find("Point_Probe") == null)
         {
-            Debug.LogError("La position alternative ne peut pas être à l'origine de la scene");
+            Debug.LogError("Sonde de position alternative manquante, traveling indisponible");
         }
+        
     }
     public void Update()
     {
@@ -66,14 +68,14 @@ public class CameraHandler : MonoBehaviour
                 {
                     progress += (Time.deltaTime / slowFactor);
                     cameraGO.transform.position = Vector3.Lerp(cameraGO.transform.position, positionDépart, progress);
-                    position = false;
+                    
                 }
                 break;
                 case false:
                 {
                     progress += (Time.deltaTime / slowFactor);
                     cameraGO.transform.position = Vector3.Lerp(cameraGO.transform.position, positionAlternatif, progress);
-                    position = true;
+                    
                 }
                 break;
             }
@@ -84,11 +86,13 @@ public class CameraHandler : MonoBehaviour
             {
                 
                 cameraGO.transform.position = positionAlternatif;
+                position = true;
             }
             else
             {
                 
                 cameraGO.transform.position = positionDépart;
+                position = false;
             }
             travel = false;
             progress = 0f;            
