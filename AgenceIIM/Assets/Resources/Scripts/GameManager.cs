@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public bool useWASDLayout;
     public Player player = null;
     private List<Cube> cubes = new List<Cube>();
+    public float fallDuration = 1f;
 
     private void Awake()
     {

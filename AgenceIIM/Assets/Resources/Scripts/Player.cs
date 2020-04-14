@@ -195,15 +195,18 @@ public class Player : MonoBehaviour
     private void DoActionFall()
     {
         transform.position += Vector3.down * Time.deltaTime;
-
-        DoAction = DoActionNull;
-        StartCoroutine(Death());
     }
 
     #endregion
 
-    private IEnumerator Death()
+    private IEnumerator Death(string deathInfo = null)
     {
+        if (deathInfo == "fall")
+        {
+            yield return new WaitForSeconds(GameManager.instance.fallDuration);
+            DoAction = DoActionNull;
+        }
+
         for (int i = faceColor.Length; i-- > 0;)
         {
             faceColor[i].gameObject.SetActive(false);
@@ -476,6 +479,8 @@ public class Player : MonoBehaviour
         else
         {
             DoAction = DoActionFall;
+
+            StartCoroutine(Death("fall"));
         }
     }
 

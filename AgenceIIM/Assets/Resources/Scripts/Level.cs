@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    public GameObject cubePrefab = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +18,11 @@ public class Level : MonoBehaviour
         
     }
 
-    void OnGUI()
+    public void CreateCube(Vector3 pos)
     {
-        if (GUI.Button(new Rect(10, 10, 150, 100), "I am a button"))
+        if (cubePrefab != null)
         {
-            print("You clicked the button!");
+            Instantiate(cubePrefab);
         }
     }
 }
