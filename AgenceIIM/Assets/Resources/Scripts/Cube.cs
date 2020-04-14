@@ -7,7 +7,7 @@ public class Cube : MonoBehaviour
     [Header("General Settings")]
 
     public bool isEnemy = false;
-    public bool isCliningBox = false;
+    public bool isCleaningBox = false;
     public bool isDashBox = false;
 
     public Color enemyColor;
