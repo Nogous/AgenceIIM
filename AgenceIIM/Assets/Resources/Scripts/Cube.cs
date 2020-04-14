@@ -9,6 +9,7 @@ public class Cube : MonoBehaviour
     public bool isEnemy = false;
     public bool isCleaningBox = false;
     public bool isDashBox = false;
+    public bool isWall = false;
 
     public Color enemyColor;
 

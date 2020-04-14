@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
 
                 ApplyStain();
 
-                SetModeMove();
+                if (!TestWall()) SetModeMove();
             }
             else if (replayer.GetAxis("MoveVert") < -0.1f)
             {
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
 
                 ApplyStain();
 
-                SetModeMove();
+                if (!TestWall()) SetModeMove();
             }
             else if (replayer.GetAxis("MoveHor") > 0.1f)
             {
@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
 
                 ApplyStain();
 
-                SetModeMove();
+                if (!TestWall()) SetModeMove();
             }
             else if (replayer.GetAxis("MoveHor") < -0.1f)
             {
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
 
                 ApplyStain();
 
-                SetModeMove();
+                if (!TestWall()) SetModeMove();
             }
         }
         #endregion
@@ -155,7 +155,7 @@ public class Player : MonoBehaviour
 
                 ApplyStain();
 
-                SetModeMove();
+                if(!TestWall())SetModeMove();
             }
             else if (replayer.GetAxis("MoveVert") * -1 < -0.1f)
             {
@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
 
                 ApplyStain();
 
-                SetModeMove();
+                if (!TestWall()) SetModeMove();
             }
             else if (replayer.GetAxis("MoveHor") * -1 > 0.1f)
             {
@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
 
                 ApplyStain();
 
-                SetModeMove();
+                if (!TestWall()) SetModeMove();
             }
             else if (replayer.GetAxis("MoveHor") * -1 < -0.1f)
             {
@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
 
                 ApplyStain();
 
-                SetModeMove();
+                if (!TestWall()) SetModeMove();
             }
         }
         #endregion
@@ -482,6 +482,24 @@ public class Player : MonoBehaviour
 
             StartCoroutine(Death("fall"));
         }
+    }
+
+    private bool TestWall()
+    {
+        Ray ray = new Ray(transform.position, orientation);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 0.5f))
+        {
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                if (tmpCube.isWall) return true;
+            }
+        }
+
+        return false;
     }
 
     private void SplashPaint()
