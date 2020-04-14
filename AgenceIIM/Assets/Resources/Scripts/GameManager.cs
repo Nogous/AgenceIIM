@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Player player = null;
     private List<Cube> cubes = new List<Cube>();
     public float fallDuration = 1f;
+    public float fallSpeed = 1f;
 
     private void Awake()
     {

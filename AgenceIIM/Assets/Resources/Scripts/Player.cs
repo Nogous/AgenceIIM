@@ -194,7 +194,7 @@ public class Player : MonoBehaviour
 
     private void DoActionFall()
     {
-        transform.position += Vector3.down * Time.deltaTime;
+        transform.position += Vector3.down * Time.deltaTime * GameManager.instance.fallSpeed;
     }
 
     #endregion

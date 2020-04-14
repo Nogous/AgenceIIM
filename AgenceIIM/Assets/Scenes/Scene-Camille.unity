@@ -1137,7 +1137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
-  isCliningBox: 0
+  isCleaningBox: 0
+  isDashBox: 0
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   isBreakable: 0
   colorPotencial: 0
@@ -2143,6 +2144,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2028893386}
     m_Modifications:
+    - target: {fileID: 3894315184640427557, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: isDashBox
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7993145178237273349, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3386,6 +3392,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene_SYSTEM
       objectReference: {fileID: 0}
+    - target: {fileID: 3796483333143764459, guid: e7b0e41ba628cef40a474d01b5b5617e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.31387177
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796483333143764459, guid: e7b0e41ba628cef40a474d01b5b5617e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.101852566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796483333143764459, guid: e7b0e41ba628cef40a474d01b5b5617e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.89789426
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314663701867350221, guid: e7b0e41ba628cef40a474d01b5b5617e,
+        type: 3}
+      propertyPath: fallSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7b0e41ba628cef40a474d01b5b5617e, type: 3}
 --- !u!1001 &963006163
@@ -3395,6 +3421,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2028893386}
     m_Modifications:
+    - target: {fileID: 3894315184640427557, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: isDashBox
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7993145178237273349, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3624,6 +3655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05da22a65a55d184fb0cadd4c556cd55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cubePrefab: {fileID: 0}
 --- !u!4 &1138689664
 Transform:
   m_ObjectHideFlags: 0
@@ -4869,6 +4901,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2028893386}
     m_Modifications:
+    - target: {fileID: 3894315184640427557, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: isDashBox
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7993145178237273349, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5580,6 +5617,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2028893386}
     m_Modifications:
+    - target: {fileID: 3894315184640427557, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: isDashBox
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7993145178237273349, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
         type: 3}
       propertyPath: m_LocalPosition.x
