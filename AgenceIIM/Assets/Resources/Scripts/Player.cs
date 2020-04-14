@@ -460,7 +460,7 @@ public class Player : MonoBehaviour
                         faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
                     }
                 }
-                else if (tmpCube.isCliningBox)
+                else if (tmpCube.isCleaningBox)
                 {
                     faceColor[1].GetComponent<Renderer>().material.color = baseColor;
                 }
