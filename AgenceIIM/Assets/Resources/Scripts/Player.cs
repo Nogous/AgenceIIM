@@ -470,6 +470,24 @@ public class Player : MonoBehaviour
 
                 else if (tmpCube.isDashBox)
                 {
+
+                    if((int)tmpCube.dashOrientation == 0)
+                    {
+                        orientation = Vector3.forward;
+                    }
+                    else if ((int)tmpCube.dashOrientation == 1)
+                    {
+                        orientation = Vector3.back;
+                    }
+                    else if ((int)tmpCube.dashOrientation == 2)
+                    {
+                        orientation = Vector3.right;
+                    }
+                    else 
+                    {
+                        orientation = Vector3.left;
+                    }
+
                     SetModeDash();
                 }
 

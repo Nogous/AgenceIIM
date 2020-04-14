@@ -11,6 +11,18 @@ public class Cube : MonoBehaviour
     public bool isDashBox = false;
     public bool isWall = false;
 
+    //[Header("Dash Settings")] 
+
+    public enum dashEnum
+    {
+        forward,
+        backward,
+        right,  
+        left, 
+    };
+
+    [SerializeField] public dashEnum dashOrientation = dashEnum.forward;
+
     public Color enemyColor;
 
     private Vector3 initPos;
@@ -52,10 +64,12 @@ public class Cube : MonoBehaviour
         {
             gameObject.GetComponent<Renderer>().material.color = color;
         }
+
     }
 
     private void Start()
     {
+
         GameManager.instance.AddCube(this);
 
         if (!isEnemy)
