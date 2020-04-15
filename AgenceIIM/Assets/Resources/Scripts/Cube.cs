@@ -13,6 +13,11 @@ public class Cube : MonoBehaviour
     public bool isDashBox = false;
     public bool isWall = false;
 
+    public bool isTnt = false;
+    public bool isTrigger = false;
+
+    [SerializeField] private Cube associatedTnt = null;
+
     public enum dashEnum
     {
         forward,
@@ -365,5 +370,13 @@ public class Cube : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void ActivateTnt()
+    {
+        if(associatedTnt != null)
+        {
+            associatedTnt.Explode();
+        }
     }
 }

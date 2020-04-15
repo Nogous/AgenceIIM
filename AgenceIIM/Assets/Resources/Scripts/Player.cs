@@ -506,6 +506,10 @@ public class Player : MonoBehaviour
 
                     SetModeDash();
                 }
+                else if (tmpCube.isTrigger)
+                {
+                    tmpCube.ActivateTnt();
+                }
 
             }
 
