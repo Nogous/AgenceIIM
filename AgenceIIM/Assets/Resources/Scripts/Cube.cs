@@ -38,11 +38,6 @@ public class Cube : MonoBehaviour
     private void Awake()
     {
         initPos = transform.position;
-        initPos.x = (int)initPos.x;
-        initPos.y = (int)initPos.y;
-        initPos.z = (int)initPos.z;
-
-        transform.position = initPos;
         initRot = transform.rotation;
         initColorPotencial = colorPotencial;
         initColor = color;

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     public GameObject cubePrefab = null;
+    public int length = 15;
+    public int height = 15;
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +20,12 @@ public class Level : MonoBehaviour
         
     }
 
-    public void CreateCube(Vector3 pos)
+    public GameObject CreateCube()
     {
         if (cubePrefab != null)
         {
-            Instantiate(cubePrefab);
+            return Instantiate(cubePrefab);
         }
+        return null;
     }
 }
