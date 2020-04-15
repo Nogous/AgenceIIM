@@ -190,6 +190,8 @@ public class Cube : MonoBehaviour
     float cubesPivotDistance;
     Vector3 cubesPivot;
 
+    [Header("Explosion Settings")]
+
     public float explosionForce = 50f;
     public float explosionRadius = 4f;
     public float explosionUpward = 0.04f;
@@ -296,7 +298,11 @@ public class Cube : MonoBehaviour
             orientation = vector;
         }
 
-        Debug.Log(orientation);
+        if (TestWall())
+        {
+            SetModeVoid();
+            return;
+        }  
 
         RotationCheck();
 
@@ -339,5 +345,25 @@ public class Cube : MonoBehaviour
         else if (orientation == Vector3.right) axis = Vector3.back;
         else if (orientation == Vector3.back) axis = Vector3.left;
         else axis = Vector3.forward;
+    }
+
+    private bool TestWall()
+    {
+        Ray ray = new Ray(transform.position, orientation);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                if (tmpCube.isWall) return true;
+            }
+        }
+
+        return false;
     }
 }
