@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +8,29 @@ public class Cube : MonoBehaviour
     [Header("General Settings")]
 
     public bool isEnemy = false;
+    public bool isEnemyMoving = false;
     public bool isCleaningBox = false;
     public bool isDashBox = false;
     public bool isWall = false;
 
+    public enum dashEnum
+    {
+        forward,
+        backward,
+        right,  
+        left, 
+    };
+
+    [Header("Dash Settings")]
+
+    [SerializeField] public dashEnum dashOrientation = dashEnum.forward;
+
+    [Header("Enemy Settings")]
+
     public Color enemyColor;
+
+    [SerializeField] public bool InvertXAxis = false;
+    [SerializeField] public bool InvertZAxis = false;
 
     private Vector3 initPos;
     private Quaternion initRot;
@@ -34,6 +53,29 @@ public class Cube : MonoBehaviour
 
     private float elapsedTime = 0;
 
+    private Action DoAction;
+
+    [Header("Movement Settings")]
+
+    [SerializeField] private float _moveTime = 0.2f;
+
+    private float _elapsedTime = 0;
+    public Rewired.Player replayer;
+    private Vector3 direction;
+    public Vector3 orientation = Vector3.forward;
+    private Vector3 axis = Vector3.right;
+
+    private Quaternion addedRotation;
+    private Vector3 previousPos;
+    private Vector3 previousOr;
+    private Quaternion previousRot;
+
+    private Quaternion zeroRot = new Quaternion(0, 0, 0, 0);
+
+    private static float diagonal = 1 * Mathf.Sqrt(2);
+    private float offset = (diagonal - 1) / 2;
+    public float speed = 5;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -47,13 +89,24 @@ public class Cube : MonoBehaviour
         {
             gameObject.GetComponent<Renderer>().material.color = color;
         }
+
+    }
+
+    private void SetModeVoid()
+    {
+        DoAction = DoActionVoid;
+    }
+
+    private void DoActionVoid()
+    {
+
     }
 
     private void Start()
     {
         GameManager.instance.AddCube(this);
 
-        if (!isEnemy)
+        if (!isEnemy && !isEnemyMoving)
         {
             if (stain != null)
             {
@@ -62,11 +115,15 @@ public class Cube : MonoBehaviour
             }
         }
 
+        if (isEnemyMoving) Player.OnMove += SetModeMove;
+
         if (isBreakable)
         {
             cubesPivotDistance = cubeSize * cubesInRow / 2;
             cubesPivot = Vector3.one * cubesPivotDistance;
         }
+
+        SetModeVoid();
     }
 
     public void ResetCube()
@@ -213,4 +270,74 @@ public class Cube : MonoBehaviour
     }
 
     #endregion
+
+    private void Update()
+    {
+        DoAction();
+    }
+
+    private void SetModeMove(Vector3 vector)
+    {
+        if (InvertZAxis)
+        {
+            if (vector == Vector3.forward || vector == Vector3.back) orientation = vector * -1;
+        }
+        else
+        {
+            orientation = vector;
+        }
+
+        if (InvertXAxis)
+        {
+            if (vector == Vector3.right || vector == Vector3.left) orientation = vector * -1;
+        }
+        else
+        {
+            orientation = vector;
+        }
+
+        Debug.Log(orientation);
+
+        RotationCheck();
+
+        _elapsedTime = 0;
+
+        direction = transform.position + orientation;
+        previousRot = transform.rotation;
+        addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
+        previousPos = transform.position;
+
+        // init move
+
+        DoAction = DoActionMove;
+    }
+
+    private void DoActionMove()
+    {
+        _elapsedTime += Time.deltaTime;
+
+        float ratio = _elapsedTime / _moveTime;
+
+        transform.position = Vector3.Lerp(previousPos, direction, ratio);
+
+        transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
+
+        transform.position = new Vector3(transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), transform.position.z);
+
+        if (_elapsedTime >= _moveTime)
+        {
+            // end move
+            SetModeVoid();
+
+            transform.eulerAngles = Vector3.zero;
+        }
+    }
+
+    private void RotationCheck()
+    {
+        if (orientation == Vector3.forward) axis = Vector3.right;
+        else if (orientation == Vector3.right) axis = Vector3.back;
+        else if (orientation == Vector3.back) axis = Vector3.left;
+        else axis = Vector3.forward;
+    }
 }
