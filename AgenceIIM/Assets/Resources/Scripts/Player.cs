@@ -84,6 +84,7 @@ public class Player : MonoBehaviour
             faceColor[i].gameObject.SetActive(true);
             faceColor[i].material.color = initColors[i];
         }
+
         SetModeWait();
     }
 
@@ -92,6 +93,11 @@ public class Player : MonoBehaviour
     private void DoActionNull()
     {
 
+    }
+
+    public void SetModeNull()
+    {
+        DoAction = DoActionWait;
     }
 
     #region Wait
@@ -417,7 +423,7 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
+        //Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
         if (Physics.Raycast(ray, out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
@@ -428,6 +434,7 @@ public class Player : MonoBehaviour
                     if (tmpColor == tmpCube.enemyColor)
                     {
                         tmpCube.Explode();
+                        GameManager.instance.KillEnnemy();
                     }
                     else
                     {
