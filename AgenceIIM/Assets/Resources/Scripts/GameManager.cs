@@ -54,6 +54,10 @@ public class GameManager : MonoBehaviour
         {
             ResetParty();
         }
+        if (replayer.GetButtonDown("Pause"))
+        {
+            Application.Quit();
+        }
     }
 
     public void KillEnnemy()
