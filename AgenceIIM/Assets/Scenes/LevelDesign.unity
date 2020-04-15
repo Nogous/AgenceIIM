@@ -500,6 +500,11 @@ PrefabInstance:
       propertyPath: enemyColor.r
       value: 0.015686275
       objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: isEnemyMoving
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2009963308243871468, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
       propertyPath: m_Name
@@ -509,7 +514,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cc556ec9d923d0a49a0ec5351d123cce, type: 2}
+      objectReference: {fileID: 2100000, guid: f0810aca7b23fe346bdd0abb1c46b004, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04b79f3873952824ab6d0bba621327c4, type: 3}
 --- !u!1001 &170494391
@@ -1231,10 +1236,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  isEnemyMoving: 0
   isCleaningBox: 0
   isDashBox: 0
   isWall: 0
+  dashOrientation: 0
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
+  InvertXAxis: 0
+  InvertZAxis: 0
   isBreakable: 0
   colorPotencial: 0
   color: {r: 1, g: 1, b: 1, a: 1}
@@ -1251,6 +1260,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _moveTime: 0.2
+  orientation: {x: 0, y: 0, z: 1}
+  speed: 5
   explosionForce: 50
   explosionRadius: 4
   explosionUpward: 0.04
@@ -6165,6 +6177,11 @@ PrefabInstance:
     - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
         type: 3}
       propertyPath: baseColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: speed
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2519804548927062628, guid: 842e2c31424e86c4789bb65fd935067e,
