@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private ParticleSystem Splash;
 
+    public static event Action<Vector3> OnMove;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -117,6 +119,8 @@ public class Player : MonoBehaviour
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
 
+                OnMove(orientation);
+
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
@@ -125,6 +129,8 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
+
+                OnMove(orientation);
 
                 ApplyStain();
 
@@ -135,6 +141,8 @@ public class Player : MonoBehaviour
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
 
+                OnMove(orientation);
+
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
@@ -143,6 +151,8 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;
+
+                OnMove(orientation);
 
                 ApplyStain();
 
@@ -281,7 +291,6 @@ public class Player : MonoBehaviour
         else if (orientation == Vector3.right) axis = Vector3.back;
         else if (orientation == Vector3.back) axis = Vector3.left;
         else axis = Vector3.forward;
-
     }
 
     #endregion
@@ -477,6 +486,24 @@ public class Player : MonoBehaviour
 
                 else if (tmpCube.isDashBox)
                 {
+
+                    if((int)tmpCube.dashOrientation == 0)
+                    {
+                        orientation = Vector3.forward;
+                    }
+                    else if ((int)tmpCube.dashOrientation == 1)
+                    {
+                        orientation = Vector3.back;
+                    }
+                    else if ((int)tmpCube.dashOrientation == 2)
+                    {
+                        orientation = Vector3.right;
+                    }
+                    else 
+                    {
+                        orientation = Vector3.left;
+                    }
+
                     SetModeDash();
                 }
 
