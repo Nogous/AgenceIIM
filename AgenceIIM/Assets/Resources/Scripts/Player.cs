@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
 
-                OnMove(orientation);
+                OnMove?.Invoke(orientation);
 
                 ApplyStain();
 
@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
 
-                OnMove(orientation);
+                OnMove?.Invoke(orientation);
 
                 ApplyStain();
 
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
 
-                OnMove(orientation);
+                OnMove?.Invoke(orientation);
 
                 ApplyStain();
 
@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;
 
-                OnMove(orientation);
+                OnMove?.Invoke(orientation);
 
                 ApplyStain();
 
