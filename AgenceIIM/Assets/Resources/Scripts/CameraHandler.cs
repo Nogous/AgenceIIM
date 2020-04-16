@@ -7,10 +7,9 @@ public class CameraHandler : MonoBehaviour
     bool travel;
     public bool position;
     float progress = 0.0f;
-    Vector3 positionDépart;
-    [Header("Renseignez la caméra et sa position")]
     public GameObject cameraGO;
-    Vector3 positionAlternatif;
+    Vector3 positionDépart = GameObject.Find("Camera").transform.position;
+    Vector3 positionAlternatif = GameObject.Find("Point_ALT").transform.position;
     [Range(2, 100)] 
     public int slowFactor;
     [Range(0.01f, 0.90f)] 
@@ -39,8 +38,8 @@ public class CameraHandler : MonoBehaviour
             cameraGO = GameObject.Find("Camera");
         }
         positionDépart = cameraGO.transform.position;
-        positionAlternatif = GameObject.Find("Point_Probe").transform.position;
-        if (GameObject.Find("Point_Probe") == null)
+        positionAlternatif = GameObject.Find("Point_ALT").transform.position;
+        if (GameObject.Find("Point_ALT") == null)
         {
             Debug.LogError("Sonde de position alternative manquante, traveling indisponible");
         }
