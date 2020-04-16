@@ -7,10 +7,11 @@ public class CameraHandler : MonoBehaviour
     bool travel;
     public bool position;
     float progress = 0.0f;
-    Vector3 positionDépart;
-    [Header("Renseignez la caméra et sa position")]
     public GameObject cameraGO;
-    Vector3 positionAlternatif;
+    public Vector3 positionDepart;
+    public Vector3 positionAlternatif;
+    public Vector3 TanDepart;
+    public Vector3 TanAlternatif;
     [Range(2, 100)] 
     public int slowFactor;
     [Range(0.01f, 0.90f)] 
@@ -38,9 +39,9 @@ public class CameraHandler : MonoBehaviour
         {
             cameraGO = GameObject.Find("Camera");
         }
-        positionDépart = cameraGO.transform.position;
-        positionAlternatif = GameObject.Find("Point_Probe").transform.position;
-        if (GameObject.Find("Point_Probe") == null)
+        positionDepart = cameraGO.transform.position;
+        positionAlternatif = GameObject.Find("Point_Alt").transform.position;
+        if (GameObject.Find("Point_Alt") == null)
         {
             Debug.LogError("Sonde de position alternative manquante, traveling indisponible");
         }
@@ -67,7 +68,7 @@ public class CameraHandler : MonoBehaviour
                 case true:
                 {
                     progress += (Time.deltaTime / slowFactor);
-                    cameraGO.transform.position = Vector3.Lerp(cameraGO.transform.position, positionDépart, progress);
+                    cameraGO.transform.position = Vector3.Lerp(cameraGO.transform.position, positionDepart, progress);
                     
                 }
                 break;
@@ -91,7 +92,7 @@ public class CameraHandler : MonoBehaviour
             else
             {
                 
-                cameraGO.transform.position = positionDépart;
+                cameraGO.transform.position = positionDepart;
                 position = false;
             }
             travel = false;

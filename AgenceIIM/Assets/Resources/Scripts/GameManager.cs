@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Rewired;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
     public float fallSpeed = 1f;
     public int nbEnnemyInit = 1;
     private int nbEnnemy = 1;
+
+    //[HideInInspector]
+    public Texture2D[] colorEnemy;
 
     private void Awake()
     {

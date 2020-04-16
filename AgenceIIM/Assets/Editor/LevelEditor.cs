@@ -2,14 +2,20 @@
 using UnityEditor;
 using System.Collections.Generic;
 
+[System.Serializable]
+enum ColorTile
+{
+
+}
+
 [CustomEditor(typeof(Level))]
 public class LevelEditor : Editor
 {
-    bool[,] cubes = null;
-   //ameObject[,] cubesObj;
-    private Dictionary<Vector2, GameObject> cubesObj = new Dictionary<Vector2, GameObject>();
-    Vector2 saveSize;
     Level level;
+    public GUIStyle buttonStyle = new GUIStyle(EditorStyles.miniButton);
+
+    //GUIStyle foldoutColorStyle = new GUIStyle(EditorStyles.foldout);
+    //foldoutColorStyle.normal.textColor = new color
 
     public override void OnInspectorGUI()
     {
@@ -17,69 +23,88 @@ public class LevelEditor : Editor
 
         level = (Level)target;
 
-        if (GUILayout.Button("Reset Level"))
+        if (GUILayout.Button("GenerateLevel"))
         {
-            Debug.Log("Level size set to : " + level.length + " x " + level.height);
-            SetLevelSize(level.height, level.length);
+            level.GenerateLevel();
         }
 
-        if (GUILayout.Button("spawn"))
-        {
-            cubesObj.Add(new Vector2(0, 0), Instantiate(level.cubePrefab));
-        }
-        if (GUILayout.Button("reset dictionary"))
-        {
-            cubesObj.Clear();
-        }
-
-        for (int y = 0; y < saveSize.y; y++)
+        for (int x = 0; x < level.levelSize.x; x++)
         {
             GUILayout.BeginHorizontal();
-            for (int x = 0; x < saveSize.x; x++)
+            for (int y = 0; y < level.levelSize.y; y++)
             {
-                if (saveSize.x >= x && saveSize.y >= y)
+                switch (level.cubesState[x, y])
                 {
-                    GUILayout.Toggle(cubes[x, y], "");
+                    case 0: // no cube
+                        if (level.textureNull != null)
+                        {
+                            buttonStyle.normal.background = level.textureNull;
+                        }
+                        break;
+                    case 1: // baseCube
+                        if (level.textureBase != null)
+                        {
+                            buttonStyle.normal.background = level.textureBase;
+                        }
+                        break;
+                    case 2: // color 1
+                        if (level.textureColor1 != null)
+                        {
+                            buttonStyle.normal.background = level.textureColor1;
+                        }
+                        break;
+                    case 3: // Color 2
+                        if (level.textureColor2 != null)
+                        {
+                            buttonStyle.normal.background = level.textureColor2;
+                        }
+                        break;
+                    case 4: // Color 3
+                        if (level.textureColor3 != null)
+                        {
+                            buttonStyle.normal.background = level.textureColor3;
+                        }
+                        break;
+                }
+
+                if (GUILayout.Button("", buttonStyle))
+                {
+                    level.cubesState[x, y]++;
+                    if (level.cubesState[x, y] > 4)
+                    {
+                        level.cubesState[x, y] = 0;
+                    }
+
+                    switch (level.cubesState[x,y])
+                    {
+                        case 0: // no cube
+                            level.cubes[x, y].gameObject.SetActive(false);
+                            level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                            break;
+                        case 1: // baseCube
+                            level.cubes[x, y].gameObject.SetActive(true);
+                            level.cubes[x, y].gameObject.GetComponent<Cube>().SetCubeBase(level.colorMat0);
+                            level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                            break;
+                        case 2: // color 1
+                            level.cubes[x, y].gameObject.SetActive(true);
+                            level.cubes[x, y].gameObject.GetComponent<Cube>().SetCubeColor(level.colorMat1);
+                            level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                            break;
+                        case 3: // Color 2
+                            level.cubes[x, y].gameObject.SetActive(true);
+                            level.cubes[x, y].gameObject.GetComponent<Cube>().SetCubeColor(level.colorMat2);
+                            level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                            break;
+                        case 4: // Color 3
+                            level.cubes[x, y].gameObject.SetActive(true);
+                            level.cubes[x, y].gameObject.GetComponent<Cube>().SetCubeColor(level.colorMat3);
+                            level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                            break;
+                    }
                 }
             }
             GUILayout.EndHorizontal();
-        }
-    }
-
-    public void SetLevelSize(int height, int length)
-    {
-        cubes = new bool[height,length];
-
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < length; x++)
-            {
-                //Debug.Log(cubesObj.Count);
-                GameObject toto =null;
-                cubesObj.TryGetValue(new Vector2(x,y), out toto);
-                if (toto != null)
-                {
-                    Debug.Log("weeeee");
-                }
-            }
-        }
-        saveSize = new Vector2(length, height);
-    }
-
-    public void GenerateLevel(int height, int length)
-    {
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < length; x++)
-            {
-                /*
-                if (cubesObj[x, y] == null && cubes[y,x])
-                {
-                    cubesObj[x, y] = level.CreateCube();
-                    cubesObj[x, y].transform.position = new Vector3(-x + (length / 2), 0f, -y + (height / 2));
-                }
-                */
-            }
         }
     }
 }
