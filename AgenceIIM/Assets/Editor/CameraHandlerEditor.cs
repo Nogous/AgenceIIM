@@ -5,28 +5,28 @@ using UnityEditor;
 [CustomEditor(typeof(CameraHandler))]
 public class CameraHandlerEditor : Editor
 {
-    /*private void OnSceneViewGUI(SceneView sv)
+    private void OnSceneViewGUI(SceneView sv)
     {
         CameraHandler ch = target as CameraHandler;
 
-        ch.positionDepart = Handles.PositionHandle(ch.positionDepart, Quaternion.identity);
-        ch.positionAlternatif = Handles.PositionHandle(ch.positionAlternatif, Quaternion.identity);
-        ch.startTangent = Handles.PositionHandle(ch.startTangent, Quaternion.identity);
-        ch.endTangent = Handles.PositionHandle(ch.endTangent, Quaternion.identity);
+        /*ch.positionDepart = Handles.PositionHandle(ch.positionDepart, Quaternion.identity);
+        ch.positionAlternatif = Handles.PositionHandle(ch.positionAlternatif, Quaternion.identity);*/
+        ch.TanDepart = Handles.PositionHandle(ch.TanDepart, Quaternion.identity);
+        ch.TanAlternatif = Handles.PositionHandle(ch.TanAlternatif, Quaternion.identity);
 
-        Handles.DrawBezier(ch.startPoint, ch.endPoint, ch.startTangent, ch.endTangent, Color.red, null, 2f);
-    }*/
+        Handles.DrawBezier(ch.positionDepart, ch.positionAlternatif, ch.TanDepart, ch.TanAlternatif, Color.red, null, 2f);
+    }
 
     void OnEnable()
     {
         Debug.Log("OnEnable");
-        //SceneView.onSceneGUIDelegate += OnSceneViewGUI;
+        SceneView.onSceneGUIDelegate += OnSceneViewGUI;
     }
 
     void OnDisable()
     {
         Debug.Log("OnDisable");
-        //SceneView.onSceneGUIDelegate -= OnSceneViewGUI;
+        SceneView.onSceneGUIDelegate -= OnSceneViewGUI;
     }
 }
 

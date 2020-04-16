@@ -7,11 +7,11 @@ public class CameraHandler : MonoBehaviour
     bool travel;
     public bool position;
     float progress = 0.0f;
-    public GameObject cameraGO = GameObject.Find("Camera");
-    public Vector3 positionDepart = GameObject.Find("Camera").transform.position;
-    public Vector3 positionAlternatif = GameObject.Find("Point_Alt").transform.position;
-    public Vector3 TanDepart = GameObject.Find("Point_TanOrg").transform.position;
-    public Vector3 TanAlternatif = GameObject.Find("Point_TanAlt").transform.position;
+    public GameObject cameraGO;
+    public Vector3 positionDepart;
+    public Vector3 positionAlternatif;
+    public Vector3 TanDepart;
+    public Vector3 TanAlternatif;
     [Range(2, 100)] 
     public int slowFactor;
     [Range(0.01f, 0.90f)] 
