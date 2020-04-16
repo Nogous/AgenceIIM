@@ -134,6 +134,31 @@ public class Cube : MonoBehaviour
         color = initColor;
     }
 
+    #region CubeType
+
+    public void SetCubeBase(Material colorMat)
+    {
+        isEnemy = false;
+        isCleaningBox = false;
+        isDashBox = false;
+        isWall = false;
+
+        gameObject.GetComponent<Renderer>().sharedMaterial = colorMat;
+    }
+
+    public void SetCubeColor(Material colorMat)
+    {
+        isEnemy = false;
+        isCleaningBox = false;
+        isDashBox = false;
+        isWall = false;
+
+        colorPotencial = 10;
+        gameObject.GetComponent<Renderer>().sharedMaterial = colorMat;
+    }
+
+    #endregion
+
     #region Effects
 
     public void ActivateStain(Color tint)

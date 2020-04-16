@@ -20,13 +20,13 @@ public class CameraHandlerEditor : Editor
     void OnEnable()
     {
         Debug.Log("OnEnable");
-        SceneView.onSceneGUIDelegate += OnSceneViewGUI;
+        //SceneView.onSceneGUIDelegate += OnSceneViewGUI;
     }
 
     void OnDisable()
     {
         Debug.Log("OnDisable");
-        SceneView.onSceneGUIDelegate -= OnSceneViewGUI;
+        //SceneView.onSceneGUIDelegate -= OnSceneViewGUI;
     }
 }
 
