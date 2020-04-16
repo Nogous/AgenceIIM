@@ -298,6 +298,10 @@ public class Cube : MonoBehaviour
 
                     tmpCube.Explode();
                 }
+                else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+                {
+                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                }
             }
         }
 
@@ -309,6 +313,10 @@ public class Cube : MonoBehaviour
 
                 tmpCube.Explode();
             }
+            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            {
+                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+            }
         }
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[0] + vectors[3], out hit, 1f))
@@ -318,6 +326,10 @@ public class Cube : MonoBehaviour
                 Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
                 tmpCube.Explode();
+            }
+            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            {
+                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
             }
         }
 
@@ -329,6 +341,10 @@ public class Cube : MonoBehaviour
 
                 tmpCube.Explode();
             }
+            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            {
+                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+            }
         }
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[1] + vectors[3], out hit, 1f))
@@ -338,6 +354,10 @@ public class Cube : MonoBehaviour
                 Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
                 tmpCube.Explode();
+            }
+            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            {
+                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
             }
         }
     }
