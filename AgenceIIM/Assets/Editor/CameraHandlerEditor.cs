@@ -5,17 +5,17 @@ using UnityEditor;
 [CustomEditor(typeof(CameraHandler))]
 public class CameraHandlerEditor : Editor
 {
-    private void OnSceneViewGUI(SceneView sv)
+    /*private void OnSceneViewGUI(SceneView sv)
     {
-        CameraHandler camscript = target as CameraHandler;
+        CameraHandler ch = target as CameraHandler;
 
-        be.startPoint = Handles.PositionHandle(be.startPoint, Quaternion.identity);
-        be.endPoint = Handles.PositionHandle(be.endPoint, Quaternion.identity);
-        be.startTangent = Handles.PositionHandle(be.startTangent, Quaternion.identity);
-        be.endTangent = Handles.PositionHandle(be.endTangent, Quaternion.identity);
+        ch.positionDepart = Handles.PositionHandle(ch.positionDepart, Quaternion.identity);
+        ch.positionAlternatif = Handles.PositionHandle(ch.positionAlternatif, Quaternion.identity);
+        ch.startTangent = Handles.PositionHandle(ch.startTangent, Quaternion.identity);
+        ch.endTangent = Handles.PositionHandle(ch.endTangent, Quaternion.identity);
 
-        Handles.DrawBezier(be.startPoint, be.endPoint, be.startTangent, be.endTangent, Color.red, null, 2f);
-    }
+        Handles.DrawBezier(ch.startPoint, ch.endPoint, ch.startTangent, ch.endTangent, Color.red, null, 2f);
+    }*/
 
     void OnEnable()
     {
