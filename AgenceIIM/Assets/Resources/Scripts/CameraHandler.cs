@@ -81,9 +81,9 @@ public class CameraHandler : MonoBehaviour
                 case true:
                 {
                     progress += (Time.deltaTime * slowFactor);
-                        vectorNormal = Vector3.Lerp(positionDepart, positionTan, progress);
-                        vectorTan = Vector3.Lerp(positionTan, positionAlternatif, progress);
-                        cameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, -progress);
+                        vectorNormal = Vector3.Lerp(positionAlternatif, positionTan, progress);
+                        vectorTan = Vector3.Lerp(positionTan, positionDepart, progress);
+                        cameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress);
                 }
                 break;
             }
