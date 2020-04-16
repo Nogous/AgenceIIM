@@ -13,6 +13,11 @@ public class Cube : MonoBehaviour
     public bool isDashBox = false;
     public bool isWall = false;
 
+    public bool isTnt = false;
+    public bool isTrigger = false;
+
+    [SerializeField] private Cube associatedTnt = null;
+
     public enum dashEnum
     {
         forward,
@@ -76,9 +81,12 @@ public class Cube : MonoBehaviour
     private float offset = (diagonal - 1) / 2;
     public float speed = 5;
 
+    private List<Vector3> vectors = new List<Vector3>();
+
     // Start is called before the first frame update
     private void Awake()
     {
+
         initPos = transform.position;
         initRot = transform.rotation;
         initColorPotencial = colorPotencial;
@@ -90,6 +98,10 @@ public class Cube : MonoBehaviour
             gameObject.GetComponent<Renderer>().material.color = color;
         }
 
+        vectors.Add(Vector3.forward);
+        vectors.Add(Vector3.back);
+        vectors.Add(Vector3.left);
+        vectors.Add(Vector3.right);
     }
 
     private void SetModeVoid()
@@ -232,6 +244,8 @@ public class Cube : MonoBehaviour
         {
             if (!isBreakable) return;
 
+            if (isTnt) DestroySurroundings();
+
             //make object disappear
             gameObject.SetActive(false);
         }
@@ -265,6 +279,85 @@ public class Cube : MonoBehaviour
             {
                 // addd explosion force
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, explosionUpward);
+            }
+        }
+    }
+
+    private void DestroySurroundings()
+    {
+        RaycastHit hit;
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (Physics.Raycast(transform.position, vectors[i], out hit, 1f))
+            { 
+
+                if (hit.transform.gameObject.GetComponent<Cube>())
+                {
+                    Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                    tmpCube.Explode();
+                }
+                else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+                {
+                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                }
+            }
+        }
+
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f,0), vectors[0] + vectors[2], out hit, 1f))
+        {
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                tmpCube.Explode();
+            }
+            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            {
+                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+            }
+        }
+
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[0] + vectors[3], out hit, 1f))
+        {
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                tmpCube.Explode();
+            }
+            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            {
+                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+            }
+        }
+
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[1] + vectors[2], out hit, 1f))
+        {
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                tmpCube.Explode();
+            }
+            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            {
+                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+            }
+        }
+
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[1] + vectors[3], out hit, 1f))
+        {
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                tmpCube.Explode();
+            }
+            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            {
+                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
             }
         }
     }
@@ -390,5 +483,13 @@ public class Cube : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void ActivateTnt()
+    {
+        if(associatedTnt != null && associatedTnt.gameObject.activeSelf)
+        {
+            associatedTnt.Explode();
+        } 
     }
 }

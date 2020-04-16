@@ -215,6 +215,12 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    public void SetDeath()
+    {
+        SetModeNull();
+        StartCoroutine(Death());
+    }
+
     private IEnumerator Death(string deathInfo = null)
     {
         if (deathInfo == "fall")
@@ -505,6 +511,10 @@ public class Player : MonoBehaviour
                     }
 
                     SetModeDash();
+                }
+                else if (tmpCube.isTrigger)
+                {
+                    tmpCube.ActivateTnt();
                 }
 
             }
