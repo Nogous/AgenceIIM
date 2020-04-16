@@ -400,18 +400,26 @@ public class Cube : MonoBehaviour
     {
         if (InvertZAxis)
         {
-            if (vector == Vector3.forward || vector == Vector3.back) orientation = vector * -1;
+            if (vector == Vector3.forward || vector == Vector3.back)
+            {
+                vector *= -1;
+                orientation = vector;
+            }
         }
-        else
+        else 
         {
             orientation = vector;
         }
 
         if (InvertXAxis)
         {
-            if (vector == Vector3.right || vector == Vector3.left) orientation = vector * -1;
+            if (vector == Vector3.right || vector == Vector3.left)
+            {
+                vector *= -1;
+                orientation = vector;
+            }
         }
-        else
+        else 
         {
             orientation = vector;
         }
