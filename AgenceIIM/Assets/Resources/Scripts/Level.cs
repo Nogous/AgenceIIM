@@ -10,6 +10,8 @@ public class Level : MonoBehaviour
     public Transform[,] cubes = null;
     public int[,] cubesState = null;
 
+    public int tabTarget = 0;
+
     // test
     public Texture2D textureNull = null;
     public Texture2D textureBase = null;
@@ -25,7 +27,7 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateLevel();
+        //GenerateLevel();
     }
 
     // Update is called once per frame
