@@ -13,6 +13,8 @@ public class Cube : MonoBehaviour
     public bool isDashBox = false;
     public bool isWall = false;
 
+    public bool isPushBlock = false;
+
     public bool isTnt = false;
     public bool isTrigger = false;
 
@@ -469,6 +471,8 @@ public class Cube : MonoBehaviour
                 hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
             }
         }
+
+        SetModeVoid();
     }
 
     public Color GetColor()
@@ -592,7 +596,10 @@ public class Cube : MonoBehaviour
 
         if (transform.position.y < initPos.y - 1)
         {
-            Explode();
+            if(isEnemy || isEnemyMoving)
+            {
+                Explode();
+            }
 
             SetModeVoid();
         }
@@ -688,7 +695,46 @@ public class Cube : MonoBehaviour
 
     #endregion
 
-    private bool TestWall()
+    #region Push
+
+    public void SetModePush(Vector3 vector)
+    {
+        if (DoAction == DoActionFall) return;
+
+        RotationCheck();
+
+        _elapsedTime = 0;
+
+        direction = transform.position + orientation;
+        previousPos = transform.position;
+
+        // init move
+
+        DoAction = DoActionPush;
+    }
+
+    private void DoActionPush()
+    {
+        _elapsedTime += Time.deltaTime;
+
+        float ratio = _elapsedTime / _moveTime;
+
+        transform.position = Vector3.Lerp(previousPos, direction, ratio);
+
+        if (_elapsedTime >= _moveTime)
+        {
+            // end move
+            SetModeVoid();
+
+            transform.eulerAngles = Vector3.zero;
+
+            TestTile();
+        }
+    }
+
+    #endregion
+
+    public bool TestWall()
     {
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
@@ -698,10 +744,7 @@ public class Cube : MonoBehaviour
 
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
-
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
-
-                if (tmpCube.isWall) return true;
+                return true;
             }
         }
 
