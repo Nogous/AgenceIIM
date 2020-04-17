@@ -150,12 +150,26 @@ public class Cube : MonoBehaviour
 
     #region CubeType
 
-    public void SetCubeBase(Material colorMat)
+    public void SetCubeBase()
     {
         isEnemy = false;
+        isEnemyMoving = false;
         isCleaningBox = false;
         isDashBox = false;
         isWall = false;
+        isTnt = false;
+        isTrigger = false;
+    }
+
+    public void SetCubeBase(Material colorMat)
+    {
+        isEnemy = false;
+        isEnemyMoving = false;
+        isCleaningBox = false;
+        isDashBox = false;
+        isWall = false;
+        isTnt = false;
+        isTrigger = false;
 
         gameObject.GetComponent<Renderer>().sharedMaterial = colorMat;
     }
@@ -163,12 +177,91 @@ public class Cube : MonoBehaviour
     public void SetCubeColor(Material colorMat)
     {
         isEnemy = false;
+        isEnemyMoving = false;
         isCleaningBox = false;
         isDashBox = false;
         isWall = false;
+        isTnt = false;
+        isTrigger = false;
 
         colorPotencial = 10;
         gameObject.GetComponent<Renderer>().sharedMaterial = colorMat;
+    }
+
+    public void SetEnemy()
+    {
+        isEnemy = true;
+        isEnemyMoving = false;
+        isCleaningBox = false;
+        isDashBox = false;
+        isWall = false;
+        isTnt = false;
+        isTrigger = false;
+    }
+
+    public void SetEnemyMoving()
+    {
+        isEnemy = true;
+        isEnemyMoving = true;
+        isCleaningBox = false;
+        isDashBox = false;
+        isWall = false;
+        isTnt = false;
+        isTrigger = false;
+    }
+
+    public void SetCleaningBox()
+    {
+        isEnemy = false;
+        isEnemyMoving = false;
+        isCleaningBox = true;
+        isDashBox = false;
+        isWall = false;
+        isTnt = false;
+        isTrigger = false;
+    }
+    public void SetDashBox()
+    {
+        isEnemy = false;
+        isEnemyMoving = false;
+        isCleaningBox = false;
+        isDashBox = true;
+        isWall = false;
+        isTnt = false;
+        isTrigger = false;
+    }
+
+    public void SetWall()
+    {
+        isEnemy = false;
+        isEnemyMoving = false;
+        isCleaningBox = false;
+        isDashBox = false;
+        isWall = true;
+        isTnt = false;
+        isTrigger = false;
+    }
+
+    public void SetTNT()
+    {
+        isEnemy = false;
+        isEnemyMoving = false;
+        isCleaningBox = false;
+        isDashBox = false;
+        isWall = false;
+        isTnt = true;
+        isTrigger = false;
+    }
+
+    public void SetTrigger()
+    {
+        isEnemy = false;
+        isEnemyMoving = false;
+        isCleaningBox = false;
+        isDashBox = false;
+        isWall = false;
+        isTnt = false;
+        isTrigger = true;
     }
 
     #endregion
