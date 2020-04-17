@@ -144,6 +144,8 @@ public class Cube : MonoBehaviour
         transform.rotation = initRot;
         colorPotencial = initColorPotencial;
         color = initColor;
+
+        SetModeVoid();
     }
 
     #region CubeType
@@ -398,6 +400,8 @@ public class Cube : MonoBehaviour
 
     private void SetModeMove(Vector3 vector)
     {
+        if (DoAction == DoActionFall) return;
+
         if (InvertZAxis)
         {
             if (vector == Vector3.forward || vector == Vector3.back)
@@ -462,6 +466,8 @@ public class Cube : MonoBehaviour
             SetModeVoid();
 
             transform.eulerAngles = Vector3.zero;
+
+            TestTile();
         }
     }
 
@@ -472,6 +478,108 @@ public class Cube : MonoBehaviour
         else if (orientation == Vector3.back) axis = Vector3.left;
         else axis = Vector3.forward;
     }
+
+    private void DoActionFall()
+    {
+        transform.position += Vector3.down * Time.deltaTime * GameManager.instance.fallSpeed;
+
+        if (transform.position.y < initPos.y - 1)
+        {
+            Explode();
+
+            SetModeVoid();
+        }
+    }
+
+    private void TestTile()
+    {
+        // test tile d'arriver
+
+        Ray ray = new Ray(transform.position, Vector3.down);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();               
+
+                if (tmpCube.isDashBox)
+                {
+
+                    if ((int)tmpCube.dashOrientation == 0)
+                    {
+                        orientation = Vector3.forward;
+                    }
+                    else if ((int)tmpCube.dashOrientation == 1)
+                    {
+                        orientation = Vector3.back;
+                    }
+                    else if ((int)tmpCube.dashOrientation == 2)
+                    {
+                        orientation = Vector3.right;
+                    }
+                    else
+                    {
+                        orientation = Vector3.left;
+                    }
+
+                    SetModeDash();
+                }
+                else if (tmpCube.isTrigger)
+                {
+                    tmpCube.ActivateTnt();
+                }
+
+            }
+
+        }
+        else
+        {
+            DoAction = DoActionFall;
+        }
+    }
+
+    #region Dash
+
+    private void SetModeDash()
+    {
+        RotationCheck();
+
+        _elapsedTime = 0;
+
+        direction = transform.position + orientation * 2;
+        previousRot = transform.rotation;
+        addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
+        previousPos = transform.position;
+
+        DoAction = DoActionDash;
+    }
+
+    private void DoActionDash()
+    {
+        _elapsedTime += Time.deltaTime;
+
+        float ratio = _elapsedTime / _moveTime;
+
+        transform.position = Vector3.Lerp(previousPos, direction, ratio);
+
+        transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
+
+        transform.position = new Vector3(transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), transform.position.z);
+
+        if (_elapsedTime >= _moveTime)
+        {
+            // end move
+            SetModeVoid();
+
+            transform.eulerAngles = Vector3.zero;
+
+            TestTile();
+        }
+    }
+
+    #endregion
 
     private bool TestWall()
     {
