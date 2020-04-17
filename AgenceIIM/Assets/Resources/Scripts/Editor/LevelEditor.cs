@@ -57,73 +57,67 @@ public class LevelEditor : Editor
                     GUILayout.BeginHorizontal();
                     for (int y = 0; y < level.levelSize.y; y++)
                     {
-                        switch (level.cubesState[x, y])
+                        switch (level.cubesState[x + (y * (int)level.levelSize.x)])
                         {
-                            case 0: // no cube
-                                if (level.textureNull != null)
-                                {
-                                    buttonStyle.normal.background = level.textureNull;
-                                }
-                                break;
                             case 1: // baseCube
-                                if (level.textureBase != null)
+                                if (level.texture2DCubeBase != null)
                                 {
-                                    buttonStyle.normal.background = level.textureBase;
+                                    buttonStyle.normal.background = level.texture2DCubeBase;
                                 }
                                 break;
                             case 2: // color 1
-                                if (level.textureColor1 != null)
+                                if (level.texture2DGrond1 != null)
                                 {
-                                    buttonStyle.normal.background = level.textureColor1;
+                                    buttonStyle.normal.background = level.texture2DGrond1;
                                 }
                                 break;
                             case 3: // Color 2
-                                if (level.textureColor2 != null)
+                                if (level.texture2DGrond2 != null)
                                 {
-                                    buttonStyle.normal.background = level.textureColor2;
+                                    buttonStyle.normal.background = level.texture2DGrond2;
                                 }
                                 break;
                             case 4: // Color 3
-                                if (level.textureColor3 != null)
+                                if (level.texture2DGrond3 != null)
                                 {
-                                    buttonStyle.normal.background = level.textureColor3;
+                                    buttonStyle.normal.background = level.texture2DGrond3;
                                 }
                                 break;
                         }
 
                         if (GUILayout.Button("", buttonStyle))
                         {
-                            level.cubesState[x, y]++;
-                            if (level.cubesState[x, y] > 4)
+                            level.cubesState[x + (y * (int)level.levelSize.x)]++;
+                            if (level.cubesState[x + (y * (int)level.levelSize.x)] > 4)
                             {
-                                level.cubesState[x, y] = 0;
+                                level.cubesState[x + (y * (int)level.levelSize.x)] = 0;
                             }
 
-                            switch (level.cubesState[x, y])
+                            switch (level.cubesState[x + (y * (int)level.levelSize.x)])
                             {
                                 case 0: // no cube
-                                    level.cubes[x, y].gameObject.SetActive(false);
-                                    level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].gameObject.SetActive(false);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 1: // baseCube
-                                    level.cubes[x, y].gameObject.SetActive(true);
-                                    level.cubes[x, y].gameObject.GetComponent<Cube>().SetCubeBase(level.colorMat0);
-                                    level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetCubeBase(level.matCubeBase);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 2: // color 1
-                                    level.cubes[x, y].gameObject.SetActive(true);
-                                    level.cubes[x, y].gameObject.GetComponent<Cube>().SetCubeColor(level.colorMat1);
-                                    level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetCubeColor(level.matColor1);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 3: // Color 2
-                                    level.cubes[x, y].gameObject.SetActive(true);
-                                    level.cubes[x, y].gameObject.GetComponent<Cube>().SetCubeColor(level.colorMat2);
-                                    level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetCubeColor(level.matColor2);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 4: // Color 3
-                                    level.cubes[x, y].gameObject.SetActive(true);
-                                    level.cubes[x, y].gameObject.GetComponent<Cube>().SetCubeColor(level.colorMat3);
-                                    level.cubes[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetCubeColor(level.matColor3);
+                                    level.cubes[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                             }
                         }
@@ -144,106 +138,106 @@ public class LevelEditor : Editor
                     GUILayout.BeginHorizontal();
                     for (int y = 0; y < level.levelSize.y; y++)
                     {
-                        switch (level.enemyState[x, y])
+                        switch (level.enemyState[x + (y * (int)level.levelSize.x)])
                         {
                             case 0: // no cube
-                                if (GameManager.instance.texture2DNoCube != null)
+                                if (level.texture2DNoCube != null)
                                 {
-                                    buttonStyle.normal.background = GameManager.instance.texture2DNoCube;
+                                    buttonStyle.normal.background = level.texture2DNoCube;
                                 }
                                 break;
                             case 1: // isEnemy
-                                if (GameManager.instance.texture2DEnemyStatic != null)
+                                if (level.texture2DEnemyStatic != null)
                                 {
-                                    buttonStyle.normal.background = GameManager.instance.texture2DEnemyStatic;
+                                    buttonStyle.normal.background = level.texture2DEnemyStatic;
                                 }
                                 break;
                             case 2: // isEnemyMoving
-                                if (GameManager.instance.texture2DEnemyMove != null)
+                                if (level.texture2DEnemyMove != null)
                                 {
-                                    buttonStyle.normal.background = GameManager.instance.texture2DEnemyMove;
+                                    buttonStyle.normal.background = level.texture2DEnemyMove;
                                 }
                                 break;
                             case 3: // isCleaningBox
-                                if (GameManager.instance.texture2DCleaningBox != null)
+                                if (level.texture2DCleaningBox != null)
                                 {
-                                    buttonStyle.normal.background = GameManager.instance.texture2DCleaningBox;
+                                    buttonStyle.normal.background = level.texture2DCleaningBox;
                                 }
                                 break;
                             case 4: // isDashBox
-                                if (GameManager.instance.texture2DDashBox != null)
+                                if (level.texture2DDashBox != null)
                                 {
-                                    buttonStyle.normal.background = GameManager.instance.texture2DDashBox;
+                                    buttonStyle.normal.background = level.texture2DDashBox;
                                 }
                                 break;
                             case 5: // isWall
-                                if (GameManager.instance.texture2DWall != null)
+                                if (level.texture2DWall != null)
                                 {
-                                    buttonStyle.normal.background = GameManager.instance.texture2DWall;
+                                    buttonStyle.normal.background = level.texture2DWall;
                                 }
                                 break;
                             case 6: // isTnt
-                                if (GameManager.instance.texture2DTNT != null)
+                                if (level.texture2DTNT != null)
                                 {
-                                    buttonStyle.normal.background = GameManager.instance.texture2DTNT;
+                                    buttonStyle.normal.background = level.texture2DTNT;
                                 }
                                 break;
                             case 7: // isTrigger
-                                if (GameManager.instance.texture2DTrigger != null)
+                                if (level.texture2DTrigger != null)
                                 {
-                                    buttonStyle.normal.background = GameManager.instance.texture2DTrigger;
+                                    buttonStyle.normal.background = level.texture2DTrigger;
                                 }
                                 break;
                         }
 
                         if (GUILayout.Button("", buttonStyle))
                         {
-                            level.enemyState[x, y]++;
-                            if (level.enemyState[x, y] > 7)
+                            level.enemyState[x + (y * (int)level.levelSize.x)]++;
+                            if (level.enemyState[x + (y * (int)level.levelSize.x)] > 7)
                             {
-                                level.enemyState[x, y] = 0;
+                                level.enemyState[x + (y * (int)level.levelSize.x)] = 0;
                             }
 
-                            switch (level.enemyState[x, y])
+                            switch (level.enemyState[x + (y * (int)level.levelSize.x)])
                             {
                                 case 0: // no cube
-                                    level.enemys[x, y].gameObject.SetActive(false);
-                                    level.enemys[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.SetActive(false);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 1: // isEnemy
-                                    level.enemys[x, y].gameObject.SetActive(true);
-                                    level.enemys[x, y].gameObject.GetComponent<Cube>().SetCubeBase(GameManager.instance.matEnemy);
-                                    level.enemys[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetEnemy(level.matEnemy);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 2: // isEnemyMoving
-                                    level.enemys[x, y].gameObject.SetActive(true);
-                                    level.enemys[x, y].gameObject.GetComponent<Cube>().SetCubeColor(GameManager.instance.matEnemyMove);
-                                    level.enemys[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetEnemyMoving(level.matEnemyMove);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 3: // isCleaningBox
-                                    level.enemys[x, y].gameObject.SetActive(true);
-                                    level.enemys[x, y].gameObject.GetComponent<Cube>().SetCubeColor(GameManager.instance.matCleaningBox);
-                                    level.enemys[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetCleaningBox(level.matCleaningBox);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 4: // isDashBox
-                                    level.enemys[x, y].gameObject.SetActive(true);
-                                    level.enemys[x, y].gameObject.GetComponent<Cube>().SetCubeColor(GameManager.instance.matDashBox);
-                                    level.enemys[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetDashBox(level.matDashBox);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 5: // isWall
-                                    level.enemys[x, y].gameObject.SetActive(true);
-                                    level.enemys[x, y].gameObject.GetComponent<Cube>().SetCubeColor(GameManager.instance.matWall);
-                                    level.enemys[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetWall(level.matWall);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 6: // isTnt
-                                    level.enemys[x, y].gameObject.SetActive(true);
-                                    level.enemys[x, y].gameObject.GetComponent<Cube>().SetCubeColor(GameManager.instance.matTNT);
-                                    level.enemys[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetTNT(level.matTNT);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                                 case 7: // isTrigger
-                                    level.enemys[x, y].gameObject.SetActive(true);
-                                    level.enemys[x, y].gameObject.GetComponent<Cube>().SetCubeColor(GameManager.instance.matTrigger);
-                                    level.enemys[x, y].name = string.Format("{0},{1}", x, y);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.SetActive(true);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].gameObject.GetComponent<Cube>().SetTrigger(level.matTrigger);
+                                    level.enemys[x + (y * (int)level.levelSize.x)].name = string.Format("{0},{1}", x, y);
                                     break;
                             }
                         }
@@ -259,8 +253,6 @@ public class LevelEditor : Editor
         {
             soTarget.ApplyModifiedProperties();
             GUI.FocusControl(null);
-
-            level.SetCubesState(level.cubesState);
         }
 
 

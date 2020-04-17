@@ -188,7 +188,7 @@ public class Cube : MonoBehaviour
         gameObject.GetComponent<Renderer>().sharedMaterial = colorMat;
     }
 
-    public void SetEnemy()
+    public void SetEnemy(Material mat)
     {
         isEnemy = true;
         isEnemyMoving = false;
@@ -197,9 +197,11 @@ public class Cube : MonoBehaviour
         isWall = false;
         isTnt = false;
         isTrigger = false;
+
+        gameObject.GetComponent<Renderer>().sharedMaterial = mat;
     }
 
-    public void SetEnemyMoving()
+    public void SetEnemyMoving(Material mat)
     {
         isEnemy = true;
         isEnemyMoving = true;
@@ -208,9 +210,11 @@ public class Cube : MonoBehaviour
         isWall = false;
         isTnt = false;
         isTrigger = false;
+
+        gameObject.GetComponent<Renderer>().sharedMaterial = mat;
     }
 
-    public void SetCleaningBox()
+    public void SetCleaningBox(Material mat)
     {
         isEnemy = false;
         isEnemyMoving = false;
@@ -219,8 +223,10 @@ public class Cube : MonoBehaviour
         isWall = false;
         isTnt = false;
         isTrigger = false;
+
+        gameObject.GetComponent<Renderer>().sharedMaterial = mat;
     }
-    public void SetDashBox()
+    public void SetDashBox(Material mat)
     {
         isEnemy = false;
         isEnemyMoving = false;
@@ -229,9 +235,11 @@ public class Cube : MonoBehaviour
         isWall = false;
         isTnt = false;
         isTrigger = false;
+
+        gameObject.GetComponent<Renderer>().sharedMaterial = mat;
     }
 
-    public void SetWall()
+    public void SetWall(Material mat)
     {
         isEnemy = false;
         isEnemyMoving = false;
@@ -240,9 +248,11 @@ public class Cube : MonoBehaviour
         isWall = true;
         isTnt = false;
         isTrigger = false;
+
+        gameObject.GetComponent<Renderer>().sharedMaterial = mat;
     }
 
-    public void SetTNT()
+    public void SetTNT(Material mat)
     {
         isEnemy = false;
         isEnemyMoving = false;
@@ -251,9 +261,11 @@ public class Cube : MonoBehaviour
         isWall = false;
         isTnt = true;
         isTrigger = false;
+
+        gameObject.GetComponent<Renderer>().sharedMaterial = mat;
     }
 
-    public void SetTrigger()
+    public void SetTrigger(Material mat)
     {
         isEnemy = false;
         isEnemyMoving = false;
@@ -262,6 +274,8 @@ public class Cube : MonoBehaviour
         isWall = false;
         isTnt = false;
         isTrigger = true;
+
+        gameObject.GetComponent<Renderer>().sharedMaterial = mat;
     }
 
     #endregion
