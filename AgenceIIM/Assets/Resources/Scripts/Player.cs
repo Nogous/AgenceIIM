@@ -541,13 +541,23 @@ public class Player : MonoBehaviour
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 0.5f))
+        if (Physics.Raycast(ray, out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
                 Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
                 if (tmpCube.isWall) return true;
+
+                else if (tmpCube.isPushBlock)
+                {
+                    tmpCube.orientation = orientation;
+                    if (!tmpCube.TestWall())
+                    {
+                        tmpCube.SetModePush(tmpCube.orientation);
+                    }
+                    else return true;
+                }
             }
         }
 
