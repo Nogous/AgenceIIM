@@ -8,7 +8,9 @@ public class Level : MonoBehaviour
     public Vector2 levelSize = new Vector2(15,15);
 
     public Transform[,] cubes = null;
+    public Transform[,] enemys = null;
     public int[,] cubesState = null;
+    public int[,] enemyState = null;
 
     public int tabTarget = 0;
 
@@ -27,34 +29,44 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         //GenerateLevel();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (cubesState == null)
+        {
+            Debug.Log("cubesState est null");
+        }
+        if (cubes == null)
+        {
+            Debug.Log("cubes est null");
+        }
+        */
     }
 
     public void GenerateLevel()
     {
-        string holderName = "Generated Level";
-        if (transform.Find(holderName))
+        string holderCubeName = "Generated Level 0";
+        string holderEnemyName = "Generated Level 1";
+        if (transform.Find(holderCubeName))
         {
-            DestroyImmediate(transform.Find(holderName).gameObject);
+            DestroyImmediate(transform.Find(holderCubeName).gameObject);
+            DestroyImmediate(transform.Find(holderEnemyName).gameObject);
         }
 
         cubes = new Transform[(int)levelSize.x, (int)levelSize.y];
         cubesState = new int[(int)levelSize.x, (int)levelSize.y];
 
-        Transform levelHolder = new GameObject(holderName).transform;
+        enemys = new Transform[(int)levelSize.x, (int)levelSize.y];
+        enemyState = new int[(int)levelSize.x, (int)levelSize.y];
+
+        // ground
+        Transform levelHolder = new GameObject(holderCubeName).transform;
         levelHolder.parent = transform;
 
         for (int x = 0; x < levelSize.x; x++)
         {
             for (int y = 0; y < levelSize.y; y++)
             {
-                Vector3 cubePos = new Vector3(-levelSize.x / 2 + 0.5f + x, 0, -levelSize.y / 2 + 0.5f + y);
+                Vector3 cubePos = new Vector3(-levelSize.x / 2 + 0.5f + x, 0, -levelSize.y / 2 + 0.5f + y) + transform.position;
                 Transform newCube = Instantiate(cubePrefab, cubePos, Quaternion.Euler(Vector3.right * 90)) as Transform;
 
                 cubes[x, y] = newCube;
@@ -62,7 +74,33 @@ public class Level : MonoBehaviour
 
                 newCube.localScale = Vector3.one;
                 newCube.parent = levelHolder;
+                newCube.gameObject.SetActive(false);
             }
         }
+
+        // level 1
+        levelHolder = new GameObject(holderEnemyName).transform;
+        levelHolder.parent = transform;
+
+        for (int x = 0; x < levelSize.x; x++)
+        {
+            for (int y = 0; y < levelSize.y; y++)
+            {
+                Vector3 cubePos = new Vector3(-levelSize.x / 2 + 0.5f + x, 1, -levelSize.y / 2 + 0.5f + y) + transform.position;
+                Transform newCube = Instantiate(cubePrefab, cubePos, Quaternion.Euler(Vector3.right * 90)) as Transform;
+
+                enemys[x, y] = newCube;
+                enemyState[x, y] = 0;
+
+                newCube.localScale = Vector3.one;
+                newCube.parent = levelHolder;
+                newCube.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void SetCubesState(int[,] _cubesState)
+    {
+        cubesState = _cubesState;
     }
 }
