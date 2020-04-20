@@ -464,7 +464,6 @@ public class Player : MonoBehaviour
                     if (tmpColor == tmpCube.enemyColor)
                     {
                         tmpCube.Explode();
-                        GameManager.instance.KillEnnemy();
                     }
                     else
                     {
