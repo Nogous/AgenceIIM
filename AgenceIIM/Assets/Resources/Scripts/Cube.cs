@@ -8,6 +8,7 @@ public class Cube : MonoBehaviour
     [Header("General Settings")]
 
     public bool isEnemy = false;
+    public bool isEnemyMirror = false;
     public bool isEnemyMoving = false;
     public bool isCleaningBox = false;
     public bool isDashBox = false;
@@ -63,6 +64,10 @@ public class Cube : MonoBehaviour
     private Action DoAction;
 
     [Header("Movement Settings")]
+
+    public List<dashEnum> MoveList = new List<dashEnum>();
+    private int CurrentMove = 0;
+    private bool revertMove = false;
 
     [SerializeField] private float _moveTime = 0.2f;
 
@@ -120,7 +125,7 @@ public class Cube : MonoBehaviour
     {
         GameManager.instance.AddCube(this);
 
-        if (!isEnemy && !isEnemyMoving)
+        if (!isEnemy && !isEnemyMirror)
         {
             if (stain != null)
             {
@@ -129,7 +134,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (isEnemyMoving) Player.OnMove += SetModeMove;
+        if (isEnemyMirror || isEnemyMoving) Player.OnMove += SetModeMove;
 
         if (isBreakable)
         {
@@ -147,6 +152,8 @@ public class Cube : MonoBehaviour
         colorPotencial = initColorPotencial;
         color = initColor;
 
+        CurrentMove = 0;
+
         SetModeVoid();
     }
 
@@ -155,7 +162,7 @@ public class Cube : MonoBehaviour
     public void SetCubeBase()
     {
         isEnemy = false;
-        isEnemyMoving = false;
+        isEnemyMirror = false;
         isCleaningBox = false;
         isDashBox = false;
         isWall = false;
@@ -166,7 +173,7 @@ public class Cube : MonoBehaviour
     public void SetCubeBase(Material colorMat)
     {
         isEnemy = false;
-        isEnemyMoving = false;
+        isEnemyMirror = false;
         isCleaningBox = false;
         isDashBox = false;
         isWall = false;
@@ -179,7 +186,7 @@ public class Cube : MonoBehaviour
     public void SetCubeColor(Material colorMat)
     {
         isEnemy = false;
-        isEnemyMoving = false;
+        isEnemyMirror = false;
         isCleaningBox = false;
         isDashBox = false;
         isWall = false;
@@ -193,7 +200,7 @@ public class Cube : MonoBehaviour
     public void SetEnemy(Material mat)
     {
         isEnemy = true;
-        isEnemyMoving = false;
+        isEnemyMirror = false;
         isCleaningBox = false;
         isDashBox = false;
         isWall = false;
@@ -206,7 +213,7 @@ public class Cube : MonoBehaviour
     public void SetEnemyMoving(Material mat)
     {
         isEnemy = true;
-        isEnemyMoving = true;
+        isEnemyMirror = true;
         isCleaningBox = false;
         isDashBox = false;
         isWall = false;
@@ -219,7 +226,7 @@ public class Cube : MonoBehaviour
     public void SetCleaningBox(Material mat)
     {
         isEnemy = false;
-        isEnemyMoving = false;
+        isEnemyMirror = false;
         isCleaningBox = true;
         isDashBox = false;
         isWall = false;
@@ -231,7 +238,7 @@ public class Cube : MonoBehaviour
     public void SetDashBox(Material mat)
     {
         isEnemy = false;
-        isEnemyMoving = false;
+        isEnemyMirror = false;
         isCleaningBox = false;
         isDashBox = true;
         isWall = false;
@@ -244,7 +251,7 @@ public class Cube : MonoBehaviour
     public void SetWall(Material mat)
     {
         isEnemy = false;
-        isEnemyMoving = false;
+        isEnemyMirror = false;
         isCleaningBox = false;
         isDashBox = false;
         isWall = true;
@@ -257,7 +264,7 @@ public class Cube : MonoBehaviour
     public void SetTNT(Material mat)
     {
         isEnemy = false;
-        isEnemyMoving = false;
+        isEnemyMirror = false;
         isCleaningBox = false;
         isDashBox = false;
         isWall = false;
@@ -270,7 +277,7 @@ public class Cube : MonoBehaviour
     public void SetTrigger(Material mat)
     {
         isEnemy = false;
-        isEnemyMoving = false;
+        isEnemyMirror = false;
         isCleaningBox = false;
         isDashBox = false;
         isWall = false;
@@ -518,38 +525,79 @@ public class Cube : MonoBehaviour
     {
         if (DoAction == DoActionFall) return;
 
-        if (InvertZAxis)
+        if (isEnemyMirror)
         {
-            if (vector == Vector3.forward || vector == Vector3.back)
+            if (InvertZAxis)
             {
-                vector *= -1;
+                if (vector == Vector3.forward || vector == Vector3.back)
+                {
+                    vector *= -1;
+                    orientation = vector;
+                }
+            }
+            else
+            {
                 orientation = vector;
             }
-        }
-        else 
-        {
-            orientation = vector;
-        }
 
-        if (InvertXAxis)
-        {
-            if (vector == Vector3.right || vector == Vector3.left)
+            if (InvertXAxis)
             {
-                vector *= -1;
+                if (vector == Vector3.right || vector == Vector3.left)
+                {
+                    vector *= -1;
+                    orientation = vector;
+                }
+            }
+            else
+            {
                 orientation = vector;
             }
-        }
-        else 
-        {
-            orientation = vector;
-        }
 
-        if (TestWall())
+            if (TestWall())
+            {
+                SetModeVoid();
+                return;
+            }
+        }
+        else if(isEnemyMoving)
         {
-            SetModeVoid();
-            return;
-        }  
+            if (CurrentMove == MoveList.Count && !revertMove)
+            {
+                if (transform.position == initPos)
+                {
+                    CurrentMove = 0;
+                }
+                else revertMove = true;
+            }
+            else if (CurrentMove == 0 && revertMove) revertMove = false;
 
+            if(revertMove) CurrentMove--;
+
+            if ((int)MoveList[CurrentMove] == 0)
+            {
+                orientation = Vector3.forward;
+                if (revertMove) orientation = Vector3.back;
+            }
+            else if ((int)MoveList[CurrentMove] == 1)
+            {
+                orientation = Vector3.back;
+                if (revertMove) orientation = Vector3.forward;
+            }
+            else if ((int)MoveList[CurrentMove] == 2)
+            {
+                orientation = Vector3.right;
+                if (revertMove) orientation = Vector3.left;
+            }
+            else
+            {
+                orientation = Vector3.left;
+                if (revertMove) orientation = Vector3.right;
+            }
+
+            if (!revertMove) CurrentMove++;
+
+        }
+        
         RotationCheck();
 
         _elapsedTime = 0;
@@ -601,7 +649,7 @@ public class Cube : MonoBehaviour
 
         if (transform.position.y < initPos.y - 1)
         {
-            if(isEnemy || isEnemyMoving)
+            if(isEnemy || isEnemyMirror)
             {
                 Explode();
             }
