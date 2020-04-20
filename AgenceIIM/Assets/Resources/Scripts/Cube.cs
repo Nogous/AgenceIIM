@@ -351,6 +351,11 @@ public class Cube : MonoBehaviour
 
     public void Explode(bool isPlayer = false)
     {
+        if (!isEnemy)
+        {
+            GameManager.instance.KillEnnemy();
+        }
+
         if (!isPlayer)
         {
             if (!isBreakable) return;
