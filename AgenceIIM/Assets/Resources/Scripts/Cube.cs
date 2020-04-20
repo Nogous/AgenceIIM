@@ -358,11 +358,6 @@ public class Cube : MonoBehaviour
 
     public void Explode(bool isPlayer = false)
     {
-        if (!isEnemy)
-        {
-            GameManager.instance.KillEnnemy();
-        }
-
         if (!isPlayer)
         {
             if (!isBreakable) return;
@@ -374,6 +369,9 @@ public class Cube : MonoBehaviour
         }
         else
         {
+
+            GameManager.instance.KillEnnemy();
+
             AudioManager.instance.Play("Splash");
             AudioManager.instance.Play("ExplosionCube");
         }    
