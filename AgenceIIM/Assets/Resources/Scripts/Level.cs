@@ -7,24 +7,49 @@ public class Level : MonoBehaviour
     public Transform cubePrefab = null;
     public Vector2 levelSize = new Vector2(15,15);
 
-    public Transform[,] cubes = null;
-    public Transform[,] enemys = null;
-    public int[,] cubesState = null;
-    public int[,] enemyState = null;
+    public Transform[] cubes = new Transform[225];
+    public Transform[] enemys = new Transform[225];
+    public int[] cubesState = new int[225];
+    public int[] enemyState = new int[225];
 
     public int tabTarget = 0;
 
-    // test
-    public Texture2D textureNull = null;
-    public Texture2D textureBase = null;
-    public Texture2D textureColor1 = null;
-    public Texture2D textureColor2 = null;
-    public Texture2D textureColor3 = null;
 
-    public Material colorMat0;
-    public Material colorMat1;
-    public Material colorMat2;
-    public Material colorMat3;
+    [Header("no Cube")]
+    public Texture2D texture2DNoCube;
+    [Header("Base Cube")]
+    public Texture2D texture2DCubeBase;
+    public Material matCubeBase = null;
+    [Header("Wall")]
+    public Texture2D texture2DWall;
+    public Material matWall = null;
+    [Header("Color Grond 1")]
+    public Texture2D texture2DGrond1;
+    public Material matColor1 = null;
+    [Header("Color Grond 2")]
+    public Texture2D texture2DGrond2;
+    public Material matColor2 = null;
+    [Header("Color Grond 3")]
+    public Texture2D texture2DGrond3;
+    public Material matColor3 = null;
+    [Header("EnemyStatic")]
+    public Texture2D texture2DEnemyStatic;
+    public Material matEnemy = null;
+    [Header("Enemy Moving")]
+    public Texture2D texture2DEnemyMove;
+    public Material matEnemyMove = null;
+    [Header("CleaningBox")]
+    public Texture2D texture2DCleaningBox;
+    public Material matCleaningBox = null;
+    [Header("DashBox")]
+    public Texture2D texture2DDashBox;
+    public Material matDashBox = null;
+    [Header("TNT")]
+    public Texture2D texture2DTNT;
+    public Material matTNT = null;
+    [Header("Trigger")]
+    public Texture2D texture2DTrigger;
+    public Material matTrigger = null;
 
     // Start is called before the first frame update
     void Start()
@@ -52,11 +77,11 @@ public class Level : MonoBehaviour
             DestroyImmediate(transform.Find(holderEnemyName).gameObject);
         }
 
-        cubes = new Transform[(int)levelSize.x, (int)levelSize.y];
-        cubesState = new int[(int)levelSize.x, (int)levelSize.y];
+        cubes = new Transform[(int)levelSize.x* (int)levelSize.y];
+        cubesState = new int[(int)levelSize.x* (int)levelSize.y];
 
-        enemys = new Transform[(int)levelSize.x, (int)levelSize.y];
-        enemyState = new int[(int)levelSize.x, (int)levelSize.y];
+        enemys = new Transform[(int)levelSize.x* (int)levelSize.y];
+        enemyState = new int[(int)levelSize.x* (int)levelSize.y];
 
         // ground
         Transform levelHolder = new GameObject(holderCubeName).transform;
@@ -69,8 +94,8 @@ public class Level : MonoBehaviour
                 Vector3 cubePos = new Vector3(-levelSize.x / 2 + 0.5f + x, 0, -levelSize.y / 2 + 0.5f + y) + transform.position;
                 Transform newCube = Instantiate(cubePrefab, cubePos, Quaternion.Euler(Vector3.right * 90)) as Transform;
 
-                cubes[x, y] = newCube;
-                cubesState[x, y] = 0;
+                cubes[x+ (y* (int)levelSize.x)] = newCube;
+                cubesState[x + (y * (int)levelSize.x)] = 0;
 
                 newCube.localScale = Vector3.one;
                 newCube.parent = levelHolder;
@@ -89,18 +114,13 @@ public class Level : MonoBehaviour
                 Vector3 cubePos = new Vector3(-levelSize.x / 2 + 0.5f + x, 1, -levelSize.y / 2 + 0.5f + y) + transform.position;
                 Transform newCube = Instantiate(cubePrefab, cubePos, Quaternion.Euler(Vector3.right * 90)) as Transform;
 
-                enemys[x, y] = newCube;
-                enemyState[x, y] = 0;
+                enemys[x + (y * (int)levelSize.x)] = newCube;
+                enemyState[x + (y * (int)levelSize.x)] = 0;
 
                 newCube.localScale = Vector3.one;
                 newCube.parent = levelHolder;
                 newCube.gameObject.SetActive(false);
             }
         }
-    }
-
-    public void SetCubesState(int[,] _cubesState)
-    {
-        cubesState = _cubesState;
     }
 }
