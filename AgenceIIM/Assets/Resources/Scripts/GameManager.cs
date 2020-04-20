@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public float fallDuration = 1f;
     public float fallSpeed = 1f;
     public int nbEnnemyInit = 1;
-    private int nbEnnemy = 1;
+    [SerializeField]private int nbEnnemy = 1;
 
 
 
