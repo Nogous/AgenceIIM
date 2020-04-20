@@ -41,17 +41,6 @@ public class CubeEditor : Editor
                 Debug.Log("Trigger GameManager svp");
                 myCube.SetCubeBase();
             }
-            else
-            {
-                if (GameManager.instance.matCubeBase != null)
-                {
-                    myCube.SetCubeBase(GameManager.instance.matCubeBase);
-                }
-                else
-                {
-                    Debug.Log("cubeBase in GameManager as no material.");
-                }
-            }
         }
 
         serializedObject.ApplyModifiedProperties();
