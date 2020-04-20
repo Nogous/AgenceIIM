@@ -363,14 +363,15 @@ public class Cube : MonoBehaviour
             if (!isBreakable) return;
 
             if (isTnt) DestroySurroundings();
-
+            if(isEnemy)
+            GameManager.instance.KillEnnemy();
             //make object disappear
             gameObject.SetActive(false);
         }
         else
         {
 
-            GameManager.instance.KillEnnemy();
+            
 
             AudioManager.instance.Play("Splash");
             AudioManager.instance.Play("ExplosionCube");
