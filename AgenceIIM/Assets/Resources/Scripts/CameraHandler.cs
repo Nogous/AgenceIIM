@@ -14,9 +14,9 @@ public class CameraHandler : MonoBehaviour
     public Vector3 positionTan;
     Vector3 vectorTan;
     Vector3 vectorNormal;
-    [Range(2, 100)] 
+    [Range(0, 100)] 
     public int slowFactor;
-    [Range(0.01f, 0.90f)] 
+    [Range(0.001f, 0.99f)] 
     public float cutoff;
 
     public void Awake()
