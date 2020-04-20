@@ -119,44 +119,52 @@ public class Player : MonoBehaviour
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
 
-                OnMove?.Invoke(orientation);
-
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
             }
             else if (replayer.GetAxis("MoveVert") < -0.1f)
             {
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
 
-                OnMove?.Invoke(orientation);
-
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
             }
             else if (replayer.GetAxis("MoveHor") > 0.1f)
             {
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
 
-                OnMove?.Invoke(orientation);
-
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
             }
             else if (replayer.GetAxis("MoveHor") < -0.1f)
             {
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;
 
-                OnMove?.Invoke(orientation);
-
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
             }
         }
         #endregion
@@ -169,44 +177,52 @@ public class Player : MonoBehaviour
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
 
-                OnMove?.Invoke(orientation);
-
                 ApplyStain();
 
                 if(!TestWall())SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
             }
             else if (replayer.GetAxis("MoveVert") * -1 < -0.1f)
             {
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
 
-                OnMove?.Invoke(orientation);
-
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
             }
             else if (replayer.GetAxis("MoveHor") * -1 > 0.1f)
             {
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
 
-                OnMove?.Invoke(orientation);
-
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
             }
             else if (replayer.GetAxis("MoveHor") * -1 < -0.1f)
             {
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;
 
-                OnMove?.Invoke(orientation);
-
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
             }
         }
         #endregion
