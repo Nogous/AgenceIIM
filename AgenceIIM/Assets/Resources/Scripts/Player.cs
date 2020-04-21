@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
         if (!CameraHandler.instance.position)
         {
             
-            if (replayer.GetAxis("MoveVert") > 0.1f)
+            if (replayer.GetAxis(RewiredConsts.Action.MoveVert) > 0.1f)
             {
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (replayer.GetAxis("MoveVert") < -0.1f)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) < -0.1f)
             {
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (replayer.GetAxis("MoveHor") > 0.1f)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) > 0.1f)
             {
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (replayer.GetAxis("MoveHor") < -0.1f)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) < -0.1f)
             {
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;

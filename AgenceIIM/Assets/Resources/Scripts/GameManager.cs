@@ -79,9 +79,9 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-
-        SceneManager.LoadScene(sceneNameToLoad);
         //ResetParty();
+        SceneManager.LoadScene(sceneNameToLoad);
+        
     }
 
     public void ResetParty()
