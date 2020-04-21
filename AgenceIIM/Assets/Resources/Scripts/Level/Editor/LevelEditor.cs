@@ -28,6 +28,8 @@ public class LevelEditor : Editor
         player = soLevel.FindProperty("player");
 
         tabs = new string[] { "Player", "Level 0", "Level 1", "Option" };
+
+        OnClickLoadLevel();
     }
 
     public override void OnInspectorGUI()
@@ -143,6 +145,17 @@ public class LevelEditor : Editor
 
     public void OnClickLoadLevel()
     {
+        if (level.transform.Find("CubeBox"))
+        {
+            Transform[] childs = level.transform.Find("CubeBox").gameObject.GetComponentsInChildren<Transform>();
+
+            foreach (Transform item in childs)
+            {
+                if(item.gameObject.name!= "CubeBox")
+                DestroyImmediate(item.gameObject);
+            }
+        }
+
         // destruction de tout les cubes
         for (int i = level.cubes.Count; i-- > 0;)
         {

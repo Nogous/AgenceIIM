@@ -32,6 +32,7 @@ public class Level : MonoBehaviour
     public GameObject cubePrefab = null;
 
     public GameObject player;
+    public Transform cubeBox;
 
     public void SetupCube(CubeType _cubeType, Vector3 pos)
     {
@@ -50,7 +51,7 @@ public class Level : MonoBehaviour
         {
             obj = Instantiate(cubePrefab);
             obj.name = pos.ToString();
-            obj.transform.parent = transform;
+            obj.transform.parent = cubeBox;
             cubes.Add(obj);
         }
 
