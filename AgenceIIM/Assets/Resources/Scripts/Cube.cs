@@ -363,7 +363,10 @@ public class Cube : MonoBehaviour
             if (!isBreakable) return;
 
             if (isTnt) DestroySurroundings();
-            if(isEnemy)
+
+            if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
+
+            if (isEnemy)
             GameManager.instance.KillEnnemy();
             //make object disappear
             gameObject.SetActive(false);
