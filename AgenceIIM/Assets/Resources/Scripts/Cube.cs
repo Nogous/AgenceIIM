@@ -410,6 +410,8 @@ public class Cube : MonoBehaviour
 
     private void DestroySurroundings()
     {
+        bool isPlayerDestroyed = false;
+
         RaycastHit hit;
 
         for (int i = 0; i < 4; i++)
@@ -423,9 +425,13 @@ public class Cube : MonoBehaviour
 
                     tmpCube.Explode();
                 }
-                else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+                else if (hit.transform.parent != null)
                 {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                    {
+                        hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                        isPlayerDestroyed = true;
+                    }
                 }
             }
         }
@@ -438,10 +444,15 @@ public class Cube : MonoBehaviour
 
                 tmpCube.Explode();
             }
-            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            else if(hit.transform.parent != null)
             {
-                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                {
+                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    isPlayerDestroyed = true;
+                }
             }
+            
         }
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[0] + vectors[3], out hit, 1f))
@@ -452,9 +463,13 @@ public class Cube : MonoBehaviour
 
                 tmpCube.Explode();
             }
-            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            else if (hit.transform.parent != null)
             {
-                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                {
+                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    isPlayerDestroyed = true;
+                }
             }
         }
 
@@ -466,9 +481,13 @@ public class Cube : MonoBehaviour
 
                 tmpCube.Explode();
             }
-            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            else if (hit.transform.parent != null)
             {
-                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                {
+                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    isPlayerDestroyed = true;
+                }
             }
         }
 
@@ -480,9 +499,13 @@ public class Cube : MonoBehaviour
 
                 tmpCube.Explode();
             }
-            else if (hit.transform.parent.parent.gameObject.GetComponent<Player>())
+            else if (hit.transform.parent != null)
             {
-                hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                {
+                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    isPlayerDestroyed = true;
+                }
             }
         }
 
