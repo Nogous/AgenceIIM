@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class LevelTestSceneEditor : Editor
 {
     LevelTestScene level;
+    CubeType cubeType = CubeType.Base;
 
     private void OnEnable()
     {
@@ -24,6 +25,15 @@ public class LevelTestSceneEditor : Editor
         if (GUILayout.Button("Save"))
         {
             level.OnClickSaveLevel();
+        }
+        if (GUILayout.Button("Reset"))
+        {
+            level.OnClickReseLevelt();
+        }
+
+        if (GUILayout.Button("SpawnCube000"))
+        {
+            level.OnClickSpawnCube(cubeType, Vector3.zero);
         }
     }
 }
