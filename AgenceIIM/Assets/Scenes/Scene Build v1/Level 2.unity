@@ -2102,9 +2102,9 @@ Transform:
   - {fileID: 478796466}
   - {fileID: 923049482}
   - {fileID: 1908143190}
-  - {fileID: 539225479}
   - {fileID: 1493991727}
   - {fileID: 1642342492}
+  - {fileID: 539225479}
   - {fileID: 1980991260}
   - {fileID: 986466844}
   - {fileID: 1641520749}
@@ -2343,7 +2343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7757309263036692550
 Transform:
   m_ObjectHideFlags: 0
@@ -3668,6 +3668,11 @@ PrefabInstance:
         type: 3}
       propertyPath: nbEnnemyInit
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314663703096171900, guid: c153899fc0feab241877cc83526b21fc,
+        type: 3}
+      propertyPath: sceneNameToLoad
+      value: Level 3
       objectReference: {fileID: 0}
     - target: {fileID: 5314663703096171901, guid: c153899fc0feab241877cc83526b21fc,
         type: 3}
