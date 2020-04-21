@@ -22278,7 +22278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398483787}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 2, z: -8}
+  m_LocalPosition: {x: 4, y: 2, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1464242480}
@@ -28200,7 +28200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723569499}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 3, z: -1}
+  m_LocalPosition: {x: 4, y: 3, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1939630520}
@@ -28224,8 +28224,8 @@ MonoBehaviour:
   isEnemyMoving: 0
   isCleaningBox: 0
   isDashBox: 0
-  isWall: 1
-  isPushBlock: 0
+  isWall: 0
+  isPushBlock: 1
   isTnt: 0
   isTrigger: 0
   associatedTnt: {fileID: 0}
@@ -47813,30 +47813,8 @@ MonoBehaviour:
   fallDuration: 1
   fallSpeed: 3
   nbEnnemyInit: 3
-  texture2DNoCube: {fileID: 0}
-  matNoCube: {fileID: 0}
-  texture2DCubeBase: {fileID: 0}
-  matCubeBase: {fileID: 0}
-  texture2DWall: {fileID: 0}
-  matWall: {fileID: 0}
-  texture2DGrond1: {fileID: 0}
-  matColor1: {fileID: 0}
-  texture2DGrond2: {fileID: 0}
-  matColor2: {fileID: 0}
-  texture2DGrond3: {fileID: 0}
-  matColor3: {fileID: 0}
-  texture2DEnemyStatic: {fileID: 0}
-  matEnemy: {fileID: 0}
-  texture2DEnemyMove: {fileID: 0}
-  matEnemyMove: {fileID: 0}
-  texture2DCleaningBox: {fileID: 0}
-  matCleaningBox: {fileID: 0}
-  texture2DDashBox: {fileID: 0}
-  matDashBox: {fileID: 0}
-  texture2DTNT: {fileID: 0}
-  matTNT: {fileID: 0}
-  texture2DTrigger: {fileID: 0}
-  matTrigger: {fileID: 0}
+  nbEnnemy: 1
+  sceneNameToLoad: 
 --- !u!1 &5314663703272796319
 GameObject:
   m_ObjectHideFlags: 0
