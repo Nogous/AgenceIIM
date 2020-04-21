@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Rewired;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
     public int nbEnnemyInit = 1;
     [SerializeField]private int nbEnnemy = 1;
 
-
+    public string sceneNameToLoad;
 
 
     private void Awake()
@@ -78,7 +79,9 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        ResetParty();
+
+        SceneManager.LoadScene(sceneNameToLoad);
+        //ResetParty();
     }
 
     public void ResetParty()
