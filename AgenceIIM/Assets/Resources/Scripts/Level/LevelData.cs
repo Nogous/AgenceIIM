@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class LevelData
 {
-    public int i;
+    public List<CubeData> cubeDatas;
 
     public LevelData(Level level)
     {
-        i = level.i;
+        cubeDatas = level.cubeDatas;
     }
 }
