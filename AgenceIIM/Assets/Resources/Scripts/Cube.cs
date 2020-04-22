@@ -367,15 +367,15 @@ public class Cube : MonoBehaviour
             if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
 
             if (isEnemy)
-            GameManager.instance.KillEnnemy();
+            {
+                GameManager.instance.KillEnnemy();
+                SplashCamera.instance.CreateStains(color);
+            }
             //make object disappear
             gameObject.SetActive(false);
         }
         else
         {
-
-            
-
             AudioManager.instance.Play("Splash");
             AudioManager.instance.Play("ExplosionCube");
         }    
