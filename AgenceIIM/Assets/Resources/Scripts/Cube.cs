@@ -159,6 +159,25 @@ public class Cube : MonoBehaviour
 
     #region CubeType
 
+    /*
+    NoCube,
+    Base,
+    EnnemiStatique,
+    EnnemiPattern,
+    EnnemiMiroir,
+    Peinture,
+    Cleaner,
+    ArcEnCiel,
+    Téléporteur,
+    Dash,
+    Glissant,
+    Mur,
+    TNT,
+    Interrupteur,
+    Destructible,
+    BlocMouvant,
+    */
+
     public void SetCubeBase()
     {
         isEnemy = false;
