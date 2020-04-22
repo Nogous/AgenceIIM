@@ -125,6 +125,7 @@ public class GameManager : MonoBehaviour
             PlaytestAnalitic.Instance.timeDuration[idLevel] = DATA_Time;
             PlaytestAnalitic.Instance.nbDeath[idLevel] = DATAnbDeath;
             PlaytestAnalitic.Instance.nbMoveCam[idLevel] = DATAnbMoveCam;
+            PlaytestAnalitic.Instance.ShowData();
         }
     }
 
