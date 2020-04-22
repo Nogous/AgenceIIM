@@ -17,6 +17,9 @@ public class LevelEditor : Editor
     string[] tabs = null;
     public int tabTarget = 0;
 
+
+    public GUIStyle buttonStyle = new GUIStyle();
+
     private void OnEnable()
     {
         level = (Level)target;
@@ -40,30 +43,24 @@ public class LevelEditor : Editor
 
         switch (tabTarget)
         {
-            case 3:
-                #region case 3
+            case 0:
+                #region case 0
 
-                EditorGUILayout.PropertyField(levelSize);
-                EditorGUILayout.PropertyField(cubePrefab);
+                EditorGUILayout.PropertyField(player);
 
-                if (cubePrefab != null)
+                if (level.levelSize.x > 0 && level.levelSize.y > 0)
                 {
-                    if (GUILayout.Button("Load"))
+                    for (int x = 0; x < level.levelSize.x; x++)
                     {
-                        OnClickLoadLevel();
-                    }
-                    if (GUILayout.Button("Save"))
-                    {
-                        OnClickSaveLevel();
-                    }
-                    if (GUILayout.Button("Reset"))
-                    {
-                        OnClickReseLevelt();
-                    }
-
-                    if (GUILayout.Button("SpawnCube000"))
-                    {
-                        OnClickSpawnCube(CubeType.Base, Vector3.zero);
+                        GUILayout.BeginHorizontal();
+                        for (int y = 0; y < level.levelSize.y; y++)
+                        {
+                            if (GUILayout.Button(""))
+                            {
+                                level.player.transform.position = new Vector3(y - level.levelSize.y / 2, 1, -x + level.levelSize.x / 2);
+                            }
+                        }
+                        GUILayout.EndHorizontal();
                     }
                 }
                 #endregion
@@ -80,6 +77,113 @@ public class LevelEditor : Editor
                         GUILayout.BeginHorizontal();
                         for (int y = 0; y < level.levelSize.y; y++)
                         {
+                            switch (level.cubeType)
+                            {
+                                case CubeType.NoCube:
+                                    if (level.texture2DNoCube != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DNoCube;
+                                    }
+                                    break;
+                                case CubeType.Base:
+                                    if (level.texture2DCubeBase != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeBase;
+                                    }
+                                    break;
+                                case CubeType.EnnemiStatique:
+                                    if (level.texture2DEnnemiStatique != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DEnnemiStatique;
+                                    }
+                                    break;
+                                case CubeType.EnnemiPattern:
+                                    if (level.texture2DEnnemiPattern != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DEnnemiPattern;
+                                    }
+                                    break;
+                                case CubeType.EnnemiMiroir:
+                                    if (level.texture2DEnnemiMiroir != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DEnnemiMiroir;
+                                    }
+                                    break;
+                                case CubeType.Peinture:
+                                    if (level.texture2DCubePeinture != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubePeinture;
+                                    }
+                                    break;
+                                case CubeType.Cleaner:
+                                    if (level.texture2DCubeCleaner != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeCleaner;
+                                    }
+                                    break;
+                                case CubeType.ArcEnCiel:
+                                    if (level.texture2DCubeArcEnCiel != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeArcEnCiel;
+                                    }
+                                    break;
+                                case CubeType.Téléporteur:
+                                    if (level.texture2DCubeTeleporteur != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeTeleporteur;
+                                    }
+                                    break;
+                                case CubeType.Dash:
+                                    if (level.texture2DCubeDash != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeDash;
+                                    }
+                                    break;
+                                case CubeType.Glissant:
+                                    if (level.texture2DCubeGlissant != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeGlissant;
+                                    }
+                                    break;
+                                case CubeType.Mur:
+                                    if (level.texture2DCubeMur != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeMur;
+                                    }
+                                    break;
+                                case CubeType.TNT:
+                                    if (level.texture2DCubeTNT != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeTNT;
+                                    }
+                                    break;
+                                case CubeType.Interrupteur:
+                                    if (level.texture2DCubeInterrupteur != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeInterrupteur;
+                                    }
+                                    break;
+                                case CubeType.Destructible:
+                                    if (level.texture2DCubeDestructible != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeDestructible;
+                                    }
+                                    break;
+                                case CubeType.BlocMouvant:
+                                    if (level.texture2DCubeBlocMouvant != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DCubeBlocMouvant;
+                                    }
+                                    break;
+                                default:
+                                    if (level.texture2DNoCube != null)
+                                    {
+                                        buttonStyle.normal.background = level.texture2DNoCube;
+                                    }
+                                    break;
+                            }
+
+                            //if (GUILayout.Button("", buttonStyle))
                             if (GUILayout.Button(""))
                             {
                                 OnClickSpawnCube(level.cubeType, new Vector3(y - level.levelSize.y / 2, 0, -x + level.levelSize.x / 2));
@@ -112,26 +216,35 @@ public class LevelEditor : Editor
                 }
                 #endregion
                 break;
-            case 0:
-                #region case 0
+            case 3:
+                #region case 3
 
-                EditorGUILayout.PropertyField(player);
+                EditorGUILayout.PropertyField(levelSize);
+                EditorGUILayout.PropertyField(cubePrefab);
 
-                if (level.levelSize.x > 0 && level.levelSize.y > 0)
+                if (cubePrefab != null)
                 {
-                    for (int x = 0; x < level.levelSize.x; x++)
+                    if (GUILayout.Button("Load"))
                     {
-                        GUILayout.BeginHorizontal();
-                        for (int y = 0; y < level.levelSize.y; y++)
-                        {
-                            if (GUILayout.Button(""))
-                            {
-                                level.player.transform.position = new Vector3(y - level.levelSize.y / 2, 1, -x + level.levelSize.x / 2);
-                            }
-                        }
-                        GUILayout.EndHorizontal();
+                        OnClickLoadLevel();
+                    }
+                    if (GUILayout.Button("Save"))
+                    {
+                        OnClickSaveLevel();
+                    }
+                    if (GUILayout.Button("Reset"))
+                    {
+                        OnClickReseLevelt();
+                    }
+
+                    if (GUILayout.Button("SpawnCube000"))
+                    {
+                        OnClickSpawnCube(CubeType.Base, Vector3.zero);
                     }
                 }
+
+                base.DrawDefaultInspector();
+
                 #endregion
                 break;
         }
