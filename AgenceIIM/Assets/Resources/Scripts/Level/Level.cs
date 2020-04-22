@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public enum CubeType
 {
+    NoCube,
     Base,
     EnnemiStatique,
     EnnemiPattern,
@@ -24,15 +25,64 @@ public enum CubeType
 
 public class Level : MonoBehaviour
 {
-    public Vector2 levelSize = new Vector2(15, 15);
-    public List<CubeData> cubeDatas = new List<CubeData>();
-    public List<GameObject> cubes = new List<GameObject>();
+    [HideInInspector] public Vector2 levelSize = new Vector2(15, 15);
+    [HideInInspector] public List<CubeData> cubeDatas = new List<CubeData>();
+    [HideInInspector] public List<GameObject> cubes = new List<GameObject>();
 
-    public CubeType cubeType;
-    public GameObject cubePrefab = null;
+    [HideInInspector] public CubeType cubeType;
+    [HideInInspector] public GameObject cubePrefab = null;
 
-    public GameObject player;
-    public Transform cubeBox;
+    [HideInInspector] public GameObject player;
+    [HideInInspector] public Transform cubeBox;
+
+    [Header("no Cube")]
+    public Texture2D texture2DNoCube;
+    [Header("Cube Base")]
+    public Texture2D texture2DCubeBase;
+    public Material matCubeBase = null;
+    [Header("EnnemiStatique")]
+    public Texture2D texture2DEnnemiStatique;
+    public Material matEnnemiStatique = null;
+    [Header("EnnemiPattern")]
+    public Texture2D texture2DEnnemiPattern;
+    public Material matEnnemiPattern = null;
+    [Header("EnnemiMiroir")]
+    public Texture2D texture2DEnnemiMiroir;
+    public Material matEnnemiMiroir = null;
+    [Header("Cube Peinture")]
+    public Texture2D texture2DCubePeinture;
+    public Material matCubePeinture = null;
+    [Header("Cube Cleaner")]
+    public Texture2D texture2DCubeCleaner;
+    public Material matCubeCleaner = null;
+    [Header("Cube ArcEnCiel")]
+    public Texture2D texture2DCubeArcEnCiel;
+    public Material matCubeArcEnCiel = null;
+    [Header("Cube Dash")]
+    public Texture2D texture2DCubeDash;
+    public Material matCubeDash = null;
+    [Header("Cube Téléporteur")]
+    public Texture2D texture2DCubeTeleporteur;
+    public Material matCubeTeleporteur = null;
+    [Header("Cube Glissant")]
+    public Texture2D texture2DCubeGlissant;
+    public Material matCubeGlissant = null;
+    [Header("Cube Mur")]
+    public Texture2D texture2DCubeMur;
+    public Material matCubeMur = null;
+    [Header("Cube TNT")]
+    public Texture2D texture2DCubeTNT;
+    public Material matCubeTNT = null;
+    [Header("Cube Interrupteur")]
+    public Texture2D texture2DCubeInterrupteur;
+    public Material matCubeInterrupteur = null;
+    [Header("Cube Destructible")]
+    public Texture2D texture2DCubeDestructible;
+    public Material matCubeDestructible = null;
+    [Header("Cube BlocMouvant")]
+    public Texture2D texture2DCubeBlocMouvant;
+    public Material matCubeBlocMouvant = null;
+
 
     public void SetupCube(CubeType _cubeType, Vector3 pos)
     {
@@ -62,53 +112,53 @@ public class Level : MonoBehaviour
         {
             switch (_cubeType)
             {
+                case CubeType.NoCube:
+                    cubeObj.gameObject.SetActive(false);
+                    break;
                 case CubeType.Base:
                     cubeObj.SetCubeBase();
                     break;
                 case CubeType.EnnemiStatique:
-                    //cubeObj.SetEnemy();
+                    cubeObj.SetEnemy(matEnnemiStatique);
                     break;
                 case CubeType.EnnemiPattern:
-                    //cubeObj.SetEnemyMoving();
+                    cubeObj.SetEnemyMoving(matEnnemiPattern);
                     break;
                 case CubeType.EnnemiMiroir:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetEnemyMoving(matEnnemiMiroir);
                     break;
                 case CubeType.Peinture:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubePeinture);
                     break;
                 case CubeType.Cleaner:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeCleaner);
                     break;
                 case CubeType.ArcEnCiel:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeArcEnCiel);
                     break;
                 case CubeType.Téléporteur:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeTeleporteur);
                     break;
                 case CubeType.Dash:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeDash);
                     break;
                 case CubeType.Glissant:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeGlissant);
                     break;
                 case CubeType.Mur:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeMur);
                     break;
                 case CubeType.TNT:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeTNT);
                     break;
                 case CubeType.Interrupteur:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeInterrupteur);
                     break;
                 case CubeType.Destructible:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeDestructible);
                     break;
                 case CubeType.BlocMouvant:
-                    cubeObj.SetCubeBase();
-                    break;
-                default:
-                    cubeObj.SetCubeBase();
+                    cubeObj.SetCubeBase(matCubeBlocMouvant);
                     break;
             }
         }

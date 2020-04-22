@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public int idLevel;
+
     public static GameManager instance = null;
     public Rewired.Player replayer;
     public bool useWASDLayout;
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        DATATimeInTheGame();
+
         if (replayer.GetButtonDown("Reset"))
         {
             ResetParty();
@@ -72,6 +76,8 @@ public class GameManager : MonoBehaviour
         if (nbEnnemy <= 0)
         {
             StartCoroutine(YouWin());
+
+            DATASaveData();
         }
     }
 
@@ -86,6 +92,8 @@ public class GameManager : MonoBehaviour
 
     public void ResetParty()
     {
+        DATAnbDeath++;
+
         player.gameObject.SetActive(true);
         player.ResetPlayer();
         ResetCubes();
@@ -106,6 +114,27 @@ public class GameManager : MonoBehaviour
             cubes[i].gameObject.SetActive(true);
             cubes[i].ResetCube();
         }
+    }
+    #endregion
+
+    #region analitics
+    public void DATASaveData()
+    {
+        if (PlaytestAnalitic.Instance != null)
+        {
+            PlaytestAnalitic.Instance.timeDuration[idLevel] = DATA_Time;
+            PlaytestAnalitic.Instance.nbDeath[idLevel] = DATAnbDeath;
+            PlaytestAnalitic.Instance.nbMoveCam[idLevel] = DATAnbMoveCam;
+        }
+    }
+
+    float DATA_Time = 0;
+    int DATAnbDeath = 0;
+    public int DATAnbMoveCam = 0;
+
+    public void DATATimeInTheGame()
+    {
+        DATA_Time += Time.deltaTime;
     }
     #endregion
 }
