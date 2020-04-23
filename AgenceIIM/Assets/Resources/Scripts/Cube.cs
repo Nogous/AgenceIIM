@@ -144,11 +144,7 @@ public class Cube : MonoBehaviour
             cubesPivot = Vector3.one * cubesPivotDistance;
         }
 
-        ParticleSystem.MainModule mainMod = particleDeath.main;
 
-        Debug.Log(mainMod);
-
-        mainMod.startColor = color;
 
         SetModeVoid();
     }
@@ -397,6 +393,14 @@ public class Cube : MonoBehaviour
             {
                 GameManager.instance.KillEnnemy();
                 //SplashCamera.instance.CreateStains(color);
+
+                ParticleSystem particles = Instantiate(particleDeath);
+
+                ParticleSystem.MainModule mainMod = particles.main;
+
+                mainMod.startColor = color;
+
+                particles.Play();
             }
             //make object disappear
             gameObject.SetActive(false);
@@ -406,9 +410,6 @@ public class Cube : MonoBehaviour
             AudioManager.instance.Play("Splash");
             AudioManager.instance.Play("ExplosionCube");
         }
-
-        
-        particleDeath.Play();
 
         // loop 3 times to create 5x5x5 pices un x,y,z coordonate
         /*for (int i = cubesInRow; i-->0;)
