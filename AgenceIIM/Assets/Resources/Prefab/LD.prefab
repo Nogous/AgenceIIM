@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffe6a43a545a164cbc3583900906361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameLevel: 
   levelSize: {x: 15, y: 15}
   cubeDatas: []
   cubes: []
@@ -86,34 +87,41 @@ MonoBehaviour:
   texture2DNoCube: {fileID: 2800000, guid: 454df9c072c7acd4ab71794a11fd6487, type: 3}
   texture2DCubeBase: {fileID: 2800000, guid: d3dc263c874bb684eb01b0e446eeea7d, type: 3}
   matCubeBase: {fileID: 0}
-  texture2DEnnemiStatique: {fileID: 0}
+  texture2DEnnemiStatique: {fileID: 2800000, guid: c3717e42b3b01c346a428bf29097a156,
+    type: 3}
   matEnnemiStatique: {fileID: 0}
-  texture2DEnnemiPattern: {fileID: 0}
+  texture2DEnnemiPattern: {fileID: 2800000, guid: cd8ea08f9a5d7004cb4e3cdd366d1e72,
+    type: 3}
   matEnnemiPattern: {fileID: 0}
-  texture2DEnnemiMiroir: {fileID: 0}
+  texture2DEnnemiMiroir: {fileID: 2800000, guid: eec6761f2741bef47960e0cd6e84812f,
+    type: 3}
   matEnnemiMiroir: {fileID: 0}
-  texture2DCubePeinture: {fileID: 0}
+  texture2DCubePeinture: {fileID: 2800000, guid: b301b89fc9aa61a4898b35f4fb1a704c,
+    type: 3}
   matCubePeinture: {fileID: 0}
   texture2DCubeCleaner: {fileID: 0}
   matCubeCleaner: {fileID: 0}
-  texture2DCubeArcEnCiel: {fileID: 0}
-  matCubeArcEnCiel: {fileID: 0}
-  texture2DCubeDash: {fileID: 0}
-  matCubeDash: {fileID: 0}
+  texture2DCubeArcEnCiel: {fileID: 2800000, guid: 0f93fe08b81913549ad27b4a670ae176,
+    type: 3}
+  matCubeArcEnCiel: {fileID: 2100000, guid: ad76979423a3a084f94e31b12aa266d0, type: 2}
+  texture2DCubeDash: {fileID: 2800000, guid: 307ab36486c703f41bc4283129db3587, type: 3}
+  matCubeDash: {fileID: 2100000, guid: 33279901662db8e4fbbdd5dccdcff51d, type: 2}
   texture2DCubeTeleporteur: {fileID: 0}
   matCubeTeleporteur: {fileID: 0}
-  texture2DCubeGlissant: {fileID: 0}
-  matCubeGlissant: {fileID: 0}
-  texture2DCubeMur: {fileID: 0}
+  texture2DCubeGlissant: {fileID: 2800000, guid: ad28a39014e136d4896a6cef0676525e,
+    type: 3}
+  matCubeGlissant: {fileID: 2100000, guid: 16bb94f54a0728c4784bec38d24c923d, type: 2}
+  texture2DCubeMur: {fileID: 2800000, guid: 77dc98cb5232b0c4db67aadfa791d459, type: 3}
   matCubeMur: {fileID: 0}
-  texture2DCubeTNT: {fileID: 0}
-  matCubeTNT: {fileID: 0}
+  texture2DCubeTNT: {fileID: 2800000, guid: ed1e88ebf1b044e42b5c652cf48df30f, type: 3}
+  matCubeTNT: {fileID: 2100000, guid: 67aab6d96a54d9e4d8abedc5afd00035, type: 2}
   texture2DCubeInterrupteur: {fileID: 0}
   matCubeInterrupteur: {fileID: 0}
   texture2DCubeDestructible: {fileID: 0}
   matCubeDestructible: {fileID: 0}
-  texture2DCubeBlocMouvant: {fileID: 0}
-  matCubeBlocMouvant: {fileID: 0}
+  texture2DCubeBlocMouvant: {fileID: 2800000, guid: ee05013459ae25a4bb23f3733dbeec07,
+    type: 3}
+  matCubeBlocMouvant: {fileID: 2100000, guid: 3d31e8dfc35943d44802c1962dce0d1d, type: 2}
 --- !u!1 &3735738357031189330
 GameObject:
   m_ObjectHideFlags: 0
