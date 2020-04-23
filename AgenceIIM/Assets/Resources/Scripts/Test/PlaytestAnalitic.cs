@@ -34,8 +34,13 @@ public class PlaytestAnalitic : MonoBehaviour
         nbMoveCam = new int[nbLevelToTest];
 }
 
-    public void ShowData()
+    public void ShowData(int idLevel)
     {
+        if (idLevel < nbLevelToTest-1)
+        {
+            return;
+        }
+
         data.gameObject.SetActive(true);
         data.text = "";
 
