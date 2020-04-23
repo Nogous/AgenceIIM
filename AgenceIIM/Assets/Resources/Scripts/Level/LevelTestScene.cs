@@ -17,7 +17,7 @@ public class LevelTestScene : MonoBehaviour
         }
 
         // recuperation des data
-        LevelData levelData = SaveSystem.LoadLevel();
+        LevelData levelData = SaveSystem.LoadLevel(level.nameLevel);
         level.cubeDatas = levelData.cubeDatas;
 
 
