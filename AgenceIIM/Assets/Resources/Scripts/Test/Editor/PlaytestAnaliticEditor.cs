@@ -16,7 +16,7 @@ public class PlaytestAnaliticEditor : Editor
         analitic.timeDuration = new float[analitic.nbLevelToTest];
         analitic.nbMoveCam = new int[analitic.nbLevelToTest];
 
-        analitic.ShowData();
+        //analitic.ShowData();
         analitic.data.text = "DATA";
     }
 
@@ -26,7 +26,7 @@ public class PlaytestAnaliticEditor : Editor
 
         if (GUILayout.Button("ShowData"))
         {
-            analitic.ShowData();
+            //analitic.ShowData();
         }
         if (GUILayout.Button("HideData"))
         {

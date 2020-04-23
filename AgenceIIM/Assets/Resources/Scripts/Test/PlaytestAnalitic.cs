@@ -38,6 +38,7 @@ public class PlaytestAnalitic : MonoBehaviour
     {
         if (idLevel < nbLevelToTest-1)
         {
+            data.gameObject.SetActive(false);
             return;
         }
 
