@@ -25,6 +25,8 @@ public enum CubeType
 
 public class Level : MonoBehaviour
 {
+    [HideInInspector] public string nameLevel = "";
+
     [HideInInspector] public Vector2 levelSize = new Vector2(15, 15);
     [HideInInspector] public List<CubeData> cubeDatas = new List<CubeData>();
     [HideInInspector] public List<GameObject> cubes = new List<GameObject>();

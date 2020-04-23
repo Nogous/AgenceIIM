@@ -9,6 +9,7 @@ public class LevelEditor : Editor
     private Level level;
     private SerializedObject soLevel;
 
+    private SerializedProperty nameLevel;
     private SerializedProperty levelSize;
     private SerializedProperty cubePrefab;
     private SerializedProperty cubeType;
@@ -25,6 +26,7 @@ public class LevelEditor : Editor
         level = (Level)target;
         soLevel = new SerializedObject(target);
 
+        nameLevel = soLevel.FindProperty("nameLevel");
         levelSize = soLevel.FindProperty("levelSize");
         cubePrefab = soLevel.FindProperty("cubePrefab");
         cubeType = soLevel.FindProperty("cubeType");
@@ -77,6 +79,10 @@ public class LevelEditor : Editor
                         GUILayout.BeginHorizontal();
                         for (int y = 0; y < level.levelSize.y; y++)
                         {
+                            if (level.texture2DNoCube != null)
+                            {
+                                buttonStyle.normal.background = level.texture2DNoCube;
+                            }
                             for (int i = level.cubeDatas.Count; i-->0;)
                             {
                                 if (level.cubeDatas[i].id == new Vector3(y - level.levelSize.y / 2, level.transform.position.y, -x + level.levelSize.x / 2).ToString())
@@ -189,13 +195,6 @@ public class LevelEditor : Editor
                                     }
                                     break;
                                 }
-                                else
-                                {
-                                    if (level.texture2DNoCube != null)
-                                    {
-                                        buttonStyle.normal.background = level.texture2DNoCube;
-                                    }
-                                }
                             }
 
                             if (GUILayout.Button("", buttonStyle))
@@ -222,6 +221,10 @@ public class LevelEditor : Editor
                         {
                             for (int i = level.cubeDatas.Count; i-- > 0;)
                             {
+                                if (level.texture2DNoCube != null)
+                                {
+                                    buttonStyle.normal.background = level.texture2DNoCube;
+                                }
                                 if (level.cubeDatas[i].id == new Vector3(y - level.levelSize.y / 2, 1 + level.transform.position.y, -x + level.levelSize.x / 2).ToString())
                                 {
 
@@ -332,13 +335,6 @@ public class LevelEditor : Editor
                                     }
                                     break;
                                 }
-                                else
-                                {
-                                    if (level.texture2DNoCube != null)
-                                    {
-                                        buttonStyle.normal.background = level.texture2DNoCube;
-                                    }
-                                }
                             }
 
                             if (GUILayout.Button("", buttonStyle))
@@ -353,6 +349,8 @@ public class LevelEditor : Editor
                 break;
             case 3:
                 #region case 3
+
+                EditorGUILayout.PropertyField(nameLevel);
 
                 EditorGUILayout.PropertyField(levelSize);
                 EditorGUILayout.PropertyField(cubePrefab);
@@ -413,7 +411,7 @@ public class LevelEditor : Editor
         }
 
         // recuperation des data
-        level.cubeDatas = SaveSystem.LoadLevel().cubeDatas;
+        level.cubeDatas = SaveSystem.LoadLevel(level.nameLevel).cubeDatas;
 
         for (int j = level.cubeDatas.Count; j-- > 0;)
         {
