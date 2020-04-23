@@ -76,13 +76,12 @@ public class GameManager : MonoBehaviour
         if (nbEnnemy <= 0)
         {
             StartCoroutine(YouWin());
-
-            DATASaveData();
         }
     }
 
     public IEnumerator YouWin()
     {
+        DATASaveData();
         yield return new WaitForSeconds(2f);
 
         //ResetParty();
@@ -122,9 +121,12 @@ public class GameManager : MonoBehaviour
     {
         if (PlaytestAnalitic.Instance != null)
         {
+            
             PlaytestAnalitic.Instance.timeDuration[idLevel] = DATA_Time;
             PlaytestAnalitic.Instance.nbDeath[idLevel] = DATAnbDeath;
             PlaytestAnalitic.Instance.nbMoveCam[idLevel] = DATAnbMoveCam;
+
+            PlaytestAnalitic.Instance.ShowData(idLevel);
         }
     }
 
