@@ -1,15 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Rewired;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
+    public int idLevel;
+
     public static GameManager instance = null;
-
-    [SerializeField] private KeyCode resetGameKey = KeyCode.R;
-
-    public Player player;
+    public Rewired.Player replayer;
+    public bool useWASDLayout;
+    public Player player = null;
     private List<Cube> cubes = new List<Cube>();
+    public float fallDuration = 1f;
+    public float fallSpeed = 1f;
+    public int nbEnnemyInit = 1;
+    [SerializeField]private int nbEnnemy = 1;
+
+    public string sceneNameToLoad;
+
 
     private void Awake()
     {
@@ -21,21 +32,73 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+    }
+
+    private void Start()
+    {
+        if (player == null)
+        {
+            player = FindObjectOfType<Player>();
+        }
+        replayer = ReInput.players.GetPlayer(0);
+        player.replayer = replayer;
+        if (!useWASDLayout)
+        {
+            replayer.controllers.maps.SetMapsEnabled(true, 0);
+        }
+        else
+        {
+            replayer.controllers.maps.SetMapsEnabled(true, 2);
+        }
+
+        nbEnnemy = nbEnnemyInit;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(resetGameKey))
+        DATATimeInTheGame();
+
+        if (replayer.GetButtonDown("Reset"))
         {
             ResetParty();
         }
+        if (replayer.GetButtonDown("Pause"))
+        {
+            Application.Quit();
+        }
+    }
+
+    public void KillEnnemy()
+    {
+        nbEnnemy--;
+
+        if (nbEnnemy <= 0)
+        {
+            StartCoroutine(YouWin());
+
+            DATASaveData();
+        }
+    }
+
+    public IEnumerator YouWin()
+    {
+        yield return new WaitForSeconds(2f);
+
+        //ResetParty();
+        SceneManager.LoadScene(sceneNameToLoad);
+        
     }
 
     public void ResetParty()
     {
+        DATAnbDeath++;
+
         player.gameObject.SetActive(true);
         player.ResetPlayer();
         ResetCubes();
+
+        nbEnnemy = nbEnnemyInit;
     }
 
     #region Cube
@@ -51,6 +114,29 @@ public class GameManager : MonoBehaviour
             cubes[i].gameObject.SetActive(true);
             cubes[i].ResetCube();
         }
+    }
+    #endregion
+
+    #region analitics
+    public void DATASaveData()
+    {
+        if (PlaytestAnalitic.Instance != null)
+        {
+            
+            PlaytestAnalitic.Instance.timeDuration[idLevel] = DATA_Time;
+            PlaytestAnalitic.Instance.nbDeath[idLevel] = DATAnbDeath;
+            PlaytestAnalitic.Instance.nbMoveCam[idLevel] = DATAnbMoveCam;
+            PlaytestAnalitic.Instance.ShowData();
+        }
+    }
+
+    float DATA_Time = 0;
+    int DATAnbDeath = 0;
+    public int DATAnbMoveCam = 0;
+
+    public void DATATimeInTheGame()
+    {
+        DATA_Time += Time.deltaTime;
     }
     #endregion
 }

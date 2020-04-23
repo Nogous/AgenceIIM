@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8556209c5bf43f34b8341ad79faa879b, type: 2}
+  - {fileID: 2100000, guid: 6d9377af2d1665a4dafb5af51e0c68be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,7 +106,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  isEnemyMoving: 0
+  isCleaningBox: 0
+  isDashBox: 0
+  isWall: 0
+  isTnt: 0
+  isTrigger: 0
+  associatedTnt: {fileID: 0}
+  dashOrientation: 0
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
+  InvertXAxis: 0
+  InvertZAxis: 0
   isBreakable: 0
   colorPotencial: 0
   color: {r: 1, g: 1, b: 1, a: 1}
@@ -159,6 +169,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _moveTime: 0.2
+  orientation: {x: 0, y: 0, z: 1}
+  speed: 5
   explosionForce: 50
   explosionRadius: 4
   explosionUpward: 0.04

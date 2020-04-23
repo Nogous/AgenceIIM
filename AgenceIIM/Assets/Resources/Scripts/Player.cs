@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveTime = 0.2f;
 
     private float _elapsedTime = 0;
-
+    public Rewired.Player replayer;
     private Vector3 direction;
     public Vector3 orientation = Vector3.forward;
     private Vector3 axis = Vector3.right;
@@ -35,12 +35,6 @@ public class Player : MonoBehaviour
     public float speed = 5;
 
     private Action DoAction;
-
-    [SerializeField] private KeyCode up = KeyCode.Z;
-    [SerializeField] private KeyCode down = KeyCode.S;
-    [SerializeField] private KeyCode right = KeyCode.D;
-    [SerializeField] private KeyCode left = KeyCode.Q;
-
     [SerializeField] private GameObject Cube = null;
 
     private Quaternion newCubeRot;
@@ -55,6 +49,8 @@ public class Player : MonoBehaviour
     [SerializeField] private TrailRenderer trail;
 
     [SerializeField] private ParticleSystem Splash;
+
+    public static event Action<Vector3> OnMove;
 
     // Start is called before the first frame update
     void Start()
@@ -88,6 +84,7 @@ public class Player : MonoBehaviour
             faceColor[i].gameObject.SetActive(true);
             faceColor[i].material.color = initColors[i];
         }
+
         SetModeWait();
     }
 
@@ -96,6 +93,11 @@ public class Player : MonoBehaviour
     private void DoActionNull()
     {
 
+    }
+
+    public void SetModeNull()
+    {
+        DoAction = DoActionWait;
     }
 
     #region Wait
@@ -108,42 +110,122 @@ public class Player : MonoBehaviour
 
     private void DoActionWait()
     {
-        if (Input.GetKey(up))
+        #region normal
+        if (!CameraHandler.instance.position)
         {
-            orientation = Vector3.forward;
-            moveDir = MoveDir.up;
+            
+            if (replayer.GetAxis(RewiredConsts.Action.MoveVert) > 0.1f)
+            {
+                orientation = Vector3.forward;
+                moveDir = MoveDir.up;
 
-            ApplyStain();
+                ApplyStain();
 
-            SetModeMove();
+                if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
+            }
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) < -0.1f)
+            {
+                orientation = Vector3.back;
+                moveDir = MoveDir.down;
+
+                ApplyStain();
+
+                if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
+            }
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) > 0.1f)
+            {
+                orientation = Vector3.right;
+                moveDir = MoveDir.right;
+
+                ApplyStain();
+
+                if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
+            }
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) < -0.1f)
+            {
+                orientation = Vector3.left;
+                moveDir = MoveDir.left;
+
+                ApplyStain();
+
+                if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
+            }
         }
-        else if (Input.GetKey(down))
+        #endregion
+        #region inverted
+        else
         {
-            orientation = Vector3.back;
-            moveDir = MoveDir.down;
+            
+            if (replayer.GetAxis("MoveVert")* -1 > 0.1f)
+            {
+                orientation = Vector3.forward;
+                moveDir = MoveDir.up;
 
-            ApplyStain();
+                ApplyStain();
 
-            SetModeMove();
+                if(!TestWall())SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
+            }
+            else if (replayer.GetAxis("MoveVert") * -1 < -0.1f)
+            {
+                orientation = Vector3.back;
+                moveDir = MoveDir.down;
+
+                ApplyStain();
+
+                if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
+            }
+            else if (replayer.GetAxis("MoveHor") * -1 > 0.1f)
+            {
+                orientation = Vector3.right;
+                moveDir = MoveDir.right;
+
+                ApplyStain();
+
+                if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
+            }
+            else if (replayer.GetAxis("MoveHor") * -1 < -0.1f)
+            {
+                orientation = Vector3.left;
+                moveDir = MoveDir.left;
+
+                ApplyStain();
+
+                if (!TestWall()) SetModeMove();
+
+                else return;
+
+                OnMove?.Invoke(orientation);
+            }
         }
-        else if (Input.GetKey(right))
-        {
-            orientation = Vector3.right;
-            moveDir = MoveDir.right;
-
-            ApplyStain();
-
-            SetModeMove();
-        }
-        else if (Input.GetKey(left))
-        {
-            orientation = Vector3.left;
-            moveDir = MoveDir.left;
-
-            ApplyStain();
-
-            SetModeMove();
-        }
+        #endregion
     }
 
     #endregion
@@ -152,16 +234,25 @@ public class Player : MonoBehaviour
 
     private void DoActionFall()
     {
-        transform.position += Vector3.down * Time.deltaTime;
-
-        DoAction = DoActionNull;
-        StartCoroutine(Death());
+        transform.position += Vector3.down * Time.deltaTime * GameManager.instance.fallSpeed;
     }
 
     #endregion
 
-    private IEnumerator Death()
+    public void SetDeath()
     {
+        SetModeNull();
+        StartCoroutine(Death());
+    }
+
+    private IEnumerator Death(string deathInfo = null)
+    {
+        if (deathInfo == "fall")
+        {
+            yield return new WaitForSeconds(GameManager.instance.fallDuration);
+            DoAction = DoActionNull;
+        }
+
         for (int i = faceColor.Length; i-- > 0;)
         {
             faceColor[i].gameObject.SetActive(false);
@@ -230,7 +321,53 @@ public class Player : MonoBehaviour
         else if (orientation == Vector3.right) axis = Vector3.back;
         else if (orientation == Vector3.back) axis = Vector3.left;
         else axis = Vector3.forward;
+    }
 
+    #endregion
+
+    #region Dash
+
+    private void SetModeDash()
+    {
+        RotationCheck();
+
+        _elapsedTime = 0;
+
+        direction = transform.position + orientation*2;
+        previousRot = Cube.transform.rotation;
+        addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
+        previousPos = transform.position;
+
+        // init move
+        LeaveTile();
+
+        DoAction = DoActionDash;
+    }
+
+    private void DoActionDash()
+    {
+        _elapsedTime += Time.deltaTime;
+
+        float ratio = _elapsedTime / _moveTime;
+
+        transform.position = Vector3.Lerp(previousPos, direction, ratio);
+
+        Cube.transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
+
+        Cube.transform.position = new Vector3(Cube.transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), Cube.transform.position.z);
+
+        if (_elapsedTime >= _moveTime)
+        {
+            // end move
+            SetModeWait();
+
+            Cube.transform.eulerAngles = Vector3.zero;
+            UpdateColor();
+
+            SplashPaint();
+
+            TestTile();
+        }
     }
 
     #endregion
@@ -316,7 +453,7 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
+        //Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
         if (Physics.Raycast(ray, out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
@@ -371,9 +508,36 @@ public class Player : MonoBehaviour
                         faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
                     }
                 }
-                else if (tmpCube.isCliningBox)
+                else if (tmpCube.isCleaningBox)
                 {
                     faceColor[1].GetComponent<Renderer>().material.color = baseColor;
+                }
+
+                else if (tmpCube.isDashBox)
+                {
+
+                    if((int)tmpCube.dashOrientation == 0)
+                    {
+                        orientation = Vector3.forward;
+                    }
+                    else if ((int)tmpCube.dashOrientation == 1)
+                    {
+                        orientation = Vector3.back;
+                    }
+                    else if ((int)tmpCube.dashOrientation == 2)
+                    {
+                        orientation = Vector3.right;
+                    }
+                    else 
+                    {
+                        orientation = Vector3.left;
+                    }
+
+                    SetModeDash();
+                }
+                else if (tmpCube.isTrigger)
+                {
+                    tmpCube.ActivateTnt();
                 }
 
             }
@@ -382,7 +546,37 @@ public class Player : MonoBehaviour
         else
         {
             DoAction = DoActionFall;
+
+            StartCoroutine(Death("fall"));
         }
+    }
+
+    private bool TestWall()
+    {
+        Ray ray = new Ray(transform.position, orientation);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+
+                if (tmpCube.isWall) return true;
+
+                else if (tmpCube.isPushBlock)
+                {
+                    tmpCube.orientation = orientation;
+                    if (!tmpCube.TestWall())
+                    {
+                        tmpCube.SetModePush(tmpCube.orientation);
+                    }
+                    else return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     private void SplashPaint()

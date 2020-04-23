@@ -3,22 +3,34 @@ using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
+    public static CameraHandler instance = null;
     bool travel;
-    bool position;
+    [System.NonSerialized]
+    public bool position;
     float progress = 0.0f;
-    Vector3 positionDépart;
-    [Header("Renseignez la caméra et sa position")]
     public GameObject cameraGO;
+    public Vector3 positionDepart;
     public Vector3 positionAlternatif;
-    [Range(2, 100)] 
+    public Vector3 positionTan;
+    Vector3 vectorTan;
+    Vector3 vectorNormal;
+    [Range(0, 100)] 
     public int slowFactor;
-    [Range(0.01f, 0.90f)] 
+    [Range(0.001f, 0.99f)] 
     public float cutoff;
-    public void TravelTick()
-    {
-        travel = true;
-    }
 
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     public void Start()
     {
         try
@@ -27,59 +39,64 @@ public class CameraHandler : MonoBehaviour
         }
         catch (UnassignedReferenceException)
         {
-            Debug.LogError("Aucune Camera renseignée ! Veuillez utiliser de préférence la caméra présente de le dossier Ressources/Prefab/Camera");
+            cameraGO = GameObject.Find("Camera");
         }
-        positionDépart = cameraGO.transform.position;
-        if (positionAlternatif == new Vector3(0, 0, 0) || positionAlternatif == null)
+        positionDepart = cameraGO.transform.position;
+        positionAlternatif = GameObject.Find("Point_Alt").transform.position;
+        positionTan = GameObject.Find("Point_Tan").transform.position;
+        if (GameObject.Find("Point_Alt") == null)
         {
-            Debug.LogError("La position alternative ne peut pas être à l'origine de la scene");
+            Debug.LogError("Sonde de position alternative manquante, traveling indisponible");
         }
+        
     }
     public void Update()
     {
+        if (GameManager.instance.replayer.GetButtonDown("Camera_Travel"))
+        {
+            if (!travel)
+            {
+                GameManager.instance.DATAnbMoveCam++;
+            }
+            travel = true;
+            
+        }
         if (travel)
         {
             Travel();
         }
     }
-
     public void Travel()
     {
-        if (progress < cutoff)
+        
+
+        if (progress < 1.0f)
         {
             switch (position)
             {
-                case true:
-                {
-                    progress += (Time.deltaTime / slowFactor);
-                    cameraGO.transform.position = Vector3.Lerp(cameraGO.transform.position, positionDépart, progress);
-                }
-                break;
                 case false:
                 {
-                    progress += (Time.deltaTime / slowFactor);
-                    cameraGO.transform.position = Vector3.Lerp(cameraGO.transform.position, positionAlternatif, progress);
+                    progress += (Time.deltaTime * slowFactor);
+                        vectorNormal = Vector3.Lerp(positionDepart, positionTan, progress);
+                        vectorTan = Vector3.Lerp(positionTan, positionAlternatif, progress);
+                        cameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress); 
+                }
+                break;
+                case true:
+                {
+                    progress += (Time.deltaTime * slowFactor);
+                        vectorNormal = Vector3.Lerp(positionAlternatif, positionTan, progress);
+                        vectorTan = Vector3.Lerp(positionTan, positionDepart, progress);
+                        cameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress);
                 }
                 break;
             }
         }
-        else
+        else if (progress >= 1.0f)
         {
-            if (!position)
-            {
-                position = true;
-                cameraGO.transform.position = positionAlternatif;
-                Debug.Log("PosALT");
-            }
-            else
-            {
-                position = false;
-                cameraGO.transform.position = positionDépart;
-                Debug.Log("PosORG");
-            }
-            progress = 0f;
+            progress = 0.0f;
             travel = false;
-            
+            position = !position;
         }
     }
 }
