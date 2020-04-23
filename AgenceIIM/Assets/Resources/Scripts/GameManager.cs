@@ -76,13 +76,12 @@ public class GameManager : MonoBehaviour
         if (nbEnnemy <= 0)
         {
             StartCoroutine(YouWin());
-
-            DATASaveData();
         }
     }
 
     public IEnumerator YouWin()
     {
+        DATASaveData();
         yield return new WaitForSeconds(2f);
 
         //ResetParty();

@@ -32,5 +32,9 @@ public class PlaytestAnaliticEditor : Editor
         {
             analitic.HideData();
         }
+        if (GUILayout.Button("Win Level"))
+        {
+            GameManager.instance.StartCoroutine(GameManager.instance.YouWin());
+        }
     }
 }
