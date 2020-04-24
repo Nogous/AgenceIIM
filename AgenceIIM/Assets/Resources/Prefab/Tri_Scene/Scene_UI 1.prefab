@@ -114,9 +114,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5314663703096171900, guid: c153899fc0feab241877cc83526b21fc,
-          type: 3}
-        m_MethodName: ResetParty
+      - m_Target: {fileID: 8730473079294462543}
+        m_MethodName: OnClick_Reset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -317,9 +316,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2276547513290559370, guid: c153899fc0feab241877cc83526b21fc,
-          type: 3}
-        m_MethodName: Travel
+      - m_Target: {fileID: 8730473079294462543}
+        m_MethodName: OnClick_Travel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -903,6 +901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1689471063146222632}
+  - component: {fileID: 8730473079294462543}
   m_Layer: 5
   m_Name: Mobile_Canvas
   m_TagString: Untagged
@@ -931,3 +930,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8730473079294462543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7988141294472844502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaff9c71ab4710d4e9536926bac5a931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
