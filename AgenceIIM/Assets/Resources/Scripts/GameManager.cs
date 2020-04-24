@@ -83,10 +83,11 @@ public class GameManager : MonoBehaviour
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC
+            GameObject.Find("Mobile_Canvas").SetActive(false);
         }
         else
         {
-            //Code Spécifique Mobile
+            //Code Spécifique Mobile 
         }
     }
     public IEnumerator YouWin()

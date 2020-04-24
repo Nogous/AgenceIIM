@@ -332,7 +332,9 @@ public class Player : MonoBehaviour
         if (_elapsedTime >= _moveTime)
         {
             // end move
-            SetModeWait();
+            //SetModeWait();
+
+            SetModeStretch();
 
             Cube.transform.eulerAngles = Vector3.zero;
             UpdateColor();
@@ -341,6 +343,40 @@ public class Player : MonoBehaviour
 
             TestTile();
         }
+    }
+
+    public AnimationCurve stretchCube;
+    public float stretchSpeed = 1f;
+    private float stretchLerp = 0;
+    private Vector3 stretchInitPos;
+
+    public void SetModeStretch()
+    {
+        stretchInitPos = Cube.transform.localPosition;
+        stretchLerp = 0;
+        DoAction = DoStretchCube;
+        
+    }
+
+    public void DoStretchCube()
+    {
+        stretchLerp += Time.deltaTime * stretchSpeed;
+
+        CubeStretch(stretchCube.Evaluate(stretchLerp), stretchInitPos);
+
+        if (stretchLerp >= 1f)
+        {
+            SetModeWait();
+        }
+    }
+
+    public void CubeStretch(float y, Vector3 _initPos)
+    {
+        float x, z;
+        z = x = Mathf.Sqrt(1 / y);
+
+        Cube.transform.localScale = new Vector3(x, y, z);
+        Cube.transform.localPosition = _initPos + (((y - 1) / 2) * Vector3.up);
     }
 
     private void RotationCheck()
