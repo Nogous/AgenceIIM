@@ -84,10 +84,12 @@ public class GameManager : MonoBehaviour
         {
             //Code Spécifique PC
             GameObject.Find("Mobile_Canvas").SetActive(false);
+            GetComponent<SwipeDetector>().enabled = false;
         }
         else
         {
             //Code Spécifique Mobile 
+            GameObject.Find("Controles_PC").SetActive(false);
         }
     }
     public IEnumerator YouWin()
