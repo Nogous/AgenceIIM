@@ -194,6 +194,40 @@ MonoBehaviour:
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   trail: {fileID: 181076388}
   Splash: {fileID: 8895707438627183602}
+  stretchCube:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -1.0040525
+      outSlope: -1.0040525
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.49898893
+      value: 0.49898893
+      inSlope: -0.00202626
+      outSlope: -0.00202626
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  stretchSpeed: 10
 --- !u!114 &402075932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,10 +241,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  isEnemyMirror: 0
   isEnemyMoving: 0
   isCleaningBox: 0
   isDashBox: 0
   isWall: 0
+  isPushBlock: 0
   isTnt: 0
   isTrigger: 0
   associatedTnt: {fileID: 0}
@@ -234,6 +270,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  MoveList: 
   _moveTime: 0.2
   orientation: {x: 0, y: 0, z: 1}
   speed: 5
