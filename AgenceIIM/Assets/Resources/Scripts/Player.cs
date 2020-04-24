@@ -202,7 +202,7 @@ public class Player : MonoBehaviour
         else
         {
             
-            if (RewiredConsts.Action.MoveVert * -1 > 0.1f || MobileAxeVerNeg)
+            if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 > 0.1f || MobileAxeVerNeg)
             {
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
@@ -215,7 +215,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (RewiredConsts.Action.MoveVert * -1 < -0.1f || MobileAxeVerPos)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 < -0.1f || MobileAxeVerPos)
             {
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (RewiredConsts.Action.MoveHor * -1 > 0.1f || MobileAxeHorNeg)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 > 0.1f || MobileAxeHorNeg)
             {
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
@@ -241,7 +241,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (RewiredConsts.Action.MoveHor * -1 < -0.1f || MobileAxeHorPos)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 < -0.1f || MobileAxeHorPos)
             {
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;
