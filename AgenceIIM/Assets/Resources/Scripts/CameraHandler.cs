@@ -33,13 +33,8 @@ public class CameraHandler : MonoBehaviour
     
     public void Start()
     {
-        try
-        {
-            cameraGO.name = "Camera";
-        }
-        catch (UnassignedReferenceException)
-        {
-            cameraGO = GameObject.Find("Camera");
+        if(cameraGO == null || cameraGO.GetComponent<Camera>() == null) { 
+            cameraGO = GetComponent<Camera>().gameObject;
         }
         positionDepart = cameraGO.transform.position;
         positionAlternatif = GameObject.Find("Point_Alt").transform.position;
@@ -52,24 +47,25 @@ public class CameraHandler : MonoBehaviour
     }
     public void Update()
     {
-        if (GameManager.instance.replayer.GetButtonDown("Camera_Travel"))
-        {
-            if (!travel)
-            {
-                GameManager.instance.DATAnbMoveCam++;
-            }
-            travel = true;
-            
-        }
         if (travel)
         {
             Travel();
         }
+        else if (GameManager.instance.replayer.GetButtonDown("Camera_Travel"))
+        {
+            GameManager.instance.DATAnbMoveCam++;
+            StartTravel();
+        }
+    }
+
+    public void StartTravel()
+    {
+        if (travel) return;
+        progress = 0.0f;
+        travel = true;
     }
     public void Travel()
     {
-        
-
         if (progress < 1.0f)
         {
             switch (position)

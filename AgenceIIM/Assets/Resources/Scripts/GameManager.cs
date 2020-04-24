@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        DeterminPlatform();
     }
 
     private void Start()
@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
         {
             replayer.controllers.maps.SetMapsEnabled(true, 2);
         }
-
         nbEnnemy = nbEnnemyInit;
     }
 
@@ -79,6 +78,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DeterminPlatform()
+    {
+        if (!(Application.platform == RuntimePlatform.Android))
+        {
+            //Code Spécifique PC
+            //GameObject.Find("Mobile_Canvas").SetActive(false);
+        }
+        else
+        {
+            //Code Spécifique Mobile 
+        }
+    }
     public IEnumerator YouWin()
     {
         DATASaveData();
