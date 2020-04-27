@@ -24,10 +24,30 @@ public class deathSplash : MonoBehaviour
 
         for (int i = 0; i < numCollisionEvents; i++)
         {
-
             Vector3 collidePos = collisionEvents[i].intersection;
 
-            GameObject newStain = Instantiate(stain, collidePos, Quaternion.identity);
+            Vector3 collideRot = Vector3.zero;
+
+            if (collisionEvents[i].normal == Vector3.forward)
+            {
+                collideRot = new Vector3(90, 0, 0);
+            }
+            else if (collisionEvents[i].normal == Vector3.back)
+            {
+                collideRot = new Vector3(-90, 0, 0);
+            }
+            else if (collisionEvents[i].normal == Vector3.left)
+            {
+                collideRot = new Vector3(0, 0, 90);
+            }
+            else if (collisionEvents[i].normal == Vector3.right)
+            {
+                collideRot = new Vector3(0, 0, -90);
+            }
+
+            GameObject newStain = Instantiate(stain, collidePos, Quaternion.Euler(collideRot));
+
+            newStain.transform.localScale *= Random.Range(0.2f, 1.5f);
 
             newStain.GetComponent<MeshRenderer>().material.SetColor("_Color", main.startColor.color);
         }
