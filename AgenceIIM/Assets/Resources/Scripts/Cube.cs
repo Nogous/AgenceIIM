@@ -45,10 +45,12 @@ public class Cube : MonoBehaviour
 
     [SerializeField] private bool isBreakable = false;
 
+    [Header("ColoredGround")]
     public int colorPotencial = 0;
     private int initColorPotencial;
     public Color color = Color.white;
     private Color initColor;
+    public ParticleSystem takeColor = null;
 
     [Header("Effect Settings")]
 
@@ -536,6 +538,7 @@ public class Cube : MonoBehaviour
         if (colorPotencial > 0)
         {
             colorPotencial--;
+            //takeColor.gameObject.SetActive(true);
             return color;
         }
         return Color.white;
