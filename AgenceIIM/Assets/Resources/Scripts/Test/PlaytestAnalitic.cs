@@ -56,10 +56,6 @@ public class PlaytestAnalitic : MonoBehaviour
         Debug.Log(nbDeath.Length);
         for (int i = nbDeath.Length; i-- > 0;)
         {
-            if (timeDuration[i] <= 0)
-            {
-                break;
-            }
             data.text += "Mort level " + i + " : " + nbDeath[i] + "\n";
         }
 
@@ -74,10 +70,6 @@ public class PlaytestAnalitic : MonoBehaviour
 
         for (int i = nbDeath.Length; i-- > 0;)
         {
-            if (timeDuration[i] <= 0)
-            {
-                break;
-            }
             data.text += "Temps level " + i + " : " + timeDuration[i] + "\n";
         }
 
@@ -92,10 +84,6 @@ public class PlaytestAnalitic : MonoBehaviour
 
         for (int i = nbMoveCam.Length; i-- > 0;)
         {
-            if (timeDuration[i] <= 0)
-            {
-                break;
-            }
             data.text += "Nombre de rotation de la camera level " + i + " : " + nbMoveCam[i] + "\n";
         }
     }

@@ -52,6 +52,18 @@ public class Player : MonoBehaviour
 
     public static event Action<Vector3> OnMove;
 
+    [Header("Options Axes Mobile")]
+    bool MobileAxeHorPos = false;
+    bool MobileAxeHorNeg = false;
+    bool MobileAxeVerPos = false;
+    bool MobileAxeVerNeg = false;
+    public float DuréeActivationAxe = 0.01f;
+
+    void Awake()
+    {
+        SwipeDetector.OnSwipe += ProcessMobileInput;     
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +85,24 @@ public class Player : MonoBehaviour
     void Update()
     {
         DoAction();
+    }
+
+    private void ProcessMobileInput(SwipeData data) {
+        if(data.Direction == SwipeDirection.Up)
+        {
+            StartCoroutine("MobileUpAxisBehaviour");
+        }else if(data.Direction == SwipeDirection.Down)
+        {
+            StartCoroutine("MobileDownAxisBehaviour");
+        }
+        else if (data.Direction == SwipeDirection.Right)
+        {
+            StartCoroutine("MobileRightAxisBehaviour");
+        }
+        else if (data.Direction == SwipeDirection.Left)
+        {
+            StartCoroutine("MobileLeftAxisBehaviour");
+        }
     }
 
     public void ResetPlayer()
@@ -114,7 +144,7 @@ public class Player : MonoBehaviour
         if (!CameraHandler.instance.position)
         {
             
-            if (replayer.GetAxis(RewiredConsts.Action.MoveVert) > 0.1f)
+            if (replayer.GetAxis(RewiredConsts.Action.MoveVert) > 0.1f || MobileAxeVerPos)
             {
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
@@ -127,7 +157,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) < -0.1f)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) < -0.1f || MobileAxeVerNeg)
             {
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
@@ -140,7 +170,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) > 0.1f)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) > 0.1f || MobileAxeHorPos)
             {
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
@@ -153,7 +183,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) < -0.1f)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) < -0.1f || MobileAxeHorNeg)
             {
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;
@@ -172,7 +202,7 @@ public class Player : MonoBehaviour
         else
         {
             
-            if (replayer.GetAxis("MoveVert")* -1 > 0.1f)
+            if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 > 0.1f || MobileAxeVerNeg)
             {
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
@@ -185,7 +215,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (replayer.GetAxis("MoveVert") * -1 < -0.1f)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 < -0.1f || MobileAxeVerPos)
             {
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
@@ -198,7 +228,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (replayer.GetAxis("MoveHor") * -1 > 0.1f)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 > 0.1f || MobileAxeHorNeg)
             {
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
@@ -211,7 +241,7 @@ public class Player : MonoBehaviour
 
                 OnMove?.Invoke(orientation);
             }
-            else if (replayer.GetAxis("MoveHor") * -1 < -0.1f)
+            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 < -0.1f || MobileAxeHorPos)
             {
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;
@@ -267,8 +297,6 @@ public class Player : MonoBehaviour
 
         GameManager.instance.ResetParty();
     }
-
-    // Update is called once per frame
 
     #region Move
 
@@ -647,5 +675,33 @@ public class Player : MonoBehaviour
 
             }
         }
+    }
+
+    private IEnumerable MobileUpAxisBehaviour()
+    {
+        MobileAxeVerPos = true;
+        yield return new WaitForSeconds(DuréeActivationAxe);
+        MobileAxeVerPos = false;
+    }
+
+    private IEnumerable MobileDownAxisBehaviour()
+    {
+        MobileAxeVerNeg = true;
+        yield return new WaitForSeconds(DuréeActivationAxe);
+        MobileAxeVerNeg = false;
+    }
+
+    private IEnumerable MobileRightAxisBehaviour()
+    {
+        MobileAxeHorPos = true;
+        yield return new WaitForSeconds(DuréeActivationAxe);
+        MobileAxeHorPos = false;
+    }
+
+    private IEnumerable MobileLeftAxisBehaviour()
+    {
+        MobileAxeHorNeg = true;
+        yield return new WaitForSeconds(DuréeActivationAxe);
+        MobileAxeHorNeg = false;
     }
 }
