@@ -650,13 +650,19 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
+            
             if (faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
                 ParticleSystem.MainModule main = Splash.main;
                 main.startColor = faceColor[1].GetComponent<Renderer>().material.color;
-
+                
+                AudioManager.instance.Play("TouchSolPaint");
                 Splash.Play();
 
+            }
+            else
+            {
+                AudioManager.instance.Play("TouchSolNeutre");
             }
         }
 
