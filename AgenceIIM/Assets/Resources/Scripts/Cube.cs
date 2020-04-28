@@ -537,6 +537,7 @@ public class Cube : MonoBehaviour
     {
         if (colorPotencial > 0)
         {
+            AudioManager.instance.Play("AddPaint");
             colorPotencial--;
             //takeColor.gameObject.SetActive(true);
             return color;
