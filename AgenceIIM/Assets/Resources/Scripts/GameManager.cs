@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+       
+
         DATATimeInTheGame();
 
         if (replayer.GetButtonDown("Reset"))

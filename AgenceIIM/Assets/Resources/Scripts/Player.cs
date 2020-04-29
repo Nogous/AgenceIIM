@@ -59,10 +59,11 @@ public class Player : MonoBehaviour
     bool MobileAxeVerNeg = false;
     public float DuréeActivationAxe = 0.01f;
 
-    //public CameraShake cameraShake;
+   
 
     void Awake()
     {
+        
         SwipeDetector.OnSwipe += ProcessMobileInput;     
     }
 
@@ -87,6 +88,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         DoAction();
+
+       
     }
 
     private void ProcessMobileInput(SwipeData data) {
@@ -291,6 +294,7 @@ public class Player : MonoBehaviour
 
         if (gameObject.GetComponent<Cube>())
         {
+            CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(.3f, .1f));
             gameObject.GetComponent<Cube>().Explode(true);
 
             yield return new WaitForSeconds(2f);
@@ -528,7 +532,7 @@ public class Player : MonoBehaviour
                 {
                     if (tmpColor == tmpCube.enemyColor)
                     {
-                       //StartCoroutine(cameraShake.Shake(.15f, .4f));
+                       CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(.15f, .4f));
                         tmpCube.Explode();
                     }
                     else

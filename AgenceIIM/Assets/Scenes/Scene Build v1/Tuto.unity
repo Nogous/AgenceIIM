@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -181,6 +181,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2abbe9e3a2e70334f8e05a0c37760f7a, type: 3}
+--- !u!114 &194256462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4128000923007695928, guid: 28faf8354b97c1446ab5e1f3d05bc063,
+    type: 3}
+  m_PrefabInstance: {fileID: 265391501}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c50665b222eab54bb2e2e1e41867592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &201782999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7993145178237273349, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
@@ -340,6 +352,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1329019748114725864, guid: 28faf8354b97c1446ab5e1f3d05bc063,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2800800336665842686, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
       propertyPath: sounds.Array.size
@@ -477,24 +494,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 565448115}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &427928478 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1329019748114725877, guid: 28faf8354b97c1446ab5e1f3d05bc063,
-    type: 3}
-  m_PrefabInstance: {fileID: 265391501}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &427928484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427928478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1015234620c749a42acfb3eae1d8ef50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &441524870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -781,10 +780,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene_UI 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4895571998219325074, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -263.39844
+      objectReference: {fileID: 0}
     - target: {fileID: 4895571998220270560, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
         type: 3}
       propertyPath: m_Text
       value: Tuto
+      objectReference: {fileID: 0}
+    - target: {fileID: 4895571998220270561, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 27.550781
+      objectReference: {fileID: 0}
+    - target: {fileID: 4895571998648494919, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 85.80078
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7daf1a6dbed61fc4982fa49e7eeb0183, type: 3}
@@ -2727,7 +2741,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cameraShake
       value: 
-      objectReference: {fileID: 427928484}
+      objectReference: {fileID: 194256462}
     - target: {fileID: 2519804550802159510, guid: 842e2c31424e86c4789bb65fd935067e,
         type: 3}
       propertyPath: m_IsActive
