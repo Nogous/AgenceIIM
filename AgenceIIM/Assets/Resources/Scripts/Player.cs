@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
     bool MobileAxeVerNeg = false;
     public float DuréeActivationAxe = 0.01f;
 
+    //public CameraShake cameraShake;
+
     void Awake()
     {
         SwipeDetector.OnSwipe += ProcessMobileInput;     
@@ -272,6 +274,7 @@ public class Player : MonoBehaviour
 
     public void SetDeath()
     {
+        
         SetModeNull();
         StartCoroutine(Death());
     }
@@ -525,6 +528,7 @@ public class Player : MonoBehaviour
                 {
                     if (tmpColor == tmpCube.enemyColor)
                     {
+                       //StartCoroutine(cameraShake.Shake(.15f, .4f));
                         tmpCube.Explode();
                     }
                     else
