@@ -181,18 +181,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2abbe9e3a2e70334f8e05a0c37760f7a, type: 3}
---- !u!114 &194256462 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4128000923007695928, guid: 28faf8354b97c1446ab5e1f3d05bc063,
-    type: 3}
-  m_PrefabInstance: {fileID: 265391501}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c50665b222eab54bb2e2e1e41867592, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &201782999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7993145178237273349, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
@@ -2598,30 +2586,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4003242115290936197}
     m_Modifications:
-    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -133.488
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.018
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -245.489
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.055834185
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.055834185
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.055834185
-      objectReference: {fileID: 0}
     - target: {fileID: 2519804548909918936, guid: 842e2c31424e86c4789bb65fd935067e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2681,71 +2645,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918938, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[0].inSlope
-      value: -0.9140953
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[0].outSlope
-      value: -0.9140953
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[1].value
-      value: 0.6141458
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[1].inSlope
-      value: 0.020930529
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[1].outSlope
-      value: 0.020930529
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[2].inSlope
-      value: 0.95595634
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[2].outSlope
-      value: 0.95595634
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[1].time
-      value: 0.42211592
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[2].value
-      value: 0.98729515
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: stretchCube.m_Curve.Array.data[2].time
-      value: 0.8124573
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: cameraShake
-      value: 
-      objectReference: {fileID: 194256462}
-    - target: {fileID: 2519804550802159510, guid: 842e2c31424e86c4789bb65fd935067e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
