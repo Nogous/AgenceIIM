@@ -12,6 +12,7 @@
         Pass
         {
 			Blend Zero One
+			ZWrite Off
 
 			Stencil{
 				Ref 2
