@@ -3,16 +3,18 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+
+		[IntRange] _StencilRef("Stencil Reference Value", Range(0,255)) = 0
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "Queue" = "Geometry"}
+        Tags { "RenderType"="Opaque" "Queue" = "Geometry-1"}
         LOD 100
 
         Pass
         {
 			Stencil{
-				Ref 2
+				Ref [_StencilRef]
 				Comp Equal
 			}
 

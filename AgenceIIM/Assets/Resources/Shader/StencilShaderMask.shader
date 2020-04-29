@@ -2,11 +2,11 @@
 {
     Properties
     {
-        
+		[IntRange] _StencilRef("Stencil Reference Value", Range(0,255)) = 0
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "Queue" = "Geometry-1"}
+        Tags { "RenderType"="Opaque" "Queue" = "Geometry"}
         LOD 100
 
         Pass
@@ -15,7 +15,7 @@
 			ZWrite Off
 
 			Stencil{
-				Ref 2
+				Ref [_StencilRef]
 				Comp Always		
 				Pass Replace
 			}
