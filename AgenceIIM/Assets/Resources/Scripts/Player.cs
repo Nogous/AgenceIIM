@@ -88,20 +88,20 @@ public class Player : MonoBehaviour
     }
 
     private void ProcessMobileInput(SwipeData data) {
-        if(data.Direction == SwipeDirection.Up)
+        if (data.Direction == SwipeDirection.Up)
         {
-            StartCoroutine("MobileUpAxisBehaviour");
-        }else if(data.Direction == SwipeDirection.Down)
+            StartCoroutine(MobileUpAxisBehaviour());
+        } else if (data.Direction == SwipeDirection.Down)
         {
-            StartCoroutine("MobileDownAxisBehaviour");
+            StartCoroutine(MobileDownAxisBehaviour());
         }
         else if (data.Direction == SwipeDirection.Right)
-        {
-            StartCoroutine("MobileRightAxisBehaviour");
+        { 
+            StartCoroutine(MobileRightAxisBehaviour());
         }
         else if (data.Direction == SwipeDirection.Left)
         {
-            StartCoroutine("MobileLeftAxisBehaviour");
+            StartCoroutine(MobileLeftAxisBehaviour());
         }
     }
 
@@ -683,28 +683,28 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerable MobileUpAxisBehaviour()
+    private IEnumerator MobileUpAxisBehaviour()
     {
         MobileAxeVerPos = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeVerPos = false;
     }
 
-    private IEnumerable MobileDownAxisBehaviour()
+    private IEnumerator MobileDownAxisBehaviour()
     {
         MobileAxeVerNeg = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeVerNeg = false;
     }
 
-    private IEnumerable MobileRightAxisBehaviour()
+    private IEnumerator MobileRightAxisBehaviour()
     {
         MobileAxeHorPos = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeHorPos = false;
     }
 
-    private IEnumerable MobileLeftAxisBehaviour()
+    private IEnumerator MobileLeftAxisBehaviour()
     {
         MobileAxeHorNeg = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
