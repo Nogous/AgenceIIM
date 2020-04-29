@@ -861,6 +861,11 @@ PrefabInstance:
       propertyPath: isBreakable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3894315184640427557, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
+        type: 3}
+      propertyPath: isWall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7993145178237273349, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1661,18 +1666,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8007131220705390286, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
-      propertyPath: idLevel
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8007131220705390286, guid: 28faf8354b97c1446ab5e1f3d05bc063,
-        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 4292875431625673970}
     - target: {fileID: 8007131220705390286, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
-      propertyPath: sceneNameToLoad
-      value: Level 8.1
+      propertyPath: nbEnnemyInit
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28faf8354b97c1446ab5e1f3d05bc063, type: 3}

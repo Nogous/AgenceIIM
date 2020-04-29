@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
     bool MobileAxeVerNeg = false;
     public float DuréeActivationAxe = 0.01f;
 
+    //public CameraShake cameraShake;
+
     void Awake()
     {
         SwipeDetector.OnSwipe += ProcessMobileInput;     
@@ -88,20 +90,20 @@ public class Player : MonoBehaviour
     }
 
     private void ProcessMobileInput(SwipeData data) {
-        if(data.Direction == SwipeDirection.Up)
+        if (data.Direction == SwipeDirection.Up)
         {
-            StartCoroutine("MobileUpAxisBehaviour");
-        }else if(data.Direction == SwipeDirection.Down)
+            StartCoroutine(MobileUpAxisBehaviour());
+        } else if (data.Direction == SwipeDirection.Down)
         {
-            StartCoroutine("MobileDownAxisBehaviour");
+            StartCoroutine(MobileDownAxisBehaviour());
         }
         else if (data.Direction == SwipeDirection.Right)
-        {
-            StartCoroutine("MobileRightAxisBehaviour");
+        { 
+            StartCoroutine(MobileRightAxisBehaviour());
         }
         else if (data.Direction == SwipeDirection.Left)
         {
-            StartCoroutine("MobileLeftAxisBehaviour");
+            StartCoroutine(MobileLeftAxisBehaviour());
         }
     }
 
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour
             faceColor[i].gameObject.SetActive(true);
             faceColor[i].material.color = initColors[i];
         }
+        Cube.SetActive(true);
 
         SetModeWait();
     }
@@ -271,6 +274,7 @@ public class Player : MonoBehaviour
 
     public void SetDeath()
     {
+        
         SetModeNull();
         StartCoroutine(Death());
     }
@@ -283,10 +287,7 @@ public class Player : MonoBehaviour
             DoAction = DoActionNull;
         }
 
-        for (int i = faceColor.Length; i-- > 0;)
-        {
-            faceColor[i].gameObject.SetActive(false);
-        }
+        Cube.SetActive(false);
 
         if (gameObject.GetComponent<Cube>())
         {
@@ -527,6 +528,7 @@ public class Player : MonoBehaviour
                 {
                     if (tmpColor == tmpCube.enemyColor)
                     {
+                       //StartCoroutine(cameraShake.Shake(.15f, .4f));
                         tmpCube.Explode();
                     }
                     else
@@ -650,13 +652,19 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
+            
             if (faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
                 ParticleSystem.MainModule main = Splash.main;
                 main.startColor = faceColor[1].GetComponent<Renderer>().material.color;
-
+                
+                AudioManager.instance.Play("TouchSolPaint");
                 Splash.Play();
 
+            }
+            else
+            {
+                AudioManager.instance.Play("TouchSolNeutre");
             }
         }
 
@@ -677,28 +685,28 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerable MobileUpAxisBehaviour()
+    private IEnumerator MobileUpAxisBehaviour()
     {
         MobileAxeVerPos = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeVerPos = false;
     }
 
-    private IEnumerable MobileDownAxisBehaviour()
+    private IEnumerator MobileDownAxisBehaviour()
     {
         MobileAxeVerNeg = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeVerNeg = false;
     }
 
-    private IEnumerable MobileRightAxisBehaviour()
+    private IEnumerator MobileRightAxisBehaviour()
     {
         MobileAxeHorPos = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeHorPos = false;
     }
 
-    private IEnumerable MobileLeftAxisBehaviour()
+    private IEnumerator MobileLeftAxisBehaviour()
     {
         MobileAxeHorNeg = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
