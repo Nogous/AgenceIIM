@@ -83,8 +83,8 @@ public class GameManager : MonoBehaviour
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC
-            GameObject.Find("Mobile_Canvas").SetActive(false);
-            GetComponent<SwipeDetector>().enabled = false;
+            /*GameObject.Find("Mobile_Canvas").SetActive(false);
+            GetComponent<SwipeDetector>().enabled = false;*/
         }
         else
         {
