@@ -335,6 +335,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2800800336665842686, guid: 28faf8354b97c1446ab5e1f3d05bc063,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800800336665842686, guid: 28faf8354b97c1446ab5e1f3d05bc063,
+        type: 3}
+      propertyPath: sounds.Array.data[3].name
+      value: AddPaint
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800800336665842686, guid: 28faf8354b97c1446ab5e1f3d05bc063,
+        type: 3}
+      propertyPath: sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f781351af85bb340a2a6072877fc8de, type: 3}
+    - target: {fileID: 2800800336665842686, guid: 28faf8354b97c1446ab5e1f3d05bc063,
+        type: 3}
+      propertyPath: sounds.Array.data[3].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800800336665842686, guid: 28faf8354b97c1446ab5e1f3d05bc063,
+        type: 3}
+      propertyPath: sounds.Array.data[3].pitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8007131220705390286, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
       propertyPath: player
@@ -2506,6 +2531,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4003242115290936197}
     m_Modifications:
+    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -133.488
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -245.489
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.055834185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.055834185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165935745, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.055834185
+      objectReference: {fileID: 0}
     - target: {fileID: 2519804548909918936, guid: 842e2c31424e86c4789bb65fd935067e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2566,6 +2615,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918938, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
         type: 3}
       propertyPath: stretchCube.m_Curve.Array.data[0].inSlope
@@ -2615,6 +2669,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stretchCube.m_Curve.Array.data[2].time
       value: 0.8124573
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804550802159510, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}

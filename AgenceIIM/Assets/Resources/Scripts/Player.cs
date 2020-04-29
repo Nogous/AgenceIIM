@@ -114,6 +114,7 @@ public class Player : MonoBehaviour
             faceColor[i].gameObject.SetActive(true);
             faceColor[i].material.color = initColors[i];
         }
+        Cube.SetActive(true);
 
         SetModeWait();
     }
@@ -283,10 +284,7 @@ public class Player : MonoBehaviour
             DoAction = DoActionNull;
         }
 
-        for (int i = faceColor.Length; i-- > 0;)
-        {
-            faceColor[i].gameObject.SetActive(false);
-        }
+        Cube.SetActive(false);
 
         if (gameObject.GetComponent<Cube>())
         {
