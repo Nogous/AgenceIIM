@@ -59,10 +59,15 @@ public class Player : MonoBehaviour
     bool MobileAxeVerNeg = false;
     public float DuréeActivationAxe = 0.01f;
 
-    //public CameraShake cameraShake;
+    [Header("Variables ScreenShake")]
+    public float TimeShakeEnnemy;
+    public float MagnShakeEnnemy;
+    public float TimeShakePlayer;
+    public float MagnShakePlayer;
 
     void Awake()
     {
+        
         SwipeDetector.OnSwipe += ProcessMobileInput;     
     }
 
@@ -87,6 +92,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         DoAction();
+
+       
     }
 
     private void ProcessMobileInput(SwipeData data) {
@@ -291,6 +298,7 @@ public class Player : MonoBehaviour
 
         if (gameObject.GetComponent<Cube>())
         {
+            CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakePlayer, MagnShakePlayer));
             gameObject.GetComponent<Cube>().Explode(true);
 
             yield return new WaitForSeconds(2f);
@@ -528,7 +536,7 @@ public class Player : MonoBehaviour
                 {
                     if (tmpColor == tmpCube.enemyColor)
                     {
-                       //StartCoroutine(cameraShake.Shake(.15f, .4f));
+                       CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakeEnnemy, MagnShakeEnnemy));
                         tmpCube.Explode();
                     }
                     else
