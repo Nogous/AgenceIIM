@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class SpawnLevel : MonoBehaviour
 {
-    private bool isSpawnConpleat = false;
-    private bool isSpawnConpleat2 = false;
+    public static SpawnLevel Instance = null;
+
+    private bool isSpawnConpleat = true;
+    private bool isUnPopConpleat = true;
 
     public float hightSpawn = 1f;
     public float fallSpeed = 1f;
+    public int nbsimultaneousFallingObject = 1;
 
     public List<GameObject> cubes = new List<GameObject>();
     private List<Vector3> cubePos = new List<Vector3>();
 
-    private float fLerp = 0f;
-    private int idCube = 0;
+    private float[] fLerp;
+    private int[] idCube;
+    private bool[] isFall;
 
-    private float fLerp2 = -.5f;
-    private int idCube2 = 1;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.Log("more than 1 SpawnLevel");
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +41,18 @@ public class SpawnLevel : MonoBehaviour
         for (int i = 0; i < cubes.Count; i++)
         {
             cubePos.Add(cubes[i].transform.position);
-            cubes[i].transform.position = cubePos[idCube] + Vector3.up * hightSpawn;
+            cubes[i].transform.position = cubePos[i] + Vector3.up * hightSpawn;
+        }
+
+        fLerp = new float[nbsimultaneousFallingObject];
+        idCube = new int[nbsimultaneousFallingObject];
+        isFall = new bool[nbsimultaneousFallingObject];
+
+        for (int i = 0; i < nbsimultaneousFallingObject; i++)
+        {
+            fLerp[i] = -((float)i / (float)nbsimultaneousFallingObject);
+            idCube[i] = i;
+            isFall[i] = true;
         }
     }
     private void Update()
@@ -36,41 +61,111 @@ public class SpawnLevel : MonoBehaviour
         {
             UpdateFallLevel();
         }
-        if (!isSpawnConpleat2)
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            UpdateFallLevel2();
+            StartSpawnLevel();
+        }
+
+        if (!isUnPopConpleat)
+        {
+            UpdateFloatLevel();
         }
     }
 
-    public void UpdateFallLevel()
+    public void StartSpawnLevel()
     {
-        fLerp += Time.deltaTime * fallSpeed;
-        cubes[idCube].transform.position = Vector3.Lerp(cubePos[idCube] + Vector3.up* hightSpawn, cubePos[idCube], fLerp);
-
-        if (fLerp >= 1f)
+        for (int i = 0; i < cubes.Count; i++)
+            cubes[i].transform.position = cubePos[i] + Vector3.up * hightSpawn;
+        for (int i = 0; i < nbsimultaneousFallingObject; i++)
         {
-            idCube +=2;
-            fLerp = 0f;
-            if (idCube >= cubes.Count)
+            fLerp[i] = -((float)i / (float)nbsimultaneousFallingObject);
+            idCube[i] = i;
+            isFall[i] = true;
+        }
+        isSpawnConpleat = false;
+        isUnPopConpleat = true;
+    }
+
+    private void UpdateFallLevel()
+    {
+        for (int i = nbsimultaneousFallingObject; i-- > 0;)
+        {
+            if (isFall[i])
             {
-                isSpawnConpleat = true;
+                fLerp[i] += Time.deltaTime * fallSpeed;
+                cubes[idCube[i]].transform.position = Vector3.Lerp(cubePos[idCube[i]] + Vector3.up * hightSpawn, cubePos[idCube[i]], fLerp[i]);
+
+                if (fLerp[i] >= 1f)
+                {
+                    idCube[i] += nbsimultaneousFallingObject;
+                    fLerp[i] = 0f;
+                    if (idCube[i] >= cubes.Count)
+                    {
+                        isFall[i] = false;
+                        if (i == nbsimultaneousFallingObject-1)
+                        {
+                            EndSpawnLevel();
+                        }
+                    }
+                }
             }
         }
     }
 
-    public void UpdateFallLevel2()
+    private void EndSpawnLevel()
     {
-        fLerp2 += Time.deltaTime * fallSpeed;
-        cubes[idCube2].transform.position = Vector3.Lerp(cubePos[idCube2] + Vector3.up * hightSpawn, cubePos[idCube2], fLerp2);
-
-        if (fLerp2 >= 1f)
+        isSpawnConpleat = true;
+        for (int i = nbsimultaneousFallingObject; i-->0;)
         {
-            idCube2 += 2;
-            fLerp2 = 0f;
-            if (idCube2 >= cubes.Count)
+            isFall[i] = true;
+        }
+    }
+
+    public void StartUnPopLevel()
+    {
+        for (int i = 0; i < cubes.Count; i++)
+            cubes[i].transform.position = cubePos[i];
+        for (int i = 0; i < nbsimultaneousFallingObject; i++)
+        {
+            fLerp[i] = -((float)i / (float)nbsimultaneousFallingObject);
+            idCube[i] = i;
+            isFall[i] = true;
+        }
+
+        isSpawnConpleat = true;
+        isUnPopConpleat = false;
+    }
+
+    private void UpdateFloatLevel()
+    {
+        for (int i = nbsimultaneousFallingObject; i-- > 0;)
+        {
+            if (isFall[i])
             {
-                isSpawnConpleat2 = true;
+                fLerp[i] += Time.deltaTime * fallSpeed;
+                cubes[idCube[i]].transform.position = Vector3.Lerp(cubePos[idCube[i]], cubePos[idCube[i]] + Vector3.up * hightSpawn, fLerp[i]);
+
+                if (fLerp[i] >= 1f)
+                {
+                    idCube[i] += nbsimultaneousFallingObject;
+                    fLerp[i] = 0f;
+                    if (idCube[i] >= cubes.Count)
+                    {
+                        isFall[i] = false;
+                        EndUnPopLevel();
+                    }
+                }
             }
+        }
+    }
+
+    private void EndUnPopLevel()
+    {
+        isUnPopConpleat = true;
+        for (int i = nbsimultaneousFallingObject; i-- > 0;)
+        {
+            isFall[i] = true;
         }
     }
 }
