@@ -395,7 +395,7 @@ public class Cube : MonoBehaviour
             {
                 GameManager.instance.KillEnnemy();
 
-                ParticleSystem particles = Instantiate(particleDeath);
+                ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
 
                 ParticleSystem.MainModule mainMod = particles.main;
 
