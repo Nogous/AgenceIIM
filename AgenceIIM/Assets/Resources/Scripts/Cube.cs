@@ -468,7 +468,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f,0), vectors[0] + vectors[2], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0,0), vectors[0] + vectors[2], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
@@ -487,7 +487,7 @@ public class Cube : MonoBehaviour
             
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[0] + vectors[3], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[0] + vectors[3], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
@@ -505,7 +505,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[1] + vectors[2], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[2], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
@@ -523,7 +523,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[1] + vectors[3], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[3], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
