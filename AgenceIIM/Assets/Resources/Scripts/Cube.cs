@@ -402,7 +402,7 @@ public class Cube : MonoBehaviour
         }    
 
         // loop 3 times to create 5x5x5 pices un x,y,z coordonate
-        for (int i = cubesInRow; i-->0;)
+        /*for (int i = cubesInRow; i-->0;)
         {
             for (int j = cubesInRow; j-- > 0;)
             {
@@ -411,7 +411,7 @@ public class Cube : MonoBehaviour
                     CreatePiece(i, j, k);
                 }
             }
-        }
+        }*/
 
         // get explosion position
         Vector3 explosionPos = transform.position;
@@ -457,7 +457,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f,0), vectors[0] + vectors[2], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0,0), vectors[0] + vectors[2], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
@@ -476,7 +476,7 @@ public class Cube : MonoBehaviour
             
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[0] + vectors[3], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[0] + vectors[3], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
@@ -494,7 +494,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[1] + vectors[2], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[2], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
@@ -512,7 +512,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[1] + vectors[3], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[3], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
