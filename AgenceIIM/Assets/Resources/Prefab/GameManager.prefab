@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5314663703096171900}
   - component: {fileID: 2276547513290559370}
   - component: {fileID: 442703948}
+  - component: {fileID: 8032396062613171700}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,8 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1fdf2e8aabeae42bd25adc970c2812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetGameKey: 114
+  idLevel: 0
+  useWASDLayout: 0
   player: {fileID: 0}
+  fallDuration: 1
+  fallSpeed: 1
+  nbEnnemyInit: 1
+  nbEnnemy: 1
+  sceneNameToLoad: 
+  DATAnbMoveCam: 0
 --- !u!114 &2276547513290559370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +68,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraGO: {fileID: 0}
+  positionDepart: {x: 0, y: 0, z: 0}
   positionAlternatif: {x: 14.1, y: 11.6, z: 12.9}
+  positionTan: {x: 0, y: 0, z: 0}
   slowFactor: 30
   cutoff: 0.1
 --- !u!114 &442703948
@@ -76,3 +86,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds: []
+--- !u!114 &8032396062613171700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5314663703096171901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2246c17cd1d063343b4d0f7978d55f0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hightSpawn: 20
+  fallSpeed: 4
+  nbsimultaneousFallingObject: 2
+  cubes: []

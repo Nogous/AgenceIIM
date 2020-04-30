@@ -157,7 +157,10 @@ public class SpawnLevel : MonoBehaviour
                     if (idCube[i] >= cubes.Count)
                     {
                         isFall[i] = false;
-                        EndUnPopLevel();
+                        if (i == 0)
+                        {
+                            EndUnPopLevel();
+                        }
                     }
                 }
             }
