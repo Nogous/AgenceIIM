@@ -30,19 +30,23 @@ public class deathSplash : MonoBehaviour
 
             if (collisionEvents[i].normal == Vector3.forward)
             {
-                collideRot = new Vector3(90, 0, 0);
+                //collideRot = new Vector3(90, 0, 0);
+                return;
             }
             else if (collisionEvents[i].normal == Vector3.back)
             {
-                collideRot = new Vector3(-90, 0, 0);
+                //collideRot = new Vector3(-90, 0, 0);
+                return;
             }
             else if (collisionEvents[i].normal == Vector3.left)
             {
-                collideRot = new Vector3(0, 0, 90);
+                //collideRot = new Vector3(0, 0, 90);
+                return;
             }
             else if (collisionEvents[i].normal == Vector3.right)
             {
-                collideRot = new Vector3(0, 0, -90);
+                //collideRot = new Vector3(0, 0, -90);
+                return;
             }
 
             GameObject newStain = Instantiate(stain, collidePos, Quaternion.Euler(collideRot));

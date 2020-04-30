@@ -1,26 +1,16 @@
-﻿Shader "Stencil/StencilShader"
+﻿Shader "Unlit/NewUnlitShader"
 {
     Properties
     {
-		_Color("Tint", Color) = (0, 0, 0, 1)
-
         _MainTex ("Texture", 2D) = "white" {}
-		_CutOff("Alpha cutoff", Range(0,1)) = 0.5
-
-		[IntRange] _StencilRef("Stencil Reference Value", Range(0,255)) = 0
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue" = "Transparent"}
+        Tags { "RenderType"="Opaque" }
         LOD 100
 
         Pass
         {
-			Stencil{
-				Ref [_StencilRef]
-				Comp Equal
-			}
-
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -44,24 +34,23 @@
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-			fixed4 _Color;
-
-			uniform float _CutOff;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
 
-            fixed4 frag (v2f i) : COLOR
+            fixed4 frag (v2f i) : SV_Target
             {
-				float4 color = tex2D(_MainTex, float2(i.uv.xy));
-				if (color.a < _CutOff) discard;
-				color *= _Color;
-				return color;
+                // sample the texture
+                fixed4 col = tex2D(_MainTex, i.uv);
+                // apply fog
+                UNITY_APPLY_FOG(i.fogCoord, col);
+                return col;
             }
             ENDCG
         }

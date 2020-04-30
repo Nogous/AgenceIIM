@@ -394,7 +394,6 @@ public class Cube : MonoBehaviour
             if (isEnemy)
             {
                 GameManager.instance.KillEnnemy();
-                //SplashCamera.instance.CreateStains(color);
 
                 ParticleSystem particles = Instantiate(particleDeath);
 
