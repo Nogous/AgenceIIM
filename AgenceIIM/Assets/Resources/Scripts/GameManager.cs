@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
             replayer.controllers.maps.SetMapsEnabled(true, 2);
         }
         nbEnnemy = nbEnnemyInit;
+
         if (SpawnLevel.Instance != null)
         {
             SpawnLevel.Instance.StartSpawnLevel();

@@ -31,13 +31,7 @@ public class SpawnLevel : MonoBehaviour
             Debug.Log("more than 1 SpawnLevel");
             Destroy(gameObject);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //AudioManager.instance.Play("");
-
+        
         for (int i = 0; i < cubes.Count; i++)
         {
             cubePos.Add(cubes[i].transform.position);
@@ -54,6 +48,14 @@ public class SpawnLevel : MonoBehaviour
             idCube[i] = i;
             isFall[i] = true;
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //AudioManager.instance.Play("");
+
+        
     }
     private void Update()
     {
@@ -76,7 +78,9 @@ public class SpawnLevel : MonoBehaviour
     public void StartSpawnLevel()
     {
         for (int i = 0; i < cubes.Count; i++)
+        {
             cubes[i].transform.position = cubePos[i] + Vector3.up * hightSpawn;
+        }
         for (int i = 0; i < nbsimultaneousFallingObject; i++)
         {
             fLerp[i] = -((float)i / (float)nbsimultaneousFallingObject);
@@ -103,7 +107,7 @@ public class SpawnLevel : MonoBehaviour
                     if (idCube[i] >= cubes.Count)
                     {
                         isFall[i] = false;
-                        if (i == nbsimultaneousFallingObject-1)
+                        if (i == 0)
                         {
                             EndSpawnLevel();
                         }
