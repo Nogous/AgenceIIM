@@ -21,6 +21,8 @@ public class Cube : MonoBehaviour
 
     [SerializeField] private Cube associatedTnt = null;
 
+    [SerializeField] private ParticleSystem particleDeath = null;
+
     public enum dashEnum
     {
         forward,
@@ -143,6 +145,8 @@ public class Cube : MonoBehaviour
             cubesPivotDistance = cubeSize * cubesInRow / 2;
             cubesPivot = Vector3.one * cubesPivotDistance;
         }
+
+
 
         SetModeVoid();
     }
@@ -388,18 +392,25 @@ public class Cube : MonoBehaviour
             if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
 
             if (isEnemy)
-            GameManager.instance.KillEnnemy();
+            {
+                GameManager.instance.KillEnnemy();
+
+                ParticleSystem particles = Instantiate(particleDeath);
+
+                ParticleSystem.MainModule mainMod = particles.main;
+
+                mainMod.startColor = color;
+
+                particles.Play();
+            }
             //make object disappear
             gameObject.SetActive(false);
         }
         else
         {
-
-            
-
             AudioManager.instance.Play("Splash");
             AudioManager.instance.Play("ExplosionCube");
-        }    
+        }
 
         // loop 3 times to create 5x5x5 pices un x,y,z coordonate
         /*for (int i = cubesInRow; i-->0;)
