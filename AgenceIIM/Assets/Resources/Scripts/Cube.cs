@@ -19,6 +19,10 @@ public class Cube : MonoBehaviour
     public bool isTnt = false;
     public bool isTrigger = false;
 
+    [SerializeField] private float tntDelay = 1f;
+
+    private float tntTimer;
+
     [SerializeField] private Cube associatedTnt = null;
 
     [SerializeField] private ParticleSystem particleDeath = null;
@@ -383,11 +387,15 @@ public class Cube : MonoBehaviour
 
     public void Explode(bool isPlayer = false)
     {
+        if (isTnt)
+        {
+            StartCoroutine(DetonateTnt());
+            return;
+        }
+
         if (!isPlayer)
         {
-            if (!isBreakable) return;
-
-            if (isTnt) DestroySurroundings();
+            if (!isBreakable) return;        
 
             if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
 
@@ -440,6 +448,22 @@ public class Cube : MonoBehaviour
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, explosionUpward);
             }
         }
+    }
+
+    private IEnumerator DetonateTnt()
+    {
+        tntTimer += Time.deltaTime;
+
+        while(tntTimer < tntDelay)
+        {
+            yield return null;
+        }
+
+        
+
+        DestroySurroundings();
+
+        gameObject.SetActive(false);
     }
 
     private void DestroySurroundings()
