@@ -85,7 +85,11 @@ public class Player : MonoBehaviour
             initColors[i] = faceColor[i].material.color;
         }
 
-        // start move
+        SetActionNull();
+    }
+
+    public void StartPlayer()
+    {
         SetModeWait();
     }
 
@@ -129,6 +133,11 @@ public class Player : MonoBehaviour
     }
 
     #region Actions
+
+    public void SetActionNull()
+    {
+        DoAction = DoActionNull;
+    }
 
     private void DoActionNull()
     {
@@ -291,7 +300,7 @@ public class Player : MonoBehaviour
         if (deathInfo == "fall")
         {
             yield return new WaitForSeconds(GameManager.instance.fallDuration);
-            DoAction = DoActionNull;
+            SetActionNull();
         }
 
         Cube.SetActive(false);
