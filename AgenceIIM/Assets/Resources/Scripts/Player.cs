@@ -62,19 +62,15 @@ public class Player : MonoBehaviour
     bool MobileAxeVerPos = false;
     bool MobileAxeVerNeg = false;
     public float DuréeActivationAxe = 0.01f;
-<<<<<<< HEAD
     [Header("Image des controles")]
     public Image crossUI;
     public float timeNoAction;
     public AnimationCurve LUT_FadeControls;
-=======
-
     [Header("Variables ScreenShake")]
     public float TimeShakeEnnemy;
     public float MagnShakeEnnemy;
     public float TimeShakePlayer;
     public float MagnShakePlayer;
->>>>>>> 705d8f3aac7aa496300deea8ddefa431df8aaf64
 
     void Awake()
     {
@@ -108,7 +104,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         DoAction();
-<<<<<<< HEAD
         timeNoAction += Time.deltaTime;
         if(LUT_FadeControls.Evaluate(timeNoAction) >= 10)
         {
@@ -118,10 +113,6 @@ public class Player : MonoBehaviour
         {
             crossUI.color = new Color(255, 255, 255, LUT_FadeControls.Evaluate(timeNoAction));
         }
-=======
-
-       
->>>>>>> 705d8f3aac7aa496300deea8ddefa431df8aaf64
     }
 
     private void ProcessMobileInput(SwipeData data) {
