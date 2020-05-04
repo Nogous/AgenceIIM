@@ -67,6 +67,15 @@ public class CameraHandler : MonoBehaviour
     }
     public void Travel()
     {
+        GameObject crossUI = GameObject.Find("ControlIcon");
+        if (position)
+        {
+            crossUI.GetComponent<RectTransform>().localRotation = new Quaternion(90, 52, -128, 0);
+        }
+        else
+        {
+            crossUI.GetComponent<RectTransform>().localRotation = new Quaternion(90, -38, -128, 0);
+        }
         if (progress < 1.0f)
         {
             switch (position)
