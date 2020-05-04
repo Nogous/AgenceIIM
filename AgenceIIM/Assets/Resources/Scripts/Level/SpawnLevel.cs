@@ -126,10 +126,14 @@ public class SpawnLevel : MonoBehaviour
         {
             isFall[i] = true;
         }
+
+        GameManager.instance.player.StartPlayer();
     }
 
     public void StartUnPopLevel()
     {
+        GameManager.instance.player.SetActionNull();
+
         for (int i = 0; i < cubes.Count; i++)
         {
             cubePos[i] = cubes[i].transform.position;
