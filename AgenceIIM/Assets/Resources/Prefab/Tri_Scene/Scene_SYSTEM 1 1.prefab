@@ -536,6 +536,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 914792916222924062}
     m_Modifications:
+    - target: {fileID: 1382779334066711132, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: cubes.Array.size
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 3857660365893819091, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -591,10 +596,75 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3857660365893819092, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: fallSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857660365893819092, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sceneNameToLoad
+      value: Level 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3857660365893819093, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
         type: 3}
       propertyPath: m_Name
       value: GameManager 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196673271184115746, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: cameraGO
+      value: 
+      objectReference: {fileID: 1329019748114725877}
+    - target: {fileID: 7196673271184115746, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: slowFactor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sounds.Array.data[0].name
+      value: TouchSolPaint
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f983fa6bc506034ebb0a7e464160996, type: 3}
+    - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sounds.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: TouchSolNeutre
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c04023f5e93dc24181ad4d455f9498a, type: 3}
+    - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sounds.Array.data[1].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: sounds.Array.data[1].pitch
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4af750fe97d7d9b4bbf0e17223d865d8, type: 3}
