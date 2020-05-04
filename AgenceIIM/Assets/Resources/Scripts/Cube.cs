@@ -21,8 +21,6 @@ public class Cube : MonoBehaviour
 
     [SerializeField] private float tntDelay = 1f;
 
-    private float tntTimer;
-
     [SerializeField] private Cube associatedTnt = null;
 
     [SerializeField] private ParticleSystem particleDeath = null;
@@ -452,14 +450,9 @@ public class Cube : MonoBehaviour
 
     private IEnumerator DetonateTnt()
     {
-        tntTimer += Time.deltaTime;
+        yield return new WaitForSeconds(tntDelay);
 
-        while(tntTimer < tntDelay)
-        {
-            yield return null;
-        }
-
-        
+        Debug.Log("here");
 
         DestroySurroundings();
 
