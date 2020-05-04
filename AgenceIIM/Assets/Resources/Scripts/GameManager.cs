@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
             replayer.controllers.maps.SetMapsEnabled(true, 2);
         }
         nbEnnemy = nbEnnemyInit;
+
+        if (SpawnLevel.Instance != null)
+        {
+            SpawnLevel.Instance.StartSpawnLevel();
+        }
     }
 
     void Update()
@@ -109,8 +114,10 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator YouWin()
     {
+        yield return new WaitForSeconds(.2f);
+        SpawnLevel.Instance.StartUnPopLevel();
         DATASaveData();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         //ResetParty();
         SceneManager.LoadScene(sceneNameToLoad);

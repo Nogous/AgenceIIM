@@ -48,11 +48,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Color baseColor = Color.white;
     private MoveDir moveDir;
 
-    [SerializeField] private TrailRenderer trail;
+    [SerializeField] private TrailRenderer trail = null;
 
-    [SerializeField] private ParticleSystem Splash;
+    [SerializeField] private ParticleSystem Splash = null;
 
     public static event Action<Vector3> OnMove;
+
+    [SerializeField] private ParticleSystem particleDeath = null;
 
     [Header("Options Axes Mobile")]
     bool MobileAxeHorPos = false;
@@ -60,13 +62,23 @@ public class Player : MonoBehaviour
     bool MobileAxeVerPos = false;
     bool MobileAxeVerNeg = false;
     public float DuréeActivationAxe = 0.01f;
+<<<<<<< HEAD
     [Header("Image des controles")]
     public Image crossUI;
     public float timeNoAction;
     public AnimationCurve LUT_FadeControls;
+=======
+
+    [Header("Variables ScreenShake")]
+    public float TimeShakeEnnemy;
+    public float MagnShakeEnnemy;
+    public float TimeShakePlayer;
+    public float MagnShakePlayer;
+>>>>>>> 705d8f3aac7aa496300deea8ddefa431df8aaf64
 
     void Awake()
     {
+        
         SwipeDetector.OnSwipe += ProcessMobileInput;     
     }
 
@@ -84,7 +96,11 @@ public class Player : MonoBehaviour
             initColors[i] = faceColor[i].material.color;
         }
 
-        // start move
+        SetActionNull();
+    }
+
+    public void StartPlayer()
+    {
         SetModeWait();
         crossUI = GameObject.Find("ControlIcon").GetComponent<Image>();
     }
@@ -92,6 +108,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         DoAction();
+<<<<<<< HEAD
         timeNoAction += Time.deltaTime;
         if(LUT_FadeControls.Evaluate(timeNoAction) >= 10)
         {
@@ -101,6 +118,10 @@ public class Player : MonoBehaviour
         {
             crossUI.color = new Color(255, 255, 255, LUT_FadeControls.Evaluate(timeNoAction));
         }
+=======
+
+       
+>>>>>>> 705d8f3aac7aa496300deea8ddefa431df8aaf64
     }
 
     private void ProcessMobileInput(SwipeData data) {
@@ -137,6 +158,11 @@ public class Player : MonoBehaviour
 
     #region Actions
 
+    public void SetActionNull()
+    {
+        DoAction = DoActionNull;
+    }
+
     private void DoActionNull()
     {
 
@@ -144,7 +170,7 @@ public class Player : MonoBehaviour
 
     public void SetModeNull()
     {
-        DoAction = DoActionWait;
+        DoAction = DoActionNull;
     }
 
     #region Wait
@@ -287,10 +313,38 @@ public class Player : MonoBehaviour
     #endregion
 
     public void SetDeath()
-    {
-        
+    {  
         SetModeNull();
         StartCoroutine(Death());
+        DeathSplash();
+    }
+
+    private void DeathSplash()
+    {
+        Color color = Color.white;
+
+        List<Color> colors = new List<Color>();
+
+        for (int i = 0; i < faceColor.Length; i++)
+        {
+            if(faceColor[i].material.color != Color.white)
+            {
+                colors.Add(faceColor[i].material.color);
+            }            
+        }
+
+        for (int i = 0; i < colors.Count; i++)
+        {
+            color = colors[(int)UnityEngine.Random.value * colors.Count];
+        }
+
+        ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
+
+        ParticleSystem.MainModule mainMod = particles.main;
+
+        mainMod.startColor = color;
+
+        particles.Play();
     }
 
     private IEnumerator Death(string deathInfo = null)
@@ -298,15 +352,18 @@ public class Player : MonoBehaviour
         if (deathInfo == "fall")
         {
             yield return new WaitForSeconds(GameManager.instance.fallDuration);
-            DoAction = DoActionNull;
+            SetActionNull();
         }
+
+        SetModeNull();
 
         Cube.SetActive(false);
 
         if (gameObject.GetComponent<Cube>())
         {
+            CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakePlayer, MagnShakePlayer));
             gameObject.GetComponent<Cube>().Explode(true);
-
+            AudioManager.instance.Play("Death");
             yield return new WaitForSeconds(2f);
         }
 
@@ -542,13 +599,14 @@ public class Player : MonoBehaviour
                 {
                     if (tmpColor == tmpCube.enemyColor)
                     {
-                       //StartCoroutine(cameraShake.Shake(.15f, .4f));
+                       CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakeEnnemy, MagnShakeEnnemy));
                         tmpCube.Explode();
                     }
                     else
                     {
-                        DoAction = DoActionNull;
+                        SetModeNull();
                         StartCoroutine(Death());
+                        DeathSplash();
                     }
                 }
             }
@@ -579,8 +637,9 @@ public class Player : MonoBehaviour
                     {
                         if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
                         {
-                            DoAction = DoActionNull;
+                            SetModeNull();
                             StartCoroutine(Death());
+                            DeathSplash();
                         }
                     }
                     else

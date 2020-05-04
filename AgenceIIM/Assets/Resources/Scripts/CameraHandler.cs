@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class CameraHandler : MonoBehaviour
 {
@@ -107,6 +108,29 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
-    
+    public IEnumerator Shake(float duration, float magnitude)
+    {
+        Vector3 originalPos = cameraGO.transform.position;
+        Vector3 originalRot = cameraGO.transform.eulerAngles;
+
+        float elapsed = 0.0f;
+
+        cameraGO.GetComponent<LookAtConstraint>().enabled = false;
+        while (elapsed < duration)
+        {
+            float x = originalPos.x + Random.Range(-1f, 1f) * magnitude;
+            float y = originalPos.y + Random.Range(-1f, 1f) * magnitude;
+
+            cameraGO.transform.position = new Vector3(x, y, originalPos.z);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+        cameraGO.transform.position = originalPos;
+        cameraGO.transform.eulerAngles = originalRot;
+        cameraGO.GetComponent<LookAtConstraint>().enabled = true;
+        
+    }
 }
 
