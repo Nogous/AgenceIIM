@@ -7,7 +7,7 @@ public class deathSplash : MonoBehaviour
     private ParticleSystem particle;
     public List<ParticleCollisionEvent> collisionEvents;
 
-    [SerializeField] private GameObject stain;
+    [SerializeField] private GameObject stain= null;
 
     // Start is called before the first frame update
     void Start()
