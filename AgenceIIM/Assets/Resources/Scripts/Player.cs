@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
 
     public static event Action<Vector3> OnMove;
 
+    [SerializeField] private ParticleSystem particleDeath = null;
+
     [Header("Options Axes Mobile")]
     bool MobileAxeHorPos = false;
     bool MobileAxeHorNeg = false;
@@ -146,7 +148,7 @@ public class Player : MonoBehaviour
 
     public void SetModeNull()
     {
-        DoAction = DoActionWait;
+        DoAction = DoActionNull;
     }
 
     #region Wait
@@ -289,10 +291,38 @@ public class Player : MonoBehaviour
     #endregion
 
     public void SetDeath()
-    {
-        
+    {  
         SetModeNull();
         StartCoroutine(Death());
+        DeathSplash();
+    }
+
+    private void DeathSplash()
+    {
+        Color color = Color.white;
+
+        List<Color> colors = new List<Color>();
+
+        for (int i = 0; i < faceColor.Length; i++)
+        {
+            if(faceColor[i].material.color != Color.white)
+            {
+                colors.Add(faceColor[i].material.color);
+            }            
+        }
+
+        for (int i = 0; i < colors.Count; i++)
+        {
+            color = colors[(int)UnityEngine.Random.value * colors.Count];
+        }
+
+        ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
+
+        ParticleSystem.MainModule mainMod = particles.main;
+
+        mainMod.startColor = color;
+
+        particles.Play();
     }
 
     private IEnumerator Death(string deathInfo = null)
@@ -303,13 +333,15 @@ public class Player : MonoBehaviour
             SetActionNull();
         }
 
+        SetModeNull();
+
         Cube.SetActive(false);
 
         if (gameObject.GetComponent<Cube>())
         {
             CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakePlayer, MagnShakePlayer));
             gameObject.GetComponent<Cube>().Explode(true);
-
+            AudioManager.instance.Play("Death");
             yield return new WaitForSeconds(2f);
         }
 
@@ -550,8 +582,9 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-                        DoAction = DoActionNull;
+                        SetModeNull();
                         StartCoroutine(Death());
+                        DeathSplash();
                     }
                 }
             }
@@ -582,8 +615,9 @@ public class Player : MonoBehaviour
                     {
                         if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
                         {
-                            DoAction = DoActionNull;
+                            SetModeNull();
                             StartCoroutine(Death());
+                            DeathSplash();
                         }
                     }
                     else
