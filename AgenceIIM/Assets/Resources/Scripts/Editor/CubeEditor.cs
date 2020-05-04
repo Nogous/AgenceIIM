@@ -9,7 +9,7 @@ public class CubeEditor : Editor
 {
     SerializedProperty isEnemy;
     SerializedProperty isBreakable;
-    Color color;
+    Color color = Color.white;
 
     private Renderer renderer;
 

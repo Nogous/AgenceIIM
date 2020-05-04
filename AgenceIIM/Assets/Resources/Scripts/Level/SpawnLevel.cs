@@ -35,7 +35,6 @@ public class SpawnLevel : MonoBehaviour
         for (int i = 0; i < cubes.Count; i++)
         {
             cubePos.Add(cubes[i].transform.position);
-            cubes[i].transform.position = cubePos[i] + Vector3.up * hightSpawn;
         }
 
         fLerp = new float[nbsimultaneousFallingObject];
@@ -55,7 +54,10 @@ public class SpawnLevel : MonoBehaviour
     {
         //AudioManager.instance.Play("");
 
-        
+        for (int i = 0; i < cubes.Count; i++)
+        {
+            cubes[i].transform.position = cubePos[i] + Vector3.up * hightSpawn;
+        }
     }
     private void Update()
     {
@@ -129,7 +131,9 @@ public class SpawnLevel : MonoBehaviour
     public void StartUnPopLevel()
     {
         for (int i = 0; i < cubes.Count; i++)
-            cubes[i].transform.position = cubePos[i];
+        {
+            cubePos[i] = cubes[i].transform.position;
+        }
         for (int i = 0; i < nbsimultaneousFallingObject; i++)
         {
             fLerp[i] = -((float)i / (float)nbsimultaneousFallingObject);

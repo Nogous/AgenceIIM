@@ -46,9 +46,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Color baseColor = Color.white;
     private MoveDir moveDir;
 
-    [SerializeField] private TrailRenderer trail;
+    [SerializeField] private TrailRenderer trail = null;
 
-    [SerializeField] private ParticleSystem Splash;
+    [SerializeField] private ParticleSystem Splash = null;
 
     public static event Action<Vector3> OnMove;
 

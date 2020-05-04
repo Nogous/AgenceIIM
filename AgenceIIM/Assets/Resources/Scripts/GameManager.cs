@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator YouWin()
     {
+        yield return new WaitForSeconds(.2f);
         SpawnLevel.Instance.StartUnPopLevel();
         DATASaveData();
         yield return new WaitForSeconds(5f);
