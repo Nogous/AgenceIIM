@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 1165935747}
   - component: {fileID: 1165935746}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ControlIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,6 +368,14 @@ MonoBehaviour:
   particleDeath: {fileID: 7111025012622286692, guid: 87ebd932ac8e65f49b2e0f00a711cc56,
     type: 3}
   "Dur\xE9eActivationAxe": 0.01
+  crossUI: {fileID: 0}
+  timeNoAction: 0
+  LUT_FadeControls:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   TimeShakeEnnemy: 0.1
   MagnShakeEnnemy: 1
   TimeShakePlayer: 0.1
@@ -427,6 +435,7 @@ MonoBehaviour:
   isPushBlock: 0
   isTnt: 0
   isTrigger: 0
+  tntDelay: 1
   associatedTnt: {fileID: 0}
   particleDeath: {fileID: 0}
   dashOrientation: 0
