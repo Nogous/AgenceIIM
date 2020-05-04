@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 1165935747}
   - component: {fileID: 1165935746}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ControlIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,13 +259,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165935744}
-  m_LocalRotation: {x: 0.49846977, y: 0.4621983, z: -0.5300448, w: 0.5069055}
+  m_LocalRotation: {x: 0.5, y: 0.50000006, z: -0.50000006, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 3.05}
   m_LocalScale: {x: 0.06843599, y: 0.06843599, z: 0.06843599}
   m_Children: []
   m_Father: {fileID: 412535989}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 84.45801, y: -38.289, z: -127.536}
+  m_LocalEulerAnglesHint: {x: 90, y: -38, z: -128}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -245.45, y: -133.85}
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -366,6 +366,39 @@ MonoBehaviour:
   trail: {fileID: 181076388}
   Splash: {fileID: 8895707438627183602}
   "Dur\xE9eActivationAxe": 0.01
+  LUT_FadeControls:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.000091552734
+      inSlope: 0.044752195
+      outSlope: -0.000018112238
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 1
+    - serializedVersion: 3
+      time: 5.0547447
+      value: 0
+      inSlope: -0.000018112238
+      outSlope: 0.20221403
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10
+      value: 1
+      inSlope: 0.20221403
+      outSlope: -0.0003739327
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   stretchCube:
     serializedVersion: 2
     m_Curve:

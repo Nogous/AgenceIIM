@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Rewired;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 
 public class GameManager : MonoBehaviour
@@ -80,18 +81,32 @@ public class GameManager : MonoBehaviour
 
     public void DeterminPlatform()
     {
+#if UNITY_EDITOR
+        if (!(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)){
+            //Code Spécifique PC
+            GameObject.Find("Mobile_Canvas").SetActive(false);
+            GetComponent<SwipeDetector>().enabled = false;
+        }
+        else { 
+            // Code Spécifique Mobile
+            GameObject.Find("Controles_PC").SetActive(false);
+        }
+#endif
+#if UNITY_STANDALONE
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC
-            /*GameObject.Find("Mobile_Canvas").SetActive(false);
-            GetComponent<SwipeDetector>().enabled = false;*/
+            GameObject.Find("Mobile_Canvas").SetActive(false);
+            GetComponent<SwipeDetector>().enabled = false;
         }
         else
         {
             //Code Spécifique Mobile 
             GameObject.Find("Controles_PC").SetActive(false);
         }
+#endif
     }
+
     public IEnumerator YouWin()
     {
         DATASaveData();
@@ -113,7 +128,7 @@ public class GameManager : MonoBehaviour
         nbEnnemy = nbEnnemyInit;
     }
 
-    #region Cube
+#region Cube
     public void AddCube(Cube cube)
     {
         cubes.Add(cube);
@@ -127,9 +142,9 @@ public class GameManager : MonoBehaviour
             cubes[i].ResetCube();
         }
     }
-    #endregion
+#endregion
 
-    #region analitics
+#region analitics
     public void DATASaveData()
     {
         if (PlaytestAnalitic.Instance != null)
@@ -151,5 +166,5 @@ public class GameManager : MonoBehaviour
     {
         DATA_Time += Time.deltaTime;
     }
-    #endregion
+#endregion
 }
