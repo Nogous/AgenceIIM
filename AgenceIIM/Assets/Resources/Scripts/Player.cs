@@ -300,7 +300,7 @@ public class Player : MonoBehaviour
         {
             CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakePlayer, MagnShakePlayer));
             gameObject.GetComponent<Cube>().Explode(true);
-
+            AudioManager.instance.Play("Death");
             yield return new WaitForSeconds(2f);
         }
 
