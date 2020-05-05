@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7196673271184115746}
   - component: {fileID: 8955500025482504164}
   - component: {fileID: 1382779334066711132}
+  - component: {fileID: 114750172719874858}
   m_Layer: 0
   m_Name: GameManager 1
   m_TagString: Untagged
@@ -102,3 +103,17 @@ MonoBehaviour:
   fallSpeed: 4
   nbsimultaneousFallingObject: 1
   cubes: []
+--- !u!114 &114750172719874858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3857660365893819093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5569c274d4e51324aaae8e6f20d08376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectSwipeOnlyAfterRelease: 0
+  minDistanceForSwipe: 20

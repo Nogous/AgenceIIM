@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine.SceneManagement;
 
 
+
 public class GameManager : MonoBehaviour
 {
     public int idLevel;
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]private int nbEnnemy = 1;
 
     public string sceneNameToLoad;
+
+    public GameObject UI_mobile;
 
 
     private void Awake()
@@ -90,7 +93,7 @@ public class GameManager : MonoBehaviour
         if (!(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android))
         {
             //Code Spécifique PC
-            GameObject.Find("Mobile_Canvas").SetActive(false);
+            UI_mobile.SetActive(false);
             GetComponent<SwipeDetector>().enabled = false;
         }
         else
@@ -103,7 +106,7 @@ public class GameManager : MonoBehaviour
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC
-            GameObject.Find("Mobile_Canvas").SetActive(false);
+            /*GameObject.Find("Mobile_Canvas")*/UI_mobile.SetActive(false);
             GetComponent<SwipeDetector>().enabled = false;
         }
         else
