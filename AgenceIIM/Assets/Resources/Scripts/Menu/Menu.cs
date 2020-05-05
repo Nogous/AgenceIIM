@@ -21,7 +21,9 @@ public class Menu : MonoBehaviour
 
     public void OnclikSelecteLevel(int i)
     {
-        currentId += i;
+        Debug.Log("click " + i);
+        currentId = i;
+        /*
         if (currentId >= nbLevel)
         {
             currentId -= nbLevel;
@@ -30,7 +32,7 @@ public class Menu : MonoBehaviour
         {
             currentId = nbLevel + i;
         }
-
+        */
         nameLeveltext.text = "Level 1-" + currentId;
     }
 }
