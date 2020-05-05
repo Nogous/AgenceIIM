@@ -55,6 +55,7 @@ MonoBehaviour:
   nbEnnemyInit: 1
   nbEnnemy: 1
   sceneNameToLoad: 
+  UI_mobile: {fileID: 0}
   DATAnbMoveCam: 0
 --- !u!114 &7196673271184115746
 MonoBehaviour:
@@ -86,7 +87,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045af54cc9caf0c4595f77a14dc7490f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: TNT
+    clip: {fileID: 8300000, guid: a45df8647b67d6a44bf65b6fe6b85f52, type: 3}
+    source: {fileID: 0}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+  - name: TouchSolPaint
+    clip: {fileID: 8300000, guid: 2f983fa6bc506034ebb0a7e464160996, type: 3}
+    source: {fileID: 0}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+  - name: TouchSolNeutre
+    clip: {fileID: 8300000, guid: 6c04023f5e93dc24181ad4d455f9498a, type: 3}
+    source: {fileID: 0}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+  - name: AddPaint
+    clip: {fileID: 8300000, guid: 6f781351af85bb340a2a6072877fc8de, type: 3}
+    source: {fileID: 0}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+  - name: Death
+    clip: {fileID: 8300000, guid: 394ff775215ba1a4e9565a8b65229916, type: 3}
+    source: {fileID: 0}
+    volume: 0.75
+    pitch: 1
+    loop: 0
 --- !u!114 &1382779334066711132
 MonoBehaviour:
   m_ObjectHideFlags: 0
