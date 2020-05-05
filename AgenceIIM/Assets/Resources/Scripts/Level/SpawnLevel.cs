@@ -79,6 +79,11 @@ public class SpawnLevel : MonoBehaviour
 
     public void StartSpawnLevel()
     {
+        if (cubes.Count <= 0)
+        {
+            GameManager.instance.player.StartPlayer();
+        }
+
         for (int i = 0; i < cubes.Count; i++)
         {
             cubes[i].transform.position = cubePos[i] + Vector3.up * hightSpawn;
