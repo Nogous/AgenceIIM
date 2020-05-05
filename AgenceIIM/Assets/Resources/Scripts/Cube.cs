@@ -387,6 +387,7 @@ public class Cube : MonoBehaviour
     {
         if (isTnt)
         {
+            AudioManager.instance.Play("TNT");
             StartCoroutine(DetonateTnt());
             return;
         }
@@ -455,8 +456,6 @@ public class Cube : MonoBehaviour
         Debug.Log("here");
 
         DestroySurroundings();
-
-        AudioManager.instance.Play("TNT");
 
         gameObject.SetActive(false);
     }
