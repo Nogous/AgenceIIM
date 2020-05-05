@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         if (!(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android))
         {
             //Code Spécifique PC
-            UI_mobile.SetActive(false);
+            GameObject.Find("Mobile_Canvas").SetActive(false);
             GetComponent<SwipeDetector>().enabled = false;
         }
         else
@@ -101,12 +101,11 @@ public class GameManager : MonoBehaviour
             // Code Spécifique Mobile
             GameObject.Find("Controles_PC").SetActive(false);
         }
-#endif
-#if UNITY_STANDALONE
+#else
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC
-            /*GameObject.Find("Mobile_Canvas")*/UI_mobile.SetActive(false);
+            GameObject.Find("Mobile_Canvas").SetActive(false);
             GetComponent<SwipeDetector>().enabled = false;
         }
         else
