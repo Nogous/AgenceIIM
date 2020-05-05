@@ -548,7 +548,7 @@ public class Cube : MonoBehaviour
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
                 Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
-
+ 
                 tmpCube.Explode();
             }
             else if (hit.transform.parent != null)
@@ -593,7 +593,7 @@ public class Cube : MonoBehaviour
         Destroy(piece, 1.5f);
     }
 
-    #endregion
+    #endregion 
 
     private void Update()
     {
