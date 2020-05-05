@@ -24,6 +24,7 @@ public class Cube : MonoBehaviour
     [SerializeField] private Cube associatedTnt = null;
 
     [SerializeField] private ParticleSystem particleDeath = null;
+    [SerializeField] private ParticleSystem particleTnt = null;
 
     public enum dashEnum
     {
@@ -453,9 +454,10 @@ public class Cube : MonoBehaviour
     {
         yield return new WaitForSeconds(tntDelay);
 
-        Debug.Log("here");
-
         DestroySurroundings();
+
+        ParticleSystem tntExplosion = Instantiate(particleTnt, transform.position, Quaternion.identity);
+        tntExplosion.Play();
 
         gameObject.SetActive(false);
     }
