@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MoveDir
 {
@@ -60,7 +61,10 @@ public class Player : MonoBehaviour
     bool MobileAxeVerPos = false;
     bool MobileAxeVerNeg = false;
     public float DuréeActivationAxe = 0.01f;
-
+    [Header("Image des controles")]
+    public Image crossUI;
+    public float timeNoAction;
+    public AnimationCurve LUT_FadeControls;
     [Header("Variables ScreenShake")]
     public float TimeShakeEnnemy;
     public float MagnShakeEnnemy;
@@ -88,6 +92,7 @@ public class Player : MonoBehaviour
         }
 
         SetActionNull();
+        crossUI = GameObject.Find("ControlIcon").GetComponent<Image>();
     }
 
     public void StartPlayer()
@@ -98,8 +103,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         DoAction();
-
-       
+        timeNoAction += Time.deltaTime;
+        if (LUT_FadeControls.Evaluate(timeNoAction) >= 10)
+        {
+            crossUI.color = new Color(255, 255, 255, 1);
+        }
+        else
+        {
+            crossUI.color = new Color(255, 255, 255, LUT_FadeControls.Evaluate(timeNoAction));
+        }
     }
 
     private void ProcessMobileInput(SwipeData data) {
@@ -169,7 +181,7 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
-
+                timeNoAction = 0.0f;
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
@@ -182,7 +194,7 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
-
+                timeNoAction = 0.0f;
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
@@ -195,7 +207,7 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
-
+                timeNoAction = 0.0f;
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
@@ -208,7 +220,7 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;
-
+                timeNoAction = 0.0f;
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
@@ -227,7 +239,7 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.forward;
                 moveDir = MoveDir.up;
-
+                timeNoAction = 0.0f;
                 ApplyStain();
 
                 if(!TestWall())SetModeMove();
@@ -240,7 +252,7 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.back;
                 moveDir = MoveDir.down;
-
+                timeNoAction = 0.0f;
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
@@ -253,7 +265,7 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.right;
                 moveDir = MoveDir.right;
-
+                timeNoAction = 0.0f;
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();
@@ -266,7 +278,7 @@ public class Player : MonoBehaviour
             {
                 orientation = Vector3.left;
                 moveDir = MoveDir.left;
-
+                timeNoAction = 0.0f;
                 ApplyStain();
 
                 if (!TestWall()) SetModeMove();

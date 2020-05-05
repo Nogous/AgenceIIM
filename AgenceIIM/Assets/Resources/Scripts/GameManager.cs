@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Rewired;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement;
+
 
 
 public class GameManager : MonoBehaviour
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]private int nbEnnemy = 1;
 
     public string sceneNameToLoad;
+
+    public GameObject UI_mobile;
 
 
     private void Awake()
@@ -85,17 +89,32 @@ public class GameManager : MonoBehaviour
 
     public void DeterminPlatform()
     {
+#if UNITY_EDITOR
+        if (!(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android))
+        {
+            //Code Spécifique PC
+            UI_mobile.SetActive(false);
+            GetComponent<SwipeDetector>().enabled = false;
+        }
+        else
+        {
+            // Code Spécifique Mobile
+            GameObject.Find("Controles_PC").SetActive(false);
+        }
+#endif
+#if UNITY_STANDALONE
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC
-            /*GameObject.Find("Mobile_Canvas").SetActive(false);
-            GetComponent<SwipeDetector>().enabled = false;*/
+            /*GameObject.Find("Mobile_Canvas")*/UI_mobile.SetActive(false);
+            GetComponent<SwipeDetector>().enabled = false;
         }
         else
         {
             //Code Spécifique Mobile 
             GameObject.Find("Controles_PC").SetActive(false);
         }
+#endif
     }
     public IEnumerator YouWin()
     {
