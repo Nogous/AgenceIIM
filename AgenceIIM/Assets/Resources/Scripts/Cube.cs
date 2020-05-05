@@ -456,6 +456,8 @@ public class Cube : MonoBehaviour
 
         DestroySurroundings();
 
+        AudioManager.instance.Play("TNT");
+
         gameObject.SetActive(false);
     }
 

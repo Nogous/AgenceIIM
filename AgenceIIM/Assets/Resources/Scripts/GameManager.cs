@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine.SceneManagement;
 
 
+
 public class GameManager : MonoBehaviour
 {
     public int idLevel;
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]private int nbEnnemy = 1;
 
     public string sceneNameToLoad;
+
+    public GameObject UI_mobile;
 
 
     private void Awake()
@@ -98,8 +101,7 @@ public class GameManager : MonoBehaviour
             // Code Spécifique Mobile
             GameObject.Find("Controles_PC").SetActive(false);
         }
-#endif
-#if UNITY_STANDALONE
+#else
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC

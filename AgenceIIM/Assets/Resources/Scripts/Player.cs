@@ -618,9 +618,6 @@ public class Player : MonoBehaviour
 
                 if (tmpCube.colorPotencial > 0)
                 {
-
-                    Debug.Log("Color block");
-
                     Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
 
                     if (tmpColor != baseColor)

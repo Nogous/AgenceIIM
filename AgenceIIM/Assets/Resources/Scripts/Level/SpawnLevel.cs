@@ -141,7 +141,7 @@ public class SpawnLevel : MonoBehaviour
         for (int i = 0; i < nbsimultaneousFallingObject; i++)
         {
             fLerp[i] = -((float)i / (float)nbsimultaneousFallingObject);
-            idCube[i] = i;
+            idCube[i] = cubes.Count-1-i;
             isFall[i] = true;
         }
 
@@ -160,9 +160,9 @@ public class SpawnLevel : MonoBehaviour
 
                 if (fLerp[i] >= 1f)
                 {
-                    idCube[i] += nbsimultaneousFallingObject;
+                    idCube[i] -= nbsimultaneousFallingObject;
                     fLerp[i] = 0f;
-                    if (idCube[i] >= cubes.Count)
+                    if (idCube[i] < 0)
                     {
                         isFall[i] = false;
                         if (i == 0)
