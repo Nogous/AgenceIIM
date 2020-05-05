@@ -19,7 +19,11 @@ public class Cube : MonoBehaviour
     public bool isTnt = false;
     public bool isTrigger = false;
 
+    [SerializeField] private float tntDelay = 1f;
+
     [SerializeField] private Cube associatedTnt = null;
+
+    [SerializeField] private ParticleSystem particleDeath = null;
 
     public enum dashEnum
     {
@@ -143,6 +147,8 @@ public class Cube : MonoBehaviour
             cubesPivotDistance = cubeSize * cubesInRow / 2;
             cubesPivot = Vector3.one * cubesPivotDistance;
         }
+
+
 
         SetModeVoid();
     }
@@ -379,30 +385,43 @@ public class Cube : MonoBehaviour
 
     public void Explode(bool isPlayer = false)
     {
+        if (isTnt)
+        {
+            StartCoroutine(DetonateTnt());
+            return;
+        }
+
         if (!isPlayer)
         {
-            if (!isBreakable) return;
-
-            if (isTnt) DestroySurroundings();
+            if (!isBreakable) return;        
 
             if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
 
             if (isEnemy)
-            GameManager.instance.KillEnnemy();
+            {
+                GameManager.instance.KillEnnemy();
+
+                ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
+
+                ParticleSystem.MainModule mainMod = particles.main;
+
+                mainMod.startColor = color;
+
+                particles.Play();
+            }
             //make object disappear
             gameObject.SetActive(false);
         }
         else
         {
-
-            
-
             AudioManager.instance.Play("Splash");
             AudioManager.instance.Play("ExplosionCube");
-        }    
+
+            
+        }
 
         // loop 3 times to create 5x5x5 pices un x,y,z coordonate
-        for (int i = cubesInRow; i-->0;)
+        /*for (int i = cubesInRow; i-->0;)
         {
             for (int j = cubesInRow; j-- > 0;)
             {
@@ -411,7 +430,7 @@ public class Cube : MonoBehaviour
                     CreatePiece(i, j, k);
                 }
             }
-        }
+        }*/
 
         // get explosion position
         Vector3 explosionPos = transform.position;
@@ -427,6 +446,17 @@ public class Cube : MonoBehaviour
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, explosionUpward);
             }
         }
+    }
+
+    private IEnumerator DetonateTnt()
+    {
+        yield return new WaitForSeconds(tntDelay);
+
+        Debug.Log("here");
+
+        DestroySurroundings();
+
+        gameObject.SetActive(false);
     }
 
     private void DestroySurroundings()
@@ -457,7 +487,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f,0), vectors[0] + vectors[2], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0,0), vectors[0] + vectors[2], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
@@ -476,7 +506,7 @@ public class Cube : MonoBehaviour
             
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[0] + vectors[3], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[0] + vectors[3], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
@@ -494,7 +524,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[1] + vectors[2], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[2], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
@@ -512,7 +542,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), vectors[1] + vectors[3], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[3], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube>())
             {

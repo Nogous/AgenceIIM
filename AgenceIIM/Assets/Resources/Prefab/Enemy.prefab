@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2009963308243871470}
   - component: {fileID: 2009963308243871469}
   - component: {fileID: 2009963308243867921}
+  - component: {fileID: 176610706}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -105,20 +106,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  isEnemyMirror: 0
   isEnemyMoving: 0
   isCleaningBox: 0
   isDashBox: 0
   isWall: 0
+  isPushBlock: 0
   isTnt: 0
   isTrigger: 0
   associatedTnt: {fileID: 0}
+  particleDeath: {fileID: 7111025012622286692, guid: 87ebd932ac8e65f49b2e0f00a711cc56,
+    type: 3}
   dashOrientation: 0
-  enemyColor: {r: 0.015686275, g: 0.69803923, b: 0.8509804, a: 1}
+  enemyColor: {r: 0, g: 1, b: 0.99607843, a: 1}
   InvertXAxis: 0
-  InvertZAxis: 1
+  InvertZAxis: 0
   isBreakable: 1
   colorPotencial: 0
-  color: {r: 0.015686275, g: 0.69803923, b: 0.8509804, a: 1}
+  color: {r: 0, g: 1, b: 0.99607843, a: 1}
+  takeColor: {fileID: 0}
   stain: {fileID: 0}
   fadeCurve:
     serializedVersion: 2
@@ -132,6 +138,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  MoveList: 
   _moveTime: 0.2
   orientation: {x: 0, y: 0, z: 1}
   speed: 5
@@ -140,3 +147,22 @@ MonoBehaviour:
   explosionUpward: 0.04
   cubeSize: 0.2
   cubesInRow: 5
+--- !u!95 &176610706
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009963308243871468}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c1ad252767fef3408f4272decd17f08, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

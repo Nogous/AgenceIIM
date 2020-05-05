@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Rewired;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 
 
@@ -52,6 +53,11 @@ public class GameManager : MonoBehaviour
             replayer.controllers.maps.SetMapsEnabled(true, 2);
         }
         nbEnnemy = nbEnnemyInit;
+
+        if (SpawnLevel.Instance != null)
+        {
+            SpawnLevel.Instance.StartSpawnLevel();
+        }
     }
 
     void Update()
@@ -80,22 +86,39 @@ public class GameManager : MonoBehaviour
 
     public void DeterminPlatform()
     {
+#if UNITY_EDITOR
+        if (!(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android))
+        {
+            //Code Spécifique PC
+            GameObject.Find("Mobile_Canvas").SetActive(false);
+            GetComponent<SwipeDetector>().enabled = false;
+        }
+        else
+        {
+            // Code Spécifique Mobile
+            GameObject.Find("Controles_PC").SetActive(false);
+        }
+#endif
+#if UNITY_STANDALONE
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC
-            /*GameObject.Find("Mobile_Canvas").SetActive(false);
-            GetComponent<SwipeDetector>().enabled = false;*/
+            GameObject.Find("Mobile_Canvas").SetActive(false);
+            GetComponent<SwipeDetector>().enabled = false;
         }
         else
         {
             //Code Spécifique Mobile 
             GameObject.Find("Controles_PC").SetActive(false);
         }
+#endif
     }
     public IEnumerator YouWin()
     {
+        yield return new WaitForSeconds(.2f);
+        SpawnLevel.Instance.StartUnPopLevel();
         DATASaveData();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         //ResetParty();
         SceneManager.LoadScene(sceneNameToLoad);
