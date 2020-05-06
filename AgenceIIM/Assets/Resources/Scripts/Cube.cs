@@ -24,6 +24,7 @@ public class Cube : MonoBehaviour
     [SerializeField] private Cube associatedTnt = null;
 
     [SerializeField] private ParticleSystem particleDeath = null;
+    [SerializeField] private ParticleSystem particleTnt = null;
 
     public enum dashEnum
     {
@@ -387,6 +388,7 @@ public class Cube : MonoBehaviour
     {
         if (isTnt)
         {
+            AudioManager.instance.Play("TNT");
             StartCoroutine(DetonateTnt());
             return;
         }
@@ -452,11 +454,10 @@ public class Cube : MonoBehaviour
     {
         yield return new WaitForSeconds(tntDelay);
 
-        Debug.Log("here");
-
         DestroySurroundings();
 
-        AudioManager.instance.Play("TNT");
+        ParticleSystem tntExplosion = Instantiate(particleTnt, transform.position, Quaternion.identity);
+        tntExplosion.Play();
 
         gameObject.SetActive(false);
     }
@@ -549,7 +550,7 @@ public class Cube : MonoBehaviour
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
                 Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
-
+ 
                 tmpCube.Explode();
             }
             else if (hit.transform.parent != null)
@@ -594,7 +595,7 @@ public class Cube : MonoBehaviour
         Destroy(piece, 1.5f);
     }
 
-    #endregion
+    #endregion 
 
     private void Update()
     {
