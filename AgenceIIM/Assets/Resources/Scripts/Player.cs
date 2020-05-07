@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     public static event Action<Vector3> OnMove;
 
     [SerializeField] private ParticleSystem particleDeath = null;
+    [SerializeField] private ParticleSystem particleSmoke = null;
 
     [Header("Options Axes Mobile")]
     bool MobileAxeHorPos = false;
@@ -637,6 +638,12 @@ public class Player : MonoBehaviour
                 else if (tmpCube.isCleaningBox)
                 {
                     faceColor[1].GetComponent<Renderer>().material.color = baseColor;
+                }
+                else if(tmpCube.colorPotencial == 0 && faceColor[1].GetComponent<Renderer>().material.color == Color.white)
+                {
+                    ParticleSystem particles = Instantiate(particleSmoke, transform.position, Quaternion.identity);
+
+                    particles.Play();
                 }
 
                 else if (tmpCube.isDashBox)
