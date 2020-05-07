@@ -71,12 +71,6 @@ public class Player : MonoBehaviour
     public float TimeShakePlayer;
     public float MagnShakePlayer;
 
-    void Awake()
-    {
-        
-        SwipeDetector.OnSwipe += ProcessMobileInput;     
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -93,11 +87,17 @@ public class Player : MonoBehaviour
 
         SetActionNull();
         crossUI = GameObject.Find("ControlIcon").GetComponent<Image>();
+        SwipeDetector.OnSwipe += ProcessMobileInput;
     }
 
     public void StartPlayer()
     {
         SetModeWait();
+    }
+
+    void OnDestroy()
+    {
+        SwipeDetector.OnSwipe -= ProcessMobileInput;
     }
 
     void Update()
