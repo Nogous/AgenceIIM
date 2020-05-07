@@ -177,4 +177,12 @@ public class GameManager : MonoBehaviour
         DATA_Time += Time.deltaTime;
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
 }
