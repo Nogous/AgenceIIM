@@ -623,7 +623,7 @@ public class Player : MonoBehaviour
 
                     if (tmpColor != baseColor)
                     {
-                        if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
+                        if (faceColor[1].GetComponent<Renderer>().material.color != tmpCube.color)
                         {
                             SetModeNull();
                             StartCoroutine(Death());
@@ -632,7 +632,9 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-                        faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                        faceColor[1].GetComponent<Renderer>().material.color = tmpCube.color;
+                        tmpCube.colorPotencial -= 25;
+                        hit.transform.gameObject.GetComponent<Renderer>().material.color = Color.Lerp(hit.transform.gameObject.GetComponent<Renderer>().material.color, Color.white, 1-(float)tmpCube.colorPotencial/100);
                     }
                 }
                 else if (tmpCube.isCleaningBox)

@@ -161,6 +161,8 @@ public class Cube : MonoBehaviour
         colorPotencial = initColorPotencial;
         color = initColor;
 
+        if(!GetComponent<Player>())GetComponent<Renderer>().material.color = color;
+
         CurrentMove = 0;
 
         SetModeVoid();
