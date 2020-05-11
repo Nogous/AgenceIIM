@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject UI_mobile;
 
+    // color Rainbow
+    public Material rainbowMaterial;
+    public float colorSpeed = 1f;
+    private float rainbowColor = 0f;
 
     private void Awake()
     {
@@ -75,6 +79,14 @@ public class GameManager : MonoBehaviour
         {
             Application.Quit();
         }
+
+        UpdateColorRainbow();
+    }
+
+    public void UpdateColorRainbow()
+    {
+        rainbowColor = Time.time * colorSpeed %1;
+        rainbowMaterial.color = Color.HSVToRGB(rainbowColor,1,1);
     }
 
     public void KillEnnemy()
@@ -177,4 +189,12 @@ public class GameManager : MonoBehaviour
         DATA_Time += Time.deltaTime;
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
 }
