@@ -643,7 +643,9 @@ public class Player : MonoBehaviour
                 }
                 else if(tmpCube.colorPotencial == 0 && faceColor[1].GetComponent<Renderer>().material.color == Color.white)
                 {
-                    ParticleSystem particles = Instantiate(particleSmoke, transform.position, Quaternion.identity);
+                    Vector3 offset = new Vector3(0, -0.40f, 0);
+
+                    ParticleSystem particles = Instantiate(particleSmoke, transform.position + offset, Quaternion.Euler(90, 0, 0));
 
                     particles.Play();
                 }
