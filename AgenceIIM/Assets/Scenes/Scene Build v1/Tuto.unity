@@ -903,7 +903,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 120
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -2867,6 +2867,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: enemyColor.r
+      value: 0.4392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: enemyColor.g
+      value: 0.9137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: enemyColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: color.r
+      value: 0.4392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: color.g
+      value: 0.9137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009963308243867921, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: color.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2009963308243871468, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
       propertyPath: m_Name
@@ -3296,6 +3326,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731223298210963789, guid: 796617cb6c0ba7b4b85489bc5a4d5486,
+        type: 3}
+      propertyPath: enemyColor.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 796617cb6c0ba7b4b85489bc5a4d5486, type: 3}
