@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public GameObject UI_mobile;
 
     // color Rainbow
-    public Material rainbowMaterial;
+    public Material rainbowMaterial = null;
     public float colorSpeed = 1f;
     private float rainbowColor = 0f;
 
@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateColorRainbow()
     {
+        if (rainbowMaterial == null) return;
+
         rainbowColor = Time.time * colorSpeed %1;
         rainbowMaterial.color = Color.HSVToRGB(rainbowColor,1,1);
     }
