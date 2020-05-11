@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -81,7 +82,6 @@ public class SpawnLevel : MonoBehaviour
     {
         if (cubes.Count <= 0)
         {
-            Debug.Log("endSpawn");
             GameManager.instance.player.StartPlayer();
             return;
         }
@@ -98,6 +98,12 @@ public class SpawnLevel : MonoBehaviour
         }
         isSpawnConpleat = false;
         isUnPopConpleat = true;
+    }
+
+    IEnumerator InASecond(Action function)
+    {
+        yield return new WaitForSeconds(1f);
+        function();
     }
 
     private void UpdateFallLevel()

@@ -71,6 +71,11 @@ public class Player : MonoBehaviour
     public float TimeShakePlayer;
     public float MagnShakePlayer;
 
+    private void Awake()
+    {
+        SetActionNull();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,7 +90,6 @@ public class Player : MonoBehaviour
             initColors[i] = faceColor[i].material.color;
         }
 
-        SetActionNull();
         crossUI = GameObject.Find("ControlIcon").GetComponent<Image>();
         SwipeDetector.OnSwipe += ProcessMobileInput;
     }
