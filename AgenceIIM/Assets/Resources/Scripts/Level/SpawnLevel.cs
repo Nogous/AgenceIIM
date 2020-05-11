@@ -81,7 +81,9 @@ public class SpawnLevel : MonoBehaviour
     {
         if (cubes.Count <= 0)
         {
+            Debug.Log("endSpawn");
             GameManager.instance.player.StartPlayer();
+            return;
         }
 
         for (int i = 0; i < cubes.Count; i++)
