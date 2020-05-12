@@ -796,7 +796,7 @@ public class Cube : MonoBehaviour
                 }
                 else if (tmpCube.isTeleport)
                 {
-                    gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 2f, teleportDestination.transform.position.z);
+                    gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
                 }
 
             }
