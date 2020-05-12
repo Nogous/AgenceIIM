@@ -669,6 +669,10 @@ public class Player : MonoBehaviour
                 {
                     tmpCube.ActivateTnt();
                 }
+                else if (tmpCube.isTeleport)
+                {
+                    gameObject.transform.position = new Vector3(tmpCube.teleportDestination.transform.position.x, tmpCube.teleportDestination.transform.position.y + 1f, tmpCube.teleportDestination.transform.position.z);
+                }
 
             }
 

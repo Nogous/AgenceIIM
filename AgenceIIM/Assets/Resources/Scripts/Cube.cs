@@ -758,7 +758,6 @@ public class Cube : MonoBehaviour
     private void TestTile()
     {
         // test tile d'arriver
-
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
 
