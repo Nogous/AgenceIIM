@@ -34,7 +34,7 @@ public class LevelEditor : Editor
 
         tabs = new string[] { "Player", "Level 0", "Level 1", "Option" };
 
-        OnClickLoadLevel();
+        OnClickLoadLevel(true);
     }
 
     public override void OnInspectorGUI()
@@ -359,7 +359,7 @@ public class LevelEditor : Editor
                 {
                     if (GUILayout.Button("Load"))
                     {
-                        OnClickLoadLevel();
+                        OnClickLoadLevel(false);
                     }
                     if (GUILayout.Button("Save"))
                     {
@@ -389,18 +389,22 @@ public class LevelEditor : Editor
     }
 
 
-    public void OnClickLoadLevel()
+    public void OnClickLoadLevel(bool _isEditor)
     {
-        if (level.transform.Find("CubeBox"))
+        if (level.cubeBox != null)
         {
-            Transform[] childs = level.transform.Find("CubeBox").gameObject.GetComponentsInChildren<Transform>();
-
-            foreach (Transform item in childs)
+            DestroyImmediate(level.cubeBox.gameObject);
+        }
+        else
+        {
+            if (level.transform.Find("CubeBox"))
             {
-                if(item.gameObject.name!= "CubeBox")
-                DestroyImmediate(item.gameObject);
+                DestroyImmediate(level.transform.Find("CubeBox").gameObject);
             }
         }
+
+        level.cubeBox = new GameObject("CubeBox").transform;
+        level.cubeBox.parent = level.transform;
 
         // destruction de tout les cubes
         for (int i = level.cubes.Count; i-- > 0;)
@@ -411,18 +415,28 @@ public class LevelEditor : Editor
         }
 
         // recuperation des data
-        level.cubeDatas = SaveSystem.LoadLevel(level.nameLevel).cubeDatas;
+        if (_isEditor)
+        {
+            level.cubeDatas = SaveSystem.LoadLevel("saveEditor").cubeDatas;
+        }
+        else
+        {
+            level.cubeDatas = SaveSystem.LoadLevel(level.nameLevel).cubeDatas;
+        }
 
         for (int j = level.cubeDatas.Count; j-- > 0;)
         {
             CubeData cd = level.cubeDatas[j];
             level.SetupCube(cd.cubeType, new Vector3(cd.posX, cd.posY, cd.posZ));
         }
+
+        SaveSystem.SaveLevel(level, "saveEditor");
     }
 
     public void OnClickSaveLevel()
     {
         SaveSystem.SaveLevel(level);
+        SaveSystem.SaveLevel(level, "saveEditor");
     }
 
     public void OnClickReseLevelt()
@@ -436,7 +450,7 @@ public class LevelEditor : Editor
             DestroyImmediate(obj);
         }
 
-        //SaveSystem.SaveLevel(level);
+        SaveSystem.SaveLevel(level, "saveEditor");
     }
 
     public void OnClickSpawnCube(CubeType cubeType, Vector3 pos)
@@ -458,5 +472,7 @@ public class LevelEditor : Editor
         level.cubeDatas.Add(cubeData);
 
         level.SetupCube(cubeType, pos);
+
+        SaveSystem.SaveLevel(level, "saveEditor");
     }
 }
