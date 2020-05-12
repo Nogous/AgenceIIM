@@ -723,6 +723,7 @@ public class Cube : MonoBehaviour
 
         if (_elapsedTime >= _moveTime)
         {
+            Debug.Log("plomp2");
             // end move
             SetModeVoid();
 
@@ -758,7 +759,7 @@ public class Cube : MonoBehaviour
     private void TestTile()
     {
         // test tile d'arriver
-
+        Debug.Log("plomp");
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
 
