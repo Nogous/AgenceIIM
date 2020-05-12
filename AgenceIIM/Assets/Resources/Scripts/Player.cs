@@ -72,6 +72,11 @@ public class Player : MonoBehaviour
     public float TimeShakePlayer;
     public float MagnShakePlayer;
 
+    private void Awake()
+    {
+        SetActionNull();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,7 +91,6 @@ public class Player : MonoBehaviour
             initColors[i] = faceColor[i].material.color;
         }
 
-        SetActionNull();
         crossUI = GameObject.Find("ControlIcon").GetComponent<Image>();
         SwipeDetector.OnSwipe += ProcessMobileInput;
     }
@@ -675,6 +679,10 @@ public class Player : MonoBehaviour
                 else if (tmpCube.isTrigger)
                 {
                     tmpCube.ActivateTnt();
+                }
+                else if (tmpCube.isTeleport)
+                {
+                    gameObject.transform.position = new Vector3(tmpCube.teleportDestination.transform.position.x, tmpCube.teleportDestination.transform.position.y + 1f, tmpCube.teleportDestination.transform.position.z);
                 }
 
             }
