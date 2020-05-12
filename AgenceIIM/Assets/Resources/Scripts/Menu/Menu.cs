@@ -75,7 +75,6 @@ public class Menu : MonoBehaviour
 
     public void OnclikSelecteLevel(int i)
     {
-        Debug.Log("click " + i);
         currentId = i;
         /*
         if (currentId >= nbLevel)

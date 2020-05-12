@@ -19,6 +19,9 @@ public class Cube : MonoBehaviour
     public bool isTnt = false;
     public bool isTrigger = false;
 
+    public bool isTeleport = false;
+    public GameObject teleportDestination = null;
+
     [SerializeField] private float tntDelay = 1f;
 
     [SerializeField] private Cube associatedTnt = null;
@@ -177,7 +180,7 @@ public class Cube : MonoBehaviour
     Peinture,
     Cleaner,
     ArcEnCiel,
-    Téléporteur,
+    Teleporter,
     Dash,
     Glissant,
     Mur,
@@ -235,6 +238,19 @@ public class Cube : MonoBehaviour
         isTnt = false;
         isTrigger = false;
 
+        gameObject.GetComponent<Renderer>().sharedMaterial = mat;
+    }
+
+    public void SetTeleporter(Material mat)
+    {
+        isEnemy = false;
+        isEnemyMirror = false;
+        isCleaningBox = false;
+        isDashBox = false;
+        isWall = false;
+        isTnt = false;
+        isTrigger = false;
+        isTeleport = true;
         gameObject.GetComponent<Renderer>().sharedMaterial = mat;
     }
 
@@ -742,7 +758,6 @@ public class Cube : MonoBehaviour
     private void TestTile()
     {
         // test tile d'arriver
-
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
 
@@ -777,6 +792,10 @@ public class Cube : MonoBehaviour
                 else if (tmpCube.isTrigger)
                 {
                     tmpCube.ActivateTnt();
+                }
+                else if (tmpCube.isTeleport)
+                {
+                    gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
                 }
 
             }
