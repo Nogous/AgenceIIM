@@ -138,7 +138,7 @@ public class LevelEditor : Editor
                                                 buttonStyle.normal.background = level.texture2DCubeArcEnCiel;
                                             }
                                             break;
-                                        case CubeType.Téléporteur:
+                                        case CubeType.Teleporteur:
                                             if (level.texture2DCubeTeleporteur != null)
                                             {
                                                 buttonStyle.normal.background = level.texture2DCubeTeleporteur;
@@ -278,7 +278,7 @@ public class LevelEditor : Editor
                                                 buttonStyle.normal.background = level.texture2DCubeArcEnCiel;
                                             }
                                             break;
-                                        case CubeType.Téléporteur:
+                                        case CubeType.Teleporteur:
                                             if (level.texture2DCubeTeleporteur != null)
                                             {
                                                 buttonStyle.normal.background = level.texture2DCubeTeleporteur;

@@ -12,7 +12,7 @@ public enum MoveDir
     left,
 }
 
-public class Player : MonoBehaviour
+public class Player_obselete : MonoBehaviour
 {
     [Header("Movement Settings")]
 
@@ -353,10 +353,10 @@ public class Player : MonoBehaviour
 
         Cube.SetActive(false);
 
-        if (gameObject.GetComponent<Cube>())
+        if (gameObject.GetComponent<Cube_obselete>())
         {
             CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakePlayer, MagnShakePlayer));
-            gameObject.GetComponent<Cube>().Explode(true);
+            gameObject.GetComponent<Cube_obselete>().Explode(true);
             AudioManager.instance.Play("Death");
             yield return new WaitForSeconds(2f);
         }
@@ -546,9 +546,9 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
                 tmpCube.Explode();
 
                 tmpColor = tmpCube.GetColor();
@@ -586,9 +586,9 @@ public class Player : MonoBehaviour
         //Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
                 if (tmpCube.isEnemy)
                 {
                     if (tmpColor == tmpCube.enemyColor)
@@ -616,9 +616,9 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
 
                 if (tmpCube.colorPotencial > 0)
                 {
@@ -692,9 +692,9 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
 
                 if (tmpCube.isWall) return true;
 
@@ -745,9 +745,9 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.GetComponent<Cube>() != null && hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
+            if (hit.transform.GetComponent<Cube_obselete>() != null && hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
-                hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
+                //hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
 
             }
         }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube : MonoBehaviour
+public class Cube_obselete : MonoBehaviour
 {
     [Header("General Settings")]
 
@@ -24,7 +24,7 @@ public class Cube : MonoBehaviour
 
     [SerializeField] private float tntDelay = 1f;
 
-    [SerializeField] private Cube associatedTnt = null;
+    [SerializeField] private Cube_obselete associatedTnt = null;
 
     [SerializeField] private ParticleSystem particleDeath = null;
     [SerializeField] private ParticleSystem particleTnt = null;
@@ -144,7 +144,7 @@ public class Cube : MonoBehaviour
             }
         }
 
-        if (isEnemyMirror || isEnemyMoving) Player.OnMove += SetModeMove;
+        if (isEnemyMirror || isEnemyMoving) Player_obselete.OnMove += SetModeMove;
 
         if (isBreakable)
         {
@@ -335,55 +335,7 @@ public class Cube : MonoBehaviour
 
     #region Effects
 
-    public void ActivateStain(Color tint)
-    {
-        if (stain == null) return;
-        if (colorPotencial == 0 && !isEnemy)
-        {
-            stain.SetActive(true);
-            stain.GetComponent<Renderer>().material.color = tint;
-
-            stain.transform.localScale = stainScale;
-            elapsedTime = 0;
-
-            StopCoroutine(StainRemove());
-            StartCoroutine(StainRemove());
-        }
-    }
-
-    private IEnumerator StainRemove()
-    {
-        Color colorFade = stain.GetComponent<Renderer>().material.color;
-        Vector3 sizeShrink = stainScale;
-
-        while (stain.GetComponent<Renderer>().material.color.a > 0)
-        {           
-            elapsedTime += Time.deltaTime;
-
-            colorFade.a = fadeCurve.Evaluate(elapsedTime);
-            sizeShrink.x = shrinkCurve.Evaluate(elapsedTime);
-            sizeShrink.y = shrinkCurve.Evaluate(elapsedTime);
-
-            stain.transform.localScale = sizeShrink;
-            stain.GetComponent<Renderer>().material.color = colorFade;
-
-            yield return null;
-        }
-
-        StainReset();
-    }
-
-    private void StainReset()
-    {
-        StopCoroutine(StainRemove());
-
-        stain.GetComponent<Renderer>().material.color = stainColor;
-        stain.transform.localScale = stainScale;
-        elapsedTime = 0;
-
-        stain.SetActive(false);
-    }
-
+    
     #endregion
 
     float cubesPivotDistance;
@@ -413,7 +365,7 @@ public class Cube : MonoBehaviour
         {
             if (!isBreakable) return;        
 
-            if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
+            if (isEnemyMirror || isEnemyMoving) Player_obselete.OnMove -= SetModeMove;
 
             if (isEnemy)
             {
@@ -489,17 +441,17 @@ public class Cube : MonoBehaviour
             if (Physics.Raycast(transform.position, vectors[i], out hit, 1f))
             { 
 
-                if (hit.transform.gameObject.GetComponent<Cube>())
+                if (hit.transform.gameObject.GetComponent<Cube_obselete>())
                 {
-                    Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                    Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
 
                     tmpCube.Explode();
                 }
                 else if (hit.transform.parent != null)
                 {
-                    if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                    if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
                     {
-                        hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                        hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
                         isPlayerDestroyed = true;
                     }
                 }
@@ -508,17 +460,17 @@ public class Cube : MonoBehaviour
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0,0), vectors[0] + vectors[2], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
 
                 tmpCube.Explode();
             }
             else if(hit.transform.parent != null)
             {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
                 {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
                     isPlayerDestroyed = true;
                 }
             }
@@ -527,17 +479,17 @@ public class Cube : MonoBehaviour
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[0] + vectors[3], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
 
                 tmpCube.Explode();
             }
             else if (hit.transform.parent != null)
             {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
                 {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
                     isPlayerDestroyed = true;
                 }
             }
@@ -545,17 +497,17 @@ public class Cube : MonoBehaviour
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[2], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
 
                 tmpCube.Explode();
             }
             else if (hit.transform.parent != null)
             {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
                 {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
                     isPlayerDestroyed = true;
                 }
             }
@@ -563,17 +515,17 @@ public class Cube : MonoBehaviour
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[3], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
  
                 tmpCube.Explode();
             }
             else if (hit.transform.parent != null)
             {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
                 {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
                     isPlayerDestroyed = true;
                 }
             }
@@ -763,9 +715,9 @@ public class Cube : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();               
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();               
 
                 if (tmpCube.isDashBox)
                 {
@@ -895,7 +847,7 @@ public class Cube : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 1f))
         {
 
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
                 return true;
             }

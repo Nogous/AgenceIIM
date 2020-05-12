@@ -2,26 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public enum CubeType
-{
-    NoCube,
-    Base,
-    EnnemiStatique,
-    EnnemiPattern,
-    EnnemiMiroir,
-    Peinture,
-    Cleaner,
-    ArcEnCiel,
-    Téléporteur,
-    Dash,
-    Glissant,
-    Mur,
-    TNT,
-    Interrupteur,
-    Destructible,
-    BlocMouvant,
-}
+
 
 public class Level : MonoBehaviour
 {
@@ -110,7 +91,7 @@ public class Level : MonoBehaviour
 
         obj.transform.position = pos;
 
-        Cube cubeObj = obj.GetComponent<Cube>();
+        Cube_obselete cubeObj = obj.GetComponent<Cube_obselete>();
         if (cubeObj != null)
         {
             switch (_cubeType)
@@ -146,7 +127,7 @@ public class Level : MonoBehaviour
                     cubeObj.gameObject.SetActive(true);
                     cubeObj.SetCubeBase(matCubeArcEnCiel);
                     break;
-                case CubeType.Téléporteur:
+                case CubeType.Teleporteur:
                     cubeObj.gameObject.SetActive(true);
                     cubeObj.SetCubeBase(matCubeTeleporteur);
                     break;

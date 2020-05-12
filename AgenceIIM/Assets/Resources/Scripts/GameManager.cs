@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public Rewired.Player replayer;
     public bool useWASDLayout;
-    public Player player = null;
-    private List<Cube> cubes = new List<Cube>();
+    public Player_obselete player = null;
+    private List<Cube_obselete> cubes = new List<Cube_obselete>();
     public float fallDuration = 1f;
     public float fallSpeed = 1f;
     public int nbEnnemyInit = 1;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         if (player == null)
         {
-            player = FindObjectOfType<Player>();
+            player = FindObjectOfType<Player_obselete>();
         }
         replayer = ReInput.players.GetPlayer(0);
         player.replayer = replayer;
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
     }
 
     #region Cube
-    public void AddCube(Cube cube)
+    public void AddCube(Cube_obselete cube)
     {
         cubes.Add(cube);
     }
