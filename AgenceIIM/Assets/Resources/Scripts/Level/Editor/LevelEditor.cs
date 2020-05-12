@@ -393,18 +393,22 @@ public class LevelEditor : Editor
     {
         if (level.cubeBox != null)
         {
-            DestroyImmediate(level.cubeBox.gameObject);
+            for (int i = level.cubeBox.childCount; i-->0;)
+            {
+                DestroyImmediate(level.cubeBox.GetChild(0).gameObject);
+            }
         }
         else
         {
             if (level.transform.Find("CubeBox"))
             {
-                DestroyImmediate(level.transform.Find("CubeBox").gameObject);
+                level.cubeBox = level.transform.Find("CubeBox");
+            }
+            else
+            {
+                Debug.Log("cree un gameObject vide du nom de \"CubeBox\"");
             }
         }
-
-        level.cubeBox = new GameObject("CubeBox").transform;
-        level.cubeBox.parent = level.transform;
 
         // destruction de tout les cubes
         for (int i = level.cubes.Count; i-- > 0;)

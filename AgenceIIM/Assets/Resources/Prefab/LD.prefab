@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &689716581960893547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4926741223507930239}
+  m_Layer: 0
+  m_Name: CubeBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4926741223507930239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689716581960893547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1504058120207689847}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1504058120207689849
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,6 +59,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 716928258430864980}
+  - {fileID: 4926741223507930239}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,10 +76,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameLevel: 
-  levelSize: {x: 15, y: 15}
+  levelSize: {x: 5, y: 5}
   cubeDatas: []
   cubes: []
-  cubeType: 1
+  cubeType: 2
   cubePrefab: {fileID: 7993145178237273369, guid: 2abbe9e3a2e70334f8e05a0c37760f7a,
     type: 3}
   player: {fileID: 716928258430864982}
