@@ -152,7 +152,7 @@ public class Cube : MonoBehaviour
             cubesPivot = Vector3.one * cubesPivotDistance;
         }
 
-
+        
 
         SetModeVoid();
     }
