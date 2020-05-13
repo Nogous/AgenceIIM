@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44400418, g: 0.49339974, b: 0.57286036, a: 1}
+  m_IndirectSpecularColor: {r: 0.4440045, g: 0.49340063, b: 0.5728611, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1185,7 +1185,7 @@ PrefabInstance:
     - target: {fileID: 4895571998648494919, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 85.8009
+      value: 85.801025
       objectReference: {fileID: 0}
     - target: {fileID: 7988141294472844502, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
         type: 3}
@@ -3106,6 +3106,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[0].inSlope
+      value: -0.82073337
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[0].outSlope
+      value: -0.82073337
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[1].value
+      value: 0.59300476
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[1].inSlope
+      value: -0.003723532
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[1].outSlope
+      value: -0.003723532
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[2].inSlope
+      value: 0.8132863
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[2].outSlope
+      value: 0.8132863
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[1].time
+      value: 0.49589217
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[2].time
+      value: 1.0163736
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519804548909918939, guid: 842e2c31424e86c4789bb65fd935067e,
+        type: 3}
+      propertyPath: stretchCube.m_Curve.Array.data[2].value
+      value: 1.0163052
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 842e2c31424e86c4789bb65fd935067e, type: 3}
