@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +11,61 @@ public enum MoveDirection
     left,
 }
 
+public enum moveEnum
+{
+    forward,
+    backward,
+    right,
+    left,
+};
+
 public class CubeMovable : Cube
 {
+    public List<moveEnum> MoveList = new List<moveEnum>();
+    protected int CurrentMove = 0;
+    protected bool revertMove = false;
+
+    [SerializeField] protected float _moveTime = 0.2f;
+
+    protected float _elapsedTime = 0;
+    public Rewired.Player replayer;
+    protected Vector3 direction;
+    public Vector3 orientation = Vector3.forward;
+    protected Vector3 axis = Vector3.right;
+
+    protected Quaternion addedRotation;
+    protected Vector3 previousPos;
+    protected Vector3 previousOr;
+    protected Quaternion previousRot;
+
+    protected Quaternion zeroRot = new Quaternion(0, 0, 0, 0);
+
+    protected static float diagonal = 1 * Mathf.Sqrt(2);
+    protected float offset = (diagonal - 1) / 2;
+    public float speed = 5;
+
+    protected List<Vector3> vectors = new List<Vector3>();
+
+    public GameObject teleportDestination = null;
+
+    protected Action DoAction;
+
+    private void Awake()
+    {
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+
+        vectors.Add(Vector3.forward);
+        vectors.Add(Vector3.back);
+        vectors.Add(Vector3.left);
+        vectors.Add(Vector3.right);
+    }
+
+    private void Start()
+    {
+        GameManager.instance.AddCube(this);
+    }
+
     //Mouvement du cube
     public void MoveCube(){
 
@@ -20,7 +74,8 @@ public class CubeMovable : Cube
         Paramètres : 
     */
     public void StartMoveCheckTile(){
-
+        
+        
     }
     /* Tests à la fin du déplacement
         Paramètres : 
@@ -38,10 +93,75 @@ public class CubeMovable : Cube
         Paramètres : cubeLanding (enum CubeType, cube sur lequel le bloc mouvant atteri) 
     */
     virtual public void EndMoveBehavior(){
+        transform.eulerAngles = Vector3.zero;
+
+        TestTile();
+    }
+
+    protected void SetModeVoid()
+    {
+        DoAction = DoActionVoid;
+    }
+
+    protected void DoActionVoid()
+    {
 
     }
-    
-    
+
+    virtual public void SetModeMove(Vector3 vector)
+    {
+
+    }
+
+    protected void DoActionMove()
+    {
+        _elapsedTime += Time.deltaTime;
+
+        float ratio = _elapsedTime / _moveTime;
+
+        transform.position = Vector3.Lerp(previousPos, direction, ratio);
+
+        transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
+
+        transform.position = new Vector3(transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), transform.position.z);
+
+        if (_elapsedTime >= _moveTime)
+        {
+            EndMoveBehavior();
+        }
+    }
+
+    protected void RotationCheck()
+    {
+        if (orientation == Vector3.forward) axis = Vector3.right;
+        else if (orientation == Vector3.right) axis = Vector3.back;
+        else if (orientation == Vector3.back) axis = Vector3.left;
+        else axis = Vector3.forward;
+    }
+
+    virtual public void SetModeDash()
+    {
+        RotationCheck();
+
+        _elapsedTime = 0;
+
+        direction = transform.position + orientation * 2;
+        previousRot = transform.rotation;
+        addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
+        previousPos = transform.position;
+
+        DoAction = DoActionMove;
+    }
+
+    protected bool TestWall()
+    {
+        return false;
+    }
+
+    virtual public void DoActionFall()
+    {
+        transform.position += Vector3.down * Time.deltaTime * GameManager.instance.fallSpeed;
+    }
 }
 
 
