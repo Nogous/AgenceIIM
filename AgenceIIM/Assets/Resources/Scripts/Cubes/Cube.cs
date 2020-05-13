@@ -28,4 +28,20 @@ public class Cube : MonoBehaviour
     public Vector3 initialPosition;
     public Quaternion initialRotation;
 
+    private void Awake()
+    {
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+    }
+
+    public void ResetCube()
+    {
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+    }
+
+    public CubeType GetCubeType()
+    {
+        return cubeType;
+    }
 }
