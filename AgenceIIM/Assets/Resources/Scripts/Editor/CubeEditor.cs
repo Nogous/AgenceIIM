@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Cube_obselete))]
+[CustomEditor(typeof(Cube))]
 [CanEditMultipleObjects]
 public class CubeEditor : Editor
 {
@@ -13,7 +13,7 @@ public class CubeEditor : Editor
 
     private Renderer renderer;
 
-    Cube_obselete myCube;
+    Cube myCube;
 
     void OnEnable()
     {
@@ -32,7 +32,7 @@ public class CubeEditor : Editor
         //EditorGUILayout.PropertyField(isBreakable, new GUIContent("IsBreakable"));
         EditorGUILayout.ColorField(color);
 
-        myCube = (Cube_obselete)target;
+        myCube = (Cube)target;
 
         if (GUILayout.Button("Set Cube Base"))
         {

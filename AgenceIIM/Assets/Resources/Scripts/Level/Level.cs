@@ -91,7 +91,7 @@ public class Level : MonoBehaviour
 
         obj.transform.position = pos;
 
-        Cube_obselete cubeObj = obj.GetComponent<Cube_obselete>();
+        Cube cubeObj = obj.GetComponent<Cube>();
         if (cubeObj != null)
         {
             switch (_cubeType)
@@ -127,7 +127,7 @@ public class Level : MonoBehaviour
                     cubeObj.gameObject.SetActive(true);
                     cubeObj.SetCubeBase(matCubeArcEnCiel);
                     break;
-                case CubeType.Teleporteur:
+                case CubeType.Teleporter:
                     cubeObj.gameObject.SetActive(true);
                     cubeObj.SetCubeBase(matCubeTeleporteur);
                     break;
@@ -147,7 +147,7 @@ public class Level : MonoBehaviour
                     cubeObj.gameObject.SetActive(true);
                     cubeObj.SetCubeBase(matCubeTNT);
                     break;
-                case CubeType.Interrupteur:
+                case CubeType.Detonator:
                     cubeObj.gameObject.SetActive(true);
                     cubeObj.SetCubeBase(matCubeInterrupteur);
                     break;
