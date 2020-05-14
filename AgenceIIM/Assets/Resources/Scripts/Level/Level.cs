@@ -111,7 +111,7 @@ public class Level : MonoBehaviour
                 case CubeType.EnnemiMiroir:
                     cubeObj.gameObject.SetActive(true);
                     break;
-                case CubeType.Peinture:
+                case CubeType.Paint:
                     cubeObj.gameObject.SetActive(true);
                     break;
                 case CubeType.Cleaner:

@@ -120,7 +120,7 @@ public class LevelEditor : Editor
                                                 buttonStyle.normal.background = level.texture2DEnnemiMiroir;
                                             }
                                             break;
-                                        case CubeType.Peinture:
+                                        case CubeType.Paint:
                                             if (level.texture2DCubePeinture != null)
                                             {
                                                 buttonStyle.normal.background = level.texture2DCubePeinture;
@@ -260,7 +260,7 @@ public class LevelEditor : Editor
                                                 buttonStyle.normal.background = level.texture2DEnnemiMiroir;
                                             }
                                             break;
-                                        case CubeType.Peinture:
+                                        case CubeType.Paint:
                                             if (level.texture2DCubePeinture != null)
                                             {
                                                 buttonStyle.normal.background = level.texture2DCubePeinture;
