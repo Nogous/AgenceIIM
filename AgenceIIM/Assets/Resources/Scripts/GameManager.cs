@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public Rewired.Player replayer;
     public bool useWASDLayout;
-    public Player_obselete player = null;
-    private List<Cube_obselete> cubes = new List<Cube_obselete>();
+    public Player player = null;
+    private List<Cube> cubes = new List<Cube>();
     public float fallDuration = 1f;
     public float fallSpeed = 1f;
     public int nbEnnemyInit = 1;
@@ -47,10 +47,11 @@ public class GameManager : MonoBehaviour
     {
         if (player == null)
         {
-            player = FindObjectOfType<Player_obselete>();
+            player = FindObjectOfType<Player>();
         }
         replayer = ReInput.players.GetPlayer(0);
-        player.replayer = replayer;
+        Debug.Log("error");
+        //player.replayer = replayer;
         if (!useWASDLayout)
         {
             replayer.controllers.maps.SetMapsEnabled(true, 0);
@@ -146,14 +147,16 @@ public class GameManager : MonoBehaviour
         DATAnbDeath++;
 
         player.gameObject.SetActive(true);
-        player.ResetPlayer();
+
+        Debug.Log("error");
+        //player.ResetPlayer();
         ResetCubes();
 
         nbEnnemy = nbEnnemyInit;
     }
 
     #region Cube
-    public void AddCube(Cube_obselete cube)
+    public void AddCube(Cube cube)
     {
         cubes.Add(cube);
     }

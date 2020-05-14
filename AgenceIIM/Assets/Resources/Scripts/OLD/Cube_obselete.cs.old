@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube_obselete
+public class Cube_obselete : MonoBehaviour
 {
     [Header("General Settings")]
 
