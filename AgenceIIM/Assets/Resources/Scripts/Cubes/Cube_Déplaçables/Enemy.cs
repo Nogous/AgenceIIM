@@ -39,7 +39,7 @@ public class Enemy : CubeMovable
     {
         GameManager.instance.AddCube(this);
 
-        Player.OnMove += SetModeMove;
+        if(isEnemyMirror || isEnemyMoving)Player.OnMove += SetModeMove;
 
         SetModeVoid();
     }

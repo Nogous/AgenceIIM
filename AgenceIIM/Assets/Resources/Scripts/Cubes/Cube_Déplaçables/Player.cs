@@ -225,6 +225,8 @@ public class Player : CubeMovable
     {
         DoAction = DoActionWait;
         trail.gameObject.SetActive(true);
+
+        
     }
 
     private void DoActionWait()

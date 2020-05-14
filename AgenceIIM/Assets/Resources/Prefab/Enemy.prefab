@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2009963308243871471}
   - component: {fileID: 2009963308243871470}
   - component: {fileID: 2009963308243871469}
-  - component: {fileID: 2009963308243867921}
   - component: {fileID: 176610706}
+  - component: {fileID: 607887689101925255}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -93,60 +93,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2009963308243867921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009963308243871468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnemy: 1
-  isEnemyMirror: 0
-  isEnemyMoving: 0
-  isCleaningBox: 0
-  isDashBox: 0
-  isWall: 0
-  isPushBlock: 0
-  isTnt: 0
-  isTrigger: 0
-  associatedTnt: {fileID: 0}
-  particleDeath: {fileID: 7111025012622286692, guid: 87ebd932ac8e65f49b2e0f00a711cc56,
-    type: 3}
-  dashOrientation: 0
-  enemyColor: {r: 0, g: 1, b: 0.99607843, a: 1}
-  InvertXAxis: 0
-  InvertZAxis: 0
-  isBreakable: 1
-  colorPotencial: 0
-  color: {r: 0, g: 1, b: 0.99607843, a: 1}
-  takeColor: {fileID: 0}
-  stain: {fileID: 0}
-  fadeCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  shrinkCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  MoveList: 
-  _moveTime: 0.2
-  orientation: {x: 0, y: 0, z: 1}
-  speed: 5
-  explosionForce: 50
-  explosionRadius: 4
-  explosionUpward: 0.04
-  cubeSize: 0.2
-  cubesInRow: 5
 --- !u!95 &176610706
 Animator:
   serializedVersion: 3
@@ -166,3 +112,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &607887689101925255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009963308243871468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95bb7dfaf00d4f48920843a75f18745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubeType: 0
+  initialPosition: {x: 0, y: 0, z: 0}
+  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  MoveList: 
+  _moveTime: 0.2
+  orientation: {x: 0, y: 0, z: 1}
+  speed: 5
+  teleportDestination: {fileID: 0}
+  particleDeath: {fileID: 7111025012622286692, guid: 87ebd932ac8e65f49b2e0f00a711cc56,
+    type: 3}
+  isEnemy: 0
+  isEnemyMirror: 0
+  isEnemyMoving: 0
+  InvertXAxis: 0
+  InvertZAxis: 0
+  enemyColor: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}

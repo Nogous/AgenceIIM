@@ -102,7 +102,7 @@ public class CubeMovable : Cube
         TestTile();
     }
 
-    protected void SetModeVoid()
+    public void SetModeVoid()
     {
         DoAction = DoActionVoid;
     }

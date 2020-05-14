@@ -142,13 +142,13 @@ public class SpawnLevel : MonoBehaviour
         }
 
         Debug.Log("error");
-        //GameManager.instance.player.StartPlayer();
+        GameManager.instance.player.StartPlayer();
     }
 
     public void StartUnPopLevel()
     {
         Debug.Log("error");
-        //GameManager.instance.player.SetActionNull();
+        GameManager.instance.player.SetModeVoid();
 
         for (int i = 0; i < cubes.Count; i++)
         {

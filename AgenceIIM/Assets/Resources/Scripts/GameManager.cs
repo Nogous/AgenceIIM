@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         }
         replayer = ReInput.players.GetPlayer(0);
         Debug.Log("error");
-        //player.replayer = replayer;
+        player.replayer = replayer;
         if (!useWASDLayout)
         {
             replayer.controllers.maps.SetMapsEnabled(true, 0);

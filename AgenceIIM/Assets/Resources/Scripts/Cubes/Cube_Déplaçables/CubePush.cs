@@ -111,7 +111,7 @@ public class CubePush : CubeMovable
             {
                 CubeDetonator tmpCube = hit.transform.gameObject.GetComponent<CubeDetonator>();
 
-                tmpCube.ActivateTnt();
+                //tmpCube.ActivateTnt();
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
