@@ -50,6 +50,8 @@ public class CubeMovable : Cube
 
     protected Action DoAction;
 
+    [SerializeField] protected ParticleSystem particleDeath = null;
+
     private void Awake()
     {
         initialPosition = transform.position;
@@ -93,6 +95,8 @@ public class CubeMovable : Cube
         Paramètres : cubeLanding (enum CubeType, cube sur lequel le bloc mouvant atteri) 
     */
     virtual public void EndMoveBehavior(){
+        SetModeVoid();
+        
         transform.eulerAngles = Vector3.zero;
 
         TestTile();
@@ -110,8 +114,21 @@ public class CubeMovable : Cube
 
     virtual public void SetModeMove(Vector3 vector)
     {
+        RotationCheck();
 
+        _elapsedTime = 0;
+
+        direction = transform.position + orientation;
+        previousRot = transform.rotation;
+        addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
+        previousPos = transform.position;
+
+        // init move
+        StartMoveBehavior();
+
+        DoAction = DoActionMove;
     }
+
 
     protected void DoActionMove()
     {
@@ -153,9 +170,14 @@ public class CubeMovable : Cube
         DoAction = DoActionMove;
     }
 
-    protected bool TestWall()
+    virtual public bool TestWall()
     {
         return false;
+    }
+
+    virtual public void TestTile()
+    {
+
     }
 
     virtual public void DoActionFall()

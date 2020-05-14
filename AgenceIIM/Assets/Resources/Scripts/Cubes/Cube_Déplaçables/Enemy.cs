@@ -11,12 +11,14 @@ public class Enemy : CubeMovable
     [SerializeField] public bool InvertXAxis = false;
     [SerializeField] public bool InvertZAxis = false;
 
+    public Color enemyColor;
+
     // Start is called before the first frame update
     void Start()
     {
         GameManager.instance.AddCube(this);
 
-        Player_obselete.OnMove += SetModeMove;
+        Player.OnMove += SetModeMove;
 
         SetModeVoid();
     }
@@ -24,7 +26,7 @@ public class Enemy : CubeMovable
     // Update is called once per frame
     void Update()
     {
-        
+        DoAction();
     }
 
     public override void StartMoveBehavior()
@@ -36,55 +38,9 @@ public class Enemy : CubeMovable
     {
         SetModeVoid();
 
-        base.EndMoveBehavior();
+        transform.eulerAngles = Vector3.zero;
 
-        Ray ray = new Ray(transform.position, Vector3.down);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 1f))
-        {
-            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
-            {
-                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
-
-                if (tmpCube.isDashBox)
-                {
-
-                    if ((int)tmpCube.dashOrientation == 0)
-                    {
-                        orientation = Vector3.forward;
-                    }
-                    else if ((int)tmpCube.dashOrientation == 1)
-                    {
-                        orientation = Vector3.back;
-                    }
-                    else if ((int)tmpCube.dashOrientation == 2)
-                    {
-                        orientation = Vector3.right;
-                    }
-                    else
-                    {
-                        orientation = Vector3.left;
-                    }
-
-                    SetModeDash();
-                }
-                else if (tmpCube.isTrigger)
-                {
-                    tmpCube.ActivateTnt();
-                }
-                else if (tmpCube.isTeleport)
-                {
-                    gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
-                }
-
-            }
-
-        }
-        else
-        {
-            DoAction = DoActionFall;
-        }
+        TestTile();
     }
 
     public override void SetModeMove(Vector3 vector)
@@ -192,5 +148,93 @@ public class Enemy : CubeMovable
 
             SetModeVoid();
         }
+    }
+
+    public override void TestTile()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (hit.transform.gameObject.GetComponent<CubeDash>())
+            {
+                CubeDash tmpCube = hit.transform.gameObject.GetComponent<CubeDash>();
+
+                if ((int)tmpCube.dashOrientation == 0)
+                {
+                    orientation = Vector3.forward;
+                }
+                else if ((int)tmpCube.dashOrientation == 1)
+                {
+                    orientation = Vector3.back;
+                }
+                else if ((int)tmpCube.dashOrientation == 2)
+                {
+                    orientation = Vector3.right;
+                }
+                else
+                {
+                    orientation = Vector3.left;
+                }
+
+                SetModeDash();
+            }
+            else if (hit.transform.gameObject.GetComponent<CubeDetonator>())
+            {
+                CubeDetonator tmpCube = hit.transform.gameObject.GetComponent<CubeDetonator>();
+
+                tmpCube.ActivateTnt();
+            }
+            else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
+            {
+                CubeTeleporter tmpCube = hit.transform.gameObject.GetComponent<CubeTeleporter>();
+
+                gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
+            }
+        }
+        else
+        {
+            DoAction = DoActionFall;
+        }
+    }
+
+    public override bool TestWall()
+    {
+        Ray ray = new Ray(transform.position, orientation);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+
+            if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void Explode(bool isPlayer = false)
+    {
+        if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
+
+        if (isEnemy)
+        {
+            GameManager.instance.KillEnnemy();
+
+            ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
+
+            ParticleSystem.MainModule mainMod = particles.main;
+
+            mainMod.startColor = color;
+
+            particles.Play();
+        }
+
+        gameObject.SetActive(false);
+        AudioManager.instance.Play("Splash");
+        AudioManager.instance.Play("ExplosionCube");
     }
 }
