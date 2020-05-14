@@ -13,14 +13,15 @@ public enum CubeType
     Peinture,
     Cleaner,
     ArcEnCiel,
-    Teleporteur,
+    Teleporter,
     Dash,
     Glissant,
     Mur,
     TNT,
-    Interrupteur,
+    Detonator,
     Destructible,
     BlocMouvant,
+    Wall,
 }
 public class Cube : MonoBehaviour
 {
@@ -43,5 +44,9 @@ public class Cube : MonoBehaviour
     public CubeType GetCubeType()
     {
         return cubeType;
+    }
+
+    public void SetCubeBase(){
+        
     }
 }

@@ -138,7 +138,7 @@ public class LevelEditor : Editor
                                                 buttonStyle.normal.background = level.texture2DCubeArcEnCiel;
                                             }
                                             break;
-                                        case CubeType.Teleporteur:
+                                        case CubeType.Teleporter:
                                             if (level.texture2DCubeTeleporteur != null)
                                             {
                                                 buttonStyle.normal.background = level.texture2DCubeTeleporteur;
@@ -168,7 +168,7 @@ public class LevelEditor : Editor
                                                 buttonStyle.normal.background = level.texture2DCubeTNT;
                                             }
                                             break;
-                                        case CubeType.Interrupteur:
+                                        case CubeType.Detonator:
                                             if (level.texture2DCubeInterrupteur != null)
                                             {
                                                 buttonStyle.normal.background = level.texture2DCubeInterrupteur;
@@ -278,7 +278,7 @@ public class LevelEditor : Editor
                                                 buttonStyle.normal.background = level.texture2DCubeArcEnCiel;
                                             }
                                             break;
-                                        case CubeType.Teleporteur:
+                                        case CubeType.Teleporter:
                                             if (level.texture2DCubeTeleporteur != null)
                                             {
                                                 buttonStyle.normal.background = level.texture2DCubeTeleporteur;
@@ -308,7 +308,7 @@ public class LevelEditor : Editor
                                                 buttonStyle.normal.background = level.texture2DCubeTNT;
                                             }
                                             break;
-                                        case CubeType.Interrupteur:
+                                        case CubeType.Detonator:
                                             if (level.texture2DCubeInterrupteur != null)
                                             {
                                                 buttonStyle.normal.background = level.texture2DCubeInterrupteur;

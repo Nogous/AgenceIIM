@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class CubeStatic : Cube
 {
+    [Header("Options des effets de taches")]
+
+    [SerializeField] private GameObject stain = null;
+    private Vector3 stainScale = Vector3.one;
+    private Color stainColor = Color.white;
+
+    [SerializeField] private AnimationCurve fadeCurve = null;
+    [SerializeField] private AnimationCurve shrinkCurve = null;
    public void ActivateStain(Color tint)
     {/*
         if (stain == null) return;
