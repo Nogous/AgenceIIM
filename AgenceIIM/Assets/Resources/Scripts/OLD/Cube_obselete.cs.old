@@ -33,8 +33,8 @@ public class Cube_obselete : MonoBehaviour
     {
         forward,
         backward,
-        right,  
-        left, 
+        right,
+        left,
     };
 
     [Header("Dash Settings")]
@@ -51,23 +51,11 @@ public class Cube_obselete : MonoBehaviour
     private Vector3 initPos;
     private Quaternion initRot;
 
-    [SerializeField] private bool isBreakable = false;
 
-    [Header("ColoredGround")]
-    public int colorPotencial = 0;
-    private int initColorPotencial;
-    public Color color = Color.white;
-    private Color initColor;
-    public ParticleSystem takeColor = null;
 
-    [Header("Effect Settings")]
 
-    [SerializeField] private GameObject stain = null;
-    private Vector3 stainScale = Vector3.one;
-    private Color stainColor = Color.white;
 
-    [SerializeField] private AnimationCurve fadeCurve = null;
-    [SerializeField] private AnimationCurve shrinkCurve = null;
+    
 
     private float elapsedTime = 0;
 
@@ -106,7 +94,7 @@ public class Cube_obselete : MonoBehaviour
 
         initPos = transform.position;
         initRot = transform.rotation;
-        initColorPotencial = colorPotencial;
+        initColorPotential = colorPotencial;
         initColor = color;
         enemyColor = color;
 
@@ -161,7 +149,7 @@ public class Cube_obselete : MonoBehaviour
     {
         transform.position = initPos;
         transform.rotation = initRot;
-        colorPotencial = initColorPotencial;
+        colorPotencial = initColorPotential;
         color = initColor;
 
         CurrentMove = 0;
@@ -335,7 +323,7 @@ public class Cube_obselete : MonoBehaviour
 
     #region Effects
 
-    
+
     #endregion
 
     float cubesPivotDistance;
@@ -363,7 +351,7 @@ public class Cube_obselete : MonoBehaviour
 
         if (!isPlayer)
         {
-            if (!isBreakable) return;        
+            if (!isBreakable) return;
 
             if (isEnemyMirror || isEnemyMoving) Player_obselete.OnMove -= SetModeMove;
 
@@ -387,7 +375,7 @@ public class Cube_obselete : MonoBehaviour
             AudioManager.instance.Play("Splash");
             AudioManager.instance.Play("ExplosionCube");
 
-            
+
         }
 
         // loop 3 times to create 5x5x5 pices un x,y,z coordonate
@@ -407,7 +395,7 @@ public class Cube_obselete : MonoBehaviour
         // get colliders in that position and radius
         Collider[] colliders = Physics.OverlapSphere(explosionPos, explosionRadius);
         //add explosion force to all colliders in that overlap sphere
-        foreach(Collider hit in colliders)
+        foreach (Collider hit in colliders)
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
             if (rb != null)
@@ -439,7 +427,7 @@ public class Cube_obselete : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             if (Physics.Raycast(transform.position, vectors[i], out hit, 1f))
-            { 
+            {
 
                 if (hit.transform.gameObject.GetComponent<Cube_obselete>())
                 {
@@ -458,7 +446,7 @@ public class Cube_obselete : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 0,0), vectors[0] + vectors[2], out hit, 1f))
+        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[0] + vectors[2], out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
@@ -466,7 +454,7 @@ public class Cube_obselete : MonoBehaviour
 
                 tmpCube.Explode();
             }
-            else if(hit.transform.parent != null)
+            else if (hit.transform.parent != null)
             {
                 if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
                 {
@@ -474,7 +462,7 @@ public class Cube_obselete : MonoBehaviour
                     isPlayerDestroyed = true;
                 }
             }
-            
+
         }
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[0] + vectors[3], out hit, 1f))
@@ -518,7 +506,7 @@ public class Cube_obselete : MonoBehaviour
             if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
                 Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
- 
+
                 tmpCube.Explode();
             }
             else if (hit.transform.parent != null)
@@ -553,7 +541,7 @@ public class Cube_obselete : MonoBehaviour
         piece = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
         // set scale and position
-        piece.transform.position = transform.position + new Vector3(cubeSize *x, cubeSize * y, cubeSize * z) - cubesPivot;
+        piece.transform.position = transform.position + new Vector3(cubeSize * x, cubeSize * y, cubeSize * z) - cubesPivot;
         piece.transform.localScale = Vector3.one * cubeSize;
 
         // add rigidbody and mass
@@ -608,7 +596,7 @@ public class Cube_obselete : MonoBehaviour
                 return;
             }
         }
-        else if(isEnemyMoving)
+        else if (isEnemyMoving)
         {
             if (CurrentMove == MoveList.Count && !revertMove)
             {
@@ -620,7 +608,7 @@ public class Cube_obselete : MonoBehaviour
             }
             else if (CurrentMove == 0 && revertMove) revertMove = false;
 
-            if(revertMove) CurrentMove--;
+            if (revertMove) CurrentMove--;
 
             if ((int)MoveList[CurrentMove] == 0)
             {
@@ -646,7 +634,7 @@ public class Cube_obselete : MonoBehaviour
             if (!revertMove) CurrentMove++;
 
         }
-        
+
         RotationCheck();
 
         _elapsedTime = 0;
@@ -698,7 +686,7 @@ public class Cube_obselete : MonoBehaviour
 
         if (transform.position.y < initPos.y - 1)
         {
-            if(isEnemy || isEnemyMirror)
+            if (isEnemy || isEnemyMirror)
             {
                 Explode();
             }
@@ -717,7 +705,7 @@ public class Cube_obselete : MonoBehaviour
         {
             if (hit.transform.gameObject.GetComponent<Cube_obselete>())
             {
-                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();               
+                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
 
                 if (tmpCube.isDashBox)
                 {
@@ -858,9 +846,9 @@ public class Cube_obselete : MonoBehaviour
 
     public void ActivateTnt()
     {
-        if(associatedTnt != null && associatedTnt.gameObject.activeSelf)
+        if (associatedTnt != null && associatedTnt.gameObject.activeSelf)
         {
             associatedTnt.Explode();
-        } 
+        }
     }
 }
