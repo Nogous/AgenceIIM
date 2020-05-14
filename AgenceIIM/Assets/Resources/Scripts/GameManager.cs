@@ -14,11 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public Rewired.Player replayer;
     public bool useWASDLayout;
-<<<<<<< HEAD
-    public Player_obselete player = null;
-=======
     public Player player = null;
->>>>>>> d48424abee1fc9d01fdc12711e348af97b22a60f
     private List<Cube> cubes = new List<Cube>();
     public float fallDuration = 1f;
     public float fallSpeed = 1f;
