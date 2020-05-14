@@ -113,9 +113,9 @@ public class Player : CubeMovable
             if (hit.transform.gameObject.GetComponent<Cube>())
             {
                 Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
-                tmpCube.Explode();
+                //tmpCube.Explode();
 
-                tmpColor = tmpCube.GetColor();
+                /*tmpColor = tmpCube.GetColor();
                 if (tmpColor != Color.white)
                 {
 
@@ -123,7 +123,7 @@ public class Player : CubeMovable
                     {
                         faceColor[1].GetComponent<Renderer>().material.color = tmpColor;
                     }
-                }
+                }*/
             }
         }
 
@@ -579,12 +579,12 @@ public class Player : CubeMovable
             else if (hit.transform.gameObject.GetComponent<CubeDetonator>())
             {
                 CubeDetonator tmpCube = hit.transform.gameObject.GetComponent<CubeDetonator>();
-                tmpCube.ActivateTnt();
+                //tmpCube.ActivateTnt();
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
                 CubeTeleporter tmpCube = hit.transform.gameObject.GetComponent<CubeTeleporter>();
-                gameObject.transform.position = new Vector3(tmpCube.teleportDestination.transform.position.x, tmpCube.teleportDestination.transform.position.y + 1f, tmpCube.teleportDestination.transform.position.z);
+                //gameObject.transform.position = new Vector3(tmpCube.teleportDestination.transform.position.x, tmpCube.teleportDestination.transform.position.y + 1f, tmpCube.teleportDestination.transform.position.z);
             }
 
         }

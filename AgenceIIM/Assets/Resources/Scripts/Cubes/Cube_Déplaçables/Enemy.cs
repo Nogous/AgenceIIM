@@ -13,6 +13,27 @@ public class Enemy : CubeMovable
 
     public Color enemyColor;
 
+    public Color color = Color.white;
+    private Color initColor;
+
+    private void Awake()
+    {
+        initColor = color;
+        enemyColor = color;
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+
+        if (color != Color.white)
+        {
+            gameObject.GetComponent<Renderer>().material.color = color;
+        }
+
+        vectors.Add(Vector3.forward);
+        vectors.Add(Vector3.back);
+        vectors.Add(Vector3.left);
+        vectors.Add(Vector3.right);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -184,7 +205,7 @@ public class Enemy : CubeMovable
             {
                 CubeDetonator tmpCube = hit.transform.gameObject.GetComponent<CubeDetonator>();
 
-                tmpCube.ActivateTnt();
+                //tmpCube.ActivateTnt();
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
