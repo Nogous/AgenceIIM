@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Rewired.Player replayer;
     public bool useWASDLayout;
     public Player_obselete player = null;
-    private List<Cube_obselete> cubes = new List<Cube_obselete>();
+    private List<Cube> cubes = new List<Cube>();
     public float fallDuration = 1f;
     public float fallSpeed = 1f;
     public int nbEnnemyInit = 1;
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
     }
 
     #region Cube
-    public void AddCube(Cube_obselete cube)
+    public void AddCube(Cube cube)
     {
         cubes.Add(cube);
     }
