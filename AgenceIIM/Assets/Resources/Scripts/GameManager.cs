@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
             player = FindObjectOfType<Player>();
         }
         replayer = ReInput.players.GetPlayer(0);
-        Debug.Log("error");
         player.replayer = replayer;
         if (!useWASDLayout)
         {
@@ -147,9 +146,8 @@ public class GameManager : MonoBehaviour
         DATAnbDeath++;
 
         player.gameObject.SetActive(true);
-
-        Debug.Log("error");
-        //player.ResetPlayer();
+        
+        player.ResetPlayer();
         ResetCubes();
 
         nbEnnemy = nbEnnemyInit;

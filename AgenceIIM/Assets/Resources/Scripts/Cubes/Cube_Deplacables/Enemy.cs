@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : CubeMovable
 {
-    public bool isEnemy = false;
     public bool isEnemyMirror = false;
     public bool isEnemyMoving = false;
 
@@ -162,7 +161,7 @@ public class Enemy : CubeMovable
 
         if (transform.position.y < initialPosition.y - 1)
         {
-            if (isEnemy || isEnemyMirror)
+            if (isEnemyMirror)
             {
                 //Explode();
             }
@@ -241,18 +240,15 @@ public class Enemy : CubeMovable
     {
         if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
 
-        if (isEnemy)
-        {
-            GameManager.instance.KillEnnemy();
+        GameManager.instance.KillEnnemy();
 
-            ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
+        ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
 
-            ParticleSystem.MainModule mainMod = particles.main;
+        ParticleSystem.MainModule mainMod = particles.main;
 
-            mainMod.startColor = color;
+        mainMod.startColor = color;
 
-            particles.Play();
-        }
+        particles.Play();
 
         gameObject.SetActive(false);
         AudioManager.instance.Play("Splash");

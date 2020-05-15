@@ -39,7 +39,7 @@ public class CubeEditor : Editor
             if (GameManager.instance == null)
             {
                 Debug.Log("Trigger GameManager svp");
-                myCube.SetCubeBase();
+                //myCube.SetCubeBase();
             }
         }
 

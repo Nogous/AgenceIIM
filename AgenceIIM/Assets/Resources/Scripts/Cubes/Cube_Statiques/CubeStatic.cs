@@ -12,7 +12,9 @@ public class CubeStatic : Cube
 
     [SerializeField] private AnimationCurve fadeCurve = null;
     [SerializeField] private AnimationCurve shrinkCurve = null;
-   public void ActivateStain(Color tint)
+
+
+    public void ActivateStain(Color tint)
     {/*
         if (stain == null) return;
         if (colorPotencial == 0 && !isEnemy)

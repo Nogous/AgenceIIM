@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class CubeTeleporter : CubeStatic
 {
-    private Cube teleportDestination = null;
+    [SerializeField] private Cube teleportDestination = null;
     void Awake()
     {
         cubeType = CubeType.Teleporter;
     }
 
-    
+    public Cube GetDestination()
+    {
+        return teleportDestination;
+    }
 }

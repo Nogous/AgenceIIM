@@ -27,6 +27,7 @@ public class CubeMovable : Cube
 
     [SerializeField] protected float _moveTime = 0.2f;
 
+
     protected float _elapsedTime = 0;
     public Rewired.Player replayer;
     protected Vector3 direction;
