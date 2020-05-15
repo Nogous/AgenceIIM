@@ -165,7 +165,7 @@ public class Player : CubeMovable
                 {
                     SetModeVoid();
                     StartCoroutine(Death());
-                    DeathSplash();
+                    Explode();
                 }
             }
         }
@@ -358,10 +358,10 @@ public class Player : CubeMovable
     {
         SetModeVoid();
         StartCoroutine(Death());
-        DeathSplash();
+        Explode();
     }
 
-    private void DeathSplash()
+    public override void Explode()
     {
         Color color = Color.white;
 
@@ -543,7 +543,7 @@ public class Player : CubeMovable
                     {
                         SetModeVoid();
                         StartCoroutine(Death());
-                        DeathSplash();
+                        Explode();
                     }
                 }
                 else

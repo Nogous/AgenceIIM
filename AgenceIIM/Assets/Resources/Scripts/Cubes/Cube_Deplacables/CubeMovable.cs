@@ -52,6 +52,7 @@ public class CubeMovable : Cube
     protected Action DoAction;
 
     [SerializeField] protected ParticleSystem particleDeath = null;
+    public Color color = Color.white;
 
     private void Awake()
     {
@@ -184,6 +185,21 @@ public class CubeMovable : Cube
     virtual public void DoActionFall()
     {
         transform.position += Vector3.down * Time.deltaTime * GameManager.instance.fallSpeed;
+    }
+
+    virtual public void Explode()
+    {
+        ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
+
+        ParticleSystem.MainModule mainMod = particles.main;
+
+        mainMod.startColor = color;
+
+        particles.Play();
+
+        gameObject.SetActive(false);
+        AudioManager.instance.Play("Splash");
+        AudioManager.instance.Play("ExplosionCube");
     }
 }
 

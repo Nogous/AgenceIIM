@@ -11,8 +11,6 @@ public class Enemy : CubeMovable
     [SerializeField] public bool InvertZAxis = false;
 
     public Color enemyColor;
-
-    public Color color = Color.white;
     private Color initColor;
 
     private void Awake()
@@ -236,22 +234,12 @@ public class Enemy : CubeMovable
         return false;
     }
 
-    public void Explode(bool isPlayer = false)
+    public override void Explode()
     {
         if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
 
         GameManager.instance.KillEnnemy();
 
-        ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
-
-        ParticleSystem.MainModule mainMod = particles.main;
-
-        mainMod.startColor = color;
-
-        particles.Play();
-
-        gameObject.SetActive(false);
-        AudioManager.instance.Play("Splash");
-        AudioManager.instance.Play("ExplosionCube");
+        base.Explode();
     }
 }
