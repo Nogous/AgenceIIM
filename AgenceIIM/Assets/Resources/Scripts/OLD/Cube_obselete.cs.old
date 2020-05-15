@@ -26,8 +26,7 @@ public class Cube_obselete : MonoBehaviour
 
     [SerializeField] private Cube_obselete associatedTnt = null;
 
-    [SerializeField] private ParticleSystem particleDeath = null;
-    [SerializeField] private ParticleSystem particleTnt = null;
+
 
     public enum dashEnum
     {
@@ -37,10 +36,7 @@ public class Cube_obselete : MonoBehaviour
         left,
     };
 
-    [Header("Dash Settings")]
-
-    [SerializeField] public dashEnum dashOrientation = dashEnum.forward;
-
+    
     [Header("Enemy Settings")]
 
     public Color enemyColor;
@@ -67,47 +63,22 @@ public class Cube_obselete : MonoBehaviour
     private int CurrentMove = 0;
     private bool revertMove = false;
 
-    [SerializeField] private float _moveTime = 0.2f;
+    
 
-    private float _elapsedTime = 0;
+    
     public Rewired.Player replayer;
-    private Vector3 direction;
-    public Vector3 orientation = Vector3.forward;
-    private Vector3 axis = Vector3.right;
+    
+    
 
-    private Quaternion addedRotation;
-    private Vector3 previousPos;
-    private Vector3 previousOr;
-    private Quaternion previousRot;
+    
 
     private Quaternion zeroRot = new Quaternion(0, 0, 0, 0);
 
-    private static float diagonal = 1 * Mathf.Sqrt(2);
-    private float offset = (diagonal - 1) / 2;
+    
+    
     public float speed = 5;
 
-    private List<Vector3> vectors = new List<Vector3>();
-
-    // Start is called before the first frame update
-    private void Awake()
-    {
-
-        initPos = transform.position;
-        initRot = transform.rotation;
-        initColorPotential = colorPotencial;
-        initColor = color;
-        enemyColor = color;
-
-        if (color != Color.white)
-        {
-            gameObject.GetComponent<Renderer>().material.color = color;
-        }
-
-        vectors.Add(Vector3.forward);
-        vectors.Add(Vector3.back);
-        vectors.Add(Vector3.left);
-        vectors.Add(Vector3.right);
-    }
+    
 
     private void SetModeVoid()
     {
@@ -329,198 +300,7 @@ public class Cube_obselete : MonoBehaviour
     float cubesPivotDistance;
     Vector3 cubesPivot;
 
-    [Header("Explosion Settings")]
-
-    public float explosionForce = 50f;
-    public float explosionRadius = 4f;
-    public float explosionUpward = 0.04f;
-
-    #region Explosion
-
-    [SerializeField] private float cubeSize = 0.2f;
-    [SerializeField] private int cubesInRow = 5;
-
-    public void Explode(bool isPlayer = false)
-    {
-        if (isTnt)
-        {
-            AudioManager.instance.Play("TNT");
-            StartCoroutine(DetonateTnt());
-            return;
-        }
-
-        if (!isPlayer)
-        {
-            if (!isBreakable) return;
-
-            if (isEnemyMirror || isEnemyMoving) Player_obselete.OnMove -= SetModeMove;
-
-            if (isEnemy)
-            {
-                GameManager.instance.KillEnnemy();
-
-                ParticleSystem particles = Instantiate(particleDeath, transform.position, Quaternion.identity);
-
-                ParticleSystem.MainModule mainMod = particles.main;
-
-                mainMod.startColor = color;
-
-                particles.Play();
-            }
-            //make object disappear
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            AudioManager.instance.Play("Splash");
-            AudioManager.instance.Play("ExplosionCube");
-
-
-        }
-
-        // loop 3 times to create 5x5x5 pices un x,y,z coordonate
-        /*for (int i = cubesInRow; i-->0;)
-        {
-            for (int j = cubesInRow; j-- > 0;)
-            {
-                for (int k = cubesInRow; k-- > 0;)
-                {
-                    CreatePiece(i, j, k);
-                }
-            }
-        }*/
-
-        // get explosion position
-        Vector3 explosionPos = transform.position;
-        // get colliders in that position and radius
-        Collider[] colliders = Physics.OverlapSphere(explosionPos, explosionRadius);
-        //add explosion force to all colliders in that overlap sphere
-        foreach (Collider hit in colliders)
-        {
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                // addd explosion force
-                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, explosionUpward);
-            }
-        }
-    }
-
-    private IEnumerator DetonateTnt()
-    {
-        yield return new WaitForSeconds(tntDelay);
-
-        DestroySurroundings();
-
-        ParticleSystem tntExplosion = Instantiate(particleTnt, transform.position, Quaternion.identity);
-        tntExplosion.Play();
-
-        gameObject.SetActive(false);
-    }
-
-    private void DestroySurroundings()
-    {
-        bool isPlayerDestroyed = false;
-
-        RaycastHit hit;
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (Physics.Raycast(transform.position, vectors[i], out hit, 1f))
-            {
-
-                if (hit.transform.gameObject.GetComponent<Cube_obselete>())
-                {
-                    Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
-
-                    tmpCube.Explode();
-                }
-                else if (hit.transform.parent != null)
-                {
-                    if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
-                    {
-                        hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
-                        isPlayerDestroyed = true;
-                    }
-                }
-            }
-        }
-
-        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[0] + vectors[2], out hit, 1f))
-        {
-            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
-            {
-                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
-
-                tmpCube.Explode();
-            }
-            else if (hit.transform.parent != null)
-            {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
-                {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
-                    isPlayerDestroyed = true;
-                }
-            }
-
-        }
-
-        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[0] + vectors[3], out hit, 1f))
-        {
-            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
-            {
-                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
-
-                tmpCube.Explode();
-            }
-            else if (hit.transform.parent != null)
-            {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
-                {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
-                    isPlayerDestroyed = true;
-                }
-            }
-        }
-
-        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[2], out hit, 1f))
-        {
-            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
-            {
-                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
-
-                tmpCube.Explode();
-            }
-            else if (hit.transform.parent != null)
-            {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
-                {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
-                    isPlayerDestroyed = true;
-                }
-            }
-        }
-
-        if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectors[1] + vectors[3], out hit, 1f))
-        {
-            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
-            {
-                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
-
-                tmpCube.Explode();
-            }
-            else if (hit.transform.parent != null)
-            {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>() && !isPlayerDestroyed)
-                {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player_obselete>().SetDeath();
-                    isPlayerDestroyed = true;
-                }
-            }
-        }
-
-        SetModeVoid();
-    }
+    
 
     public Color GetColor()
     {
@@ -672,13 +452,7 @@ public class Cube_obselete : MonoBehaviour
         }
     }
 
-    private void RotationCheck()
-    {
-        if (orientation == Vector3.forward) axis = Vector3.right;
-        else if (orientation == Vector3.right) axis = Vector3.back;
-        else if (orientation == Vector3.back) axis = Vector3.left;
-        else axis = Vector3.forward;
-    }
+    
 
     private void DoActionFall()
     {
@@ -695,97 +469,11 @@ public class Cube_obselete : MonoBehaviour
         }
     }
 
-    private void TestTile()
-    {
-        // test tile d'arriver
-        Ray ray = new Ray(transform.position, Vector3.down);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 1f))
-        {
-            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
-            {
-                Cube_obselete tmpCube = hit.transform.gameObject.GetComponent<Cube_obselete>();
-
-                if (tmpCube.isDashBox)
-                {
-
-                    if ((int)tmpCube.dashOrientation == 0)
-                    {
-                        orientation = Vector3.forward;
-                    }
-                    else if ((int)tmpCube.dashOrientation == 1)
-                    {
-                        orientation = Vector3.back;
-                    }
-                    else if ((int)tmpCube.dashOrientation == 2)
-                    {
-                        orientation = Vector3.right;
-                    }
-                    else
-                    {
-                        orientation = Vector3.left;
-                    }
-
-                    SetModeDash();
-                }
-                else if (tmpCube.isTrigger)
-                {
-                    tmpCube.ActivateTnt();
-                }
-                else if (tmpCube.isTeleport)
-                {
-                    gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
-                }
-
-            }
-
-        }
-        else
-        {
-            DoAction = DoActionFall;
-        }
-    }
+    
 
     #region Dash
 
-    private void SetModeDash()
-    {
-        RotationCheck();
-
-        _elapsedTime = 0;
-
-        direction = transform.position + orientation * 2;
-        previousRot = transform.rotation;
-        addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
-        previousPos = transform.position;
-
-        DoAction = DoActionDash;
-    }
-
-    private void DoActionDash()
-    {
-        _elapsedTime += Time.deltaTime;
-
-        float ratio = _elapsedTime / _moveTime;
-
-        transform.position = Vector3.Lerp(previousPos, direction, ratio);
-
-        transform.rotation = Quaternion.Lerp(previousRot, addedRotation, ratio);
-
-        transform.position = new Vector3(transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), transform.position.z);
-
-        if (_elapsedTime >= _moveTime)
-        {
-            // end move
-            SetModeVoid();
-
-            transform.eulerAngles = Vector3.zero;
-
-            TestTile();
-        }
-    }
-
+    
     #endregion
 
     #region Push
@@ -827,28 +515,6 @@ public class Cube_obselete : MonoBehaviour
 
     #endregion
 
-    public bool TestWall()
-    {
-        Ray ray = new Ray(transform.position, orientation);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 1f))
-        {
-
-            if (hit.transform.gameObject.GetComponent<Cube_obselete>())
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public void ActivateTnt()
-    {
-        if (associatedTnt != null && associatedTnt.gameObject.activeSelf)
-        {
-            associatedTnt.Explode();
-        }
-    }
+    
+    
 }
