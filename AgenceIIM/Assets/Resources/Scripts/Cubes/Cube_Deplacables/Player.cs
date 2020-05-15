@@ -539,7 +539,7 @@ public class Player : CubeMovable
 
                 if (tmpColor != baseColor)
                 {
-                    if (faceColor[1].GetComponent<Renderer>().material.color != hit.transform.gameObject.GetComponent<Renderer>().material.color)
+                    if (faceColor[1].GetComponent<Renderer>().material.color != tmpCube.GetPaintColor())
                     {
                         SetModeVoid();
                         StartCoroutine(Death());
@@ -548,7 +548,7 @@ public class Player : CubeMovable
                 }
                 else
                 {
-                    faceColor[1].GetComponent<Renderer>().material.color = hit.transform.gameObject.GetComponent<Renderer>().material.color;
+                    faceColor[1].GetComponent<Renderer>().material.color = tmpCube.GetPaintColor();
                 }
             }
             else if (hit.transform.gameObject.GetComponent<CubeCleaner>())
