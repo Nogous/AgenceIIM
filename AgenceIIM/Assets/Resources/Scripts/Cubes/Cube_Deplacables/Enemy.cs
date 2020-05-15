@@ -15,6 +15,8 @@ public class Enemy : CubeMovable
 
     private void Awake()
     {
+        SetModeVoid();
+
         initColor = color;
         enemyColor = color;
         initialPosition = transform.position;
@@ -32,13 +34,11 @@ public class Enemy : CubeMovable
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void OnStart()
     {
-        GameManager.instance.AddCube(this);
+        base.OnStart();
 
-        if(isEnemyMirror || isEnemyMoving)Player.OnMove += SetModeMove;
-
-        SetModeVoid();
+        if (isEnemyMirror || isEnemyMoving)Player.OnMove += SetModeMove;
     }
 
     // Update is called once per frame

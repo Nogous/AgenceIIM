@@ -65,11 +65,6 @@ public class CubeMovable : Cube
         vectors.Add(Vector3.right);
     }
 
-    private void Start()
-    {
-        GameManager.instance.AddCube(this);
-    }
-
     //Mouvement du cube
     public void MoveCube(){
 
@@ -109,7 +104,7 @@ public class CubeMovable : Cube
         DoAction = DoActionVoid;
     }
 
-    protected void DoActionVoid()
+    protected virtual void DoActionVoid()
     {
 
     }

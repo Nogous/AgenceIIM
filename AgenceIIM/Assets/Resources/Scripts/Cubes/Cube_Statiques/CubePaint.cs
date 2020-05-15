@@ -9,6 +9,9 @@ public class CubePaint : CubeStatic
     public ParticleSystem takeColor = null;
     void Awake()
     {
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+
         cubeType = CubeType.Paint;
         if (color != Color.white)
         {
