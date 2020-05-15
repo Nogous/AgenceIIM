@@ -106,7 +106,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5908646225209393977}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000016391276}
+  m_LocalRotation: {x: 0, y: 1, z: -0, w: -0.0000001872535}
   m_LocalPosition: {x: 1, y: 4, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -190,7 +190,7 @@ MonoBehaviour:
   isEnemyMirror: 0
   isEnemyMoving: 0
   isCleaningBox: 0
-  isDashBox: 0
+  isDashBox: 1
   isWall: 1
   isPushBlock: 0
   isTnt: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
     type: 3}
   particleTnt: {fileID: 5040198234666060554, guid: b3654cc2cc291854a91f013656ea7a39,
     type: 3}
-  dashOrientation: 0
+  dashOrientation: 1
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   InvertXAxis: 0
   InvertZAxis: 0
