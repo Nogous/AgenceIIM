@@ -45,7 +45,7 @@ public class Player : CubeMovable
     public float TimeShakePlayer;
     public float MagnShakePlayer;
 
-    private void Awake()
+    public override void Awake()
     {
         SetModeVoid();
 

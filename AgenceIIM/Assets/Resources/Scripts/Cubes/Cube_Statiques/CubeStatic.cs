@@ -13,6 +13,9 @@ public class CubeStatic : Cube
     [SerializeField] private AnimationCurve fadeCurve = null;
     [SerializeField] private AnimationCurve shrinkCurve = null;
 
+    public override void Awake(){
+        cubeType = CubeType.Base;
+    }
 
     public void ActivateStain(Color tint)
     {/*

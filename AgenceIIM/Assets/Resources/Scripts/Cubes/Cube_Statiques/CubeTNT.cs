@@ -17,7 +17,7 @@ public class CubeTNT : CubeStatic
     [SerializeField] private ParticleSystem particleDeath = null;
     [SerializeField] private ParticleSystem particleTnt = null;
 
-    void Awake()
+    public override void Awake()
     {
         cubeType = CubeType.TNT;
     }

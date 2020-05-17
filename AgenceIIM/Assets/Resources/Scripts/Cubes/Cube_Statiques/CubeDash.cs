@@ -15,7 +15,7 @@ public class CubeDash : CubeStatic
     [Header("Options du dash")]
     [SerializeField] public dashEnum dashOrientation = dashEnum.forward;
 
-    void Awake()
+    public override void Awake()
     {
         cubeType = CubeType.Dash;
     }

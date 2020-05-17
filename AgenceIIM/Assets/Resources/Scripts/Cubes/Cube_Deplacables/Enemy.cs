@@ -13,7 +13,7 @@ public class Enemy : CubeMovable
     public Color enemyColor;
     private Color initColor;
 
-    private void Awake()
+    public override void Awake()
     {
         SetModeVoid();
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CubeTeleporter : CubeStatic
 {
     [SerializeField] private Cube teleportDestination = null;
-    void Awake()
+    public override void Awake()
     {
         cubeType = CubeType.Teleporter;
     }

@@ -26,11 +26,11 @@ public enum CubeType
 public class Cube : MonoBehaviour
 {
     //Valeurs de début
-    public CubeType cubeType = CubeType.Base;
-    public Vector3 initialPosition;
-    public Quaternion initialRotation;
+    protected CubeType cubeType = CubeType.Base;
+    protected Vector3 initialPosition;
+    protected Quaternion initialRotation;
 
-    void Awake()
+    public virtual void Awake()
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;

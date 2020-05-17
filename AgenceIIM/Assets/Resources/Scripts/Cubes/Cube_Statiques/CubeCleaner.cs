@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CubeCleaner : CubeStatic
 {
-    void Awake()
+    public override void Awake()
     {
         cubeType = CubeType.Cleaner;
     }
