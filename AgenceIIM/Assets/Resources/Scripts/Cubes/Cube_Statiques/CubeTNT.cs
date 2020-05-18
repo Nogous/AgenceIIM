@@ -14,7 +14,6 @@ public class CubeTNT : CubeStatic
     public float explosionUpward = 0.04f;
 
     [SerializeField] private float tntDelay = 1f;
-    [SerializeField] private ParticleSystem particleDeath = null;
     [SerializeField] private ParticleSystem particleTnt = null;
 
     public override void Awake()
@@ -52,17 +51,17 @@ public class CubeTNT : CubeStatic
             if (Physics.Raycast(transform.position, vectorsTNT[i], out hit, 1f))
             {
 
-                if (hit.transform.gameObject.GetComponent<Cube>())
+                if (hit.transform.gameObject.GetComponent<CubeDestructible>())
                 {
-                    Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                    CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
 
-                    //tmpCube.Explode();
+                    tmpCube.gameObject.SetActive(false);
                 }
                 else if (hit.transform.parent != null)
                 {
-                    if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                    if (hit.transform.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
                     {
-                        hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                        hit.transform.parent.gameObject.GetComponent<Player>().SetDeath();
                         isPlayerDestroyed = true;
                     }
                 }
@@ -71,17 +70,17 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[0] + vectorsTNT[2], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
 
-                //tmpCube.Explode();
+                tmpCube.gameObject.SetActive(false);
             }
             else if (hit.transform.parent != null)
             {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                if (hit.transform.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
                 {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    hit.transform.parent.gameObject.GetComponent<Player>().SetDeath();
                     isPlayerDestroyed = true;
                 }
             }
@@ -90,17 +89,17 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[0] + vectorsTNT[3], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
 
-                //tmpCube.Explode();
+                tmpCube.gameObject.SetActive(false);
             }
             else if (hit.transform.parent != null)
             {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                if (hit.transform.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
                 {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    hit.transform.parent.gameObject.GetComponent<Player>().SetDeath();
                     isPlayerDestroyed = true;
                 }
             }
@@ -108,17 +107,17 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[1] + vectorsTNT[2], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
 
-                //tmpCube.Explode();
+                tmpCube.gameObject.SetActive(false);
             }
             else if (hit.transform.parent != null)
             {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                if (hit.transform.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
                 {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    hit.transform.parent.gameObject.GetComponent<Player>().SetDeath();
                     isPlayerDestroyed = true;
                 }
             }
@@ -126,23 +125,21 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[1] + vectorsTNT[3], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
 
-                //tmpCube.Explode();
+                tmpCube.gameObject.SetActive(false);
             }
             else if (hit.transform.parent != null)
             {
-                if (hit.transform.parent.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
+                if (hit.transform.parent.gameObject.GetComponent<Player>() && !isPlayerDestroyed)
                 {
-                    hit.transform.parent.parent.gameObject.GetComponent<Player>().SetDeath();
+                    hit.transform.parent.gameObject.GetComponent<Player>().SetDeath();
                     isPlayerDestroyed = true;
                 }
             }
         }
-
-        //SetModeVoid();
     }
 
 }

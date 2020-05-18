@@ -59,9 +59,9 @@ public class Player : CubeMovable
     }
 
     // Start is called before the first frame update
-    public override void OnStart()
+    void Start()
     {
-        base.OnStart();
+        GameManager.instance.OnResetLevel += ResetCube;
 
         if (GameManager.instance.player == null)
         {
@@ -175,7 +175,6 @@ public class Player : CubeMovable
 
     public override void EndMoveBehavior()
     {
-        base.EndMoveBehavior();
 
         SetModeWait();
 
@@ -583,12 +582,12 @@ public class Player : CubeMovable
             else if (hit.transform.gameObject.GetComponent<CubeDetonator>())
             {
                 CubeDetonator tmpCube = hit.transform.gameObject.GetComponent<CubeDetonator>();
-                //tmpCube.ActivateTnt();
+                tmpCube.ActivateTnt();
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
                 CubeTeleporter tmpCube = hit.transform.gameObject.GetComponent<CubeTeleporter>();
-                //gameObject.transform.position = new Vector3(tmpCube.teleportDestination.transform.position.x, tmpCube.teleportDestination.transform.position.y + 1f, tmpCube.teleportDestination.transform.position.z);
+                //transform.position = new Vector3(tmpCube.teleportDestination.transform.position.x, tmpCube.teleportDestination.transform.position.y + 1f, tmpCube.teleportDestination.transform.position.z);
             }
 
         }
@@ -662,14 +661,21 @@ public class Player : CubeMovable
         {
             if (hit.transform.GetComponent<CubeStatic>() != null && hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
-                //hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
+                hit.transform.GetComponent<CubeStatic>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
 
             }
             else if(hit.transform.GetComponent<CubePush>() != null && hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
-                //hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
+                hit.transform.GetComponent<CubePush>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
             }
         }
+    }
+
+    public override void DoActionFall()
+    {
+        base.DoActionFall();
+
+        if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
 
     private IEnumerator MobileUpAxisBehaviour()
