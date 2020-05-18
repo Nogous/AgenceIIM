@@ -11,6 +11,8 @@ public class CubePush : CubeMovable
     [SerializeField] private AnimationCurve fadeCurve = null;
     [SerializeField] private AnimationCurve shrinkCurve = null;
 
+    private float elapsedTime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class CubePush : CubeMovable
             stainScale = stain.transform.localScale;
             stainColor = stain.GetComponent<Renderer>().material.color;
         }
+
+        SetModeVoid();
     }
 
     // Update is called once per frame
@@ -111,7 +115,7 @@ public class CubePush : CubeMovable
             {
                 CubeDetonator tmpCube = hit.transform.gameObject.GetComponent<CubeDetonator>();
 
-                //tmpCube.ActivateTnt();
+                tmpCube.ActivateTnt();
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
@@ -126,24 +130,30 @@ public class CubePush : CubeMovable
         }
     }
 
+    public override void DoActionFall()
+    {
+        base.DoActionFall();
+
+        if (transform.position.y <= initialPosition.y - 1) SetModeVoid();
+    }
+
     public void ActivateStain(Color tint)
-    {/*
+    {
         if (stain == null) return;
-        if (colorPotencial == 0 && !isEnemy)
-        {
-            stain.SetActive(true);
-            stain.GetComponent<Renderer>().material.color = tint;
+        
+        stain.SetActive(true);
+        stain.GetComponent<Renderer>().material.color = tint;
 
-            stain.transform.localScale = stainScale;
-            elapsedTime = 0;
+        stain.transform.localScale = stainScale;
+        elapsedTime = 0;
 
-            StopCoroutine(StainRemove());
-            StartCoroutine(StainRemove());
-        }*/
+        StopCoroutine(StainRemove());
+        StartCoroutine(StainRemove());
+        
     }
 
     private IEnumerator StainRemove()
-    {/*
+    {
         Color colorFade = stain.GetComponent<Renderer>().material.color;
         Vector3 sizeShrink = stainScale;
 
@@ -162,12 +172,12 @@ public class CubePush : CubeMovable
         }
 
         StainReset();
-        */
+        
         yield return null;
     }
 
     private void StainReset()
-    {/*
+    {
         StopCoroutine(StainRemove());
 
         stain.GetComponent<Renderer>().material.color = stainColor;
@@ -175,6 +185,6 @@ public class CubePush : CubeMovable
         elapsedTime = 0;
 
         stain.SetActive(false);
-        */
+        
     }
 }

@@ -175,7 +175,6 @@ public class Player : CubeMovable
 
     public override void EndMoveBehavior()
     {
-        base.EndMoveBehavior();
 
         SetModeWait();
 
@@ -670,6 +669,13 @@ public class Player : CubeMovable
                 hit.transform.GetComponent<CubePush>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
             }
         }
+    }
+
+    public override void DoActionFall()
+    {
+        base.DoActionFall();
+
+        if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
 
     private IEnumerator MobileUpAxisBehaviour()
