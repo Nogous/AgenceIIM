@@ -9406,9 +9406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2869b1bf632624c46a6b1e6cfe6a8b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeType: 0
-  initialPosition: {x: 0, y: 0, z: 0}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
   MoveList: 
   _moveTime: 0.2
   orientation: {x: 0, y: 0, z: 1}
@@ -9416,6 +9413,7 @@ MonoBehaviour:
   teleportDestination: {fileID: 0}
   particleDeath: {fileID: 7111025012622286692, guid: 87ebd932ac8e65f49b2e0f00a711cc56,
     type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
   faceColor:
   - {fileID: 4906236030788149722}
   - {fileID: 4906236028996133042}
@@ -14480,16 +14478,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7416961636240684914}
-  m_LocalRotation: {x: 0.49846977, y: 0.4621983, z: -0.5300448, w: 0.5069055}
-  m_LocalPosition: {x: 0, y: 0, z: 3.018}
+  m_LocalRotation: {x: 0.5032748, y: 0.4967036, z: -0.4967036, w: 0.5032748}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.055834185, y: 0.055834185, z: 0.055834185}
   m_Children: []
   m_Father: {fileID: 7416961636985700167}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 84.45801, y: -38.289, z: -127.536}
+  m_LocalEulerAnglesHint: {x: 90, y: -38.289, z: -127.536}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -245.489, y: -133.488}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7416961636240684913
@@ -14554,7 +14552,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7416961636985700166}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7416961636240684915}
@@ -14563,8 +14561,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 245.5, y: 133.5}
-  m_SizeDelta: {x: 501, y: 273}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7416961636985700170
 Canvas:
