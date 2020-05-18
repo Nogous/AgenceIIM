@@ -91,9 +91,9 @@ GameObject:
   - component: {fileID: 8681370395756825911}
   - component: {fileID: 8681370395756825908}
   - component: {fileID: 8681370395756825909}
-  - component: {fileID: 2349845836738792982}
+  - component: {fileID: 1479932517590479279}
   m_Layer: 10
-  m_Name: Caisse
+  m_Name: Cube_Detonator
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,7 +140,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 447615d9cd56c6846851175cef4ad1cb, type: 2}
+  - {fileID: 2100000, guid: 6d9377af2d1665a4dafb5af51e0c68be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -173,7 +173,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2349845836738792982
+--- !u!114 &1479932517590479279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,34 +182,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8681370395756825898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
+  m_Script: {fileID: 11500000, guid: 9620a6c62602d5e418b1ba6fa81877ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemy: 0
-  isEnemyMirror: 0
-  isEnemyMoving: 0
-  isCleaningBox: 0
-  isDashBox: 0
-  isWall: 0
-  isPushBlock: 1
-  isTnt: 0
-  isTrigger: 0
-  isTeleport: 0
-  teleportDestination: {fileID: 0}
-  tntDelay: 1
-  associatedTnt: {fileID: 0}
-  particleDeath: {fileID: 7111025012622286692, guid: 87ebd932ac8e65f49b2e0f00a711cc56,
-    type: 3}
-  particleTnt: {fileID: 5040198234666060554, guid: b3654cc2cc291854a91f013656ea7a39,
-    type: 3}
-  dashOrientation: 0
-  enemyColor: {r: 0, g: 0, b: 0, a: 0}
-  InvertXAxis: 0
-  InvertZAxis: 0
-  isBreakable: 0
-  colorPotencial: 0
-  color: {r: 1, g: 1, b: 1, a: 1}
-  takeColor: {fileID: 1979146080206189090}
   stain: {fileID: 7831988429951475340}
   fadeCurve:
     serializedVersion: 2
@@ -219,19 +194,19 @@ MonoBehaviour:
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 2
-      value: 0
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 34
+      tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -243,15 +218,15 @@ MonoBehaviour:
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 136
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 2
+      time: 1
       value: 0
-      inSlope: -0.5
-      outSlope: -0.5
+      inSlope: -1
+      outSlope: -1
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -259,15 +234,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MoveList: 
-  _moveTime: 0.2
-  orientation: {x: 0, y: 0, z: 1}
-  speed: 5
-  explosionForce: 50
-  explosionRadius: 4
-  explosionUpward: 0.04
-  cubeSize: 0.2
-  cubesInRow: 5
+  associatedTnt: {fileID: 0}
 --- !u!1001 &6266271938745620646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -380,17 +347,16 @@ PrefabInstance:
       propertyPath: lengthInSec
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8533035266556283881, guid: 8b4e95f013ffa5946b58a7fab596f4dc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b4e95f013ffa5946b58a7fab596f4dc, type: 3}
 --- !u!4 &6931080010817128432 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3946949518766808918, guid: 8b4e95f013ffa5946b58a7fab596f4dc,
-    type: 3}
-  m_PrefabInstance: {fileID: 6266271938745620646}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1979146080206189090 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5584767000793950852, guid: 8b4e95f013ffa5946b58a7fab596f4dc,
     type: 3}
   m_PrefabInstance: {fileID: 6266271938745620646}
   m_PrefabAsset: {fileID: 0}

@@ -13,7 +13,11 @@ public class Enemy : CubeMovable
     public Color enemyColor;
     private Color initColor;
 
-    private void Awake()
+    public List<moveEnum> MoveList = new List<moveEnum>();
+    protected int CurrentMove = 0;
+    protected bool revertMove = false;
+
+    public override void Awake()
     {
         SetModeVoid();
 
@@ -34,9 +38,9 @@ public class Enemy : CubeMovable
     }
 
     // Start is called before the first frame update
-    public override void OnStart()
+    void Start()
     {
-        base.OnStart();
+        GameManager.instance.OnResetLevel += ResetCube;
 
         if (isEnemyMirror || isEnemyMoving)Player.OnMove += SetModeMove;
     }

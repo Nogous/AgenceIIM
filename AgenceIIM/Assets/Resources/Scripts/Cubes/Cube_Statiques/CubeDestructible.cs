@@ -5,7 +5,7 @@ using UnityEngine;
 public class CubeDestructible : CubeStatic
 {
 
-    void Awake()
+    public override void Awake()
     {
         cubeType = CubeType.Destructible;
     }

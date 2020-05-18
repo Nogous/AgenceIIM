@@ -5,7 +5,7 @@ using UnityEngine;
 public class CubeDetonator : CubeStatic
 {
     public CubeTNT associatedTnt;
-    void Awake()
+    public override void Awake()
     {
         cubeType = CubeType.Detonator;
     }

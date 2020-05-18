@@ -7,7 +7,7 @@ public class CubePaint : CubeStatic
     [Header("Options des couleurs au sol")]
     [SerializeField] private Color color = Color.white;
     public ParticleSystem takeColor = null;
-    void Awake()
+    public override void Awake()
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;

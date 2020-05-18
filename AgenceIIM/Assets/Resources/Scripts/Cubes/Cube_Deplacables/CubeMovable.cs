@@ -20,13 +20,8 @@ public enum moveEnum
 };
 
 public class CubeMovable : Cube
-{
-    public List<moveEnum> MoveList = new List<moveEnum>();
-    protected int CurrentMove = 0;
-    protected bool revertMove = false;
-
+{ 
     [SerializeField] protected float _moveTime = 0.2f;
-
 
     protected float _elapsedTime = 0;
     public Rewired.Player replayer;
@@ -54,7 +49,7 @@ public class CubeMovable : Cube
     [SerializeField] protected ParticleSystem particleDeath = null;
     public Color color = Color.white;
 
-    private void Awake()
+    public override void Awake()
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;

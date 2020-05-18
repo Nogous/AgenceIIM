@@ -13,25 +13,28 @@ public class CubeStatic : Cube
     [SerializeField] private AnimationCurve fadeCurve = null;
     [SerializeField] private AnimationCurve shrinkCurve = null;
 
+    private float elapsedTime = 0;
+
+    public override void Awake(){
+        cubeType = CubeType.Base;
+    }
 
     public void ActivateStain(Color tint)
-    {/*
+    {
         if (stain == null) return;
-        if (colorPotencial == 0 && !isEnemy)
-        {
-            stain.SetActive(true);
-            stain.GetComponent<Renderer>().material.color = tint;
+        
+        stain.SetActive(true);
+        stain.GetComponent<Renderer>().material.color = tint;
 
-            stain.transform.localScale = stainScale;
-            elapsedTime = 0;
+        stain.transform.localScale = stainScale;
+        elapsedTime = 0;
 
-            StopCoroutine(StainRemove());
-            StartCoroutine(StainRemove());
-        }*/
+        StopCoroutine(StainRemove());
+        StartCoroutine(StainRemove());
     }
 
     private IEnumerator StainRemove()
-    {/*
+    {
         Color colorFade = stain.GetComponent<Renderer>().material.color;
         Vector3 sizeShrink = stainScale;
 
@@ -50,12 +53,12 @@ public class CubeStatic : Cube
         }
 
         StainReset();
-        */
+        
         yield return null;
     }
 
     private void StainReset()
-    {/*
+    {
         StopCoroutine(StainRemove());
 
         stain.GetComponent<Renderer>().material.color = stainColor;
@@ -63,7 +66,7 @@ public class CubeStatic : Cube
         elapsedTime = 0;
 
         stain.SetActive(false);
-        */
+        
     }
     
 }
