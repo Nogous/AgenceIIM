@@ -583,12 +583,12 @@ public class Player : CubeMovable
             else if (hit.transform.gameObject.GetComponent<CubeDetonator>())
             {
                 CubeDetonator tmpCube = hit.transform.gameObject.GetComponent<CubeDetonator>();
-                //tmpCube.ActivateTnt();
+                tmpCube.ActivateTnt();
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
                 CubeTeleporter tmpCube = hit.transform.gameObject.GetComponent<CubeTeleporter>();
-                //gameObject.transform.position = new Vector3(tmpCube.teleportDestination.transform.position.x, tmpCube.teleportDestination.transform.position.y + 1f, tmpCube.teleportDestination.transform.position.z);
+                //transform.position = new Vector3(tmpCube.teleportDestination.transform.position.x, tmpCube.teleportDestination.transform.position.y + 1f, tmpCube.teleportDestination.transform.position.z);
             }
 
         }
@@ -662,12 +662,12 @@ public class Player : CubeMovable
         {
             if (hit.transform.GetComponent<CubeStatic>() != null && hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
-                //hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
+                hit.transform.GetComponent<CubeStatic>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
 
             }
             else if(hit.transform.GetComponent<CubePush>() != null && hit.transform.GetComponent<Renderer>().material.color == Color.white && faceColor[1].GetComponent<Renderer>().material.color != Color.white)
             {
-                //hit.transform.GetComponent<Cube>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
+                hit.transform.GetComponent<CubePush>().ActivateStain(faceColor[1].GetComponent<Renderer>().material.color);
             }
         }
     }

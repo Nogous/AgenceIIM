@@ -14,7 +14,6 @@ public class CubeTNT : CubeStatic
     public float explosionUpward = 0.04f;
 
     [SerializeField] private float tntDelay = 1f;
-    [SerializeField] private ParticleSystem particleDeath = null;
     [SerializeField] private ParticleSystem particleTnt = null;
 
     public override void Awake()
