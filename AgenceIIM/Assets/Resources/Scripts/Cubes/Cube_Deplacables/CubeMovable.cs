@@ -20,13 +20,8 @@ public enum moveEnum
 };
 
 public class CubeMovable : Cube
-{
-    public List<moveEnum> MoveList = new List<moveEnum>();
-    protected int CurrentMove = 0;
-    protected bool revertMove = false;
-
+{ 
     [SerializeField] protected float _moveTime = 0.2f;
-
 
     protected float _elapsedTime = 0;
     public Rewired.Player replayer;

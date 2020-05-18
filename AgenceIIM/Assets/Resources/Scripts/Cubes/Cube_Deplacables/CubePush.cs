@@ -12,9 +12,9 @@ public class CubePush : CubeMovable
     [SerializeField] private AnimationCurve shrinkCurve = null;
 
     // Start is called before the first frame update
-    public override void OnStart()
+    void Start()
     {
-        base.OnStart();
+        GameManager.instance.OnResetLevel += ResetCube;
 
         if (stain != null)
         {

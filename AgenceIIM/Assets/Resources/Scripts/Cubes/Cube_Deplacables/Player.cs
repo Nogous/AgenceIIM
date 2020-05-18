@@ -59,9 +59,9 @@ public class Player : CubeMovable
     }
 
     // Start is called before the first frame update
-    public override void OnStart()
+    void Start()
     {
-        base.OnStart();
+        GameManager.instance.OnResetLevel += ResetCube;
 
         if (GameManager.instance.player == null)
         {
