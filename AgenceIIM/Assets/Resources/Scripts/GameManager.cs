@@ -4,8 +4,7 @@ using Rewired;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
-
-
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +28,8 @@ public class GameManager : MonoBehaviour
     public Material rainbowMaterial = null;
     public float colorSpeed = 1f;
     private float rainbowColor = 0f;
+
+    public event Action OnResetLevel;
 
     private void Awake()
     {
@@ -146,27 +147,11 @@ public class GameManager : MonoBehaviour
         DATAnbDeath++;
 
         player.gameObject.SetActive(true);
-        player.ResetPlayer();
-        ResetCubes();
+
+        OnResetLevel();
 
         nbEnnemy = nbEnnemyInit;
     }
-
-    #region Cube
-    public void AddCube(Cube cube)
-    {
-        cubes.Add(cube);
-    }
-
-    private void ResetCubes()
-    {
-        for (int i = cubes.Count; i-->0;)
-        {
-            cubes[i].gameObject.SetActive(true);
-            cubes[i].ResetCube();
-        }
-    }
-    #endregion
 
     #region analitics
     public void DATASaveData()

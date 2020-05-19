@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4119042190230056091}
   - component: {fileID: 4119042190230056090}
   - component: {fileID: 4119042190230056093}
-  - component: {fileID: 4119042190230056089}
+  - component: {fileID: 8928110094159648044}
   m_Layer: 0
   m_Name: Color Cube
   m_TagString: Color
@@ -92,7 +92,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4119042190230056089
+--- !u!114 &8928110094159648044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,24 +101,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4119042190230056092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75498d0a2e5610a4090c901dbc13db31, type: 3}
+  m_Script: {fileID: 11500000, guid: 414f1e707e9d7a04095208bcaf931ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemy: 0
-  isEnemyMoving: 0
-  isCleaningBox: 0
-  isDashBox: 0
-  isWall: 0
-  isTnt: 0
-  isTrigger: 0
-  associatedTnt: {fileID: 0}
-  dashOrientation: 0
-  enemyColor: {r: 0.015686275, g: 0.69803923, b: 0.8509804, a: 1}
-  InvertXAxis: 0
-  InvertZAxis: 0
-  isBreakable: 0
-  colorPotencial: 20
-  color: {r: 0.015686275, g: 0.69803923, b: 0.8509804, a: 1}
   stain: {fileID: 0}
   fadeCurve:
     serializedVersion: 2
@@ -132,11 +117,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _moveTime: 0.2
-  orientation: {x: 0, y: 0, z: 1}
-  speed: 5
-  explosionForce: 50
-  explosionRadius: 4
-  explosionUpward: 0.04
-  cubeSize: 0.2
-  cubesInRow: 5
+  color: {r: 0, g: 1, b: 1, a: 1}
+  takeColor: {fileID: 0}

@@ -8,10 +8,18 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
 
-    public static void SaveLevel(Level level)
+    public static void SaveLevel(Level level, string _name = null)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/level"+ level.nameLevel + ".save";
+        string path;
+        if (_name == null)
+        {
+            path = Application.persistentDataPath + "/level" + level.nameLevel + ".save";
+        }
+        else
+        {
+            path = Application.persistentDataPath + "/level" + _name + ".save";
+        }
         FileStream stream = new FileStream(path, FileMode.Create);
 
         LevelData data = new LevelData(level);
@@ -36,7 +44,7 @@ public static class SaveSystem
         }
         else
         {
-            SaveLevel(new Level());
+            SaveLevel(new Level(), nameLevel);
             return LoadLevel(nameLevel);
         }
     }
