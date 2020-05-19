@@ -114,10 +114,10 @@ public class Player : CubeMovable
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
-                //tmpCube.Explode();
+                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
+                tmpCube.Crumble();
 
                 /*tmpColor = tmpCube.GetColor();
                 if (tmpColor != Color.white)
