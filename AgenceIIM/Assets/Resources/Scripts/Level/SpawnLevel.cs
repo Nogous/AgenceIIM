@@ -89,6 +89,11 @@ public class SpawnLevel : MonoBehaviour
 
         for (int i = 0; i < cubes.Count; i++)
         {
+            if (cubes[i] == null)
+            {
+                Debug.Log("les cubes dans spawn level sont mal set");
+                return;
+            }
             cubes[i].transform.position = cubePos[i] + Vector3.up * hightSpawn;
         }
         for (int i = 0; i < nbsimultaneousFallingObject; i++)
