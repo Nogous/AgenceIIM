@@ -9,32 +9,25 @@ public class Enemy : CubeMovable
 
     [SerializeField] public bool InvertXAxis = false;
     [SerializeField] public bool InvertZAxis = false;
-
-    public Color enemyColor;
-    private Color initColor;
+    
+    [HideInInspector] public Color initColor;
 
     public List<moveEnum> MoveList = new List<moveEnum>();
     protected int CurrentMove = 0;
     protected bool revertMove = false;
 
-    public override void Awake()
+    public override void OnAwake()
     {
+        base.OnAwake();
+
         SetModeVoid();
 
         initColor = color;
-        enemyColor = color;
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
 
         if (color != Color.white)
         {
             gameObject.GetComponent<Renderer>().material.color = color;
         }
-
-        vectors.Add(Vector3.forward);
-        vectors.Add(Vector3.back);
-        vectors.Add(Vector3.left);
-        vectors.Add(Vector3.right);
     }
 
     // Start is called before the first frame update

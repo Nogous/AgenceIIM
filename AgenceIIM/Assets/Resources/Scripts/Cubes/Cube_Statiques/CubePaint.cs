@@ -12,11 +12,9 @@ public class CubePaint : CubeStatic
     public GameObject mask;
     public Vector3 initalScale;
 
-    public override void Awake()
+    public override void OnAwake()
     {
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
-
+        base.OnAwake();
         initalScale = mask.transform.localScale;
 
         cubeType = CubeType.Paint;

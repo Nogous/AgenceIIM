@@ -5,9 +5,11 @@ using UnityEngine;
 public class CubeDestructible : CubeStatic
 {
     [SerializeField] private ParticleSystem particle = null;
-
-    public override void Awake()
+    
+    public override void OnAwake()
     {
+        base.OnAwake();
+
         cubeType = CubeType.Destructible;
     }
     

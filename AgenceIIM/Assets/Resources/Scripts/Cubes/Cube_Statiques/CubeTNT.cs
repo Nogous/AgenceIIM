@@ -16,8 +16,11 @@ public class CubeTNT : CubeStatic
     [SerializeField] private float tntDelay = 1f;
     [SerializeField] private ParticleSystem particleTnt = null;
 
-    public override void Awake()
+
+    public override void OnAwake()
     {
+        base.OnAwake();
+        
         cubeType = CubeType.TNT;
     }
 
