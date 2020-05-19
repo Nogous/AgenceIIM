@@ -539,19 +539,30 @@ public class Player : CubeMovable
 
                 Color tmpColor = faceColor[1].GetComponent<Renderer>().material.color;
 
-                if (tmpColor != baseColor)
+                if(tmpCube.colorPotencial > 0)
                 {
-                    if (faceColor[1].GetComponent<Renderer>().material.color != tmpCube.GetPaintColor())
+                    if (tmpColor != baseColor)
                     {
-                        SetModeVoid();
-                        StartCoroutine(Death());
-                        Explode();
+                        if (faceColor[1].GetComponent<Renderer>().material.color != tmpCube.GetPaintColor())
+                        {
+                            SetModeVoid();
+                            StartCoroutine(Death());
+                            Explode();
+                        }
+                    }
+                    else
+                    {
+                        faceColor[1].GetComponent<Renderer>().material.color = tmpCube.GetPaintColor();
+                        //reduce Color
+                        /*tmpCube.colorPotencial -= 25;
+                        tmpCube.GetComponent<Renderer>().material.color = Color.Lerp(tmpCube.GetComponent<Renderer>().material.color, Color.white, 1 - (float)tmpCube.colorPotencial / 100);*/
+                        //Hide Color
+
+                        tmpCube.colorPotencial -= 25;
+                        tmpCube.mask.transform.localScale = Vector3.Lerp(tmpCube.initalScale, Vector3.zero, 1 - (float)tmpCube.colorPotencial / 100);
                     }
                 }
-                else
-                {
-                    faceColor[1].GetComponent<Renderer>().material.color = tmpCube.GetPaintColor();
-                }
+                
             }
             else if (hit.transform.gameObject.GetComponent<CubeCleaner>())
             {

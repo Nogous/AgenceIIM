@@ -46,7 +46,7 @@ public class Cube : MonoBehaviour
         GameManager.instance.OnResetLevel += ResetCube;
     }
 
-    public void ResetCube()
+    virtual public void ResetCube()
     {
         transform.position = initialPosition;
         transform.rotation = initialRotation;
