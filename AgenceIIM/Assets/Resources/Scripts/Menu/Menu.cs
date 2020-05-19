@@ -4,97 +4,200 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class LevelInfo
-{
-    public GameObject star0;
-    public GameObject star1;
-    public GameObject star2;
 
-    public GameObject starUnlock0;
+[System.Serializable]
+public class Stars
+{
     public GameObject starUnlock1;
     public GameObject starUnlock2;
-
-    public LevelMenu level = null;
-}
-
-[System.Serializable]
-public class WorldInfo
-{
-    public GameObject worldCanvas;
-    public List<LevelInfo> levels;
-
-    public Text nameLeveltext = null;
-    public Text nbcouptext = null;
-    public Text nbEnnemietext = null;
+    public GameObject starUnlock3;
 }
 
 public class Menu : MonoBehaviour
 {
-    public GameObject mainMenuCanvas = null;
-    public GameObject worldChoseCanvas = null;
-    public GameObject levelhoseCanvas = null;
+    // data des niveau
+    private int[] starsMonde1 = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int[] starsMonde2 = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int[] starsMonde3 = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-    public int nbLevel = 11;
-    private int currentId = 0;
-    private int currentMonde = 0;
+    // diferentes pages
+    public GameObject mainMenuCanvas = null;
+    public GameObject worldCanvas = null;
+    public GameObject levelCanvas = null;
 
     // affichage info level
-    public List<WorldInfo> mondes;
+    public Stars[] stars = new Stars[10];
+    private int currentId = 0;
+    private int currentWorld = 0;
+
+    public LevelMenu[] levelsMonde1 = new LevelMenu[10];
+    public LevelMenu[] levelsMonde2 = new LevelMenu[10];
+    public LevelMenu[] levelsMonde3 = new LevelMenu[10];
+
+    public Text nameLeveltext = null;
+    public Text nbcouptext = null;
+    public Text nbEnnemietext = null;
+    public GameObject[] starsSelected = new GameObject[3];
 
     public void OnClickMainMenu()
     {
         mainMenuCanvas.SetActive(true);
-        worldChoseCanvas.SetActive(false);
-        levelhoseCanvas.SetActive(false);
+        worldCanvas.SetActive(false);
+        levelCanvas.SetActive(false);
     }
 
     public void OnClickWorldSelection()
     {
         mainMenuCanvas.SetActive(false);
-        worldChoseCanvas.SetActive(true);
-        levelhoseCanvas.SetActive(false);
+        worldCanvas.SetActive(true);
+        levelCanvas.SetActive(false);
     }
 
     public void OnClickSelectWorld(int id)
     {
-        currentMonde = id;
-        levelhoseCanvas.SetActive(true);
-        worldChoseCanvas.SetActive(false);
-        for (int i = mondes.Count; i -->0;)
+        currentWorld = id;
+        mainMenuCanvas.SetActive(false);
+        levelCanvas.SetActive(true);
+        worldCanvas.SetActive(false);
+
+        int[] currentList;
+
+        switch (id)
         {
-            mondes[i].worldCanvas.SetActive(false);
+            case 1:
+                currentList = starsMonde1;
+                break;
+            case 2:
+                currentList = starsMonde2;
+                break;
+            case 3:
+                currentList = starsMonde3;
+                break;
+            default:
+                currentList = new int[10] {0,0,0,0,0,0,0,0,0,0};
+                break;
         }
-        mondes[id].worldCanvas.SetActive(true);
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (currentList[i] <= 0)
+            {
+                stars[i].starUnlock1.SetActive(false);
+                stars[i].starUnlock2.SetActive(false);
+                stars[i].starUnlock3.SetActive(false);
+            }
+            else if (currentList[i] == 1)
+            {
+                stars[i].starUnlock1.SetActive(true);
+                stars[i].starUnlock2.SetActive(false);
+                stars[i].starUnlock3.SetActive(false);
+            }
+            else if(currentList[i] == 2)
+            {
+                stars[i].starUnlock1.SetActive(true);
+                stars[i].starUnlock2.SetActive(true);
+                stars[i].starUnlock3.SetActive(false);
+            }
+            else
+            {
+                stars[i].starUnlock1.SetActive(true);
+                stars[i].starUnlock2.SetActive(true);
+                stars[i].starUnlock3.SetActive(true);
+            }
+        }
     }
 
     public void OnClickStartLevel()
     {
-        SceneManager.LoadScene("Level " + currentId + ".1");
+        SceneManager.LoadScene(currentWorld.ToString() + "-" + currentId.ToString());
     }
+
+    private LevelMenu currentLevel = null;
 
     public void OnclikSelecteLevel(int i)
     {
         currentId = i;
-        /*
-        if (currentId >= nbLevel)
-        {
-            currentId -= nbLevel;
-        }
-        if (currentId < 0)
-        {
-            currentId = nbLevel + i;
-        }
-        */
-        //mondes[currentMonde].nameLeveltext.text = "Level "+ currentMonde+"-" + currentId;
-        if (mondes[currentMonde].levels[i].level != null)
-        {
-            mondes[currentMonde].levels[i].level.LoadLevel();
-        }
-    }
 
-    public void SpawnLevelUI(int id)
-    {
+        nameLeveltext.text = "Niveau : " + currentWorld.ToString() + "-" + currentId.ToString();
 
+        int[] currentList0;
+
+        switch (currentWorld)
+        {
+            case 1:
+                currentList0 = starsMonde1;
+                break;
+            case 2:
+                currentList0 = starsMonde2;
+                break;
+            case 3:
+                currentList0 = starsMonde3;
+                break;
+            default:
+                currentList0 = new int[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                break;
+        }
+
+        if (currentList0[i] <= 0)
+        {
+            starsSelected[0].SetActive(false);
+            starsSelected[1].SetActive(false);
+            starsSelected[2].SetActive(false);
+        }
+        else if (currentList0[i] == 1)
+        {
+            starsSelected[0].SetActive(true);
+            starsSelected[1].SetActive(false);
+            starsSelected[2].SetActive(false);
+        }
+        else if (currentList0[i] == 2)
+        {
+            starsSelected[0].SetActive(true);
+            starsSelected[1].SetActive(true);
+            starsSelected[2].SetActive(false);
+        }
+        else
+        {
+            starsSelected[0].SetActive(true);
+            starsSelected[1].SetActive(true);
+            starsSelected[2].SetActive(true);
+        }
+
+        LevelMenu[] currentList;
+
+        switch (currentWorld)
+        {
+            case 1:
+                currentList = levelsMonde1;
+                break;
+            case 2:
+                currentList = levelsMonde2;
+                break;
+            case 3:
+                currentList = levelsMonde3;
+                break;
+            default:
+                currentList = new LevelMenu[0];
+                break;
+        }
+
+        if (currentLevel != null)
+        {
+            if (currentLevel.cubes.Count > 0)
+            {
+                currentLevel.cubes[0].transform.parent.gameObject.SetActive(false);
+            }
+        }
+
+        Debug.Log(currentList.Length);
+        if (currentList.Length >= i)
+        {
+            currentLevel = currentList[i - 1];
+            if (currentLevel != null)
+            {
+                currentLevel.cubes[0].transform.parent.gameObject.SetActive(true);
+                currentLevel.LoadLevel();
+            }
+        }
     }
 }
