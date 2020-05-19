@@ -51,9 +51,9 @@ public class CubeTNT : CubeStatic
             if (Physics.Raycast(transform.position, vectorsTNT[i], out hit, 1f))
             {
 
-                if (hit.transform.gameObject.GetComponent<CubeDestructible>())
+                if (hit.transform.gameObject.GetComponent<Cube>())
                 {
-                    CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
+                    Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
                     tmpCube.gameObject.SetActive(false);
                 }
@@ -70,9 +70,9 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[0] + vectorsTNT[2], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
                 tmpCube.gameObject.SetActive(false);
             }
@@ -89,9 +89,9 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[0] + vectorsTNT[3], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
                 tmpCube.gameObject.SetActive(false);
             }
@@ -107,9 +107,9 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[1] + vectorsTNT[2], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
                 tmpCube.gameObject.SetActive(false);
             }
@@ -125,9 +125,9 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[1] + vectorsTNT[3], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
+            if (hit.transform.gameObject.GetComponent<Cube>())
             {
-                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
+                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
 
                 tmpCube.gameObject.SetActive(false);
             }
