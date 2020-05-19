@@ -24,6 +24,10 @@ public class CubePaint : CubeStatic
         {
             gameObject.GetComponent<Renderer>().material.color = color;
         }
+
+        ParticleSystem.MainModule mainMod = GetComponentInChildren<ParticleSystem>().main;
+
+        mainMod.startColor = color;
     }
 
     public Color GetPaintColor()
