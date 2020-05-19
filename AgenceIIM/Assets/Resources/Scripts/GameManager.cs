@@ -149,6 +149,7 @@ public class GameManager : MonoBehaviour
         player.gameObject.SetActive(true);
 
         OnResetLevel();
+        Debug.Log("Reset");
 
         nbEnnemy = nbEnnemyInit;
     }
