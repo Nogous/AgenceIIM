@@ -49,10 +49,9 @@ public class CubeMovable : Cube
     [SerializeField] protected ParticleSystem particleDeath = null;
     public Color color = Color.white;
 
-    public override void Awake()
+    public override void OnAwake()
     {
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
+        base.OnAwake();
 
         vectors.Add(Vector3.forward);
         vectors.Add(Vector3.back);

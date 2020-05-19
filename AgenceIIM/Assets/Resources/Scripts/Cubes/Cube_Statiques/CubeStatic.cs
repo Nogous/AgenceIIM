@@ -15,10 +15,6 @@ public class CubeStatic : Cube
 
     private float elapsedTime = 0;
 
-    public override void Awake(){
-        cubeType = CubeType.Base;
-    }
-
     public void ActivateStain(Color tint)
     {
         if (stain == null) return;

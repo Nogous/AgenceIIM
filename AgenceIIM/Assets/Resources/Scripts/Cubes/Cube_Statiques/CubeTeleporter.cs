@@ -5,8 +5,10 @@ using UnityEngine;
 public class CubeTeleporter : CubeStatic
 {
     [SerializeField] private Cube teleportDestination = null;
-    public override void Awake()
+
+    public override void OnAwake()
     {
+        base.OnAwake();
         cubeType = CubeType.Teleporter;
     }
 
