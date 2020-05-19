@@ -25,7 +25,6 @@ public class VideoManager : MonoBehaviour
         videoPlayer.targetTexture = texture;
         mat.mainTexture = texture;
         obj.GetComponent<Renderer>().material = mat;
-        image.sprite = mat.;
 
         Play();
     }
