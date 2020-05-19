@@ -8,17 +8,22 @@ using UnityEngine.EventSystems;
 public class VideoManager : MonoBehaviour
 {
     public VideoClip video;
-    private VideoPlayer videoPlayer;
-    public GameObject obj;
+
+    public VideoPlayer videoPlayer;
+    private GameObject obj;
     private Material mat;
     private RenderTexture texture;
     private Image image;
 
     private void Start()
     {
+        obj = GetComponent<Transform>().gameObject;
         obj.AddComponent<VideoPlayer>();
-        videoPlayer = obj.GetComponent<VideoPlayer>();
-        videoPlayer.playOnAwake = false;
+        if (videoPlayer == null)
+        {
+            videoPlayer = obj.GetComponent<VideoPlayer>();
+            videoPlayer.playOnAwake = false;
+        }
         videoPlayer.clip = video;
         mat = new Material(obj.GetComponent<Renderer>().material);
         texture = new RenderTexture((int)obj.transform.localScale.x * 640, (int)obj.transform.localScale.y*640, 640);
