@@ -18,15 +18,13 @@ public class Menu : MonoBehaviour
     public GameObject levelCanvas = null;
 
     // affichage info level
-    public levelUI[] levelMonde1;
-    public levelUI[] levelMonde2;
-    public levelUI[] levelMonde3;
+    public LevelUI[] levelUIMonde1;
+    public LevelUI[] levelUIMonde2;
+    public LevelUI[] levelUIMonde3;
     private int currentId = 0;
     private int currentWorld = 0;
 
-    public LevelMenu[] levelsMonde1;
-    public LevelMenu[] levelsMonde2;
-    public LevelMenu[] levelsMonde3;
+    public LevelMenu[] levelObjMonde1;
 
     public Text nameLeveltext = null;
     public Text nbcouptext = null;
@@ -37,16 +35,17 @@ public class Menu : MonoBehaviour
     {
         OnClickMainMenu();
 
-        starsMonde1 = new int[levelMonde1.Length];
-        starsMonde2 = new int[levelMonde2.Length];
-        starsMonde3 = new int[levelMonde3.Length];
+        starsMonde1 = new int[levelUIMonde1.Length];
+        starsMonde2 = new int[levelUIMonde2.Length];
+        starsMonde3 = new int[levelUIMonde3.Length];
 
         int index = 1;
 
-        for (int i = 0; i < levelMonde1.Length; i++)
+        for (int i = 0; i < levelUIMonde1.Length; i++)
         {
-            levelMonde1[i].idLevelText.text = index.ToString();
-            levelMonde1[i].idLevel = index;
+            levelUIMonde1[i].idLevelText.text = index.ToString();
+            levelUIMonde1[i].idLevel = index;
+            index++;
         }
     }
 
@@ -86,6 +85,32 @@ public class Menu : MonoBehaviour
                 break;
         }
 
+        for (int i = 0; i < currentList.Length; i++)
+        {
+            if (levelUIMonde1[i].locker != null)
+            {
+                levelUIMonde1[i].locker.SetActive(true);
+            }
+
+            if (currentList[i] > 0)
+            {
+                if (levelUIMonde1[i].locker != null)
+                {
+                    levelUIMonde1[i].locker.SetActive(false);
+                }
+
+                levelUIMonde1[i].starUnlock1.SetActive(true);
+                if (currentList[i] > 1)
+                {
+                    levelUIMonde1[i].starUnlock2.SetActive(true);
+                    if (currentList[i] > 2)
+                    {
+                        levelUIMonde1[i].starUnlock3.SetActive(true);
+                    }
+                }
+            }
+        }
+
     }
 
     public void OnClickStartLevel()
@@ -97,46 +122,28 @@ public class Menu : MonoBehaviour
 
     public void OnclikSelecteLevel(int i)
     {
-        currentId = i;
+        currentId = i-1;
 
         nameLeveltext.text = "Niveau : " + currentWorld.ToString() + "-" + currentId.ToString();
 
-        int[] currentList0;
 
-
-        LevelMenu[] currentList;
-
-        switch (currentWorld)
-        {
-            case 1:
-                currentList = levelsMonde1;
-                break;
-            case 2:
-                currentList = levelsMonde2;
-                break;
-            case 3:
-                currentList = levelsMonde3;
-                break;
-            default:
-                currentList = new LevelMenu[0];
-                break;
-        }
+        LevelMenu[] currentList = levelObjMonde1;
 
         if (currentLevel != null)
         {
             if (currentLevel.cubes.Count > 0)
             {
-                currentLevel.cubes[0].transform.parent.gameObject.SetActive(false);
+                currentLevel.gameObject.SetActive(false);
             }
         }
 
         Debug.Log(currentList.Length);
-        if (currentList.Length >= i)
+        if (currentList.Length > currentId)
         {
-            currentLevel = currentList[i - 1];
+            currentLevel = currentList[currentId];
             if (currentLevel != null)
             {
-                currentLevel.cubes[0].transform.parent.gameObject.SetActive(true);
+                currentLevel.gameObject.SetActive(true);
                 currentLevel.LoadLevel();
             }
         }
