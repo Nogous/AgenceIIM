@@ -138,7 +138,7 @@ public class Menu : MonoBehaviour
         }
 
         Debug.Log(currentList.Length);
-        if (currentList.Length > i)
+        if (currentList.Length > currentId)
         {
             currentLevel = currentList[currentId];
             if (currentLevel != null)
