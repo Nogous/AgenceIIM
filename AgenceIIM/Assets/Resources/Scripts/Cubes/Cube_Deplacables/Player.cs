@@ -621,13 +621,13 @@ public class Player : CubeMovable
             }
             else if (hit.transform.gameObject.GetComponent<CubeDetonator>())
             {
-                CubeDetonator tmpCube = hit.transform.gameObject.GetComponent<CubeDetonator>();
-                tmpCube.ActivateTnt();
+                CubeDetonator tmpDetonator = hit.transform.gameObject.GetComponent<CubeDetonator>();
+                tmpDetonator.ActivateTnt();
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
-                CubeTeleporter tmpCube = hit.transform.gameObject.GetComponent<CubeTeleporter>();
-                //transform.position = new Vector3(tmpCube.teleportDestination.transform.position.x, tmpCube.teleportDestination.transform.position.y + 1f, tmpCube.teleportDestination.transform.position.z);
+                CubeTeleporter tmpTeleporter = hit.transform.gameObject.GetComponent<CubeTeleporter>();
+                tmpTeleporter.TeleportPlayer(this);
             }
 
         }

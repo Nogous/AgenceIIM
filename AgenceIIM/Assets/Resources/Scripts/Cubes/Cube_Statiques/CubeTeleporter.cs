@@ -16,4 +16,11 @@ public class CubeTeleporter : CubeStatic
     {
         return teleportDestination;
     }
+
+    public void TeleportPlayer(Player player){
+        player.gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
+        /*Ligne de code pour le son de teleport
+        AudioManager.instance.Play(pouet); 
+        */
+    }
 }
