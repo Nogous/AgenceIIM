@@ -84,9 +84,27 @@ public class Player : CubeMovable
         }
     }
 
+    private bool spwanEnded = false;
+    [HideInInspector] public bool videoEnded = true;
+
+    public void SpawnLevelEnded()
+    {
+        spwanEnded = true;
+        StartPlayer();
+    }
+
+    public void VideoTutoEnded()
+    {
+        videoEnded = true;
+        StartPlayer();
+    }
+
     public void StartPlayer()
     {
-        SetModeWait();
+        if (spwanEnded && videoEnded)
+        {
+            SetModeWait();
+        }
     }
 
     void OnDestroy()

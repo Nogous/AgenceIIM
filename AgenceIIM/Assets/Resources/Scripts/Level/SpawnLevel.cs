@@ -146,7 +146,7 @@ public class SpawnLevel : MonoBehaviour
             isFall[i] = true;
         }
         
-        GameManager.instance.player.StartPlayer();
+        GameManager.instance.player.SpawnLevelEnded();
     }
 
     public void StartUnPopLevel()

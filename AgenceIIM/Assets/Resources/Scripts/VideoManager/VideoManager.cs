@@ -17,6 +17,7 @@ public class VideoManager : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.player.videoEnded = false;
         obj = GetComponent<Transform>().gameObject;
         obj.AddComponent<VideoPlayer>();
         if (videoPlayer == null)
@@ -44,9 +45,13 @@ public class VideoManager : MonoBehaviour
         videoPlayer.Pause();
     }
 
-    public void Stop()
+    public void Stop(bool closeVideo = false)
     {
         videoPlayer.Stop();
+        if (closeVideo)
+        {
+            GameManager.instance.player.VideoTutoEnded();
+        }
     }
 
     public void Restart()
