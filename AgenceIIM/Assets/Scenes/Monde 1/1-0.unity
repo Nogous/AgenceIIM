@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2793,6 +2793,16 @@ PrefabInstance:
       propertyPath: colorPotencial
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 690699617375627272, guid: 4e2a3197969dcda47b33c119a35f2dd5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171927545176045969, guid: 4e2a3197969dcda47b33c119a35f2dd5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8681370395756825898, guid: 4e2a3197969dcda47b33c119a35f2dd5,
         type: 3}
       propertyPath: m_Name
@@ -3094,6 +3104,12 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 396202246}
+    - target: {fileID: 4128525718030276995, guid: 58c7258149ec3314282b7b3382cc6fd9,
+        type: 3}
+      propertyPath: video
+      value: 
+      objectReference: {fileID: 32900000, guid: bd7572f57f1402543a8b05e607821dce,
+        type: 3}
     - target: {fileID: 4128525718030276998, guid: 58c7258149ec3314282b7b3382cc6fd9,
         type: 3}
       propertyPath: m_TargetCamera
