@@ -48,6 +48,7 @@ public class Player : CubeMovable
 
     public override void OnAwake()
     {
+        videoEnded = true;
         base.OnAwake();
 
         SetModeVoid();
@@ -85,7 +86,7 @@ public class Player : CubeMovable
     }
 
     private bool spwanEnded = false;
-    [HideInInspector] public bool videoEnded = true;
+    [HideInInspector]public bool videoEnded;
 
     public void SpawnLevelEnded()
     {
