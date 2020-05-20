@@ -55,6 +55,8 @@ public class Cube : MonoBehaviour
     {
         transform.position = initialPosition;
         transform.rotation = initialRotation;
+
+        gameObject.SetActive(true);
     }
 
     public CubeType GetCubeType()
