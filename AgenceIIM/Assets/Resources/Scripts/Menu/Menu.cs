@@ -89,7 +89,7 @@ public class Menu : MonoBehaviour
         {
             if (levelUIMonde1[i].locker != null)
             {
-                levelUIMonde1[i].locker.SetActive(true);
+                levelUIMonde1[i].locker.SetActive(false);
             }
 
             if (currentList[i] > 0)
