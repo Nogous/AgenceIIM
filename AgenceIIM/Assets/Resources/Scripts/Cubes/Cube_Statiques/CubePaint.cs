@@ -8,6 +8,7 @@ public class CubePaint : CubeStatic
     [SerializeField] private Color color = Color.white;
     public ParticleSystem takeColor = null;
     public float colorPotencial = 100;
+    public float initColorPotencial;
 
     public GameObject mask;
     public Vector3 initalScale;
@@ -16,6 +17,7 @@ public class CubePaint : CubeStatic
     {
         base.OnAwake();
         initalScale = mask.transform.localScale;
+        initColorPotencial = colorPotencial;
 
         cubeType = CubeType.Paint;
         if (color != Color.white)
@@ -38,5 +40,6 @@ public class CubePaint : CubeStatic
         base.ResetCube();
 
         mask.transform.localScale = initalScale;
+        colorPotencial = initColorPotencial;
     }
 }

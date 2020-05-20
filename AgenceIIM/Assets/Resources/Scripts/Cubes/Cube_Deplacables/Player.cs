@@ -72,6 +72,17 @@ public class Player : CubeMovable
         SwipeDetector.OnSwipe += ProcessMobileInput;
     }
 
+    public override void ResetCube()
+    {
+        base.ResetCube();
+
+        StartPlayer();
+        for (int i = 6; i-->0;)
+        {
+            faceColor[i].material.color = initColors[i];
+        }
+    }
+
     public void StartPlayer()
     {
         SetModeWait();
@@ -395,14 +406,13 @@ public class Player : CubeMovable
 
         SetModeVoid();
 
-        gameObject.SetActive(false);
 
         CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakePlayer, MagnShakePlayer));
         
         AudioManager.instance.Play("Death");
-        yield return new WaitForSeconds(2f);
 
-        GameManager.instance.ResetParty();
+        GameManager.instance.ResetParty(2f);
+        gameObject.SetActive(false);
     }
 
     #region Move
@@ -680,7 +690,6 @@ public class Player : CubeMovable
     public override void DoActionFall()
     {
         base.DoActionFall();
-
         if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
 

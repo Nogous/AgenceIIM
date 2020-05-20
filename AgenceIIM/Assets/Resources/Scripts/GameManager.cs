@@ -142,16 +142,21 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void ResetParty()
+    public void ResetParty(float time = 0)
     {
         DATAnbDeath++;
 
-        player.gameObject.SetActive(true);
+        StartCoroutine(DoReset(time));
+    }
+
+    private IEnumerator DoReset(float time = 0)
+    {
+        yield return new WaitForSeconds(time);
 
         OnResetLevel();
-        Debug.Log("Reset");
-
         nbEnnemy = nbEnnemyInit;
+        player.gameObject.SetActive(true);
+        Debug.Log("Reset");
     }
 
     #region analitics
