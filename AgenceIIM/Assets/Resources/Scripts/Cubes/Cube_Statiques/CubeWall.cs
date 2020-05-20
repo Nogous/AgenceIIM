@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CubeWall : CubeStatic
 {
-    public override void Awake()
+    public override void OnAwake()
     {
+        base.OnAwake();
+
         cubeType = CubeType.Wall;
     }
 }

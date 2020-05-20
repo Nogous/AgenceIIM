@@ -26,6 +26,7 @@ public class Player : CubeMovable
     [SerializeField] private TrailRenderer trail = null;
 
     [SerializeField] private ParticleSystem Splash = null;
+    [SerializeField] private ParticleSystem Smoke = null;
 
     public static event Action<Vector3> OnMove;
 
@@ -45,17 +46,11 @@ public class Player : CubeMovable
     public float TimeShakePlayer;
     public float MagnShakePlayer;
 
-    public override void Awake()
+    public override void OnAwake()
     {
+        base.OnAwake();
+
         SetModeVoid();
-
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
-
-        vectors.Add(Vector3.forward);
-        vectors.Add(Vector3.back);
-        vectors.Add(Vector3.left);
-        vectors.Add(Vector3.right);
     }
 
     // Start is called before the first frame update
@@ -158,8 +153,8 @@ public class Player : CubeMovable
             {
                 Enemy tmpCube = hit.transform.gameObject.GetComponent<Enemy>();
 
-                Debug.Log(tmpColor + " ; enemmie :" + tmpCube.enemyColor);
-                if (tmpColor == tmpCube.enemyColor)
+                Debug.Log(tmpColor + " ; enemmie :" + tmpCube.initColor);
+                if (tmpColor == tmpCube.initColor)
                 {
                     CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakeEnnemy, MagnShakeEnnemy));
                     tmpCube.Explode();
@@ -533,6 +528,11 @@ public class Player : CubeMovable
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
+            if(faceColor[1].GetComponent<Renderer>().material.color == baseColor && !hit.transform.gameObject.GetComponent<CubePaint>())
+            {
+                Smoke.Play();
+            }
+
             if (hit.transform.gameObject.GetComponent<CubePaint>())
             {
                 CubePaint tmpCube = hit.transform.gameObject.GetComponent<CubePaint>();

@@ -30,7 +30,12 @@ public class Cube : MonoBehaviour
     protected Vector3 initialPosition;
     protected Quaternion initialRotation;
 
-    public virtual void Awake()
+    public void Awake()
+    {
+        OnAwake();
+    }
+
+    public virtual void OnAwake()
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
@@ -48,6 +53,7 @@ public class Cube : MonoBehaviour
 
     virtual public void ResetCube()
     {
+        Debug.Log(name +" : hello");
         transform.position = initialPosition;
         transform.rotation = initialRotation;
     }
