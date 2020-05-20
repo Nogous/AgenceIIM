@@ -26,6 +26,7 @@ public class Player : CubeMovable
     [SerializeField] private TrailRenderer trail = null;
 
     [SerializeField] private ParticleSystem Splash = null;
+    [SerializeField] private ParticleSystem Smoke = null;
 
     public static event Action<Vector3> OnMove;
 
@@ -537,6 +538,11 @@ public class Player : CubeMovable
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
+            if(faceColor[1].GetComponent<Renderer>().material.color == baseColor && !hit.transform.gameObject.GetComponent<CubePaint>())
+            {
+                Smoke.Play();
+            }
+
             if (hit.transform.gameObject.GetComponent<CubePaint>())
             {
                 CubePaint tmpCube = hit.transform.gameObject.GetComponent<CubePaint>();
