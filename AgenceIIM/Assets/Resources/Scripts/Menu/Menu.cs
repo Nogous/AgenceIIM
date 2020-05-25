@@ -35,9 +35,37 @@ public class Menu : MonoBehaviour
     {
         OnClickMainMenu();
 
-        starsMonde1 = new int[levelUIMonde1.Length];
-        starsMonde2 = new int[levelUIMonde2.Length];
-        starsMonde3 = new int[levelUIMonde3.Length];
+        starsMonde1 = SaveSystem.LoadPoints("starsMonde1");
+        starsMonde2 = SaveSystem.LoadPoints("starsMonde2");
+        starsMonde3 = SaveSystem.LoadPoints("starsMonde3");
+
+        if (starsMonde1.Length != levelUIMonde1.Length)
+        {
+            starsMonde1 = new int[levelUIMonde1.Length];
+            for (int i = 0; i < starsMonde1.Length; i++)
+            {
+                starsMonde1[i] = -1;
+            }
+            SaveSystem.SavePoints(starsMonde1, "starsMonde1");
+        }
+        if (starsMonde2.Length != levelUIMonde2.Length)
+        {
+            starsMonde2 = new int[levelUIMonde2.Length];
+            for (int i = 0; i < starsMonde2.Length; i++)
+            {
+                starsMonde2[i] = -1;
+            }
+            SaveSystem.SavePoints(starsMonde1, "starsMonde2");
+        }
+        if (starsMonde3.Length != levelUIMonde3.Length)
+        {
+            starsMonde3 = new int[levelUIMonde3.Length];
+            for (int i = 0; i < starsMonde3.Length; i++)
+            {
+                starsMonde3[i] = -1;
+            }
+            SaveSystem.SavePoints(starsMonde1, "starsMonde3");
+        }
 
         int index = 1;
 
