@@ -4,20 +4,30 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class StarPoints
+{
+    public int minPoints3Star;
+    public int minPoints2Star;
+}
 
 public class Menu : MonoBehaviour
 {
-    // data des niveau
+    [Header("Data Points")]
+    public StarPoints[] StarPointsMonde1;
+    public StarPoints[] StarPointsMonde2;
+    public StarPoints[] StarPointsMonde3;
+
     private int[] starsMonde1;
     private int[] starsMonde2;
     private int[] starsMonde3;
 
-    // diferentes pages
+    [Header("Pages")]
     public GameObject mainMenuCanvas = null;
     public GameObject worldCanvas = null;
     public GameObject levelCanvas = null;
 
-    // affichage info level
+    [Header("Level Info")]
     public LevelUI[] levelUIMonde1;
     public LevelUI[] levelUIMonde2;
     public LevelUI[] levelUIMonde3;
@@ -41,6 +51,7 @@ public class Menu : MonoBehaviour
 
         if (starsMonde1.Length != levelUIMonde1.Length)
         {
+            Debug.Log("reset points Mode 1");
             starsMonde1 = new int[levelUIMonde1.Length];
             for (int i = 0; i < starsMonde1.Length; i++)
             {
@@ -100,16 +111,22 @@ public class Menu : MonoBehaviour
 
         int[] currentList = new int[0];
 
+
+        StarPoints[] tmpPoints = new StarPoints[0];
+
         switch (id)
         {
             case 1:
                 currentList = starsMonde1;
+                tmpPoints = StarPointsMonde1;
                 break;
             case 2:
                 currentList = starsMonde2;
+                tmpPoints = StarPointsMonde2;
                 break;
             case 3:
                 currentList = starsMonde3;
+                tmpPoints = StarPointsMonde3;
                 break;
         }
 
@@ -117,21 +134,38 @@ public class Menu : MonoBehaviour
         {
             if (levelUIMonde1[i].locker != null)
             {
-                levelUIMonde1[i].locker.SetActive(false);
+                levelUIMonde1[i].locker.SetActive(true);
             }
+        }
 
-            if (currentList[i] > 0)
+        for (int i = 0; i < currentList.Length; i++)
+        {
+            levelUIMonde1[i].starUnlock1.SetActive(false);
+            levelUIMonde1[i].starUnlock2.SetActive(false);
+            levelUIMonde1[i].starUnlock3.SetActive(false);
+
+            if (currentList[i] >= 0)
             {
                 if (levelUIMonde1[i].locker != null)
                 {
                     levelUIMonde1[i].locker.SetActive(false);
                 }
+                if (levelUIMonde1.Length >= i)
+                {
+                    if (levelUIMonde1[i + 1].locker != null)
+                    {
+                        levelUIMonde1[i + 1].locker.SetActive(false);
+                    }
+                }
 
+                Debug.Log(currentList[i]);
                 levelUIMonde1[i].starUnlock1.SetActive(true);
-                if (currentList[i] > 1)
+
+
+                if (currentList[i] <= tmpPoints[i].minPoints2Star)
                 {
                     levelUIMonde1[i].starUnlock2.SetActive(true);
-                    if (currentList[i] > 2)
+                    if (currentList[i] <= tmpPoints[i].minPoints3Star)
                     {
                         levelUIMonde1[i].starUnlock3.SetActive(true);
                     }

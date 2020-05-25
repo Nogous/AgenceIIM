@@ -35,8 +35,10 @@ public static class SaveSystem
             if (points[idLevel] > score || points[idLevel] == -1)
             {
                 points[idLevel] = score;
+                Debug.Log(points[idLevel]);
             }
         }
+        SavePoints(points, _nameMonde);
     }
 
     public static int[] LoadPoints(string _nameMonde)
