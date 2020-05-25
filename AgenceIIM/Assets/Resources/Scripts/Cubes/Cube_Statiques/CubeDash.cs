@@ -19,6 +19,8 @@ public class CubeDash : CubeStatic
     {
         base.OnAwake();
 
+        isBreakable = false;
+
         cubeType = CubeType.Dash;
     }
 }
