@@ -10,6 +10,8 @@ public class CubeDetonator : CubeStatic
     {
         base.OnAwake();
 
+        isBreakable = false;
+
         cubeType = CubeType.Detonator;
     }
 

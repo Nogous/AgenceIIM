@@ -15,6 +15,13 @@ public class CubeStatic : Cube
 
     private float elapsedTime = 0;
 
+    protected bool isBreakable = true;
+
+    public bool IsBreakable
+    {
+        get { return isBreakable; }
+    }
+
     public void ActivateStain(Color tint)
     {
         if (stain == null) return;

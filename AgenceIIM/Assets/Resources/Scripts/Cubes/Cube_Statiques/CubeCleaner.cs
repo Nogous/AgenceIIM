@@ -8,6 +8,8 @@ public class CubeCleaner : CubeStatic
     {
         base.OnAwake();
 
+        isBreakable = false;
+
         cubeType = CubeType.Cleaner;
     }
 }
