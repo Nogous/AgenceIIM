@@ -204,6 +204,10 @@ public class Player : CubeMovable
 
     public override void EndMoveBehavior()
     {
+        if (trail != null)
+        {
+            trail.gameObject.SetActive(false);
+        }
 
         SetModeWait();
 
@@ -256,10 +260,7 @@ public class Player : CubeMovable
     private void SetModeWait()
     {
         DoAction = DoActionWait;
-        if (trail != null)
-        {
-            trail.gameObject.SetActive(true);
-        }
+        
     }
 
     private void DoActionWait()
@@ -498,6 +499,11 @@ public class Player : CubeMovable
 
     public override void SetModeDash()
     {
+        if (trail != null)
+        {
+            trail.gameObject.SetActive(true);
+        }
+
         RotationCheck();
 
         _elapsedTime = 0;
