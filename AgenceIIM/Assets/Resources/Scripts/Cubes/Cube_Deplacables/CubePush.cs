@@ -11,6 +11,8 @@ public class CubePush : CubeMovable
     [SerializeField] private AnimationCurve fadeCurve = null;
     [SerializeField] private AnimationCurve shrinkCurve = null;
 
+    [SerializeField] private ParticleSystem moveParticle = null;
+
     private float elapsedTime = 0;
 
     // Start is called before the first frame update
