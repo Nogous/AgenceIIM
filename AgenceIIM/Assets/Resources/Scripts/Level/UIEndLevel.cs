@@ -13,6 +13,7 @@ public class UIEndLevel : MonoBehaviour
     public void OnClickRestartLevel()
     {
         GameManager.instance.ResetParty();
+        gameObject.SetActive(false);
     }
 
     public void OnClickBackMenu()
