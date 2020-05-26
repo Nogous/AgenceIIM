@@ -6,7 +6,6 @@ public class CubeTNT : CubeStatic
 {
 
     protected Vector3[] vectorsTNT = new Vector3[4] { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
-
     [Header("Options de l'explosion")]
 
     public float explosionForce = 50f;
@@ -34,12 +33,14 @@ public class CubeTNT : CubeStatic
     private IEnumerator DetonateTnt()
     {
         yield return new WaitForSeconds(tntDelay);
-
         DestroySurroundings();
 
         ParticleSystem tntExplosion = Instantiate(particleTnt, transform.position, Quaternion.identity);
         tntExplosion.Play();
 
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        yield return new WaitForSeconds(6.0f);
         gameObject.SetActive(false);
     }
 
