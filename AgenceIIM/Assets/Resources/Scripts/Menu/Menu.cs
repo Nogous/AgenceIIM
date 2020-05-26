@@ -4,20 +4,30 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class StarPoints
+{
+    public int minPoints3Star;
+    public int minPoints2Star;
+}
 
 public class Menu : MonoBehaviour
 {
-    // data des niveau
+    [Header("Data Points")]
+    public StarPoints[] StarPointsMonde1;
+    public StarPoints[] StarPointsMonde2;
+    public StarPoints[] StarPointsMonde3;
+
     private int[] starsMonde1;
     private int[] starsMonde2;
     private int[] starsMonde3;
 
-    // diferentes pages
+    [Header("Pages")]
     public GameObject mainMenuCanvas = null;
     public GameObject worldCanvas = null;
     public GameObject levelCanvas = null;
 
-    // affichage info level
+    [Header("Level Info")]
     public LevelUI[] levelUIMonde1;
     public LevelUI[] levelUIMonde2;
     public LevelUI[] levelUIMonde3;
@@ -35,9 +45,38 @@ public class Menu : MonoBehaviour
     {
         OnClickMainMenu();
 
-        starsMonde1 = new int[levelUIMonde1.Length];
-        starsMonde2 = new int[levelUIMonde2.Length];
-        starsMonde3 = new int[levelUIMonde3.Length];
+        starsMonde1 = SaveSystem.LoadPoints("starsMonde1");
+        starsMonde2 = SaveSystem.LoadPoints("starsMonde2");
+        starsMonde3 = SaveSystem.LoadPoints("starsMonde3");
+
+        if (starsMonde1.Length != levelUIMonde1.Length)
+        {
+            Debug.Log("reset points Mode 1");
+            starsMonde1 = new int[levelUIMonde1.Length];
+            for (int i = 0; i < starsMonde1.Length; i++)
+            {
+                starsMonde1[i] = -1;
+            }
+            SaveSystem.SavePoints(starsMonde1, "starsMonde1");
+        }
+        if (starsMonde2.Length != levelUIMonde2.Length)
+        {
+            starsMonde2 = new int[levelUIMonde2.Length];
+            for (int i = 0; i < starsMonde2.Length; i++)
+            {
+                starsMonde2[i] = -1;
+            }
+            SaveSystem.SavePoints(starsMonde1, "starsMonde2");
+        }
+        if (starsMonde3.Length != levelUIMonde3.Length)
+        {
+            starsMonde3 = new int[levelUIMonde3.Length];
+            for (int i = 0; i < starsMonde3.Length; i++)
+            {
+                starsMonde3[i] = -1;
+            }
+            SaveSystem.SavePoints(starsMonde1, "starsMonde3");
+        }
 
         int index = 1;
 
@@ -72,16 +111,22 @@ public class Menu : MonoBehaviour
 
         int[] currentList = new int[0];
 
+
+        StarPoints[] tmpPoints = new StarPoints[0];
+
         switch (id)
         {
             case 1:
                 currentList = starsMonde1;
+                tmpPoints = StarPointsMonde1;
                 break;
             case 2:
                 currentList = starsMonde2;
+                tmpPoints = StarPointsMonde2;
                 break;
             case 3:
                 currentList = starsMonde3;
+                tmpPoints = StarPointsMonde3;
                 break;
         }
 
@@ -89,33 +134,58 @@ public class Menu : MonoBehaviour
         {
             if (levelUIMonde1[i].locker != null)
             {
-                levelUIMonde1[i].locker.SetActive(false);
+                levelUIMonde1[i].locker.SetActive(true);
             }
+        }
 
-            if (currentList[i] > 0)
+        for (int i = 0; i < currentList.Length; i++)
+        {
+            levelUIMonde1[i].starUnlock1.SetActive(false);
+            levelUIMonde1[i].starUnlock2.SetActive(false);
+            levelUIMonde1[i].starUnlock3.SetActive(false);
+
+            if (currentList[i] >= 0)
             {
                 if (levelUIMonde1[i].locker != null)
                 {
                     levelUIMonde1[i].locker.SetActive(false);
                 }
+                if (levelUIMonde1.Length >= i)
+                {
+                    if (levelUIMonde1[i + 1].locker != null)
+                    {
+                        levelUIMonde1[i + 1].locker.SetActive(false);
+                    }
+                }
 
+                Debug.Log(currentList[i]);
                 levelUIMonde1[i].starUnlock1.SetActive(true);
-                if (currentList[i] > 1)
+
+
+                if (currentList[i] <= tmpPoints[i].minPoints2Star)
                 {
                     levelUIMonde1[i].starUnlock2.SetActive(true);
-                    if (currentList[i] > 2)
+                    if (currentList[i] <= tmpPoints[i].minPoints3Star)
                     {
                         levelUIMonde1[i].starUnlock3.SetActive(true);
                     }
                 }
             }
         }
-
     }
 
     public void OnClickStartLevel()
     {
         SceneManager.LoadScene(currentWorld.ToString() + "-" + currentId.ToString());
+    }
+
+    public void OnClickExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private LevelMenu currentLevel = null;
