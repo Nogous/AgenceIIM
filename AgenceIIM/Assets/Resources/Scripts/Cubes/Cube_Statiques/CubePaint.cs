@@ -19,6 +19,8 @@ public class CubePaint : CubeStatic
         initalScale = mask.transform.localScale;
         initColorPotencial = colorPotencial;
 
+        isBreakable = false;
+
         cubeType = CubeType.Paint;
         if (color != Color.white)
         {

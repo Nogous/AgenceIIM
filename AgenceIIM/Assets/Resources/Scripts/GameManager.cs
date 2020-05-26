@@ -6,8 +6,17 @@ using UnityEditor;
 using UnityEngine.SceneManagement;
 using System;
 
+[System.Serializable]
+public enum Monde
+{
+    Monde1,
+    Monde2,
+    Monde3,
+}
+
 public class GameManager : MonoBehaviour
 {
+    public Monde idMonde;
     public int idLevel;
 
     public static GameManager instance = null;
@@ -80,6 +89,10 @@ public class GameManager : MonoBehaviour
         {
             Application.Quit();
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SceneManager.LoadScene(0);
+        }
 
         UpdateColorRainbow();
     }
@@ -136,6 +149,23 @@ public class GameManager : MonoBehaviour
         SpawnLevel.Instance.StartUnPopLevel();
         DATASaveData();
         yield return new WaitForSeconds(5f);
+
+        // save points
+        switch (idMonde)
+        {
+            case Monde.Monde1:
+                SaveSystem.SetPoints("starsMonde1", idLevel, player.nbMove);
+                break;
+            case Monde.Monde2:
+                SaveSystem.SetPoints("starsMonde2", idLevel, player.nbMove);
+                break;
+            case Monde.Monde3:
+                SaveSystem.SetPoints("starsMonde3", idLevel, player.nbMove);
+                break;
+            default:
+                break;
+        }
+
 
         //ResetParty();
         SceneManager.LoadScene(sceneNameToLoad);

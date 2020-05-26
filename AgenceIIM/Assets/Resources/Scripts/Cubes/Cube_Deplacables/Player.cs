@@ -46,6 +46,8 @@ public class Player : CubeMovable
     public float TimeShakePlayer;
     public float MagnShakePlayer;
 
+    [HideInInspector] public int nbMove = 0;
+
     public override void OnAwake()
     {
         videoEnded = true;
@@ -77,6 +79,7 @@ public class Player : CubeMovable
     public override void ResetCube()
     {
         base.ResetCube();
+        nbMove = 0;
 
         StartPlayer();
         for (int i = 6; i-->0;)
@@ -551,6 +554,7 @@ public class Player : CubeMovable
     public override void TestTile()
     {
         // test tile d'arriver
+        nbMove++;
 
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;

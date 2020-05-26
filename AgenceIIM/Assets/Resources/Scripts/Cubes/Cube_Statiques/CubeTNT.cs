@@ -53,12 +53,23 @@ public class CubeTNT : CubeStatic
         {
             if (Physics.Raycast(transform.position, vectorsTNT[i], out hit, 1f))
             {
-
-                if (hit.transform.gameObject.GetComponent<Cube>())
+                if (hit.transform.GetComponent<CubeTNT>())
                 {
-                    Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                    CubeTNT tnt = hit.transform.GetComponent<CubeTNT>();
 
-                    tmpCube.gameObject.SetActive(false);
+                    tnt.DetonateTnt();
+                }
+                else if (hit.transform.gameObject.GetComponent<CubeStatic>())
+                {
+                    CubeStatic tmpCube = hit.transform.gameObject.GetComponent<CubeStatic>();
+
+                    if(tmpCube.IsBreakable) tmpCube.gameObject.SetActive(false);
+                }
+                else if (hit.transform.gameObject.GetComponent<Enemy>())
+                {
+                    Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
+
+                    enemy.Explode();
                 }
                 else if (hit.transform.parent != null)
                 {
@@ -73,11 +84,23 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[0] + vectorsTNT[2], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.GetComponent<CubeTNT>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                CubeTNT tnt = hit.transform.GetComponent<CubeTNT>();
 
-                tmpCube.gameObject.SetActive(false);
+                tnt.DetonateTnt();
+            }
+            else if (hit.transform.gameObject.GetComponent<CubeStatic>())
+            {
+                CubeStatic tmpCube = hit.transform.gameObject.GetComponent<CubeStatic>();
+
+                if (tmpCube.IsBreakable) tmpCube.gameObject.SetActive(false);
+            }
+            else if (hit.transform.gameObject.GetComponent<Enemy>())
+            {
+                Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
+
+                enemy.Explode();
             }
             else if (hit.transform.parent != null)
             {
@@ -92,11 +115,23 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[0] + vectorsTNT[3], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.GetComponent<CubeTNT>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                CubeTNT tnt = hit.transform.GetComponent<CubeTNT>();
 
-                tmpCube.gameObject.SetActive(false);
+                tnt.DetonateTnt();
+            }
+            else if (hit.transform.gameObject.GetComponent<Cube>())
+            {
+                CubeStatic tmpCube = hit.transform.gameObject.GetComponent<CubeStatic>();
+
+                if (tmpCube.IsBreakable) tmpCube.gameObject.SetActive(false);
+            }
+            else if (hit.transform.gameObject.GetComponent<Enemy>())
+            {
+                Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
+
+                enemy.Explode();
             }
             else if (hit.transform.parent != null)
             {
@@ -110,11 +145,23 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[1] + vectorsTNT[2], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.GetComponent<CubeTNT>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                CubeTNT tnt = hit.transform.GetComponent<CubeTNT>();
 
-                tmpCube.gameObject.SetActive(false);
+                tnt.DetonateTnt();
+            }
+            else if (hit.transform.gameObject.GetComponent<CubeStatic>())
+            {
+                CubeStatic tmpCube = hit.transform.gameObject.GetComponent<CubeStatic>();
+
+                if (tmpCube.IsBreakable) tmpCube.gameObject.SetActive(false);
+            }
+            else if (hit.transform.gameObject.GetComponent<Enemy>())
+            {
+                Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
+
+                enemy.Explode();
             }
             else if (hit.transform.parent != null)
             {
@@ -128,11 +175,23 @@ public class CubeTNT : CubeStatic
 
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), vectorsTNT[1] + vectorsTNT[3], out hit, 1f))
         {
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.GetComponent<CubeTNT>())
             {
-                Cube tmpCube = hit.transform.gameObject.GetComponent<Cube>();
+                CubeTNT tnt = hit.transform.GetComponent<CubeTNT>();
 
-                tmpCube.gameObject.SetActive(false);
+                tnt.DetonateTnt();
+            }
+            else if (hit.transform.gameObject.GetComponent<CubeStatic>())
+            {
+                CubeStatic tmpCube = hit.transform.gameObject.GetComponent<CubeStatic>();
+
+                if (tmpCube.IsBreakable) tmpCube.gameObject.SetActive(false);
+            }
+            else if (hit.transform.gameObject.GetComponent<Enemy>())
+            {
+                Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
+
+                enemy.Explode();
             }
             else if (hit.transform.parent != null)
             {
