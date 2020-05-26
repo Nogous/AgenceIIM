@@ -150,7 +150,7 @@ public class Menu : MonoBehaviour
                 {
                     levelUIMonde1[i].locker.SetActive(false);
                 }
-                if (levelUIMonde1.Length >= i)
+                if (levelUIMonde1.Length > i)
                 {
                     if (levelUIMonde1[i + 1].locker != null)
                     {
@@ -158,7 +158,6 @@ public class Menu : MonoBehaviour
                     }
                 }
 
-                Debug.Log(currentList[i]);
                 levelUIMonde1[i].starUnlock1.SetActive(true);
 
 
@@ -207,7 +206,6 @@ public class Menu : MonoBehaviour
             }
         }
 
-        Debug.Log(currentList.Length);
         if (currentList.Length > currentId)
         {
             currentLevel = currentList[currentId];
@@ -218,4 +216,17 @@ public class Menu : MonoBehaviour
             }
         }
     }
+
+    #region cheatcodes
+
+
+    public void OnClickOption()
+    {
+        if (CheatCodes.Instance != null)
+        {
+
+        }
+    }
+
+    #endregion
 }

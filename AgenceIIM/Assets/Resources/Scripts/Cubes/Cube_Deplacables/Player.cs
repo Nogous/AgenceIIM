@@ -185,8 +185,7 @@ public class Player : CubeMovable
             if (hit.transform.gameObject.GetComponent<Enemy>())
             {
                 Enemy tmpCube = hit.transform.gameObject.GetComponent<Enemy>();
-
-                Debug.Log(tmpColor + " ; enemmie :" + tmpCube.initColor);
+                
                 if (tmpColor == tmpCube.initColor)
                 {
                     CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakeEnnemy, MagnShakeEnnemy));
