@@ -185,8 +185,7 @@ public class Player : CubeMovable
             if (hit.transform.gameObject.GetComponent<Enemy>())
             {
                 Enemy tmpCube = hit.transform.gameObject.GetComponent<Enemy>();
-
-                Debug.Log(tmpColor + " ; enemmie :" + tmpCube.initColor);
+                
                 if (tmpColor == tmpCube.initColor)
                 {
                     CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakeEnnemy, MagnShakeEnnemy));
@@ -204,6 +203,10 @@ public class Player : CubeMovable
 
     public override void EndMoveBehavior()
     {
+        if (trail != null)
+        {
+            trail.gameObject.SetActive(false);
+        }
 
         SetModeWait();
 
@@ -256,10 +259,7 @@ public class Player : CubeMovable
     private void SetModeWait()
     {
         DoAction = DoActionWait;
-        if (trail != null)
-        {
-            trail.gameObject.SetActive(true);
-        }
+        
     }
 
     private void DoActionWait()
@@ -498,6 +498,11 @@ public class Player : CubeMovable
 
     public override void SetModeDash()
     {
+        if (trail != null)
+        {
+            trail.gameObject.SetActive(true);
+        }
+
         RotationCheck();
 
         _elapsedTime = 0;

@@ -33,12 +33,16 @@ public class GameManager : MonoBehaviour
 
     public GameObject UI_mobile;
 
+    public int minPoints3Star = 10;
+    public int minPoints2Star = 10;
+
     // color Rainbow
     public Material rainbowMaterial = null;
     public float colorSpeed = 1f;
     private float rainbowColor = 0f;
 
     public event Action OnResetLevel;
+    public UIEndLevel uiEndLevel;
 
     private void Awake()
     {
@@ -51,6 +55,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DeterminPlatform();
+
+        uiEndLevel.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -87,7 +93,7 @@ public class GameManager : MonoBehaviour
         }
         if (replayer.GetButtonDown("Pause"))
         {
-            Application.Quit();
+            //Application.Quit();
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -166,10 +172,20 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        uiEndLevel.gameObject.SetActive(true);
+        // info ici
+        uiEndLevel.textStar1.text = "niveau fini";
+        uiEndLevel.textStar2.text = minPoints2Star.ToString();
+        uiEndLevel.textStar3.text = minPoints3Star.ToString();
 
-        //ResetParty();
+        uiEndLevel.star2.SetActive(true);
+        uiEndLevel.star2.SetActive(player.nbMove < minPoints2Star ? true : false);
+        uiEndLevel.star3.SetActive(player.nbMove < minPoints3Star ? true : false);
+    }
+
+    public void LoadNextScene()
+    {
         SceneManager.LoadScene(sceneNameToLoad);
-        
     }
 
     public void ResetParty(float time = 0)
