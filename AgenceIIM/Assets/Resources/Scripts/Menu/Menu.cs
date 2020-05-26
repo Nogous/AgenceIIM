@@ -172,12 +172,20 @@ public class Menu : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void OnClickStartLevel()
     {
         SceneManager.LoadScene(currentWorld.ToString() + "-" + currentId.ToString());
+    }
+
+    public void OnClickExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private LevelMenu currentLevel = null;

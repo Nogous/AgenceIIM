@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     private float rainbowColor = 0f;
 
     public event Action OnResetLevel;
+    public UIEndLevel uiEndLevel;
 
     private void Awake()
     {
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DeterminPlatform();
+
+        uiEndLevel.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -87,7 +90,7 @@ public class GameManager : MonoBehaviour
         }
         if (replayer.GetButtonDown("Pause"))
         {
-            Application.Quit();
+            //Application.Quit();
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -166,10 +169,12 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        uiEndLevel.gameObject.SetActive(true);
+    }
 
-        //ResetParty();
+    public void LoadNextScene()
+    {
         SceneManager.LoadScene(sceneNameToLoad);
-        
     }
 
     public void ResetParty(float time = 0)
