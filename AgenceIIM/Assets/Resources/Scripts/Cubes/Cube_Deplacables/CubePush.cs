@@ -48,6 +48,10 @@ public class CubePush : CubeMovable
 
         // init move
 
+        moveParticle.transform.eulerAngles = Quaternion.Euler(moveParticle.transform.rotation.eulerAngles) * -orientation;
+
+        moveParticle.Play();
+
         DoAction = DoActionPush;
     }
 
