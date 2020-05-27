@@ -179,8 +179,8 @@ public class GameManager : MonoBehaviour
         uiEndLevel.textStar3.text = minPoints3Star.ToString();
 
         uiEndLevel.star2.SetActive(true);
-        uiEndLevel.star2.SetActive(player.nbMove < minPoints2Star ? true : false);
-        uiEndLevel.star3.SetActive(player.nbMove < minPoints3Star ? true : false);
+        uiEndLevel.star2.SetActive(player.nbMove <= minPoints2Star ? true : false);
+        uiEndLevel.star3.SetActive(player.nbMove <= minPoints3Star ? true : false);
     }
 
     public void LoadNextScene()
