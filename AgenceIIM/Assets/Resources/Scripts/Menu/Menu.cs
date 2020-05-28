@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 [System.Serializable]
 public class StarPoints
@@ -13,6 +15,8 @@ public class StarPoints
 
 public class Menu : MonoBehaviour
 {
+    public EventSystem eventSystem;
+
     [Header("Data Points")]
     public StarPoints[] StarPointsMonde1;
     public StarPoints[] StarPointsMonde2;
@@ -43,7 +47,6 @@ public class Menu : MonoBehaviour
 
     private void Awake()
     {
-        OnClickMainMenu();
 
         starsMonde1 = SaveSystem.LoadPoints("starsMonde1");
         starsMonde2 = SaveSystem.LoadPoints("starsMonde2");
@@ -86,23 +89,38 @@ public class Menu : MonoBehaviour
             levelUIMonde1[i].idLevel = index;
             index++;
         }
+
     }
+
+    private void Start()
+    {
+        OnClickMainMenu();
+    }
+
+    public GameObject MainMenuFirstSelectedObj;
+    public GameObject mondeFirstSelectedObj;
+    public GameObject levelFirstSelectedObj;
 
     public void OnClickMainMenu()
     {
+
         mainMenuCanvas.SetActive(true);
         worldCanvas.SetActive(false);
         levelCanvas.SetActive(false);
+
+        eventSystem.SetSelectedGameObject(MainMenuFirstSelectedObj);
     }
 
-    public void OnClickWorldSelection()
+    public void OnClickSelectWorldMenu()
     {
         mainMenuCanvas.SetActive(false);
         worldCanvas.SetActive(true);
         levelCanvas.SetActive(false);
+
+        eventSystem.SetSelectedGameObject(mondeFirstSelectedObj);
     }
 
-    public void OnClickSelectWorld(int id)
+    public void OnClickSelectLevelMenu(int id)
     {
         currentWorld = id;
         mainMenuCanvas.SetActive(false);
@@ -171,6 +189,8 @@ public class Menu : MonoBehaviour
                 }
             }
         }
+
+        eventSystem.SetSelectedGameObject(levelFirstSelectedObj);
     }
 
     public void OnClickStartLevel()
