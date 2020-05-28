@@ -11,6 +11,8 @@ public class CubePush : CubeMovable
     [SerializeField] private AnimationCurve fadeCurve = null;
     [SerializeField] private AnimationCurve shrinkCurve = null;
 
+    [SerializeField] private ParticleSystem moveParticle = null;
+
     private float elapsedTime = 0;
 
     // Start is called before the first frame update
@@ -45,6 +47,10 @@ public class CubePush : CubeMovable
         previousPos = transform.position;
 
         // init move
+
+        moveParticle.transform.eulerAngles = Quaternion.Euler(moveParticle.transform.rotation.eulerAngles) * -orientation;
+
+        moveParticle.Play();
 
         DoAction = DoActionPush;
     }

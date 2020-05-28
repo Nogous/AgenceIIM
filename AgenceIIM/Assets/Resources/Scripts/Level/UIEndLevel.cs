@@ -21,7 +21,8 @@ public class UIEndLevel : MonoBehaviour
 
     public void OnClickRestartLevel()
     {
-        GameManager.instance.ResetParty();
+        SceneManager.LoadScene("1-" + GameManager.instance.idLevel.ToString());
+        //GameManager.instance.ResetParty();
         gameObject.SetActive(false);
     }
 
