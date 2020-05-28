@@ -29,23 +29,23 @@ public class MenuEditor : Editor
         {
             for (int i = 0; i < myMenu.levelUIMonde1.Length; i++)
             {
-                if (myMenu.levelUIMonde1[i].locker != null)
+                if (myMenu.levelUIMonde1[i].button != null)
                 {
-                    myMenu.levelUIMonde1[i].locker.SetActive(false);
+                    myMenu.levelUIMonde1[i].button.interactable = true;
                 }
             }
             for (int i = 0; i < myMenu.levelUIMonde2.Length; i++)
             {
-                if (myMenu.levelUIMonde2[i].locker != null)
+                if (myMenu.levelUIMonde2[i].button != null)
                 {
-                    myMenu.levelUIMonde2[i].locker.SetActive(false);
+                    myMenu.levelUIMonde2[i].button.interactable = true;
                 }
             }
             for (int i = 0; i < myMenu.levelUIMonde3.Length; i++)
             {
-                if (myMenu.levelUIMonde3[i].locker != null)
+                if (myMenu.levelUIMonde3[i].button != null)
                 {
-                    myMenu.levelUIMonde3[i].locker.SetActive(false);
+                    myMenu.levelUIMonde3[i].button.interactable = true;
                 }
             }
         }
