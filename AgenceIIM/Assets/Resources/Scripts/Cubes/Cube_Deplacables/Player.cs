@@ -208,7 +208,7 @@ public class Player : CubeMovable
             trail.gameObject.SetActive(false);
         }
 
-        SetModeWait();
+        SetModeStretch();
 
         transform.eulerAngles = Vector3.zero;
         UpdateColor();
