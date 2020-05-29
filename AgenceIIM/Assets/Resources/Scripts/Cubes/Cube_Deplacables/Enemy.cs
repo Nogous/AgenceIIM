@@ -125,10 +125,15 @@ public class Enemy : CubeMovable
                 orientation = Vector3.right;
                 if (revertMove) orientation = Vector3.left;
             }
-            else
+            else if ((int)MoveList[CurrentMove] == 3)
             {
                 orientation = Vector3.left;
                 if (revertMove) orientation = Vector3.right;
+            }
+            else
+            {
+                if (!revertMove) CurrentMove++;
+                return;
             }
 
             if (!revertMove) CurrentMove++;
@@ -229,6 +234,40 @@ public class Enemy : CubeMovable
         }
 
         return false;
+    }
+
+    public AnimationCurve stretchCube;
+    public float stretchSpeed = 1f;
+    private float stretchLerp = 0;
+    private Vector3 stretchInitPos;
+
+    public void SetModeStretch()
+    {
+        stretchInitPos = transform.localPosition;
+        stretchLerp = 0;
+        DoAction = DoStretchCube;
+
+    }
+
+    public void DoStretchCube()
+    {
+        stretchLerp += Time.deltaTime * stretchSpeed;
+
+        CubeStretch(stretchCube.Evaluate(stretchLerp), stretchInitPos);
+
+        if (stretchLerp >= 1f)
+        {
+            SetModeVoid();
+        }
+    }
+
+    public void CubeStretch(float y, Vector3 _initPos)
+    {
+        float x, z;
+        z = x = Mathf.Sqrt(1 / y);
+
+        transform.localScale = new Vector3(x, y, z);
+        transform.localPosition = _initPos + (((y - 1) / 2) * Vector3.up);
     }
 
     public override void Explode()

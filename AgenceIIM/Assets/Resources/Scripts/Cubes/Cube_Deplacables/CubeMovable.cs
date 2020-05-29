@@ -17,6 +17,7 @@ public enum moveEnum
     backward,
     right,
     left,
+    pause,
 };
 
 public class CubeMovable : Cube
