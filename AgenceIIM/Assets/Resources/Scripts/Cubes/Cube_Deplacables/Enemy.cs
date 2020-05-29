@@ -125,10 +125,15 @@ public class Enemy : CubeMovable
                 orientation = Vector3.right;
                 if (revertMove) orientation = Vector3.left;
             }
-            else
+            else if ((int)MoveList[CurrentMove] == 3)
             {
                 orientation = Vector3.left;
                 if (revertMove) orientation = Vector3.right;
+            }
+            else
+            {
+                if (!revertMove) CurrentMove++;
+                return;
             }
 
             if (!revertMove) CurrentMove++;
