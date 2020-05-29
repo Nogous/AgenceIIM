@@ -31,6 +31,17 @@ public class Menu : MonoBehaviour
     public GameObject worldCanvas = null;
     public GameObject levelCanvas = null;
 
+    [Header("Stars world")]
+    public Text nbStarToUnlockText1;
+    public int minPointsToUnlockWorld2 = 10;
+    public Button world2Button;
+    public Text nbStarToUnlockText2;
+    private bool level2Unlock = false;
+    public int minPointsToUnlockWorld3 = 20;
+    public Button world3Button;
+    public Text nbStarToUnlockText3;
+    private bool level3Unlock = false;
+
     [Header("Level Info")]
     public LevelUI[] levelUIMonde1;
     public LevelUI[] levelUIMonde2;
@@ -47,7 +58,6 @@ public class Menu : MonoBehaviour
 
     private void Awake()
     {
-
         starsMonde1 = SaveSystem.LoadPoints("starsMonde1");
         starsMonde2 = SaveSystem.LoadPoints("starsMonde2");
         starsMonde3 = SaveSystem.LoadPoints("starsMonde3");
@@ -113,6 +123,90 @@ public class Menu : MonoBehaviour
 
     public void OnClickSelectWorldMenu()
     {
+        if (!level2Unlock || !level3Unlock)
+        {
+            int[] tmpTab;
+            StarPoints[] tmpStarStab = new StarPoints[0];
+            int[] conte = new int[3];
+            int tmpCount = 0;
+            for (int i = 1; i <= 3; i++)
+            {
+                tmpTab = SaveSystem.LoadPoints("starsMonde" + i);
+                switch (i)
+                {
+                    case 1:
+                        tmpStarStab = StarPointsMonde1;
+                        break;
+                    case 2:
+                        tmpStarStab = StarPointsMonde2;
+                        break;
+                    case 3:
+                        tmpStarStab = StarPointsMonde3;
+                        break;
+                }
+                for (int j = 0; j < tmpTab.Length; j++)
+                {
+                    if (tmpTab[j] > 0)
+                    {
+                        tmpCount += 1;
+
+                        if (tmpTab[j] <= tmpStarStab[j].minPoints2Star)
+                        {
+                            tmpCount += 1;
+                            if (tmpTab[j] <= tmpStarStab[j].minPoints3Star)
+                            {
+                                tmpCount += 1;
+                            }
+                        }
+                    }
+                }
+                conte[i - 1] = tmpCount;
+                tmpCount = 0;
+            }
+
+            tmpCount = conte[0] + conte[1] + conte[2];
+
+            nbStarToUnlockText1.text = conte[0].ToString();
+
+            if (tmpCount >= minPointsToUnlockWorld2)
+            {
+                level2Unlock = true;
+                nbStarToUnlockText2.text = conte[1].ToString();
+            }
+            else
+            {
+                nbStarToUnlockText2.text = tmpCount+ " / " + minPointsToUnlockWorld2;
+            }
+            if (tmpCount >= minPointsToUnlockWorld3)
+            {
+                level3Unlock = true;
+
+                nbStarToUnlockText3.text = conte[2].ToString() ;
+            }
+            else
+            {
+                nbStarToUnlockText3.text = tmpCount + " / " + minPointsToUnlockWorld3;
+            }
+        }
+
+        if (world2Button != null)
+        {
+            world2Button.interactable = level2Unlock;
+        }
+        else
+        {
+            Debug.Log("world2Button is not set");
+        }
+
+        if (world3Button != null)
+        {
+            world3Button.interactable = level3Unlock;
+        }
+        else
+        {
+            Debug.Log("world2Button is not set");
+        }
+
         mainMenuCanvas.SetActive(false);
         worldCanvas.SetActive(true);
         levelCanvas.SetActive(false);
