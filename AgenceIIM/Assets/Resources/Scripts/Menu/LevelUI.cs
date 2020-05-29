@@ -12,5 +12,5 @@ public class LevelUI : MonoBehaviour
     public GameObject starUnlock2;
     public GameObject starUnlock3;
 
-    public GameObject locker;
+    public Button button;
 }
