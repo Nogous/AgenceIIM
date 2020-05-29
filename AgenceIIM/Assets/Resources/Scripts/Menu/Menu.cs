@@ -154,6 +154,10 @@ public class Menu : MonoBehaviour
             {
                 levelUIMonde1[i].button.interactable = false;
             }
+            if (levelUIMonde1[i].locker != null)
+            {
+                levelUIMonde1[i].locker.SetActive(true);
+            }
         }
 
         for (int i = 0; i < currentList.Length; i++)
@@ -168,11 +172,19 @@ public class Menu : MonoBehaviour
                 {
                     levelUIMonde1[i].button.interactable = true;
                 }
+                if (levelUIMonde1[i].locker != null)
+                {
+                    levelUIMonde1[i].locker.SetActive(false);
+                }
                 if (levelUIMonde1.Length > i)
                 {
-                    if (levelUIMonde1[i].button != null)
+                    if (levelUIMonde1[i+1].button != null)
                     {
-                        levelUIMonde1[i].button.interactable = true;
+                        levelUIMonde1[i+1].button.interactable = true;
+                    }
+                    if (levelUIMonde1[i+1].locker != null)
+                    {
+                        levelUIMonde1[i+1].locker.SetActive(false);
                     }
                 }
 
