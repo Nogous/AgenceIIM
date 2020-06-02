@@ -3244,7 +3244,7 @@ PrefabInstance:
     - target: {fileID: 4128525718369047382, guid: 58c7258149ec3314282b7b3382cc6fd9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098775235947514484, guid: 58c7258149ec3314282b7b3382cc6fd9,
         type: 3}
@@ -3787,6 +3787,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4074907879606782796}
     m_Modifications:
+    - target: {fileID: 176610706, guid: 04b79f3873952824ab6d0bba621327c4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 607887689101925255, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
       propertyPath: MoveList.Array.size
@@ -3825,17 +3829,17 @@ PrefabInstance:
     - target: {fileID: 607887689101925255, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
       propertyPath: MoveList.Array.data[1]
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 607887689101925255, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
       propertyPath: MoveList.Array.data[2]
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 607887689101925255, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
       propertyPath: MoveList.Array.data[3]
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 607887689101925255, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
@@ -3845,12 +3849,17 @@ PrefabInstance:
     - target: {fileID: 607887689101925255, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
       propertyPath: MoveList.Array.data[5]
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 607887689101925255, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
       propertyPath: MoveList.Array.data[6]
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 607887689101925255, guid: 04b79f3873952824ab6d0bba621327c4,
+        type: 3}
+      propertyPath: MoveList.Array.data[0]
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2009963308243867920, guid: 04b79f3873952824ab6d0bba621327c4,
         type: 3}
