@@ -14,7 +14,17 @@ public class Enemy : CubeMovable
 
     public List<moveEnum> MoveList = new List<moveEnum>();
     protected int CurrentMove = 0;
+    protected int CurrentMoveProject = 0;
     protected bool revertMove = false;
+    protected bool revertMoveProject = false;
+
+    [SerializeField] private GameObject projection = null;
+    [SerializeField] private float projectTimer = 2.5f;
+
+    private bool isProjecting = false;
+    private bool isProjectionMove = false;
+
+    private float timerTime = 0f;
 
     public override void OnAwake()
     {
@@ -58,9 +68,87 @@ public class Enemy : CubeMovable
         TestTile();
     }
 
+    public override void SetModeVoid()
+    {
+        base.SetModeVoid();
+
+        if (isEnemyMoving)
+        {
+            projection.SetActive(true);
+            isProjecting = false;
+            timerTime = 0;
+        }
+    }
+
+    protected override void DoActionVoid()
+    {
+        base.DoActionVoid();
+
+        if (isEnemyMoving && !isProjecting)
+        {
+            timerTime += Time.deltaTime;
+
+            if(timerTime >= projectTimer)
+            {
+                isProjecting = true;
+            }
+        }
+
+        if (isProjecting && !isProjectionMove)
+        {
+            if (CurrentMoveProject == MoveList.Count && !revertMoveProject)
+            {
+                if (transform.position == initialPosition)
+                {
+                    CurrentMoveProject = 0;
+                }
+                else revertMoveProject = true;
+            }
+            else if (CurrentMoveProject == 0 && revertMoveProject) revertMoveProject = false;
+
+            if (revertMoveProject) CurrentMoveProject--;
+
+            if ((int)MoveList[CurrentMoveProject] == 0)
+            {
+                orientation = Vector3.forward;
+                if (revertMoveProject) orientation = Vector3.back;
+            }
+            else if ((int)MoveList[CurrentMoveProject] == 1)
+            {
+                orientation = Vector3.back;
+                if (revertMoveProject) orientation = Vector3.forward;
+            }
+            else if ((int)MoveList[CurrentMoveProject] == 2)
+            {
+                orientation = Vector3.right;
+                if (revertMoveProject) orientation = Vector3.left;
+            }
+            else if ((int)MoveList[CurrentMoveProject] == 3)
+            {
+                orientation = Vector3.left;
+                if (revertMoveProject) orientation = Vector3.right;
+            }
+            else
+            {
+                if (!revertMoveProject) CurrentMoveProject++;
+                return;
+            }
+
+            if (!revertMoveProject) CurrentMoveProject++;
+
+            direction = projection.transform.position += orientation;
+
+            StartCoroutine(MoveProjection());
+
+            isProjectionMove = true;
+        }
+    }
+
     public override void SetModeMove(Vector3 vector)
     {
         if (DoAction == DoActionFall) return;
+
+        if (isEnemyMoving) projection.SetActive(false);
 
         if (isEnemyMirror)
         {
@@ -154,17 +242,31 @@ public class Enemy : CubeMovable
         DoAction = DoActionMove;
     }
 
+    private IEnumerator MoveProjection()
+    {
+        _elapsedTime += Time.deltaTime;
+
+        float ratio = _elapsedTime / _moveTime;
+
+        projection.transform.position = Vector3.Lerp(previousPos, direction, ratio);
+
+        if (_elapsedTime >= _moveTime)
+        {
+            // end move
+            _elapsedTime = 0;
+            isProjectionMove = false;
+        }
+
+        yield return null;
+    }
 
     public override void DoActionFall()
     {
         base.DoActionFall();
 
         if (transform.position.y < initialPosition.y - 1)
-        {
-            if (isEnemyMirror)
-            {
-                //Explode();
-            }
+        { 
+            Explode();
 
             SetModeVoid();
         }
@@ -235,6 +337,8 @@ public class Enemy : CubeMovable
 
         return false;
     }
+
+    [Header("Stretch")]
 
     public AnimationCurve stretchCube;
     public float stretchSpeed = 1f;
