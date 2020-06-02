@@ -51,9 +51,12 @@ public class Menu : MonoBehaviour
 
     public LevelMenu[] levelObjMonde1;
 
-    public Text nameLeveltext = null;
-    public Text nbcouptext = null;
-    public Text nbEnnemietext = null;
+    public Text nameLeveltextTrad = null;
+    public Text nameLeveltextEnd = null;
+    public Text nbcouptextTrad = null;
+    public Text nbcouptextEnd = null;
+    public Text nbEnnemietextTrad = null;
+    public Text nbEnnemietextEnd = null;
     public GameObject[] starsSelected = new GameObject[3];
 
     private void Awake()
@@ -318,8 +321,11 @@ public class Menu : MonoBehaviour
     public void OnclikSelecteLevel(int i)
     {
         currentId = i-1;
-
-        nameLeveltext.text = "Niveau : " + currentWorld.ToString() + "-" + currentId.ToString();
+        
+        nameLeveltextEnd.text = string.Format(nameLeveltextTrad.text, currentWorld.ToString(), currentId.ToString());
+        
+        nbcouptextEnd.text = string.Format(nbcouptextTrad.text, i);
+        nbEnnemietextEnd.text = string.Format(nbEnnemietextTrad.text, i);
 
 
         LevelMenu[] currentList = levelObjMonde1;
