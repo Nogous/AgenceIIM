@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject UI_mobile;
 
+    public int minPoints3Star = 10;
+    public int minPoints2Star = 10;
+
     // color Rainbow
     public Material rainbowMaterial = null;
     public float colorSpeed = 1f;
@@ -170,6 +173,14 @@ public class GameManager : MonoBehaviour
         }
 
         uiEndLevel.gameObject.SetActive(true);
+        // info ici
+        uiEndLevel.textStar1.text = "niveau fini";
+        uiEndLevel.textStar2.text = minPoints2Star.ToString();
+        uiEndLevel.textStar3.text = minPoints3Star.ToString();
+
+        uiEndLevel.star2.SetActive(true);
+        uiEndLevel.star2.SetActive(player.nbMove <= minPoints2Star ? true : false);
+        uiEndLevel.star3.SetActive(player.nbMove <= minPoints3Star ? true : false);
     }
 
     public void LoadNextScene()

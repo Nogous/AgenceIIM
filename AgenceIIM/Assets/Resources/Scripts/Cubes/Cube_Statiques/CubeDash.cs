@@ -15,6 +15,8 @@ public class CubeDash : CubeStatic
     [Header("Options du dash")]
     [SerializeField] public dashEnum dashOrientation = dashEnum.forward;
 
+    [SerializeField] private GameObject arrow = null;
+
     public override void OnAwake()
     {
         base.OnAwake();
@@ -22,5 +24,23 @@ public class CubeDash : CubeStatic
         isBreakable = false;
 
         cubeType = CubeType.Dash;
+
+        if(dashOrientation == dashEnum.forward)
+        {
+            arrow.transform.eulerAngles = new Vector3(90, 270, 0);
+        }
+        else if (dashOrientation == dashEnum.backward)
+        {
+            arrow.transform.eulerAngles = new Vector3(90, 90, 0);
+        }
+        else if (dashOrientation == dashEnum.right)
+        {
+            arrow.transform.eulerAngles = new Vector3(90, 0, 0);
+        }
+        else 
+        {
+            arrow.transform.eulerAngles = new Vector3(90, 180, 0);
+
+        }
     }
 }
