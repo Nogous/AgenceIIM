@@ -12,7 +12,9 @@ public class UIEndLevel : MonoBehaviour
 
     public Text textStar1;
     public Text textStar2;
+    public Text textStar2End;
     public Text textStar3;
+    public Text textStar3End;
 
     public void OnClickLoadNextLevel()
     {
