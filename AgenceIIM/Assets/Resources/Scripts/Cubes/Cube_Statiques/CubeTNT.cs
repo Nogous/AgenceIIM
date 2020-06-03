@@ -122,16 +122,18 @@ public class CubeTNT : CubeStatic
 
                 tnt.DetonateTnt();
             }
-            else if (hit.transform.gameObject.GetComponent<Cube>())
+            else if (hit.transform.gameObject.GetComponent<CubeStatic>())
             {
                 CubeStatic tmpCube = hit.transform.gameObject.GetComponent<CubeStatic>();
 
-                if (tmpCube.IsBreakable) tmpCube.gameObject.SetActive(false);
+                if (tmpCube.IsBreakable) {
+                    tmpCube.gameObject.SetActive(false);
+                } 
             }
             else if (hit.transform.gameObject.GetComponent<Enemy>())
             {
                 Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
-
+                Debug.Log("kill ennemy");
                 enemy.Explode();
             }
             else if (hit.transform.parent != null)
