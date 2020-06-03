@@ -100,55 +100,53 @@ public class Enemy : CubeMovable
 
         if (isProjecting)
         {
-            if (CurrentMoveProject == MoveList.Count && !revertMoveProject)
-            {
-                if (transform.position == initialPosition)
-                {
-                    CurrentMoveProject = 0;
-                }
-                else revertMoveProject = true;
-            }
-            else if (CurrentMoveProject == 0 && revertMoveProject) revertMoveProject = false;
-
-            if (revertMoveProject) CurrentMoveProject--;
-
-            if ((int)MoveList[CurrentMoveProject] == 0)
-            {
-                orientation = Vector3.forward;
-                if (revertMoveProject) orientation = Vector3.back;
-            }
-            else if ((int)MoveList[CurrentMoveProject] == 1)
-            {
-                orientation = Vector3.back;
-                if (revertMoveProject) orientation = Vector3.forward;
-            }
-            else if ((int)MoveList[CurrentMoveProject] == 2)
-            {
-                orientation = Vector3.right;
-                if (revertMoveProject) orientation = Vector3.left;
-            }
-            else if ((int)MoveList[CurrentMoveProject] == 3)
-            {
-                orientation = Vector3.left;
-                if (revertMoveProject) orientation = Vector3.right;
-            }
-            else
-            {
-                if (!revertMoveProject) CurrentMoveProject++;
-                return;
-            }
-
-            if (!revertMoveProject) CurrentMoveProject++;
-
-            direction = projection.transform.position + orientation;
-
             if (!isProjectionMove)
             {
+                if (CurrentMoveProject == MoveList.Count && !revertMoveProject)
+                {
+                    if (projection.transform.position == initialPosition)
+                    {
+                        CurrentMoveProject = 0;
+                    }
+                    else revertMoveProject = true;
+                }
+                else if (CurrentMoveProject == 0 && revertMoveProject) revertMoveProject = false;
+
+                if (revertMoveProject) CurrentMoveProject--;
+
+                if ((int)MoveList[CurrentMoveProject] == 0)
+                {
+                    orientation = Vector3.forward;
+                    if (revertMoveProject) orientation = Vector3.back;
+                }
+                else if ((int)MoveList[CurrentMoveProject] == 1)
+                {
+                    orientation = Vector3.back;
+                    if (revertMoveProject) orientation = Vector3.forward;
+                }
+                else if ((int)MoveList[CurrentMoveProject] == 2)
+                {
+                    orientation = Vector3.right;
+                    if (revertMoveProject) orientation = Vector3.left;
+                }
+                else if ((int)MoveList[CurrentMoveProject] == 3)
+                {
+                    orientation = Vector3.left;
+                    if (revertMoveProject) orientation = Vector3.right;
+                }
+                else
+                {
+                    if (!revertMoveProject) CurrentMoveProject++;
+                    return;
+                }
+
+                if (!revertMoveProject) CurrentMoveProject++;
+
+                direction = projection.transform.position + orientation;
                 isProjectionMove = true;
                 projectionPos = projection.transform.position;
             }
-
-            MoveProjection();
+            else if(isProjectionMove) MoveProjection();
         }
     }
 
@@ -157,6 +155,8 @@ public class Enemy : CubeMovable
         if (DoAction == DoActionFall) return;
 
         if (isEnemyMoving) projection.SetActive(false);
+
+        projection.transform.localPosition = Vector3.zero;
 
         if (isEnemyMirror)
         {
@@ -234,6 +234,8 @@ public class Enemy : CubeMovable
 
             if (!revertMove) CurrentMove++;
 
+            CurrentMoveProject = CurrentMove;
+            revertMoveProject = revertMove;
         }
 
         RotationCheck();
@@ -258,7 +260,7 @@ public class Enemy : CubeMovable
 
         projection.transform.position = Vector3.Lerp(projectionPos, direction, ratio);
 
-        if (_elapsedTime >= _moveTime)
+        if (_elapsedTime >= projectionSpeed)
         {
             // end move
             _elapsedTime = 0;
