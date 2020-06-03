@@ -30,6 +30,7 @@ public class Menu : MonoBehaviour
     public GameObject mainMenuCanvas = null;
     public GameObject worldCanvas = null;
     public GameObject levelCanvas = null;
+    public GameObject optionCanvas = null;
 
     [Header("Stars world")]
     public Text nbStarToUnlockText1;
@@ -120,6 +121,7 @@ public class Menu : MonoBehaviour
         mainMenuCanvas.SetActive(true);
         worldCanvas.SetActive(false);
         levelCanvas.SetActive(false);
+        optionCanvas.SetActive(false);
 
         eventSystem.SetSelectedGameObject(MainMenuFirstSelectedObj);
     }
@@ -213,8 +215,17 @@ public class Menu : MonoBehaviour
         mainMenuCanvas.SetActive(false);
         worldCanvas.SetActive(true);
         levelCanvas.SetActive(false);
+        optionCanvas.SetActive(false);
 
         eventSystem.SetSelectedGameObject(mondeFirstSelectedObj);
+    }
+
+    public void OnClickOption()
+    {
+        optionCanvas.SetActive(true);
+        mainMenuCanvas.SetActive(false);
+        levelCanvas.SetActive(false);
+        worldCanvas.SetActive(false);
     }
 
     public void OnClickSelectLevelMenu(int id)
@@ -223,6 +234,7 @@ public class Menu : MonoBehaviour
         mainMenuCanvas.SetActive(false);
         levelCanvas.SetActive(true);
         worldCanvas.SetActive(false);
+        optionCanvas.SetActive(false);
 
         int[] currentList = new int[0];
 
@@ -351,14 +363,6 @@ public class Menu : MonoBehaviour
 
     #region cheatcodes
 
-
-    public void OnClickOption()
-    {
-        if (CheatCodes.Instance != null)
-        {
-
-        }
-    }
 
     #endregion
 }
