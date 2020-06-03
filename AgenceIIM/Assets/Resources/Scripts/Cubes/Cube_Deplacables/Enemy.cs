@@ -24,6 +24,10 @@ public class Enemy : CubeMovable
     private bool isProjecting = false;
     private bool isProjectionMove = false;
 
+    private Vector3 projectionPos = Vector3.zero;
+
+    private float projectionSpeed = 0.8f;
+
     private float timerTime = 0f;
 
     public override void OnAwake()
@@ -94,7 +98,7 @@ public class Enemy : CubeMovable
             }
         }
 
-        if (isProjecting && !isProjectionMove)
+        if (isProjecting)
         {
             if (CurrentMoveProject == MoveList.Count && !revertMoveProject)
             {
@@ -136,11 +140,15 @@ public class Enemy : CubeMovable
 
             if (!revertMoveProject) CurrentMoveProject++;
 
-            direction = projection.transform.position += orientation;
+            direction = projection.transform.position + orientation;
 
-            StartCoroutine(MoveProjection());
+            if (!isProjectionMove)
+            {
+                isProjectionMove = true;
+                projectionPos = projection.transform.position;
+            }
 
-            isProjectionMove = true;
+            MoveProjection();
         }
     }
 
@@ -242,13 +250,13 @@ public class Enemy : CubeMovable
         DoAction = DoActionMove;
     }
 
-    private IEnumerator MoveProjection()
+    private void MoveProjection()
     {
         _elapsedTime += Time.deltaTime;
 
-        float ratio = _elapsedTime / _moveTime;
+        float ratio = _elapsedTime / projectionSpeed;
 
-        projection.transform.position = Vector3.Lerp(previousPos, direction, ratio);
+        projection.transform.position = Vector3.Lerp(projectionPos, direction, ratio);
 
         if (_elapsedTime >= _moveTime)
         {
@@ -257,7 +265,6 @@ public class Enemy : CubeMovable
             isProjectionMove = false;
         }
 
-        yield return null;
     }
 
     public override void DoActionFall()
