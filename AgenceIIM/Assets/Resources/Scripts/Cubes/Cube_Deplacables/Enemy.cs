@@ -26,7 +26,7 @@ public class Enemy : CubeMovable
 
     private Vector3 projectionPos = Vector3.zero;
 
-    private float projectionSpeed = 0.8f;
+    [SerializeField] private float projectionSpeed = 0.8f;
 
     private float timerTime = 0f;
 
