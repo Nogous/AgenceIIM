@@ -24,6 +24,15 @@ public class CubeTNT : CubeStatic
     }
 
 
+    public override void ResetCube()
+    {
+        base.ResetCube();
+        
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+        gameObject.SetActive(true);
+    }
+
     public void Explode(bool isPlayer = false)
     {
         AudioManager.instance.Play("TNT");
