@@ -285,7 +285,7 @@ public class Menu : MonoBehaviour
                 {
                     levelUIMonde1[i].locker.SetActive(false);
                 }
-                if (levelUIMonde1.Length > i)
+                if (levelUIMonde1.Length > i+1)
                 {
                     if (levelUIMonde1[i+1].button != null)
                     {
