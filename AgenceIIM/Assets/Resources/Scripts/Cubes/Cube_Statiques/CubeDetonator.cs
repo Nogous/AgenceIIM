@@ -14,6 +14,7 @@ public class CubeDetonator : CubeStatic
     public Color fuseColor;
     public CubeTNT associatedTnt;
 
+    [ExecuteInEditMode]
     public override void OnAwake()
     {
         base.OnAwake();
@@ -33,14 +34,33 @@ public class CubeDetonator : CubeStatic
 
     public void DrawFuse(Color fuseColor)
     {
-        if(fuseManhanttanOrder == fuseOrientationMode.HorrizontalFirst){
-            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, transform.position.z), transform.TransformVector(Vector3.forward) * (System.Math.Abs(associatedTnt.transform.position.x - transform.position.x)), fuseColor);
-            Debug.DrawRay(new Vector3(System.Math.Abs(associatedTnt.transform.position.x - transform.position.x), transform.position.y + fuseOffset, transform.position.z), associatedTnt.transform.position, fuseColor);
+        if(associatedTnt == null){
+            return;
         }
-        
+        if(fuseManhanttanOrder == fuseOrientationMode.HorrizontalFirst)
+        {
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(transform.position.x, transform.position.y + fuseOffset, associatedTnt.transform.position.z), fuseColor);
+            if(!(transform.position.y < associatedTnt.transform.position.y)){
+                Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, associatedTnt.transform.position.z), new Vector3(associatedTnt.transform.position.x, associatedTnt.transform.position.y - fuseOffset, associatedTnt.transform.position.z), fuseColor);
+            }
+            else
+            {
+                Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, associatedTnt.transform.position.z), new Vector3(associatedTnt.transform.position.x, associatedTnt.transform.position.y + fuseOffset, associatedTnt.transform.position.z), fuseColor);
+            } 
+        }
+        else if(fuseManhanttanOrder == fuseOrientationMode.VerticalFirst)
+        {
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(associatedTnt.transform.position.x, transform.position.y + fuseOffset, transform.position.z), fuseColor);
+            if(!(transform.position.y < associatedTnt.transform.position.y)){
+                Debug.DrawRay(new Vector3(associatedTnt.transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(associatedTnt.transform.position.x, associatedTnt.transform.position.y - fuseOffset, associatedTnt.transform.position.z), fuseColor);
+            }
+            else
+            {
+                Debug.DrawRay(new Vector3(associatedTnt.transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(associatedTnt.transform.position.x, associatedTnt.transform.position.y + fuseOffset, associatedTnt.transform.position.z), fuseColor);
+            }
+        }
     }
 
-    [ExecuteInEditMode]
     void Update()
     {
         DrawFuse(fuseColor);
