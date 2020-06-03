@@ -30,6 +30,7 @@ public class Menu : MonoBehaviour
     public GameObject mainMenuCanvas = null;
     public GameObject worldCanvas = null;
     public GameObject levelCanvas = null;
+    public GameObject optionCanvas = null;
 
     [Header("Stars world")]
     public Text nbStarToUnlockText1;
@@ -51,9 +52,12 @@ public class Menu : MonoBehaviour
 
     public LevelMenu[] levelObjMonde1;
 
-    public Text nameLeveltext = null;
-    public Text nbcouptext = null;
-    public Text nbEnnemietext = null;
+    public Text nameLeveltextTrad = null;
+    public Text nameLeveltextEnd = null;
+    public Text nbcouptextTrad = null;
+    public Text nbcouptextEnd = null;
+    public Text nbEnnemietextTrad = null;
+    public Text nbEnnemietextEnd = null;
     public GameObject[] starsSelected = new GameObject[3];
 
     private void Awake()
@@ -117,6 +121,7 @@ public class Menu : MonoBehaviour
         mainMenuCanvas.SetActive(true);
         worldCanvas.SetActive(false);
         levelCanvas.SetActive(false);
+        optionCanvas.SetActive(false);
 
         eventSystem.SetSelectedGameObject(MainMenuFirstSelectedObj);
     }
@@ -210,8 +215,17 @@ public class Menu : MonoBehaviour
         mainMenuCanvas.SetActive(false);
         worldCanvas.SetActive(true);
         levelCanvas.SetActive(false);
+        optionCanvas.SetActive(false);
 
         eventSystem.SetSelectedGameObject(mondeFirstSelectedObj);
+    }
+
+    public void OnClickOption()
+    {
+        optionCanvas.SetActive(true);
+        mainMenuCanvas.SetActive(false);
+        levelCanvas.SetActive(false);
+        worldCanvas.SetActive(false);
     }
 
     public void OnClickSelectLevelMenu(int id)
@@ -220,6 +234,7 @@ public class Menu : MonoBehaviour
         mainMenuCanvas.SetActive(false);
         levelCanvas.SetActive(true);
         worldCanvas.SetActive(false);
+        optionCanvas.SetActive(false);
 
         int[] currentList = new int[0];
 
@@ -318,8 +333,11 @@ public class Menu : MonoBehaviour
     public void OnclikSelecteLevel(int i)
     {
         currentId = i-1;
-
-        nameLeveltext.text = "Niveau : " + currentWorld.ToString() + "-" + currentId.ToString();
+        
+        nameLeveltextEnd.text = string.Format(nameLeveltextTrad.text, currentWorld.ToString(), currentId.ToString());
+        
+        nbcouptextEnd.text = string.Format(nbcouptextTrad.text, i);
+        nbEnnemietextEnd.text = string.Format(nbEnnemietextTrad.text, i);
 
 
         LevelMenu[] currentList = levelObjMonde1;
@@ -345,14 +363,6 @@ public class Menu : MonoBehaviour
 
     #region cheatcodes
 
-
-    public void OnClickOption()
-    {
-        if (CheatCodes.Instance != null)
-        {
-
-        }
-    }
 
     #endregion
 }
