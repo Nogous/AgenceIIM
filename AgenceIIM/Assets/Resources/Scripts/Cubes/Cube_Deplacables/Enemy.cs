@@ -170,6 +170,8 @@ public class Enemy : CubeMovable
 
         if (isEnemyMoving) projection.SetActive(false);
 
+        StartMoveBehavior();
+
         projection.transform.localPosition = Vector3.zero;
 
         if (isEnemyMirror)
