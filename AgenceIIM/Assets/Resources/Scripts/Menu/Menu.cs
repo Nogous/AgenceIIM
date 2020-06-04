@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Rewired.Integration.UnityUI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,8 +17,8 @@ public class StarPoints
 public class Menu : MonoBehaviour
 {
     public EventSystem eventSystem;
-    public Rewired.InputManager managerAzerty = null;
-    public Rewired.InputManager managerQwerty = null;
+    public RewiredStandaloneInputModule managerAzerty = null;
+    public RewiredStandaloneInputModule managerQwerty = null;
 
     [Header("Data Points")]
     public StarPoints[] StarPointsMonde1;
@@ -108,8 +109,35 @@ public class Menu : MonoBehaviour
 
     }
 
+    public void ChangeKeyBind(Text _myText = null)
+    {
+        GameManager.isQwerty = !GameManager.isQwerty;
+
+        managerAzerty.enabled = !GameManager.isQwerty;
+        managerQwerty.enabled = GameManager.isQwerty;
+        Debug.Log(GameManager.isQwerty);
+
+        if (_myText != null)
+        {
+            if (GameManager.isQwerty)
+            {
+                _myText.text = "Qwerty";
+            }
+            else
+            {
+                _myText.text = "Azerty";
+            }
+        }
+    }
+
     private void Start()
     {
+        if (managerAzerty != null && managerQwerty != null)
+        {
+            managerAzerty.enabled = !GameManager.isQwerty;
+            managerQwerty.enabled = GameManager.isQwerty;
+        }
+
         OnClickMainMenu();
     }
 
