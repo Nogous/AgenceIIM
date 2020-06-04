@@ -49,5 +49,14 @@ public class MenuEditor : Editor
                 }
             }
         }
+
+        if (GUILayout.Button("SetQwerty"))
+        {
+            GameManager.isQwerty = true;
+        }
+        if (GUILayout.Button("SetAzerty"))
+        {
+            GameManager.isQwerty = false;
+        }
     }
 }

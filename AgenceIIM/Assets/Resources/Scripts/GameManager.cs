@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     public int idLevel;
 
     public static GameManager instance = null;
+    public static bool isQwerty = false;
+
+
     public Rewired.Player replayer;
     public bool useWASDLayout;
     public Player player = null;

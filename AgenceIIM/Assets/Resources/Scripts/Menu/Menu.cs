@@ -16,6 +16,8 @@ public class StarPoints
 public class Menu : MonoBehaviour
 {
     public EventSystem eventSystem;
+    public Rewired.InputManager managerAzerty = null;
+    public Rewired.InputManager managerQwerty = null;
 
     [Header("Data Points")]
     public StarPoints[] StarPointsMonde1;

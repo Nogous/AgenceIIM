@@ -257,116 +257,231 @@ public class Player : CubeMovable
         #region normal
         if (!CameraHandler.instance.position)
         {
-
-            if (replayer.GetAxis(RewiredConsts.Action.MoveVert) > 0.1f || MobileAxeVerPos)
+            if (GameManager.isQwerty)
             {
-                orientation = Vector3.forward;
-                moveDir = MoveDir.up;
-                timeNoAction = 0.0f;
-                ApplyStain();
+                if (replayer.GetAxis(RewiredConsts.Action.MoveVerticalQwerty) > 0.1f || MobileAxeVerPos)
+                {
+                    orientation = Vector3.forward;
+                    moveDir = MoveDir.up;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
 
-                if (!TestWall()) SetModeMove(Vector3.zero);
+                    if (!TestWall()) SetModeMove(Vector3.zero);
 
-                else return;
+                    else return;
 
-                OnMove?.Invoke(orientation);
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveVerticalQwerty) < -0.1f || MobileAxeVerNeg)
+                {
+                    orientation = Vector3.back;
+                    moveDir = MoveDir.down;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
+
+                    if (!TestWall()) SetModeMove(Vector3.zero);
+
+                    else return;
+
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) > 0.1f || MobileAxeHorPos)
+                {
+                    orientation = Vector3.right;
+                    moveDir = MoveDir.right;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
+
+                    if (!TestWall()) SetModeMove(Vector3.zero);
+
+                    else return;
+
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) < -0.1f || MobileAxeHorNeg)
+                {
+                    orientation = Vector3.left;
+                    moveDir = MoveDir.left;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
+
+                    if (!TestWall()) SetModeMove(Vector3.zero);
+
+                    else return;
+
+                    OnMove?.Invoke(orientation);
+                }
             }
-            else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) < -0.1f || MobileAxeVerNeg)
+            else
             {
-                orientation = Vector3.back;
-                moveDir = MoveDir.down;
-                timeNoAction = 0.0f;
-                ApplyStain();
+                if (replayer.GetAxis(RewiredConsts.Action.MoveVert) > 0.1f || MobileAxeVerPos)
+                {
+                    orientation = Vector3.forward;
+                    moveDir = MoveDir.up;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
 
-                if (!TestWall()) SetModeMove(Vector3.zero);
+                    if (!TestWall()) SetModeMove(Vector3.zero);
 
-                else return;
+                    else return;
 
-                OnMove?.Invoke(orientation);
-            }
-            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) > 0.1f || MobileAxeHorPos)
-            {
-                orientation = Vector3.right;
-                moveDir = MoveDir.right;
-                timeNoAction = 0.0f;
-                ApplyStain();
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) < -0.1f || MobileAxeVerNeg)
+                {
+                    orientation = Vector3.back;
+                    moveDir = MoveDir.down;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
 
-                if (!TestWall()) SetModeMove(Vector3.zero);
+                    if (!TestWall()) SetModeMove(Vector3.zero);
 
-                else return;
+                    else return;
 
-                OnMove?.Invoke(orientation);
-            }
-            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) < -0.1f || MobileAxeHorNeg)
-            {
-                orientation = Vector3.left;
-                moveDir = MoveDir.left;
-                timeNoAction = 0.0f;
-                ApplyStain();
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) > 0.1f || MobileAxeHorPos)
+                {
+                    orientation = Vector3.right;
+                    moveDir = MoveDir.right;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
 
-                if (!TestWall()) SetModeMove(Vector3.zero);
+                    if (!TestWall()) SetModeMove(Vector3.zero);
 
-                else return;
+                    else return;
 
-                OnMove?.Invoke(orientation);
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) < -0.1f || MobileAxeHorNeg)
+                {
+                    orientation = Vector3.left;
+                    moveDir = MoveDir.left;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
+
+                    if (!TestWall()) SetModeMove(Vector3.zero);
+
+                    else return;
+
+                    OnMove?.Invoke(orientation);
+                }
             }
         }
         #endregion
         #region inverted
         else
         {
-
-            if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 > 0.1f || MobileAxeVerNeg)
+            if (GameManager.isQwerty)
             {
-                orientation = Vector3.forward;
-                moveDir = MoveDir.up;
-                timeNoAction = 0.0f;
-                ApplyStain();
+                if (replayer.GetAxis(RewiredConsts.Action.MoveVerticalQwerty) * -1 > 0.1f || MobileAxeVerNeg)
+                {
+                    orientation = Vector3.forward;
+                    moveDir = MoveDir.up;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
 
-                if (!TestWall()) SetModeMove(Vector3.zero);
+                    if (!TestWall()) SetModeMove(Vector3.zero);
 
-                else return;
+                    else return;
 
-                OnMove?.Invoke(orientation);
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveVerticalQwerty) * -1 < -0.1f || MobileAxeVerPos)
+                {
+                    orientation = Vector3.back;
+                    moveDir = MoveDir.down;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
+
+                    if (!TestWall()) SetModeMove(Vector3.zero);
+
+                    else return;
+
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) * -1 > 0.1f || MobileAxeHorNeg)
+                {
+                    orientation = Vector3.right;
+                    moveDir = MoveDir.right;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
+
+                    if (!TestWall()) SetModeMove(Vector3.zero);
+
+                    else return;
+
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) * -1 < -0.1f || MobileAxeHorPos)
+                {
+                    orientation = Vector3.left;
+                    moveDir = MoveDir.left;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
+
+                    if (!TestWall()) SetModeMove(Vector3.zero);
+
+                    else return;
+
+                    OnMove?.Invoke(orientation);
+                }
             }
-            else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 < -0.1f || MobileAxeVerPos)
+            else
             {
-                orientation = Vector3.back;
-                moveDir = MoveDir.down;
-                timeNoAction = 0.0f;
-                ApplyStain();
 
-                if (!TestWall()) SetModeMove(Vector3.zero);
+                if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 > 0.1f || MobileAxeVerNeg)
+                {
+                    orientation = Vector3.forward;
+                    moveDir = MoveDir.up;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
 
-                else return;
+                    if (!TestWall()) SetModeMove(Vector3.zero);
 
-                OnMove?.Invoke(orientation);
-            }
-            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 > 0.1f || MobileAxeHorNeg)
-            {
-                orientation = Vector3.right;
-                moveDir = MoveDir.right;
-                timeNoAction = 0.0f;
-                ApplyStain();
+                    else return;
 
-                if (!TestWall()) SetModeMove(Vector3.zero);
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 < -0.1f || MobileAxeVerPos)
+                {
+                    orientation = Vector3.back;
+                    moveDir = MoveDir.down;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
 
-                else return;
+                    if (!TestWall()) SetModeMove(Vector3.zero);
 
-                OnMove?.Invoke(orientation);
-            }
-            else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 < -0.1f || MobileAxeHorPos)
-            {
-                orientation = Vector3.left;
-                moveDir = MoveDir.left;
-                timeNoAction = 0.0f;
-                ApplyStain();
+                    else return;
 
-                if (!TestWall()) SetModeMove(Vector3.zero);
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 > 0.1f || MobileAxeHorNeg)
+                {
+                    orientation = Vector3.right;
+                    moveDir = MoveDir.right;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
 
-                else return;
+                    if (!TestWall()) SetModeMove(Vector3.zero);
 
-                OnMove?.Invoke(orientation);
+                    else return;
+
+                    OnMove?.Invoke(orientation);
+                }
+                else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 < -0.1f || MobileAxeHorPos)
+                {
+                    orientation = Vector3.left;
+                    moveDir = MoveDir.left;
+                    timeNoAction = 0.0f;
+                    ApplyStain();
+
+                    if (!TestWall()) SetModeMove(Vector3.zero);
+
+                    else return;
+
+                    OnMove?.Invoke(orientation);
+                }
             }
         }
         #endregion
