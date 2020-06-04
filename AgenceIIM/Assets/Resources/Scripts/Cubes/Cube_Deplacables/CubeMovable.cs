@@ -122,7 +122,7 @@ public class CubeMovable : Cube
     }
 
 
-    protected void DoActionMove()
+    virtual protected void DoActionMove()
     {
         _elapsedTime += Time.deltaTime;
 
