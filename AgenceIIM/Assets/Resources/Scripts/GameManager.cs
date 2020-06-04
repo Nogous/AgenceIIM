@@ -89,7 +89,10 @@ public class GameManager : MonoBehaviour
 
         if (replayer.GetButtonDown("Reset"))
         {
-            ResetParty();
+            if (!isWining && !player.isDeaing)
+            {
+                ResetParty();
+            }
         }
         if (replayer.GetButtonDown("Pause"))
         {
@@ -149,8 +152,13 @@ public class GameManager : MonoBehaviour
         }
 #endif
     }
+
+    private bool isWining = false;
+
     public IEnumerator YouWin()
     {
+        isWining = true;
+
         yield return new WaitForSeconds(.2f);
         SpawnLevel.Instance.StartUnPopLevel();
         DATASaveData();

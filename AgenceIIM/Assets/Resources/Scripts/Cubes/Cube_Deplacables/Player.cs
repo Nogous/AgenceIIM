@@ -419,8 +419,12 @@ public class Player : CubeMovable
         particles.Play();
     }
 
+    public bool isDeaing = false;
+
     private IEnumerator Death(string deathInfo = null)
     {
+        isDeaing = true;
+
         if (deathInfo == "fall")
         {
             yield return new WaitForSeconds(GameManager.instance.fallDuration);
@@ -436,6 +440,8 @@ public class Player : CubeMovable
 
         GameManager.instance.ResetParty(2f);
         gameObject.SetActive(false);
+
+        isDeaing = false;
     }
 
     #region Move
