@@ -146,16 +146,6 @@ public class Player : CubeMovable
             {
                 CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
                 tmpCube.Crumble();
-
-                /*tmpColor = tmpCube.GetColor();
-                if (tmpColor != Color.white)
-                {
-
-                    if (baseColor == faceColor[1].GetComponent<Renderer>().material.color)
-                    {
-                        faceColor[1].GetComponent<Renderer>().material.color = tmpColor;
-                    }
-                }*/
             }
         }
 

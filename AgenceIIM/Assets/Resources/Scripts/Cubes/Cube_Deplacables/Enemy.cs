@@ -61,6 +61,20 @@ public class Enemy : CubeMovable
     public override void StartMoveBehavior()
     {
         base.StartMoveBehavior();
+
+        Ray ray = new Ray(transform.position, Vector3.down);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f))
+        {
+            if (hit.transform.gameObject.GetComponent<CubeDestructible>())
+            {
+                CubeDestructible tmpCube = hit.transform.gameObject.GetComponent<CubeDestructible>();
+                tmpCube.Crumble();
+
+
+            }
+        }
     }
 
     public override void EndMoveBehavior()
@@ -252,6 +266,13 @@ public class Enemy : CubeMovable
         DoAction = DoActionMove;
     }
 
+    protected override void DoActionMove()
+    {
+        base.DoActionMove();
+
+        TestPlayer();
+    }
+
     private void MoveProjection()
     {
         _elapsedTime += Time.deltaTime;
@@ -315,7 +336,7 @@ public class Enemy : CubeMovable
             {
                 CubeDetonator tmpCube = hit.transform.gameObject.GetComponent<CubeDetonator>();
 
-                //tmpCube.ActivateTnt();
+                tmpCube.ActivateTnt();
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
@@ -338,13 +359,41 @@ public class Enemy : CubeMovable
         if (Physics.Raycast(ray, out hit, 1f))
         {
 
-            if (hit.transform.gameObject.GetComponent<Cube>())
+            if (hit.transform.gameObject.GetComponent<CubeStatic>())
             {
                 return true;
             }
+            
         }
 
         return false;
+    }
+
+    private Vector3 boxSize = new Vector3(0.1f, 0.1f, 0.1f);
+
+    public void TestPlayer()
+    {
+
+        RaycastHit hit;
+
+        if (Physics.BoxCast(transform.position, boxSize, orientation, out hit, Quaternion.identity, 0.2f))
+        {
+
+            if (hit.transform.parent.gameObject.GetComponent<Player>())
+            {
+                if(hit.transform.gameObject.GetComponent<Renderer>().material.color == color)
+                {
+                    Explode();
+                }
+                else
+                {
+                    Player tmpPlayer = hit.transform.parent.gameObject.GetComponent<Player>();
+
+                    tmpPlayer.SetDeath();
+                }
+            }
+
+        }
     }
 
     [Header("Stretch")]
