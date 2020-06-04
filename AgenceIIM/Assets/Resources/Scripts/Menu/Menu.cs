@@ -144,6 +144,7 @@ public class Menu : MonoBehaviour
     public GameObject MainMenuFirstSelectedObj;
     public GameObject mondeFirstSelectedObj;
     public GameObject levelFirstSelectedObj;
+    public GameObject OptionFirstSelectedObj;
 
     public void OnClickMainMenu()
     {
@@ -256,6 +257,9 @@ public class Menu : MonoBehaviour
         mainMenuCanvas.SetActive(false);
         levelCanvas.SetActive(false);
         worldCanvas.SetActive(false);
+
+
+        eventSystem.SetSelectedGameObject(OptionFirstSelectedObj);
     }
 
     public void OnClickSelectLevelMenu(int id)
