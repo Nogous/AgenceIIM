@@ -86,7 +86,7 @@ public class CubeMovable : Cube
     /* Comportement suite au test de tuile de StartMoveCheckTile()
         Paramètres : cubeLanding (enum CubeType, cube sur lequel le bloc mouvant atteri) 
     */
-    virtual public void EndMoveBehavior(){
+    virtual public void EndMoveBehavior(bool slide = false){
         SetModeVoid();
         
         transform.eulerAngles = Vector3.zero;
@@ -143,7 +143,7 @@ public class CubeMovable : Cube
 
         if (_elapsedTime >= _moveTime)
         {
-            EndMoveBehavior();
+            EndMoveBehavior(true);
         }
     }
 
