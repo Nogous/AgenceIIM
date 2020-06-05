@@ -750,7 +750,10 @@ public class Player : CubeMovable
                 CubeTeleporter tmpTeleporter = hit.transform.gameObject.GetComponent<CubeTeleporter>();
                 tmpTeleporter.TeleportPlayer(this);
             }
-
+            else if (hit.transform.gameObject.GetComponent<CubeSlid>())
+            {
+                SetModeSlid();
+            }
         }
         else
         {
@@ -837,7 +840,7 @@ public class Player : CubeMovable
         base.DoActionFall();
         if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
-
+    
     private IEnumerator MobileUpAxisBehaviour()
     {
         MobileAxeVerPos = true;
