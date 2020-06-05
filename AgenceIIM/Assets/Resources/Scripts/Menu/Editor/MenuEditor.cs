@@ -52,11 +52,6 @@ public class MenuEditor : Editor
 
         if (GUILayout.Button("SetQwerty"))
         {
-            GameManager.isQwerty = true;
-            Debug.Log(GameManager.isQwerty);
-
-            myMenu.managerAzerty.enabled = false;
-            myMenu.managerQwerty.enabled = true;
         }
         if (GUILayout.Button("SetAzerty"))
         {
