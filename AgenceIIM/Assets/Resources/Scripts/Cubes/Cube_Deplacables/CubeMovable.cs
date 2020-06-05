@@ -121,6 +121,31 @@ public class CubeMovable : Cube
         DoAction = DoActionMove;
     }
 
+    protected virtual void SetModeSlid()
+    {
+
+        _elapsedTime = 0;
+        direction = transform.position + orientation;
+
+        previousPos = transform.position;
+
+        StartMoveBehavior();
+
+        DoAction = DoActionSlid;
+    }
+    
+    public virtual void DoActionSlid()
+    {
+        _elapsedTime += Time.deltaTime;
+        float ratio = _elapsedTime / _moveTime;
+        transform.position = Vector3.Lerp(previousPos, direction, ratio);
+        transform.position = new Vector3(transform.position.x, previousPos.y + Mathf.Clamp(Mathf.Sin(ratio * Mathf.PI) * offset, 0, 1), transform.position.z);
+
+        if (_elapsedTime >= _moveTime)
+        {
+            EndMoveBehavior();
+        }
+    }
 
     virtual protected void DoActionMove()
     {
