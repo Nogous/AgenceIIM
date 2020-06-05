@@ -191,7 +191,7 @@ public class Player : CubeMovable
         }
     }
 
-    public override void EndMoveBehavior()
+    public override void EndMoveBehavior(bool slid = false)
     {
         if (trail != null)
         {
@@ -201,7 +201,10 @@ public class Player : CubeMovable
         SetModeStretch();
 
         transform.eulerAngles = Vector3.zero;
-        UpdateColor();
+        if (!slid)
+        {
+            UpdateColor();
+        }
 
         SplashPaint();
 

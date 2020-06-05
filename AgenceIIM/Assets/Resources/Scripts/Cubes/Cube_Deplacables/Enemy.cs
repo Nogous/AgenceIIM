@@ -77,7 +77,7 @@ public class Enemy : CubeMovable
         }
     }
 
-    public override void EndMoveBehavior()
+    public override void EndMoveBehavior(bool slide = false)
     {
         SetModeVoid();
 
