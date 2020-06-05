@@ -12,4 +12,13 @@ public class CubeCleaner : CubeStatic
 
         cubeType = CubeType.Cleaner;
     }
+
+    public void Clean(Player playertoclean)
+    {
+        if(playertoclean.faceColor[1].GetComponent<Renderer>().material.color != playertoclean.baseColor)
+        {
+            playertoclean.faceColor[1].GetComponent<Renderer>().material.color = playertoclean.baseColor;
+            AudioManager.instance.Play("cleanSFX");
+        }
+    }
 }

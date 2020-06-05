@@ -18,9 +18,9 @@ public class Player : CubeMovable
 
     [Header("Color Settings")]
 
-    [SerializeField] private Renderer[] faceColor = new Renderer[6];
+    public Renderer[] faceColor = new Renderer[6];
     private Color[] initColors = new Color[6];
-    [SerializeField] private Color baseColor = Color.white;
+    public Color baseColor = Color.white;
     private MoveDir moveDir;
 
     [SerializeField] private TrailRenderer trail = null;
@@ -715,7 +715,9 @@ public class Player : CubeMovable
             }
             else if (hit.transform.gameObject.GetComponent<CubeCleaner>())
             {
-                faceColor[1].GetComponent<Renderer>().material.color = baseColor;
+                CubeCleaner tmpCleaner = hit.transform.gameObject.GetComponent<CubeCleaner>();
+                tmpCleaner.Clean(this);
+                
             }
             else if (hit.transform.gameObject.GetComponent<CubeDash>())
             {
