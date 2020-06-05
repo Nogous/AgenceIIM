@@ -43,18 +43,25 @@ public class SwipeDetector : MonoBehaviour
     {
         if (SwipeDistanceCheckMet())
         {
-            if (IsVerticalSwipe())
-            {
-                var direction = fingerDownPosition.y - fingerUpPosition.y > 0 ? SwipeDirection.Up : SwipeDirection.Down;
-                var upper = (fingerDownPosition.y <= ((Screen.height) / 2));
-                SendSwipe(direction, upper);
-            }
-            else
-            {
-                var direction = fingerDownPosition.x - fingerUpPosition.x > 0 ? SwipeDirection.Right : SwipeDirection.Left;
-                var upper = (fingerDownPosition.y <= ((Screen.height) / 2));
-                SendSwipe(direction, upper);
-            }
+                SwipeDirection direction = new SwipeDirection();
+                if((fingerDownPosition.x <= (Screen.width / 2) && fingerDownPosition.y <= (Screen.height / 2)) && (fingerUpPosition.x > (Screen.width / 2) && fingerDownPosition.y > (Screen.height / 2)))
+                {
+                    direction = SwipeDirection.Up;
+                }
+                else if((fingerDownPosition.x > (Screen.width / 2) && fingerDownPosition.y > (Screen.height / 2)) && (fingerUpPosition.x <= (Screen.width / 2) && fingerDownPosition.y <= (Screen.height / 2)))
+                {
+                    direction = SwipeDirection.Down;
+                }
+                else if((fingerDownPosition.x > (Screen.width / 2) && fingerDownPosition.y <= (Screen.height / 2)) && (fingerUpPosition.x <= (Screen.width / 2) && fingerDownPosition.y > (Screen.height / 2)))
+                {
+                    direction = SwipeDirection.Left;
+                }
+                else if((fingerDownPosition.x <= (Screen.width / 2) && fingerDownPosition.y > (Screen.height / 2)) && (fingerUpPosition.x > (Screen.width / 2) && fingerDownPosition.y <= (Screen.height / 2)))
+                {
+                    direction = SwipeDirection.Right;
+                }
+                SendSwipe(direction);
+            
             fingerUpPosition = fingerDownPosition;
         }
     }
@@ -79,14 +86,13 @@ public class SwipeDetector : MonoBehaviour
         return Mathf.Abs(fingerDownPosition.x - fingerUpPosition.x);
     }
 
-    private void SendSwipe(SwipeDirection direction, bool upper)
+    private void SendSwipe(SwipeDirection direction)
     {
         SwipeData swipeData = new SwipeData()
         {
             Direction = direction,
             StartPosition = fingerDownPosition,
             EndPosition = fingerUpPosition,
-            isSwipeFromUpperScreen = upper,
         };
         OnSwipe(swipeData);
     }
@@ -97,7 +103,6 @@ public struct SwipeData
     public Vector2 StartPosition;
     public Vector2 EndPosition;
     public SwipeDirection Direction;
-    public bool isSwipeFromUpperScreen;
 }
 
 public enum SwipeDirection
