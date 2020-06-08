@@ -18,9 +18,9 @@ public class Player : CubeMovable
 
     [Header("Color Settings")]
 
-    [SerializeField] private Renderer[] faceColor = new Renderer[6];
+    public Renderer[] faceColor = new Renderer[6];
     private Color[] initColors = new Color[6];
-    [SerializeField] private Color baseColor = Color.white;
+    public Color baseColor = Color.white;
     private MoveDir moveDir;
 
     [SerializeField] private TrailRenderer trail = null;
@@ -191,7 +191,7 @@ public class Player : CubeMovable
         }
     }
 
-    public override void EndMoveBehavior()
+    public override void EndMoveBehavior(bool slid = false)
     {
         if (trail != null)
         {
@@ -201,7 +201,10 @@ public class Player : CubeMovable
         SetModeStretch();
 
         transform.eulerAngles = Vector3.zero;
-        UpdateColor();
+        if (!slid)
+        {
+            UpdateColor();
+        }
 
         SplashPaint();
 
@@ -715,7 +718,9 @@ public class Player : CubeMovable
             }
             else if (hit.transform.gameObject.GetComponent<CubeCleaner>())
             {
-                faceColor[1].GetComponent<Renderer>().material.color = baseColor;
+                CubeCleaner tmpCleaner = hit.transform.gameObject.GetComponent<CubeCleaner>();
+                tmpCleaner.Clean(this);
+                
             }
             else if (hit.transform.gameObject.GetComponent<CubeDash>())
             {
@@ -750,7 +755,10 @@ public class Player : CubeMovable
                 CubeTeleporter tmpTeleporter = hit.transform.gameObject.GetComponent<CubeTeleporter>();
                 tmpTeleporter.TeleportPlayer(this);
             }
-
+            else if (hit.transform.gameObject.GetComponent<CubeSlid>())
+            {
+                SetModeSlid();
+            }
         }
         else
         {
@@ -837,7 +845,7 @@ public class Player : CubeMovable
         base.DoActionFall();
         if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
-
+    
     private IEnumerator MobileUpAxisBehaviour()
     {
         MobileAxeVerPos = true;
