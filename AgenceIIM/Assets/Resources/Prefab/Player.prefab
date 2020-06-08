@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5364946874222482807}
   - component: {fileID: 2134056993105766400}
   - component: {fileID: 3020496083297456377}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4643,7 +4643,7 @@ GameObject:
   - component: {fileID: 2898015775139717168}
   - component: {fileID: 9167949415375607337}
   - component: {fileID: 5123834514574424794}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9274,7 +9274,7 @@ GameObject:
   - component: {fileID: 4906236028942163853}
   - component: {fileID: 4906236028942163852}
   - component: {fileID: 4906236028942163843}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9364,7 +9364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4906236028992619621}
   - component: {fileID: 4262090060869761110}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9440,6 +9440,7 @@ MonoBehaviour:
   MagnShakePlayer: 0.5
   nbMove: 0
   videoEnded: 0
+  isDeaing: 0
   stretchCube:
     serializedVersion: 2
     m_Curve:
@@ -9477,7 +9478,7 @@ GameObject:
   - component: {fileID: 4906236028996133043}
   - component: {fileID: 4906236028996133042}
   - component: {fileID: 4906236028996133041}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9569,7 +9570,7 @@ GameObject:
   - component: {fileID: 4906236030492618682}
   - component: {fileID: 4906236030492618681}
   - component: {fileID: 4906236030492618680}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9661,7 +9662,7 @@ GameObject:
   - component: {fileID: 4906236030492667739}
   - component: {fileID: 4906236030492667738}
   - component: {fileID: 4906236030492667737}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9753,7 +9754,7 @@ GameObject:
   - component: {fileID: 4906236030788149723}
   - component: {fileID: 4906236030788149722}
   - component: {fileID: 4906236030788149721}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9845,7 +9846,7 @@ GameObject:
   - component: {fileID: 4906236030926696855}
   - component: {fileID: 4906236030926696854}
   - component: {fileID: 4906236030926696853}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9936,7 +9937,7 @@ GameObject:
   - component: {fileID: 4139079900984373461}
   - component: {fileID: 8907399803065988617}
   - component: {fileID: 6869587602499412049}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Splash (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14485,7 +14486,7 @@ GameObject:
   - component: {fileID: 7416961636240684915}
   - component: {fileID: 7416961636240684913}
   - component: {fileID: 7416961636240684912}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: ControlIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14558,7 +14559,7 @@ GameObject:
   - component: {fileID: 7416961636985700170}
   - component: {fileID: 7416961636985700165}
   - component: {fileID: 7416961636985700164}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14655,7 +14656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7416961637290521169}
   - component: {fileID: 7416961637290521174}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14791,6 +14792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Smoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 4732531515519989018, guid: bf26896b3871d4140a2f6bf5e2f934d3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4732531515519989021, guid: bf26896b3871d4140a2f6bf5e2f934d3,
         type: 3}
