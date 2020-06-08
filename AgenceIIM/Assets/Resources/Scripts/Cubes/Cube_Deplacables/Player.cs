@@ -626,6 +626,8 @@ public class Player : CubeMovable
         addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
         previousPos = transform.position;
 
+        AudioManager.instance.Play("Dash");
+
         // init move
         StartMoveBehavior();
 
