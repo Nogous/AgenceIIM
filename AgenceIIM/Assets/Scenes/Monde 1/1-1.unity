@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1484,22 +1484,22 @@ PrefabInstance:
     - target: {fileID: 1329019748114725864, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.40126738
+      value: 0.42569688
       objectReference: {fileID: 0}
     - target: {fileID: 1329019748114725864, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.34534323
+      value: 0.34026468
       objectReference: {fileID: 0}
     - target: {fileID: 1329019748114725864, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.16658685
+      value: -0.1767288
       objectReference: {fileID: 0}
     - target: {fileID: 1329019748114725864, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8318482
+      value: 0.81961524
       objectReference: {fileID: 0}
     - target: {fileID: 1329019748114725867, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
@@ -1796,7 +1796,6 @@ GameObject:
   m_Component:
   - component: {fileID: 830526296}
   - component: {fileID: 830526295}
-  - component: {fileID: 830526294}
   m_Layer: 0
   m_Name: Musique
   m_TagString: Untagged
@@ -1804,18 +1803,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &830526294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830526293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf688a9fc1b7ac040985c84ab4034473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &830526295
 AudioSource:
   m_ObjectHideFlags: 0

@@ -658,6 +658,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasEndLevel (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 2602813664180701681, guid: 33d3f6794e922714a836d6f5f98d8146,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2602813664863813020, guid: 33d3f6794e922714a836d6f5f98d8146,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1476,6 +1481,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 412029015, guid: 7daf1a6dbed61fc4982fa49e7eeb0183, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.650024
+      objectReference: {fileID: 0}
     - target: {fileID: 4895571996986811948, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2305,7 +2314,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1271211371}
   - component: {fileID: 1271211370}
-  - component: {fileID: 1271211369}
   m_Layer: 0
   m_Name: Musique
   m_TagString: Untagged
@@ -2313,18 +2321,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1271211369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271211368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf688a9fc1b7ac040985c84ab4034473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1271211370
 AudioSource:
   m_ObjectHideFlags: 0
