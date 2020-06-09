@@ -9,7 +9,8 @@ public class CameraHandler : MonoBehaviour
     [System.NonSerialized]
     public bool position;
     float progress = 0.0f;
-    public GameObject cameraGO;
+    public GameObject mainCameraGO;
+    public GameObject pipCameraGO;
     public Vector3 positionDepart;
     public Vector3 positionAlternatif;
     public Vector3 positionTan;
@@ -34,16 +35,15 @@ public class CameraHandler : MonoBehaviour
     
     public void Start()
     {
-        if(cameraGO == null || cameraGO.GetComponent<Camera>() == null) { 
-            cameraGO = GetComponent<Camera>().gameObject;
-        }
-        positionDepart = cameraGO.transform.position;
+        positionDepart = mainCameraGO.transform.position;
         positionAlternatif = GameObject.Find("Point_Alt").transform.position;
         positionTan = GameObject.Find("Point_Tan").transform.position;
         if (GameObject.Find("Point_Alt") == null)
         {
             Debug.LogError("Sonde de position alternative manquante, traveling indisponible");
         }
+        mainCameraGO.transform.position = positionDepart;
+        pipCameraGO.transform.position = positionAlternatif;
         
     }
     public void Update()
@@ -82,18 +82,20 @@ public class CameraHandler : MonoBehaviour
             {
                 case false:
                 {
-                    progress += (Time.deltaTime * slowFactor);
+                        progress += (Time.deltaTime * slowFactor);
                         vectorNormal = Vector3.Lerp(positionDepart, positionTan, progress);
                         vectorTan = Vector3.Lerp(positionTan, positionAlternatif, progress);
-                        cameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress); 
+                        mainCameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress); 
+                        pipCameraGO.transform.position = Vector3.Lerp(vectorTan, vectorNormal, progress); 
                 }
                 break;
                 case true:
                 {
-                    progress += (Time.deltaTime * slowFactor);
+                        progress += (Time.deltaTime * slowFactor);
                         vectorNormal = Vector3.Lerp(positionAlternatif, positionTan, progress);
                         vectorTan = Vector3.Lerp(positionTan, positionDepart, progress);
-                        cameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress);
+                        mainCameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress);
+                        pipCameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress); 
                 }
                 break;
             }
@@ -108,26 +110,26 @@ public class CameraHandler : MonoBehaviour
 
     public IEnumerator Shake(float duration, float magnitude)
     {
-        Vector3 originalPos = cameraGO.transform.position;
-        Vector3 originalRot = cameraGO.transform.eulerAngles;
+        Vector3 originalPos = mainCameraGO.transform.position;
+        Vector3 originalRot = mainCameraGO.transform.eulerAngles;
 
         float elapsed = 0.0f;
 
-        cameraGO.GetComponent<LookAtConstraint>().enabled = false;
+        mainCameraGO.GetComponent<LookAtConstraint>().enabled = false;
         while (elapsed < duration)
         {
             float x = originalPos.x + Random.Range(-1f, 1f) * magnitude;
             float y = originalPos.y + Random.Range(-1f, 1f) * magnitude;
 
-            cameraGO.transform.position = new Vector3(x, y, originalPos.z);
+            mainCameraGO.transform.position = new Vector3(x, y, originalPos.z);
 
             elapsed += Time.deltaTime;
 
             yield return null;
         }
-        cameraGO.transform.position = originalPos;
-        cameraGO.transform.eulerAngles = originalRot;
-        cameraGO.GetComponent<LookAtConstraint>().enabled = true;
+        mainCameraGO.transform.position = originalPos;
+        mainCameraGO.transform.eulerAngles = originalRot;
+        mainCameraGO.GetComponent<LookAtConstraint>().enabled = true;
         
     }
 }
