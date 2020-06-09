@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1380510230100181852}
   - component: {fileID: 5729160609315592169}
   - component: {fileID: 2342567440723967344}
+  - component: {fileID: 5153691062407774725}
   m_Layer: 0
   m_Name: PaintSplash
   m_TagString: Untagged
@@ -77,3 +78,40 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5153691062407774725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3622891826192161473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6eba3accd4e6d45b9969b83965f003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToFade: 5
+  fadeAnim:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.09279071
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.11814978
+    - serializedVersion: 3
+      time: 1.5
+      value: 0
+      inSlope: -3.5965285
+      outSlope: -2.6056736
+      tangentMode: 1
+      weightedMode: 1
+      inWeight: 0.16413443
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

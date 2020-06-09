@@ -52,6 +52,23 @@ public class Enemy : CubeMovable
         if (isEnemyMirror || isEnemyMoving)Player.OnMove += SetModeMove;
     }
 
+    public override void ResetCube()
+    {
+        base.ResetCube();
+
+        CurrentMove = 0;
+        CurrentMoveProject = 0;
+        revertMove = false;
+        revertMoveProject = false;
+
+        isProjecting = false;
+        isProjectionMove = false;
+        timerTime = 0;
+
+        projection.transform.localPosition = Vector3.zero;
+        projection.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -77,7 +94,7 @@ public class Enemy : CubeMovable
         }
     }
 
-    public override void EndMoveBehavior()
+    public override void EndMoveBehavior(bool slide = false)
     {
         SetModeVoid();
 
@@ -173,6 +190,7 @@ public class Enemy : CubeMovable
         StartMoveBehavior();
 
         projection.transform.localPosition = Vector3.zero;
+        timerTime = 0;
 
         if (isEnemyMirror)
         {
@@ -371,19 +389,21 @@ public class Enemy : CubeMovable
         return false;
     }
 
-    private Vector3 boxSize = new Vector3(0.1f, 0.1f, 0.1f);
+    private Vector3 boxSize = new Vector3(0.25f, 0.25f, 0.25f);
 
     public void TestPlayer()
     {
-
+        Ray ray = new Ray(previousPos, orientation);
         RaycastHit hit;
 
-        if (Physics.BoxCast(transform.position, boxSize, orientation, out hit, Quaternion.identity, 0.2f))
-        {
+        int layerMask = 1 << 12;
+        layerMask = ~layerMask;
 
+        if (Physics.Raycast(ray, out hit,  0.5f, layerMask))
+        {
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
-                if(hit.transform.gameObject.GetComponent<Renderer>().material.color == color)
+                if (hit.transform.gameObject.GetComponent<Renderer>().material.color == color)
                 {
                     Explode();
                 }
@@ -394,7 +414,6 @@ public class Enemy : CubeMovable
                     tmpPlayer.SetDeath();
                 }
             }
-
         }
     }
 

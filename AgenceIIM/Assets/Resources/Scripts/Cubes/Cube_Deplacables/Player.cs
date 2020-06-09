@@ -18,9 +18,9 @@ public class Player : CubeMovable
 
     [Header("Color Settings")]
 
-    [SerializeField] private Renderer[] faceColor = new Renderer[6];
+    public Renderer[] faceColor = new Renderer[6];
     private Color[] initColors = new Color[6];
-    [SerializeField] private Color baseColor = Color.white;
+    public Color baseColor = Color.white;
     private MoveDir moveDir;
 
     [SerializeField] private TrailRenderer trail = null;
@@ -191,7 +191,7 @@ public class Player : CubeMovable
         }
     }
 
-    public override void EndMoveBehavior()
+    public override void EndMoveBehavior(bool slid = false)
     {
         if (trail != null)
         {
@@ -201,7 +201,10 @@ public class Player : CubeMovable
         SetModeStretch();
 
         transform.eulerAngles = Vector3.zero;
-        UpdateColor();
+        if (!slid)
+        {
+            UpdateColor();
+        }
 
         SplashPaint();
 
@@ -623,6 +626,8 @@ public class Player : CubeMovable
         addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
         previousPos = transform.position;
 
+        AudioManager.instance.Play("Dash");
+
         // init move
         StartMoveBehavior();
 
@@ -715,7 +720,9 @@ public class Player : CubeMovable
             }
             else if (hit.transform.gameObject.GetComponent<CubeCleaner>())
             {
-                faceColor[1].GetComponent<Renderer>().material.color = baseColor;
+                CubeCleaner tmpCleaner = hit.transform.gameObject.GetComponent<CubeCleaner>();
+                tmpCleaner.Clean(this);
+                
             }
             else if (hit.transform.gameObject.GetComponent<CubeDash>())
             {
@@ -724,18 +731,22 @@ public class Player : CubeMovable
                 if ((int)tmpCube.dashOrientation == 0)
                 {
                     orientation = Vector3.forward;
+                    moveDir = MoveDir.up;
                 }
                 else if ((int)tmpCube.dashOrientation == 1)
                 {
                     orientation = Vector3.back;
+                    moveDir = MoveDir.down;
                 }
                 else if ((int)tmpCube.dashOrientation == 2)
                 {
                     orientation = Vector3.right;
+                    moveDir = MoveDir.right;
                 }
                 else
                 {
                     orientation = Vector3.left;
+                    moveDir = MoveDir.left;
                 }
 
                 SetModeDash();
@@ -750,7 +761,10 @@ public class Player : CubeMovable
                 CubeTeleporter tmpTeleporter = hit.transform.gameObject.GetComponent<CubeTeleporter>();
                 tmpTeleporter.TeleportPlayer(this);
             }
-
+            else if (hit.transform.gameObject.GetComponent<CubeSlid>())
+            {
+                if (!TestWall()) SetModeSlid();
+            }
         }
         else
         {
@@ -837,7 +851,7 @@ public class Player : CubeMovable
         base.DoActionFall();
         if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
-
+    
     private IEnumerator MobileUpAxisBehaviour()
     {
         MobileAxeVerPos = true;
