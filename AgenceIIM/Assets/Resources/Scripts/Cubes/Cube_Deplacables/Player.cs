@@ -763,7 +763,7 @@ public class Player : CubeMovable
             }
             else if (hit.transform.gameObject.GetComponent<CubeSlid>())
             {
-                SetModeSlid();
+                if (!TestWall()) SetModeSlid();
             }
         }
         else
