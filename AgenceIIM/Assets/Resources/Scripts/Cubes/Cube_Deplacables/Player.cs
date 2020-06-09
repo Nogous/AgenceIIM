@@ -626,6 +626,8 @@ public class Player : CubeMovable
         addedRotation = previousRot * Quaternion.AngleAxis(90f, axis);
         previousPos = transform.position;
 
+        AudioManager.instance.Play("Dash");
+
         // init move
         StartMoveBehavior();
 
@@ -729,18 +731,22 @@ public class Player : CubeMovable
                 if ((int)tmpCube.dashOrientation == 0)
                 {
                     orientation = Vector3.forward;
+                    moveDir = MoveDir.up;
                 }
                 else if ((int)tmpCube.dashOrientation == 1)
                 {
                     orientation = Vector3.back;
+                    moveDir = MoveDir.down;
                 }
                 else if ((int)tmpCube.dashOrientation == 2)
                 {
                     orientation = Vector3.right;
+                    moveDir = MoveDir.right;
                 }
                 else
                 {
                     orientation = Vector3.left;
+                    moveDir = MoveDir.left;
                 }
 
                 SetModeDash();
@@ -757,7 +763,7 @@ public class Player : CubeMovable
             }
             else if (hit.transform.gameObject.GetComponent<CubeSlid>())
             {
-                SetModeSlid();
+                if (!TestWall()) SetModeSlid();
             }
         }
         else

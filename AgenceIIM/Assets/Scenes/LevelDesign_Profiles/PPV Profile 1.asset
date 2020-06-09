@@ -20,6 +20,7 @@ MonoBehaviour:
   - {fileID: 114729381478907468}
   - {fileID: 114600488085902114}
   - {fileID: 114771276208804480}
+  - {fileID: 114880125983419230}
 --- !u!114 &114185278124258086
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -32,7 +33,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -73,10 +74,10 @@ MonoBehaviour:
     value: 0
   temperature:
     overrideState: 1
-    value: -3
+    value: 0
   tint:
     overrideState: 1
-    value: 10
+    value: 0
   colorFilter:
     overrideState: 1
     value: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
@@ -84,17 +85,17 @@ MonoBehaviour:
     overrideState: 0
     value: -14
   saturation:
-    overrideState: 0
-    value: -5
+    overrideState: 1
+    value: -25
   brightness:
     overrideState: 1
     value: 19
   postExposure:
     overrideState: 1
-    value: 0.14
+    value: 1.78
   contrast:
-    overrideState: 0
-    value: 7.5
+    overrideState: 1
+    value: -36
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -1515,6 +1516,34 @@ MonoBehaviour:
   kernelSize:
     overrideState: 1
     value: 2
+--- !u!114 &114880125983419230
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
+  m_Name: Grain
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  colored:
+    overrideState: 1
+    value: 1
+  intensity:
+    overrideState: 1
+    value: 1
+  size:
+    overrideState: 1
+    value: 1.06
+  lumContrib:
+    overrideState: 1
+    value: 1
 --- !u!114 &114909653747665836
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1545,7 +1574,7 @@ MonoBehaviour:
     value: 65472
   diffusion:
     overrideState: 1
-    value: 7
+    value: 7.23
   anamorphicRatio:
     overrideState: 1
     value: 0

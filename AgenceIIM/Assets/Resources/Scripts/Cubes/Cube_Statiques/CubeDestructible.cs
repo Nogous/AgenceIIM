@@ -17,6 +17,8 @@ public class CubeDestructible : CubeStatic
     {
         ParticleSystem destroyParticle = Instantiate(particle, transform.position, Quaternion.identity);
 
+        AudioManager.instance.Play("Destru");
+
         gameObject.SetActive(false);
 
         destroyParticle.Play();

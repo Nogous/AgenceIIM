@@ -54,6 +54,8 @@ public class Menu : MonoBehaviour
     private int currentWorld = 0;
 
     public LevelMenu[] levelObjMonde1;
+    public LevelMenu[] levelObjMonde2;
+    public LevelMenu[] levelObjMonde3;
 
     public Text nameLeveltextTrad = null;
     public Text nameLeveltextEnd = null;
@@ -375,6 +377,15 @@ public class Menu : MonoBehaviour
 
 
         LevelMenu[] currentList = levelObjMonde1;
+        switch (currentWorld)
+        {
+            case 2:
+                currentList = levelObjMonde2;
+                break;
+            case 3:
+                currentList = levelObjMonde3;
+                break;
+        }
 
         if (currentLevel != null)
         {
