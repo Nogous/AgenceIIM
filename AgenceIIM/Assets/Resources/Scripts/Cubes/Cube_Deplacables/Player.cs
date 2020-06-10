@@ -23,6 +23,8 @@ public class Player : CubeMovable
     public Color baseColor = Color.white;
     private MoveDir moveDir;
 
+    private Color frontColor;
+
     [SerializeField] private TrailRenderer trail = null;
 
     [SerializeField] private ParticleSystem Splash = null;
@@ -138,7 +140,6 @@ public class Player : CubeMovable
 
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
-        Color tmpColor;
 
         if (Physics.Raycast(ray, out hit, 1f))
         {
@@ -149,34 +150,40 @@ public class Player : CubeMovable
             }
         }
 
-        // test si enemy sur le passage du joueur
-        ray = new Ray(transform.position, Vector3.forward);
-        tmpColor = faceColor[4].GetComponent<Renderer>().material.color;
+        TestEnemy();
+    }
 
+    private void TestEnemy()
+    {
+        Ray ray = new Ray(transform.position, Vector3.forward);
+        RaycastHit hit;
+
+        frontColor = faceColor[4].GetComponent<Renderer>().material.color;
+
+        // test si enemy sur le passage du joueur
         switch (moveDir)
         {
             case MoveDir.down:
                 ray = new Ray(transform.position, Vector3.back);
-                tmpColor = faceColor[3].GetComponent<Renderer>().material.color;
+                frontColor = faceColor[3].GetComponent<Renderer>().material.color;
                 break;
             case MoveDir.right:
                 ray = new Ray(transform.position, Vector3.right);
-                tmpColor = faceColor[2].GetComponent<Renderer>().material.color;
+                frontColor = faceColor[2].GetComponent<Renderer>().material.color;
                 break;
             case MoveDir.left:
                 ray = new Ray(transform.position, Vector3.left);
-                tmpColor = faceColor[5].GetComponent<Renderer>().material.color;
+                frontColor = faceColor[5].GetComponent<Renderer>().material.color;
                 break;
         }
 
-        //Debug.DrawRay(ray.origin, ray.direction, Color.black, 1f);
-        if (Physics.Raycast(ray, out hit, 1f))
+        if (Physics.Raycast(ray, out hit, 0.5f))
         {
             if (hit.transform.gameObject.GetComponent<Enemy>())
             {
                 Enemy tmpCube = hit.transform.gameObject.GetComponent<Enemy>();
-                
-                if (tmpColor == tmpCube.initColor)
+
+                if (frontColor == tmpCube.initColor)
                 {
                     CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakeEnnemy, MagnShakeEnnemy));
                     tmpCube.Explode();
@@ -193,6 +200,8 @@ public class Player : CubeMovable
 
     public override void EndMoveBehavior(bool slid = false)
     {
+        transform.position = new Vector3((int)transform.position.x, initialPosition.y, (int)transform.position.z);
+
         if (trail != null)
         {
             trail.gameObject.SetActive(false);
@@ -571,6 +580,12 @@ public class Player : CubeMovable
         DoAction = DoActionMove;
     }
 
+    protected override void DoActionMove()
+    {
+        base.DoActionMove();
+
+        TestEnemy();
+    }
 
     public AnimationCurve stretchCube;
     public float stretchSpeed = 1f;
@@ -631,7 +646,7 @@ public class Player : CubeMovable
         // init move
         StartMoveBehavior();
 
-        DoAction = DoActionMove;
+        DoAction = DoActionDash;
     }
 
     #endregion
@@ -779,7 +794,7 @@ public class Player : CubeMovable
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 1f))
+        if (Physics.Raycast(ray, out hit, 0.5f))
         {
             if (hit.transform.gameObject.GetComponent<CubeWall>())
             {
@@ -789,12 +804,17 @@ public class Player : CubeMovable
             {
                 CubePush tmpCube = hit.transform.gameObject.GetComponent<CubePush>();
 
-                tmpCube.orientation = orientation;
-                if (!tmpCube.TestWall())
+                if (!tmpCube.isMoving)
                 {
-                    tmpCube.SetModeMove(tmpCube.orientation);
+                    tmpCube.orientation = orientation.normalized;
+
+                    if (!tmpCube.TestWall())
+                    {
+                        tmpCube.SetModeMove(tmpCube.orientation);
+                    }
+                    else return true;
                 }
-                else return true;
+
             }
             
         }
