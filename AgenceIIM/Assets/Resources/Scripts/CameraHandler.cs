@@ -9,7 +9,8 @@ public class CameraHandler : MonoBehaviour
     [System.NonSerialized]
     public bool position;
     float progress = 0.0f;
-    public GameObject cameraGO;
+    public GameObject mainCameraGO;
+    public GameObject pipCameraGO;
     public Vector3 positionDepart;
     public Vector3 positionAlternatif;
     public Vector3 positionTan;
@@ -34,17 +35,9 @@ public class CameraHandler : MonoBehaviour
     
     public void Start()
     {
-        if(cameraGO == null || cameraGO.GetComponent<Camera>() == null) { 
-            cameraGO = GetComponent<Camera>().gameObject;
-        }
-        positionDepart = cameraGO.transform.position;
-        positionAlternatif = GameObject.Find("Point_Alt").transform.position;
+        positionDepart = mainCameraGO.transform.position;
+        positionAlternatif = pipCameraGO.transform.position;
         positionTan = GameObject.Find("Point_Tan").transform.position;
-        if (GameObject.Find("Point_Alt") == null)
-        {
-            Debug.LogError("Sonde de position alternative manquante, traveling indisponible");
-        }
-        
     }
     public void Update()
     {
@@ -76,58 +69,36 @@ public class CameraHandler : MonoBehaviour
         {
             crossUI.GetComponent<RectTransform>().localRotation = new Quaternion(90, -38, -128, 0);
         }
-        if (progress < 1.0f)
-        {
-            switch (position)
-            {
-                case false:
-                {
-                    progress += (Time.deltaTime * slowFactor);
-                        vectorNormal = Vector3.Lerp(positionDepart, positionTan, progress);
-                        vectorTan = Vector3.Lerp(positionTan, positionAlternatif, progress);
-                        cameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress); 
-                }
-                break;
-                case true:
-                {
-                    progress += (Time.deltaTime * slowFactor);
-                        vectorNormal = Vector3.Lerp(positionAlternatif, positionTan, progress);
-                        vectorTan = Vector3.Lerp(positionTan, positionDepart, progress);
-                        cameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress);
-                }
-                break;
-            }
-        }
-        else if (progress >= 1.0f)
-        {
-            progress = 0.0f;
-            travel = false;
-            position = !position;
-        }
+        var positionTargetMain = pipCameraGO.transform.position;
+        var positionTargetPip = mainCameraGO.transform.position;
+        pipCameraGO.transform.position = positionTargetPip;
+        mainCameraGO.transform.position = positionTargetMain;
+        travel = false;
+        position = !position;
     }
 
     public IEnumerator Shake(float duration, float magnitude)
     {
-        Vector3 originalPos = cameraGO.transform.position;
-        Vector3 originalRot = cameraGO.transform.eulerAngles;
+        Vector3 originalPos = mainCameraGO.transform.position;
+        Vector3 originalRot = mainCameraGO.transform.eulerAngles;
 
         float elapsed = 0.0f;
 
-        cameraGO.GetComponent<LookAtConstraint>().enabled = false;
+        mainCameraGO.GetComponent<LookAtConstraint>().enabled = false;
         while (elapsed < duration)
         {
             float x = originalPos.x + Random.Range(-1f, 1f) * magnitude;
             float y = originalPos.y + Random.Range(-1f, 1f) * magnitude;
 
-            cameraGO.transform.position = new Vector3(x, y, originalPos.z);
+            mainCameraGO.transform.position = new Vector3(x, y, originalPos.z);
 
             elapsed += Time.deltaTime;
 
             yield return null;
         }
-        cameraGO.transform.position = originalPos;
-        cameraGO.transform.eulerAngles = originalRot;
-        cameraGO.GetComponent<LookAtConstraint>().enabled = true;
+        mainCameraGO.transform.position = originalPos;
+        mainCameraGO.transform.eulerAngles = originalRot;
+        mainCameraGO.GetComponent<LookAtConstraint>().enabled = true;
         
     }
 }

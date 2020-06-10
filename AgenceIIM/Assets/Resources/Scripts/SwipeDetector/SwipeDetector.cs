@@ -43,26 +43,29 @@ public class SwipeDetector : MonoBehaviour
     {
         if (SwipeDistanceCheckMet())
         {
-                SwipeDirection direction = new SwipeDirection();
-                if((fingerDownPosition.x <= (Screen.width / 2) && fingerDownPosition.y <= (Screen.height / 2)) && (fingerUpPosition.x > (Screen.width / 2) && fingerDownPosition.y > (Screen.height / 2)))
-                {
-                    direction = SwipeDirection.Up;
-                }
-                else if((fingerDownPosition.x > (Screen.width / 2) && fingerDownPosition.y > (Screen.height / 2)) && (fingerUpPosition.x <= (Screen.width / 2) && fingerDownPosition.y <= (Screen.height / 2)))
-                {
-                    direction = SwipeDirection.Down;
-                }
-                else if((fingerDownPosition.x > (Screen.width / 2) && fingerDownPosition.y <= (Screen.height / 2)) && (fingerUpPosition.x <= (Screen.width / 2) && fingerDownPosition.y > (Screen.height / 2)))
-                {
-                    direction = SwipeDirection.Left;
-                }
-                else if((fingerDownPosition.x <= (Screen.width / 2) && fingerDownPosition.y > (Screen.height / 2)) && (fingerUpPosition.x > (Screen.width / 2) && fingerDownPosition.y <= (Screen.height / 2)))
-                {
-                    direction = SwipeDirection.Right;
-                }
-                SendSwipe(direction);
-            
-            fingerUpPosition = fingerDownPosition;
+            SwipeDirection direction;
+            if((fingerDownPosition.x <= (Screen.width / 2)) && (fingerDownPosition.y <= (Screen.height / 2)) && (fingerUpPosition.x > (Screen.width / 2)) && (fingerUpPosition.y > (Screen.height / 2)))
+            {
+                direction = SwipeDirection.Left;
+            }
+            else if((fingerDownPosition.x > (Screen.width / 2)) && (fingerDownPosition.y > (Screen.height / 2)) && (fingerUpPosition.x <= (Screen.width / 2)) && (fingerUpPosition.y <= (Screen.height / 2)))
+            {
+                direction = SwipeDirection.Right;
+            }
+            else if((fingerDownPosition.x > (Screen.width / 2)) && (fingerDownPosition.y <= (Screen.height / 2)) && (fingerUpPosition.x <= (Screen.width / 2)) && (fingerUpPosition.y > (Screen.height / 2)))
+            {
+                direction = SwipeDirection.Down;
+            }
+            else if((fingerDownPosition.x <= (Screen.width / 2)) && (fingerDownPosition.y > (Screen.height / 2)) && (fingerUpPosition.x > (Screen.width / 2)) && (fingerUpPosition.y <= (Screen.height / 2)))
+            {
+                direction = SwipeDirection.Up;
+            }
+            else
+            {
+                return;
+            }
+            SendSwipe(direction);     
+        fingerUpPosition = fingerDownPosition;
         }
     }
 
