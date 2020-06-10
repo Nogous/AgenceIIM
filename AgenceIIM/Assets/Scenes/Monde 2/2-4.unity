@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -982,7 +982,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cubes.Array.data[13]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1808054756}
     - target: {fileID: 6322239652353964551, guid: 28faf8354b97c1446ab5e1f3d05bc063,
         type: 3}
       propertyPath: cubes.Array.data[14]
@@ -1189,9 +1189,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
         type: 3}
+      propertyPath: associatedTnt.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
+        type: 3}
       propertyPath: associatedTnt
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
+        type: 3}
+      propertyPath: associatedTnt.Array.data[0]
+      value: 
       objectReference: {fileID: 1409227978}
+    - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
+        type: 3}
+      propertyPath: associatedTnt.Array.data[1]
+      value: 
+      objectReference: {fileID: 1808054757}
     - target: {fileID: 8681370395756825898, guid: c284ae8feaf31e747877d7419cc2258d,
         type: 3}
       propertyPath: m_Name
@@ -3200,6 +3215,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9f71bfff4ecf2b4fac6e6da42114eb9, type: 3}
+--- !u!1 &1808054756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8681370395756825898, guid: d146c79678cbcfc4a9891de0b0c20487,
+    type: 3}
+  m_PrefabInstance: {fileID: 1967320220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1808054757 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1350833571919295869, guid: d146c79678cbcfc4a9891de0b0c20487,
+    type: 3}
+  m_PrefabInstance: {fileID: 1967320220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808054756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8d8f3afb5e4e742adbcfa07eb6f57d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1902633247
 PrefabInstance:
   m_ObjectHideFlags: 0
