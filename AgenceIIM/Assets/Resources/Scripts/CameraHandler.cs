@@ -42,9 +42,6 @@ public class CameraHandler : MonoBehaviour
         {
             Debug.LogError("Sonde de position alternative manquante, traveling indisponible");
         }
-        mainCameraGO.transform.position = positionDepart;
-        pipCameraGO.transform.position = positionAlternatif;
-        
     }
     public void Update()
     {

@@ -239,7 +239,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6155770337045717456}
   - component: {fileID: 4062589322089162821}
-  - component: {fileID: 8915474772468493847}
   m_Layer: 0
   m_Name: PiPCamera
   m_TagString: Untagged
@@ -279,10 +278,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.02
+    y: 0.04
+    width: 0.19
+    height: 0.19
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -303,14 +302,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8915474772468493847
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6734273437847329174}
-  m_Enabled: 1
 --- !u!1 &9129828541496136766
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +602,16 @@ PrefabInstance:
       propertyPath: slowFactor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7196673271184115746, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: mainCameraGO
+      value: 
+      objectReference: {fileID: 1329019748114725877}
+    - target: {fileID: 7196673271184115746, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
+        type: 3}
+      propertyPath: pipCameraGO
+      value: 
+      objectReference: {fileID: 6734273437847329174}
     - target: {fileID: 8955500025482504164, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
         type: 3}
       propertyPath: sounds.Array.size
