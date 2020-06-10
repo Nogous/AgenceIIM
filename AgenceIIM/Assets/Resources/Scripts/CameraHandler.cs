@@ -69,14 +69,12 @@ public class CameraHandler : MonoBehaviour
         {
             crossUI.GetComponent<RectTransform>().localRotation = new Quaternion(90, -38, -128, 0);
         }
-
-            var positionTargetMain = pipCameraGO.transform.position;
-            var positionTargetPip = mainCameraGO.transform.position;
-            pipCameraGO.transform.position = positionTargetPip;
-            mainCameraGO.transform.position = positionTargetMain;
-            travel = false;
-            position = !position;
-        
+        var positionTargetMain = pipCameraGO.transform.position;
+        var positionTargetPip = mainCameraGO.transform.position;
+        pipCameraGO.transform.position = positionTargetPip;
+        mainCameraGO.transform.position = positionTargetMain;
+        travel = false;
+        position = !position;
     }
 
     public IEnumerator Shake(float duration, float magnitude)
