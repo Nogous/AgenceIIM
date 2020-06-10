@@ -34,20 +34,6 @@ public class MenuEditor : Editor
                     myMenu.levelUIMonde1[i].button.interactable = true;
                 }
             }
-            for (int i = 0; i < myMenu.levelUIMonde2.Length; i++)
-            {
-                if (myMenu.levelUIMonde2[i].button != null)
-                {
-                    myMenu.levelUIMonde2[i].button.interactable = true;
-                }
-            }
-            for (int i = 0; i < myMenu.levelUIMonde3.Length; i++)
-            {
-                if (myMenu.levelUIMonde3[i].button != null)
-                {
-                    myMenu.levelUIMonde3[i].button.interactable = true;
-                }
-            }
         }
 
         if (GUILayout.Button("SetQwerty"))

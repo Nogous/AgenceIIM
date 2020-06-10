@@ -48,8 +48,6 @@ public class Menu : MonoBehaviour
 
     [Header("Level Info")]
     public LevelUI[] levelUIMonde1;
-    public LevelUI[] levelUIMonde2;
-    public LevelUI[] levelUIMonde3;
     private int currentId = 0;
     private int currentWorld = 0;
 
@@ -81,18 +79,18 @@ public class Menu : MonoBehaviour
             }
             SaveSystem.SavePoints(starsMonde1, "starsMonde1");
         }
-        if (starsMonde2.Length != levelUIMonde2.Length)
+        if (starsMonde2.Length != levelUIMonde1.Length)
         {
-            starsMonde2 = new int[levelUIMonde2.Length];
+            starsMonde2 = new int[levelUIMonde1.Length];
             for (int i = 0; i < starsMonde2.Length; i++)
             {
                 starsMonde2[i] = -1;
             }
             SaveSystem.SavePoints(starsMonde1, "starsMonde2");
         }
-        if (starsMonde3.Length != levelUIMonde3.Length)
+        if (starsMonde3.Length != levelUIMonde1.Length)
         {
-            starsMonde3 = new int[levelUIMonde3.Length];
+            starsMonde3 = new int[levelUIMonde1.Length];
             for (int i = 0; i < starsMonde3.Length; i++)
             {
                 starsMonde3[i] = -1;
@@ -292,6 +290,10 @@ public class Menu : MonoBehaviour
                 tmpPoints = StarPointsMonde3;
                 break;
         }
+        for (int i = 0; i < currentList.Length; i++)
+        {
+            Debug.Log(currentList[i]);
+        }
 
         for (int i = 0; i < currentList.Length; i++)
         {
@@ -310,6 +312,7 @@ public class Menu : MonoBehaviour
             levelUIMonde1[i].starUnlock1.SetActive(false);
             levelUIMonde1[i].starUnlock2.SetActive(false);
             levelUIMonde1[i].starUnlock3.SetActive(false);
+
 
             if (currentList[i] >= 0)
             {
