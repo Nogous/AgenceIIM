@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
         uiEndLevel.textStar1.text = "niveau fini";
 
         uiEndLevel.textStar2End.text = string.Format(uiEndLevel.textStar2.text, minPoints2Star.ToString());
-        uiEndLevel.textStar3End.text = string.Format(uiEndLevel.textStar3.text, minPoints2Star.ToString());
+        uiEndLevel.textStar3End.text = string.Format(uiEndLevel.textStar3.text, minPoints3Star.ToString());
 
         uiEndLevel.star2.SetActive(true);
         uiEndLevel.star2.SetActive(player.nbMove <= minPoints2Star ? true : false);

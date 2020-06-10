@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2346,7 +2346,17 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
         type: 3}
+      propertyPath: associatedTnt.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
+        type: 3}
       propertyPath: associatedTnt
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
+        type: 3}
+      propertyPath: associatedTnt.Array.data[0]
       value: 
       objectReference: {fileID: 1690913006}
     - target: {fileID: 8681370395756825898, guid: c284ae8feaf31e747877d7419cc2258d,
@@ -4018,7 +4028,17 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
         type: 3}
+      propertyPath: associatedTnt.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
+        type: 3}
       propertyPath: associatedTnt
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479932517590479279, guid: c284ae8feaf31e747877d7419cc2258d,
+        type: 3}
+      propertyPath: associatedTnt.Array.data[0]
       value: 
       objectReference: {fileID: 332509138}
     - target: {fileID: 8681370395756825898, guid: c284ae8feaf31e747877d7419cc2258d,

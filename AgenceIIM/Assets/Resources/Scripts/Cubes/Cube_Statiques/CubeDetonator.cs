@@ -12,7 +12,7 @@ public class CubeDetonator : CubeStatic
     public bool fuseOrientation;
     public fuseOrientationMode fuseManhanttanOrder;
     public Color fuseColor;
-    public CubeTNT associatedTnt;
+    public CubeTNT[] associatedTnt = new CubeTNT[0];
 
     [ExecuteInEditMode]
     public override void OnAwake()
@@ -26,37 +26,52 @@ public class CubeDetonator : CubeStatic
 
     public void ActivateTnt()
     {
-        if (associatedTnt != null && associatedTnt.gameObject.activeSelf)
+        for (int i = 0; i < associatedTnt.Length; i++)
         {
-            associatedTnt.Explode();
+            if (associatedTnt[i] != null && associatedTnt[i].gameObject.activeSelf)
+            {
+                associatedTnt[i].Explode();
+            }
         }
     }
 
     public void DrawFuse(Color fuseColor)
     {
-        if(associatedTnt == null){
-            return;
-        }
-        if(fuseManhanttanOrder == fuseOrientationMode.HorrizontalFirst)
+        Transform tmpTNT;
+
+        for (int i = 0; i < associatedTnt.Length; i++)
         {
-            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(transform.position.x, transform.position.y + fuseOffset, associatedTnt.transform.position.z), fuseColor);
-            if(!(transform.position.y < associatedTnt.transform.position.y)){
-                Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, associatedTnt.transform.position.z), new Vector3(associatedTnt.transform.position.x, associatedTnt.transform.position.y - fuseOffset, associatedTnt.transform.position.z), fuseColor);
-            }
-            else
+            if (associatedTnt[i] == null)
             {
-                Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, associatedTnt.transform.position.z), new Vector3(associatedTnt.transform.position.x, associatedTnt.transform.position.y + fuseOffset, associatedTnt.transform.position.z), fuseColor);
-            } 
-        }
-        else if(fuseManhanttanOrder == fuseOrientationMode.VerticalFirst)
-        {
-            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(associatedTnt.transform.position.x, transform.position.y + fuseOffset, transform.position.z), fuseColor);
-            if(!(transform.position.y < associatedTnt.transform.position.y)){
-                Debug.DrawRay(new Vector3(associatedTnt.transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(associatedTnt.transform.position.x, associatedTnt.transform.position.y - fuseOffset, associatedTnt.transform.position.z), fuseColor);
+                return;
             }
-            else
+
+            tmpTNT = associatedTnt[i].transform;
+
+            if (fuseManhanttanOrder == fuseOrientationMode.HorrizontalFirst)
             {
-                Debug.DrawRay(new Vector3(associatedTnt.transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(associatedTnt.transform.position.x, associatedTnt.transform.position.y + fuseOffset, associatedTnt.transform.position.z), fuseColor);
+
+                Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(transform.position.x, transform.position.y + fuseOffset, tmpTNT.position.z), fuseColor);
+                if (!(transform.position.y < tmpTNT.position.y))
+                {
+                    Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, tmpTNT.position.z), new Vector3(tmpTNT.position.x, tmpTNT.position.y - fuseOffset, tmpTNT.position.z), fuseColor);
+                }
+                else
+                {
+                    Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, tmpTNT.position.z), new Vector3(tmpTNT.position.x, tmpTNT.position.y + fuseOffset, tmpTNT.position.z), fuseColor);
+                }
+            }
+            else if (fuseManhanttanOrder == fuseOrientationMode.VerticalFirst)
+            {
+                Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(tmpTNT.position.x, transform.position.y + fuseOffset, transform.position.z), fuseColor);
+                if (!(transform.position.y < tmpTNT.position.y))
+                {
+                    Debug.DrawRay(new Vector3(tmpTNT.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(tmpTNT.position.x, tmpTNT.position.y - fuseOffset, tmpTNT.position.z), fuseColor);
+                }
+                else
+                {
+                    Debug.DrawRay(new Vector3(tmpTNT.position.x, transform.position.y + fuseOffset, transform.position.z), new Vector3(tmpTNT.position.x, tmpTNT.position.y + fuseOffset, tmpTNT.position.z), fuseColor);
+                }
             }
         }
     }
