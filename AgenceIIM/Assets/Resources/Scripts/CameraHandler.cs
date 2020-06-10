@@ -36,12 +36,8 @@ public class CameraHandler : MonoBehaviour
     public void Start()
     {
         positionDepart = mainCameraGO.transform.position;
-        positionAlternatif = GameObject.Find("Point_Alt").transform.position;
+        positionAlternatif = pipCameraGO.transform.position;
         positionTan = GameObject.Find("Point_Tan").transform.position;
-        if (GameObject.Find("Point_Alt") == null)
-        {
-            Debug.LogError("Sonde de position alternative manquante, traveling indisponible");
-        }
     }
     public void Update()
     {
@@ -73,36 +69,14 @@ public class CameraHandler : MonoBehaviour
         {
             crossUI.GetComponent<RectTransform>().localRotation = new Quaternion(90, -38, -128, 0);
         }
-        if (progress < 1.0f)
-        {
-            switch (position)
-            {
-                case false:
-                {
-                        progress += (Time.deltaTime * slowFactor);
-                        vectorNormal = Vector3.Lerp(positionDepart, positionTan, progress);
-                        vectorTan = Vector3.Lerp(positionTan, positionAlternatif, progress);
-                        mainCameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress); 
-                        pipCameraGO.transform.position = Vector3.Lerp(vectorTan, vectorNormal, progress); 
-                }
-                break;
-                case true:
-                {
-                        progress += (Time.deltaTime * slowFactor);
-                        vectorNormal = Vector3.Lerp(positionAlternatif, positionTan, progress);
-                        vectorTan = Vector3.Lerp(positionTan, positionDepart, progress);
-                        mainCameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress);
-                        pipCameraGO.transform.position = Vector3.Lerp(vectorNormal, vectorTan, progress); 
-                }
-                break;
-            }
-        }
-        else if (progress >= 1.0f)
-        {
-            progress = 0.0f;
+
+            var positionTargetMain = pipCameraGO.transform.position;
+            var positionTargetPip = mainCameraGO.transform.position;
+            pipCameraGO.transform.position = positionTargetPip;
+            mainCameraGO.transform.position = positionTargetMain;
             travel = false;
             position = !position;
-        }
+        
     }
 
     public IEnumerator Shake(float duration, float magnitude)
