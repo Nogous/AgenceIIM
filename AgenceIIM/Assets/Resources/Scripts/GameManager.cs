@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public static bool isQwerty = false;
 
+    public CameraTravel cameraTravel;
 
     public Rewired.Player replayer;
     public bool useWASDLayout;
