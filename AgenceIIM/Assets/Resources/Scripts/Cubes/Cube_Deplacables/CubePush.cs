@@ -15,6 +15,8 @@ public class CubePush : CubeMovable
 
     private float elapsedTime = 0;
 
+    public bool isMoving = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,8 @@ public class CubePush : CubeMovable
     public override void SetModeMove(Vector3 vector)
     {
         if (DoAction == DoActionFall) return;
+
+        isMoving = true;
 
         RotationCheck();
 
@@ -67,6 +71,7 @@ public class CubePush : CubeMovable
         {
             // end move
             EndMoveBehavior();
+            isMoving = false;
         }
     }
 
@@ -75,10 +80,10 @@ public class CubePush : CubeMovable
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 1f))
+        if (Physics.Raycast(ray, out hit, 0.5f))
         {
 
-            if (hit.transform.gameObject.GetComponent<CubeWall>())
+            if (hit.transform.gameObject.GetComponent<CubeWall>() || hit.transform.gameObject.GetComponent<Enemy>())
             {
                 return true;
             }

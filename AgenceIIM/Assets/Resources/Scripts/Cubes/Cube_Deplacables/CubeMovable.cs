@@ -91,6 +91,8 @@ public class CubeMovable : Cube
         
         transform.eulerAngles = Vector3.zero;
 
+        transform.position = new Vector3((int)transform.position.x, initialPosition.y, (int)transform.position.z);
+
         TestTile();
     }
 
@@ -165,6 +167,13 @@ public class CubeMovable : Cube
         }
     }
 
+    virtual protected void DoActionDash()
+    {
+        DoActionMove();
+
+        if (TestWall()) EndMoveBehavior();
+    }
+
     protected void RotationCheck()
     {
         if (orientation == Vector3.forward) axis = Vector3.right;
@@ -186,7 +195,7 @@ public class CubeMovable : Cube
 
         AudioManager.instance.Play("Dash");
 
-        DoAction = DoActionMove;
+        DoAction = DoActionDash;
     }
 
     virtual public bool TestWall()
