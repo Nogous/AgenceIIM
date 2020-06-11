@@ -295,6 +295,13 @@ public class Enemy : CubeMovable
         TestPlayer();
     }
 
+    protected override void DoActionDash()
+    {
+        base.DoActionDash();
+
+        TestPlayerDash();
+    }
+
     private void MoveProjection()
     {
         _elapsedTime += Time.deltaTime;
@@ -418,6 +425,32 @@ public class Enemy : CubeMovable
         layerMask = ~layerMask;
 
         if (Physics.Raycast(ray, out hit,  0.5f, layerMask))
+        {
+            if (hit.transform.parent.gameObject.GetComponent<Player>())
+            {
+                if (hit.transform.gameObject.GetComponent<Renderer>().material.color == color)
+                {
+                    Explode();
+                }
+                else
+                {
+                    Player tmpPlayer = hit.transform.parent.gameObject.GetComponent<Player>();
+
+                    tmpPlayer.SetDeath();
+                }
+            }
+        }
+    }
+
+    public void TestPlayerDash()
+    {
+        Ray ray = new Ray(transform.position - orientation, orientation);
+        RaycastHit hit;
+
+        int layerMask = 1 << 12;
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(ray, out hit,  1f, layerMask))
         {
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
