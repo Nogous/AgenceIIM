@@ -179,7 +179,7 @@ public class Player : CubeMovable
                 break;
         }
 
-        if (Physics.Raycast(ray, out hit, 0.5f))
+        if (Physics.Raycast(ray, out hit, 0.6f))
         {
             if (hit.transform.gameObject.GetComponent<Enemy>())
             {
