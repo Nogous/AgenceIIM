@@ -179,7 +179,7 @@ public class Player : CubeMovable
                 break;
         }
 
-        if (Physics.Raycast(ray, out hit, 0.5f))
+        if (Physics.Raycast(ray, out hit, 0.6f))
         {
             if (hit.transform.gameObject.GetComponent<Enemy>())
             {
@@ -582,11 +582,6 @@ public class Player : CubeMovable
         DoAction = DoActionMove;
     }
 
-    protected override void DoActionMove()
-    {
-        base.DoActionMove();
-    }
-
     protected override void DoActionDash()
     {
         base.DoActionDash();
@@ -803,7 +798,7 @@ public class Player : CubeMovable
 
         if (Physics.Raycast(ray, out hit, 0.5f))
         {
-            if (hit.transform.gameObject.GetComponent<CubeWall>())
+            if (hit.transform.gameObject.GetComponent<CubeStatic>())
             {
                 return true;
             }
