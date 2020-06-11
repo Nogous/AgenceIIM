@@ -116,11 +116,9 @@ public class Player : CubeMovable
         SwipeDetector.OnSwipe -= ProcessMobileInput;
     }
 
-    void Update()
+    void UpdateControlImage()
     {
-        DoAction();
         timeNoAction += Time.deltaTime;
-        /*
         if (LUT_FadeControls.Evaluate(timeNoAction) >= 10)
         {
             crossUI.color = new Color(255, 255, 255, 1);
@@ -129,7 +127,11 @@ public class Player : CubeMovable
         {
             crossUI.color = new Color(255, 255, 255, LUT_FadeControls.Evaluate(timeNoAction));
         }
-        */
+    }
+    void Update()
+    {
+        DoAction();
+        UpdateControlImage();
     }
 
     public override void StartMoveBehavior()
