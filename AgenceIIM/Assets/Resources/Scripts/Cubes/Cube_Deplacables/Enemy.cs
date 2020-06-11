@@ -96,6 +96,8 @@ public class Enemy : CubeMovable
 
     public override void EndMoveBehavior(bool slide = false)
     {
+        transform.position = new Vector3((int)transform.position.x, initialPosition.y, (int)transform.position.z);
+
         SetModeVoid();
 
         transform.eulerAngles = Vector3.zero;
@@ -219,12 +221,6 @@ public class Enemy : CubeMovable
             {
                 orientation = vector;
             }
-
-            if (TestWall())
-            {
-                SetModeVoid();
-                return;
-            }
         }
         else if (isEnemyMoving)
         {
@@ -270,6 +266,12 @@ public class Enemy : CubeMovable
 
             CurrentMoveProject = CurrentMove;
             revertMoveProject = revertMove;
+        }
+
+        if (TestWall())
+        {
+            SetModeVoid();
+            return;
         }
 
         RotationCheck();
@@ -376,20 +378,36 @@ public class Enemy : CubeMovable
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 0.5f))
+        int layerMask = 1 << 12;
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(ray, out hit, 0.5f, layerMask))
         {
 
             if (hit.transform.gameObject.GetComponent<CubeStatic>())
             {
                 return true;
             }
-            
+            else if (hit.transform.gameObject.GetComponent<CubePush>())
+            {
+                CubePush tmpCube = hit.transform.gameObject.GetComponent<CubePush>();
+
+                if (!tmpCube.isMoving)
+                {
+                    tmpCube.orientation = orientation.normalized;
+
+                    if (!tmpCube.TestWall())
+                    {
+                        tmpCube.SetModeMove(tmpCube.orientation);
+                    }
+                    else return true;
+                }
+
+            }
         }
 
         return false;
     }
-
-    private Vector3 boxSize = new Vector3(0.25f, 0.25f, 0.25f);
 
     public void TestPlayer()
     {
