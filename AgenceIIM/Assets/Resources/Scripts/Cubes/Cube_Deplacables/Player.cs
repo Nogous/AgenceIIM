@@ -583,6 +583,11 @@ public class Player : CubeMovable
     protected override void DoActionMove()
     {
         base.DoActionMove();
+    }
+
+    protected override void DoActionDash()
+    {
+        base.DoActionDash();
 
         TestEnemy();
     }
