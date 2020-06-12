@@ -82,11 +82,15 @@ public class Player : CubeMovable
         SwipeDetector.OnSwipe += ProcessMobileInput;
     }
 
+    public void resetOnMove()
+    {
+        if(OnMove != null)OnMove = null;
+    }
+
     public void ResetPlayerMove()
     {
         //base.ResetCube();
-
-        OnMove = null;
+        resetOnMove();
 
         nbMove = 0;
 
