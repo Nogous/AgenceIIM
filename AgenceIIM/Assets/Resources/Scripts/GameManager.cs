@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
+            player.resetOnMove();
             SceneManager.LoadScene(0);
         }
 
@@ -214,6 +215,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
+        player.ResetPlayerMove();
         OnResetLevel();
         nbEnnemy = nbEnnemyInit;
         player.MobileAxeHorNeg = false;

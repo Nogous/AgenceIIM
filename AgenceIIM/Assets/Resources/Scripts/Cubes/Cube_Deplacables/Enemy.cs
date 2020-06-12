@@ -30,6 +30,8 @@ public class Enemy : CubeMovable
 
     private float timerTime = 0f;
 
+    [SerializeField] public GameObject cubeRenderer = null;
+
     public override void OnAwake()
     {
         base.OnAwake();
@@ -40,7 +42,7 @@ public class Enemy : CubeMovable
 
         if (color != Color.white)
         {
-            gameObject.GetComponent<Renderer>().material.color = color;
+            cubeRenderer.GetComponent<Renderer>().material.color = color;
         }
     }
 
@@ -55,6 +57,8 @@ public class Enemy : CubeMovable
     public override void ResetCube()
     {
         base.ResetCube();
+
+        if (isEnemyMirror || isEnemyMoving) Player.OnMove += SetModeMove;
 
         CurrentMove = 0;
         CurrentMoveProject = 0;
@@ -291,8 +295,11 @@ public class Enemy : CubeMovable
     protected override void DoActionMove()
     {
         base.DoActionMove();
-
-        TestPlayer();
+            
+        if(_elapsedTime >= _moveTime / 2)
+        {
+            TestPlayer();
+        }
     }
 
     protected override void DoActionDash()
@@ -506,7 +513,12 @@ public class Enemy : CubeMovable
 
     public override void Explode()
     {
-        if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
+        if (isEnemyMirror || isEnemyMoving)
+        {
+            Player.OnMove -= SetModeMove;
+        }
+
+        SetModeVoid();
 
         GameManager.instance.KillEnnemy();
 
