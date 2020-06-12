@@ -56,6 +56,8 @@ public class Enemy : CubeMovable
     {
         base.ResetCube();
 
+        if (isEnemyMirror || isEnemyMoving) Player.OnMove += SetModeMove;
+
         CurrentMove = 0;
         CurrentMoveProject = 0;
         revertMove = false;
@@ -291,8 +293,11 @@ public class Enemy : CubeMovable
     protected override void DoActionMove()
     {
         base.DoActionMove();
-
-        TestPlayer();
+            
+        if(_elapsedTime >= _moveTime / 2)
+        {
+            TestPlayer();
+        }
     }
 
     protected override void DoActionDash()
@@ -506,7 +511,12 @@ public class Enemy : CubeMovable
 
     public override void Explode()
     {
-        if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
+        if (isEnemyMirror || isEnemyMoving)
+        {
+            Player.OnMove -= SetModeMove;
+        }
+
+        SetModeVoid();
 
         GameManager.instance.KillEnnemy();
 

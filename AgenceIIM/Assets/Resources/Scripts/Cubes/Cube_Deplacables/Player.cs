@@ -78,9 +78,12 @@ public class Player : CubeMovable
         SwipeDetector.OnSwipe += ProcessMobileInput;
     }
 
-    public override void ResetCube()
+    public void ResetPlayerMove()
     {
-        base.ResetCube();
+        //base.ResetCube();
+
+        OnMove = null;
+
         nbMove = 0;
 
         StartPlayer();
@@ -179,7 +182,7 @@ public class Player : CubeMovable
                 break;
         }
 
-        if (Physics.Raycast(ray, out hit, 0.55f))
+        if (Physics.Raycast(ray, out hit, 0.5f))
         {
             if (hit.transform.gameObject.GetComponent<Enemy>())
             {
