@@ -179,7 +179,7 @@ public class Player : CubeMovable
                 break;
         }
 
-        if (Physics.Raycast(ray, out hit, 0.6f))
+        if (Physics.Raycast(ray, out hit, 0.55f))
         {
             if (hit.transform.gameObject.GetComponent<Enemy>())
             {
@@ -580,6 +580,13 @@ public class Player : CubeMovable
         StartMoveBehavior();
 
         DoAction = DoActionMove;
+    }
+
+    protected override void DoActionMove()
+    {
+        base.DoActionMove();
+
+        TestEnemy();
     }
 
     protected override void DoActionDash()
