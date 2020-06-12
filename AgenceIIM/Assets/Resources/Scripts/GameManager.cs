@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
+            player.resetOnMove();
             SceneManager.LoadScene(0);
         }
 
