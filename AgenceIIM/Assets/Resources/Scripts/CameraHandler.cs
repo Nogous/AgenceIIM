@@ -47,8 +47,15 @@ public class CameraHandler : MonoBehaviour
         }
         else if (GameManager.instance.replayer.GetButtonDown("Camera_Travel"))
         {
-            if (GameManager.instance.cameraTravel.MoveToNextPoint())
+            if (GameManager.instance.doCamTravel)
+            {
+                if (GameManager.instance.cameraTravel.MoveToNextPoint())
+                    GameManager.instance.DATAnbMoveCam++;
+            }
+            else
+            {
                 GameManager.instance.DATAnbMoveCam++;
+            }
             StartTravel();
         }
     }

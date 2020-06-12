@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
     public event Action OnResetLevel;
     public UIEndLevel uiEndLevel;
 
+    public bool doCamTravel = false;
+
     private void Awake()
     {
         if (instance == null)
