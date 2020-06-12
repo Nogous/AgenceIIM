@@ -214,6 +214,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
+        player.ResetPlayerMove();
         OnResetLevel();
         nbEnnemy = nbEnnemyInit;
         player.MobileAxeHorNeg = false;
