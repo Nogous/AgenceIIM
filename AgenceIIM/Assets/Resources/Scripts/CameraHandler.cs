@@ -68,14 +68,14 @@ public class CameraHandler : MonoBehaviour
     }
     public void Travel()
     {
-        GameObject crossUI = GameObject.Find("ControlIcon");
+        RectTransform crossUI = GameObject.Find("Canvas_controls").GetComponent<RectTransform>();
         if (position)
         {
-            crossUI.GetComponent<RectTransform>().localRotation = new Quaternion(90, 52, -128, 0);
+            crossUI.rotation = Quaternion.Euler(0,0,0);
         }
         else
         {
-            crossUI.GetComponent<RectTransform>().localRotation = new Quaternion(90, -38, -128, 0);
+            crossUI.rotation = Quaternion.Euler(0,180,0);
         }
         var positionTargetMain = pipCameraGO.transform.position;
         var positionTargetPip = mainCameraGO.transform.position;
