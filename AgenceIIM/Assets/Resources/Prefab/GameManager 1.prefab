@@ -47,7 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1fdf2e8aabeae42bd25adc970c2812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idMonde: 0
   idLevel: 0
+  cameraTravel: {fileID: 0}
   useWASDLayout: 0
   player: {fileID: 0}
   fallDuration: 1
@@ -56,6 +58,12 @@ MonoBehaviour:
   nbEnnemy: 1
   sceneNameToLoad: 
   UI_mobile: {fileID: 0}
+  minPoints3Star: 10
+  minPoints2Star: 10
+  rainbowMaterial: {fileID: 0}
+  colorSpeed: 1
+  uiEndLevel: {fileID: 0}
+  doCamTravel: 1
   DATAnbMoveCam: 0
 --- !u!114 &7196673271184115746
 MonoBehaviour:
@@ -69,7 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c50665b222eab54bb2e2e1e41867592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraGO: {fileID: 0}
+  mainCameraGO: {fileID: 0}
+  pipCameraGO: {fileID: 0}
   positionDepart: {x: 0, y: 0, z: 0}
   positionAlternatif: {x: 14.1, y: 11.6, z: 12.9}
   positionTan: {x: 0, y: 0, z: 0}
