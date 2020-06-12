@@ -30,6 +30,8 @@ public class Enemy : CubeMovable
 
     private float timerTime = 0f;
 
+    [SerializeField] public GameObject cubeRenderer = null;
+
     public override void OnAwake()
     {
         base.OnAwake();
@@ -40,7 +42,7 @@ public class Enemy : CubeMovable
 
         if (color != Color.white)
         {
-            gameObject.GetComponent<Renderer>().material.color = color;
+            cubeRenderer.GetComponent<Renderer>().material.color = color;
         }
     }
 
