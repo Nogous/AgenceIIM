@@ -33,10 +33,14 @@ public class Player : CubeMovable
     public static event Action<Vector3> OnMove;
 
     [Header("Options Axes Mobile")]
-    bool MobileAxeHorPos = false;
-    bool MobileAxeHorNeg = false;
-    bool MobileAxeVerPos = false;
-    bool MobileAxeVerNeg = false;
+    [HideInInspector]
+    public bool MobileAxeHorPos = false;
+    [HideInInspector]
+    public bool MobileAxeHorNeg = false;
+    [HideInInspector]
+    public bool MobileAxeVerPos = false;
+    [HideInInspector]
+    public bool MobileAxeVerNeg = false;
     public float DuréeActivationAxe = 0.01f;
     [Header("Image des controles")]
     public Image crossUI;

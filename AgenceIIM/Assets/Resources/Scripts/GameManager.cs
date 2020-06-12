@@ -216,6 +216,10 @@ public class GameManager : MonoBehaviour
 
         OnResetLevel();
         nbEnnemy = nbEnnemyInit;
+        player.MobileAxeHorNeg = false;
+        player.MobileAxeHorPos = false;
+        player.MobileAxeVerNeg = false;
+        player.MobileAxeVerPos = false;
         player.gameObject.SetActive(true);
         Debug.Log("Reset");
     }
