@@ -563,7 +563,6 @@ public class Player : CubeMovable
 
         SetModeVoid();
 
-
         CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakePlayer, MagnShakePlayer));
         
         AudioManager.instance.Play("Death");
@@ -814,7 +813,7 @@ public class Player : CubeMovable
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 1f))
+        if (Physics.Raycast(ray, out hit, 0.51f))
         {
             if (hit.transform.gameObject.GetComponent<CubeStatic>())
             {
