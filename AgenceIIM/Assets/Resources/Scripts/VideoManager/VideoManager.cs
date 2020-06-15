@@ -11,7 +11,7 @@ public class VideoManager : MonoBehaviour
 
     public VideoPlayer videoPlayer;
     private GameObject obj;
-    private Material mat;
+
     private RenderTexture texture;
     private Image image;
 
@@ -26,12 +26,6 @@ public class VideoManager : MonoBehaviour
             videoPlayer.playOnAwake = false;
         }
         videoPlayer.clip = video;
-        mat = new Material(obj.GetComponent<Renderer>().material);
-        texture = new RenderTexture((int)obj.transform.localScale.x * 640, (int)obj.transform.localScale.y*640, 640);
-        videoPlayer.targetTexture = texture;
-        mat.mainTexture = texture;
-        obj.GetComponent<Renderer>().material = mat;
-
         Play();
     }
 
