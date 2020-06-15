@@ -33,10 +33,14 @@ public class Player : CubeMovable
     public static event Action<Vector3> OnMove;
 
     [Header("Options Axes Mobile")]
-    bool MobileAxeHorPos = false;
-    bool MobileAxeHorNeg = false;
-    bool MobileAxeVerPos = false;
-    bool MobileAxeVerNeg = false;
+    [HideInInspector]
+    public bool MobileAxeHorPos = false;
+    [HideInInspector]
+    public bool MobileAxeHorNeg = false;
+    [HideInInspector]
+    public bool MobileAxeVerPos = false;
+    [HideInInspector]
+    public bool MobileAxeVerNeg = false;
     public float DuréeActivationAxe = 0.01f;
     [Header("Image des controles")]
     public Image crossUI;
@@ -78,9 +82,16 @@ public class Player : CubeMovable
         SwipeDetector.OnSwipe += ProcessMobileInput;
     }
 
-    public override void ResetCube()
+    public void resetOnMove()
     {
-        base.ResetCube();
+        if(OnMove != null)OnMove = null;
+    }
+
+    public void ResetPlayerMove()
+    {
+        //base.ResetCube();
+        resetOnMove();
+
         nbMove = 0;
 
         StartPlayer();
@@ -118,11 +129,9 @@ public class Player : CubeMovable
         SwipeDetector.OnSwipe -= ProcessMobileInput;
     }
 
-    void Update()
+    void UpdateControlImage()
     {
-        DoAction();
         timeNoAction += Time.deltaTime;
-        /*
         if (LUT_FadeControls.Evaluate(timeNoAction) >= 10)
         {
             crossUI.color = new Color(255, 255, 255, 1);
@@ -131,7 +140,11 @@ public class Player : CubeMovable
         {
             crossUI.color = new Color(255, 255, 255, LUT_FadeControls.Evaluate(timeNoAction));
         }
-        */
+    }
+    void Update()
+    {
+        DoAction();
+        UpdateControlImage();
     }
 
     public override void StartMoveBehavior()
@@ -177,7 +190,7 @@ public class Player : CubeMovable
                 break;
         }
 
-        if (Physics.Raycast(ray, out hit, 0.5f))
+        if (Physics.Raycast(ray, out hit, 0.49f))
         {
             if (hit.transform.gameObject.GetComponent<Enemy>())
             {
@@ -587,6 +600,13 @@ public class Player : CubeMovable
         TestEnemy();
     }
 
+    protected override void DoActionDash()
+    {
+        base.DoActionDash();
+
+        TestEnemy();
+    }
+
     public AnimationCurve stretchCube;
     public float stretchSpeed = 1f;
     private float stretchLerp = 0;
@@ -796,7 +816,7 @@ public class Player : CubeMovable
 
         if (Physics.Raycast(ray, out hit, 0.5f))
         {
-            if (hit.transform.gameObject.GetComponent<CubeWall>())
+            if (hit.transform.gameObject.GetComponent<CubeStatic>())
             {
                 return true;
             }

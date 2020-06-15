@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public static bool isQwerty = false;
 
+    public CameraTravel cameraTravel;
 
     public Rewired.Player replayer;
     public bool useWASDLayout;
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     public event Action OnResetLevel;
     public UIEndLevel uiEndLevel;
+
+    public bool doCamTravel = false;
 
     private void Awake()
     {
@@ -103,6 +106,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
+            player.resetOnMove();
             SceneManager.LoadScene(0);
         }
 
@@ -211,8 +215,13 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
+        player.ResetPlayerMove();
         OnResetLevel();
         nbEnnemy = nbEnnemyInit;
+        player.MobileAxeHorNeg = false;
+        player.MobileAxeHorPos = false;
+        player.MobileAxeVerNeg = false;
+        player.MobileAxeVerPos = false;
         player.gameObject.SetActive(true);
         Debug.Log("Reset");
     }

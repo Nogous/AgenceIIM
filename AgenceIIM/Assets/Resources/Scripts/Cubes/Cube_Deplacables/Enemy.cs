@@ -30,6 +30,8 @@ public class Enemy : CubeMovable
 
     private float timerTime = 0f;
 
+    [SerializeField] public GameObject cubeRenderer = null;
+
     public override void OnAwake()
     {
         base.OnAwake();
@@ -40,7 +42,7 @@ public class Enemy : CubeMovable
 
         if (color != Color.white)
         {
-            gameObject.GetComponent<Renderer>().material.color = color;
+            cubeRenderer.GetComponent<Renderer>().material.color = color;
         }
     }
 
@@ -55,6 +57,8 @@ public class Enemy : CubeMovable
     public override void ResetCube()
     {
         base.ResetCube();
+
+        if (isEnemyMirror || isEnemyMoving) Player.OnMove += SetModeMove;
 
         CurrentMove = 0;
         CurrentMoveProject = 0;
@@ -96,6 +100,8 @@ public class Enemy : CubeMovable
 
     public override void EndMoveBehavior(bool slide = false)
     {
+        transform.position = new Vector3((int)transform.position.x, initialPosition.y, (int)transform.position.z);
+
         SetModeVoid();
 
         transform.eulerAngles = Vector3.zero;
@@ -219,12 +225,6 @@ public class Enemy : CubeMovable
             {
                 orientation = vector;
             }
-
-            if (TestWall())
-            {
-                SetModeVoid();
-                return;
-            }
         }
         else if (isEnemyMoving)
         {
@@ -272,6 +272,12 @@ public class Enemy : CubeMovable
             revertMoveProject = revertMove;
         }
 
+        if (TestWall())
+        {
+            SetModeVoid();
+            return;
+        }
+
         RotationCheck();
 
         _elapsedTime = 0;
@@ -289,8 +295,18 @@ public class Enemy : CubeMovable
     protected override void DoActionMove()
     {
         base.DoActionMove();
+            
+        if(_elapsedTime >= _moveTime / 2)
+        {
+            TestPlayer();
+        }
+    }
 
-        TestPlayer();
+    protected override void DoActionDash()
+    {
+        base.DoActionDash();
+
+        TestPlayerDash();
     }
 
     private void MoveProjection()
@@ -376,20 +392,36 @@ public class Enemy : CubeMovable
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 0.5f))
+        int layerMask = 1 << 12;
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(ray, out hit, 0.5f, layerMask))
         {
 
             if (hit.transform.gameObject.GetComponent<CubeStatic>())
             {
                 return true;
             }
-            
+            else if (hit.transform.gameObject.GetComponent<CubePush>())
+            {
+                CubePush tmpCube = hit.transform.gameObject.GetComponent<CubePush>();
+
+                if (!tmpCube.isMoving)
+                {
+                    tmpCube.orientation = orientation.normalized;
+
+                    if (!tmpCube.TestWall())
+                    {
+                        tmpCube.SetModeMove(tmpCube.orientation);
+                    }
+                    else return true;
+                }
+
+            }
         }
 
         return false;
     }
-
-    private Vector3 boxSize = new Vector3(0.25f, 0.25f, 0.25f);
 
     public void TestPlayer()
     {
@@ -400,6 +432,32 @@ public class Enemy : CubeMovable
         layerMask = ~layerMask;
 
         if (Physics.Raycast(ray, out hit,  0.5f, layerMask))
+        {
+            if (hit.transform.parent.gameObject.GetComponent<Player>())
+            {
+                if (hit.transform.gameObject.GetComponent<Renderer>().material.color == color)
+                {
+                    Explode();
+                }
+                else
+                {
+                    Player tmpPlayer = hit.transform.parent.gameObject.GetComponent<Player>();
+
+                    tmpPlayer.SetDeath();
+                }
+            }
+        }
+    }
+
+    public void TestPlayerDash()
+    {
+        Ray ray = new Ray(transform.position - orientation, orientation);
+        RaycastHit hit;
+
+        int layerMask = 1 << 12;
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(ray, out hit,  1f, layerMask))
         {
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
@@ -455,7 +513,12 @@ public class Enemy : CubeMovable
 
     public override void Explode()
     {
-        if (isEnemyMirror || isEnemyMoving) Player.OnMove -= SetModeMove;
+        if (isEnemyMirror || isEnemyMoving)
+        {
+            Player.OnMove -= SetModeMove;
+        }
+
+        SetModeVoid();
 
         GameManager.instance.KillEnnemy();
 
