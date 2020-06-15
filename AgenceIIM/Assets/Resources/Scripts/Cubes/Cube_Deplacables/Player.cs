@@ -814,7 +814,7 @@ public class Player : CubeMovable
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 0.5f))
+        if (Physics.Raycast(ray, out hit, 1f))
         {
             if (hit.transform.gameObject.GetComponent<CubeStatic>())
             {
