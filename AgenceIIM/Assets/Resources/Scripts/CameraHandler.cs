@@ -8,7 +8,6 @@ public class CameraHandler : MonoBehaviour
     bool travel;
     [System.NonSerialized]
     public bool position;
-    float progress = 0.0f;
     public GameObject mainCameraGO;
     public GameObject pipCameraGO;
     public Vector3 positionDepart;
@@ -47,15 +46,8 @@ public class CameraHandler : MonoBehaviour
         }
         else if (GameManager.instance.replayer.GetButtonDown("Camera_Travel"))
         {
-            if (GameManager.instance.doCamTravel)
-            {
-                if (GameManager.instance.cameraTravel.MoveToNextPoint())
-                    GameManager.instance.DATAnbMoveCam++;
-            }
-            else
-            {
-                GameManager.instance.DATAnbMoveCam++;
-            }
+            GameManager.instance.cameraTravel.MoveToNextPoint();
+            GameManager.instance.DATAnbMoveCam++;
             StartTravel();
         }
     }
@@ -63,7 +55,6 @@ public class CameraHandler : MonoBehaviour
     public void StartTravel()
     {
         if (travel) return;
-        progress = 0.0f;
         travel = true;
     }
     public void Travel()
