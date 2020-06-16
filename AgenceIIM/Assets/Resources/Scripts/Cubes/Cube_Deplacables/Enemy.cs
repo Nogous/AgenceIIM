@@ -13,9 +13,9 @@ public class Enemy : CubeMovable
     [HideInInspector] public Color initColor;
 
     public List<moveEnum> MoveList = new List<moveEnum>();
-    protected int CurrentMove = 0;
+    public int CurrentMove = 0;
     protected int CurrentMoveProject = 0;
-    protected bool revertMove = false;
+    public bool revertMove = false;
     protected bool revertMoveProject = false;
 
     [SerializeField] private GameObject projection = null;
@@ -31,6 +31,8 @@ public class Enemy : CubeMovable
     private float timerTime = 0f;
 
     [SerializeField] public GameObject cubeRenderer = null;
+
+    private Player playerInRange = null;
 
     public override void OnAwake()
     {
@@ -107,6 +109,10 @@ public class Enemy : CubeMovable
         transform.eulerAngles = Vector3.zero;
 
         TestTile();
+
+        isGoingToDie = false;
+        isDestroy = false;
+        isDestroying = false;
     }
 
     public override void SetModeVoid()
@@ -278,6 +284,15 @@ public class Enemy : CubeMovable
             return;
         }
 
+        if (testPlayerFar())
+        {
+            if (vector == -orientation)
+            {
+                if (isGoingToDie) isDestroy = true;
+                else isDestroying = true;
+            }
+        }  
+
         RotationCheck();
 
         _elapsedTime = 0;
@@ -292,14 +307,24 @@ public class Enemy : CubeMovable
         DoAction = DoActionMove;
     }
 
+    private bool isDestroy = false;
+    private bool isDestroying = false;
+
     protected override void DoActionMove()
     {
         base.DoActionMove();
-            
-        if(_elapsedTime >= _moveTime / 2)
+
+        if (_elapsedTime >= _moveTime / 2)
         {
-            TestPlayer();
+            if (isDestroy) Explode();
+            else if (isDestroying)
+            {
+                playerInRange.SetDeath();
+                isDestroying = false;
+            }
         }
+
+        TestPlayer();      
     }
 
     protected override void DoActionDash()
@@ -395,7 +420,7 @@ public class Enemy : CubeMovable
         int layerMask = 1 << 12;
         layerMask = ~layerMask;
 
-        if (Physics.Raycast(ray, out hit, 0.5f, layerMask))
+        if (Physics.Raycast(ray, out hit, 0.51f, layerMask))
         {
 
             if (hit.transform.gameObject.GetComponent<CubeStatic>())
@@ -425,13 +450,13 @@ public class Enemy : CubeMovable
 
     public void TestPlayer()
     {
-        Ray ray = new Ray(previousPos, orientation);
+        Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
 
         int layerMask = 1 << 12;
         layerMask = ~layerMask;
 
-        if (Physics.Raycast(ray, out hit,  0.5f, layerMask))
+        if (Physics.Raycast(ray, out hit,  0.51f, layerMask))
         {
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
@@ -447,6 +472,32 @@ public class Enemy : CubeMovable
                 }
             }
         }
+    }
+
+    private bool isGoingToDie = false;
+
+    private bool testPlayerFar()
+    {
+        Ray ray = new Ray(transform.position, orientation);
+        RaycastHit hit;
+
+        int layerMask = 1 << 12;
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(ray, out hit, 2f, layerMask))
+        {
+            if (hit.transform.parent.gameObject.GetComponent<Player>())
+            {
+                playerInRange = hit.transform.parent.gameObject.GetComponent<Player>();
+
+                if (hit.transform.gameObject.GetComponent<Renderer>().material.color == color)
+                {
+                    isGoingToDie = true;
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     public void TestPlayerDash()
