@@ -231,28 +231,7 @@ public class Player : CubeMovable
         TestTile();
     }
 
-    public void ProcessMobileInputLeft()
-    {
-        StartCoroutine(MobileLeftAxisBehaviour());
-    }
-
-    public void ProcessMobileInputRight()
-    {
-        StartCoroutine(MobileRightAxisBehaviour());
-    }
-
-    public void ProcessMobileInputDown()
-    {
-        StartCoroutine(MobileDownAxisBehaviour());
-    }
-
-    public void ProcessMobileInputUp()
-    {
-        StartCoroutine(MobileUpAxisBehaviour());
-    }
-
-
-
+   
     public void ResetPlayer()
     {
         trail.gameObject.SetActive(false);
@@ -889,28 +868,28 @@ public class Player : CubeMovable
         if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
     
-    private IEnumerator MobileUpAxisBehaviour()
+    public IEnumerator MobileUpAxisBehaviour()
     {
         MobileAxeVerPos = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeVerPos = false;
     }
 
-    private IEnumerator MobileDownAxisBehaviour()
+    public IEnumerator MobileDownAxisBehaviour()
     {
         MobileAxeVerNeg = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeVerNeg = false;
     }
 
-    private IEnumerator MobileRightAxisBehaviour()
+    public IEnumerator MobileRightAxisBehaviour()
     {
         MobileAxeHorPos = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeHorPos = false;
     }
 
-    private IEnumerator MobileLeftAxisBehaviour()
+    public IEnumerator MobileLeftAxisBehaviour()
     {
         MobileAxeHorNeg = true;
         yield return new WaitForSeconds(DuréeActivationAxe);

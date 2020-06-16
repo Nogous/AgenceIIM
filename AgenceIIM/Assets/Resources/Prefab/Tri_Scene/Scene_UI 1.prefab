@@ -570,6 +570,7 @@ GameObject:
   - component: {fileID: 1743240733169148395}
   - component: {fileID: 8250268119780073185}
   - component: {fileID: 3781280855989876538}
+  - component: {fileID: 1529678573026012085}
   m_Layer: 5
   m_Name: Home
   m_TagString: Untagged
@@ -671,9 +672,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3857660365893819092, guid: 4af750fe97d7d9b4bbf0e17223d865d8,
-          type: 3}
-        m_MethodName: GoToMainMenu
+      - m_Target: {fileID: 1529678573026012085}
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -683,6 +683,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1529678573026012085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2835622115962530900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578dd749207ff5a44af29bca715b2a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3140397644662570758
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,6 +704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6288128105195313645}
+  - component: {fileID: 7107580098885085768}
   m_Layer: 5
   m_Name: Mobile-Dpad
   m_TagString: Untagged
@@ -722,6 +735,18 @@ RectTransform:
   m_AnchoredPosition: {x: 910, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &7107580098885085768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140397644662570758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6824f3a94a51e14aa24688bd573aa9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3346488140751077474
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,8 +1007,7 @@ MonoBehaviour:
   _onButtonDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4262090060869761110, guid: 5609393f323857243a32f00b8331cba8,
-          type: 3}
+      - m_Target: {fileID: 7107580098885085768}
         m_MethodName: ProcessMobileInputRight
         m_Mode: 1
         m_Arguments:
@@ -1457,7 +1481,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -11, y: 13}
+  m_AnchoredPosition: {x: -4.8, y: 5.3}
   m_SizeDelta: {x: 2275.2, y: 500}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &4895571998219325072
@@ -1499,7 +1523,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Build 0.43
+  m_Text: Build 0.5
 --- !u!1 &4895571998220270562
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,8 +2168,7 @@ MonoBehaviour:
   _onButtonDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4262090060869761110, guid: 5609393f323857243a32f00b8331cba8,
-          type: 3}
+      - m_Target: {fileID: 7107580098885085768}
         m_MethodName: ProcessMobileInputLeft
         m_Mode: 1
         m_Arguments:
@@ -2599,8 +2622,7 @@ MonoBehaviour:
   _onButtonDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4262090060869761110, guid: 5609393f323857243a32f00b8331cba8,
-          type: 3}
+      - m_Target: {fileID: 7107580098885085768}
         m_MethodName: ProcessMobileInputUp
         m_Mode: 1
         m_Arguments:
@@ -2797,8 +2819,7 @@ MonoBehaviour:
   _onButtonDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4262090060869761110, guid: 5609393f323857243a32f00b8331cba8,
-          type: 3}
+      - m_Target: {fileID: 7107580098885085768}
         m_MethodName: ProcessMobileInputDown
         m_Mode: 1
         m_Arguments:
