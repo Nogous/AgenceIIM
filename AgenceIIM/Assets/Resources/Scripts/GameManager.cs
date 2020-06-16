@@ -103,11 +103,16 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            player.resetOnMove();
-            SceneManager.LoadScene(0);
+            GoToMainMenu();
         }
 
         UpdateColorRainbow();
+    }
+
+    public void GoToMainMenu()
+    {
+        player.resetOnMove();
+        SceneManager.LoadScene(0);
     }
 
     public void UpdateColorRainbow()

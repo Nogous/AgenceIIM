@@ -77,9 +77,7 @@ public class Player : CubeMovable
         {
             initColors[i] = faceColor[i].material.color;
         }
-
         crossUI = GameObject.Find("ControlIcon").GetComponent<Image>();
-        SwipeDetector.OnSwipe += ProcessMobileInput;
     }
 
     public void resetOnMove()
@@ -126,7 +124,7 @@ public class Player : CubeMovable
 
     void OnDestroy()
     {
-        SwipeDetector.OnSwipe -= ProcessMobileInput;
+
     }
 
     void UpdateControlImage()
@@ -233,25 +231,27 @@ public class Player : CubeMovable
         TestTile();
     }
 
-    private void ProcessMobileInput(SwipeData data)
+    public void ProcessMobileInputLeft()
     {
-        if (data.Direction == SwipeDirection.Up)
-        {
-            StartCoroutine(MobileUpAxisBehaviour());
-        }
-        else if (data.Direction == SwipeDirection.Down)
-        {
-            StartCoroutine(MobileDownAxisBehaviour());
-        }
-        else if (data.Direction == SwipeDirection.Right)
-        {
-            StartCoroutine(MobileRightAxisBehaviour());
-        }
-        else if (data.Direction == SwipeDirection.Left)
-        {
-            StartCoroutine(MobileLeftAxisBehaviour());
-        }
+        StartCoroutine(MobileLeftAxisBehaviour());
     }
+
+    public void ProcessMobileInputRight()
+    {
+        StartCoroutine(MobileRightAxisBehaviour());
+    }
+
+    public void ProcessMobileInputDown()
+    {
+        StartCoroutine(MobileDownAxisBehaviour());
+    }
+
+    public void ProcessMobileInputUp()
+    {
+        StartCoroutine(MobileUpAxisBehaviour());
+    }
+
+
 
     public void ResetPlayer()
     {
