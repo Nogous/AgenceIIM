@@ -556,6 +556,15 @@ public class Player : CubeMovable
 
     public override void SetModeMove(Vector3 vector)
     {
+        RaycastHit hit;
+
+        //Debug.DrawLine((transform.position + orientation), (transform.position + orientation) + Vector3.down, Color.blue, 10f);
+
+        if (!Physics.Raycast((transform.position + orientation), Vector3.down, out hit, 1f))
+        {
+            return;
+        }
+
         RotationCheck();
 
         _elapsedTime = 0;
