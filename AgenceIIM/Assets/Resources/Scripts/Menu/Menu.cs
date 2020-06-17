@@ -12,6 +12,7 @@ public class StarPoints
 {
     public int minPoints3Star;
     public int minPoints2Star;
+    public Sprite sprite;
 }
 
 public class Menu : MonoBehaviour
@@ -297,6 +298,11 @@ public class Menu : MonoBehaviour
 
         for (int i = 0; i < currentList.Length; i++)
         {
+            if (tmpPoints[i].sprite != null)
+            {
+                levelUIMonde1[i].image.sprite = tmpPoints[i].sprite;
+            }
+
             if (levelUIMonde1[i].button != null)
             {
                 levelUIMonde1[i].button.interactable = false;
