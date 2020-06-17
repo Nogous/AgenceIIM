@@ -450,7 +450,7 @@ public class Enemy : CubeMovable
 
     public void TestPlayer()
     {
-        Ray ray = new Ray(transform.position, orientation);
+        Ray ray = new Ray(transform.position - orientation/4, orientation);
         RaycastHit hit;
 
         int layerMask = 1 << 12;
@@ -458,6 +458,7 @@ public class Enemy : CubeMovable
 
         if (Physics.Raycast(ray, out hit,  0.51f, layerMask))
         {
+
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
                 if (hit.transform.gameObject.GetComponent<Renderer>().material.color == color)
