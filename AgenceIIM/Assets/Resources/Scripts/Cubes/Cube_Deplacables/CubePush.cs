@@ -134,6 +134,10 @@ public class CubePush : CubeMovable
 
                 gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
             }
+            else if (hit.transform.gameObject.GetComponent<CubeSlid>())
+            {
+                if (!TestWall()) SetModeSlid();
+            }
         }
         else
         {
