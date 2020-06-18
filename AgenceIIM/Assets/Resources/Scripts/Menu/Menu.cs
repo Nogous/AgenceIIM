@@ -415,6 +415,49 @@ public class Menu : MonoBehaviour
         }
     }
 
+
+
+    public void LoadLastLevel()
+    {
+        string toLoadId = "3-14";
+
+        for (int j = 4; j-->0;)
+        {
+            int[] currentList = starsMonde1;
+            switch (j)
+            {
+                case 3:
+                    currentList = starsMonde3;
+                    break;
+                case 2:
+                    currentList = starsMonde2;
+                    break;
+                case 1:
+                    currentList = starsMonde1;
+                    break;
+                case 0:
+                    SceneManager.LoadScene("1-0");
+                    return;
+                default:
+                    Debug.Log("WAT?");
+                    break;
+            }
+
+            for (int i = currentList.Length; i-- > 0;)
+            {
+                if (currentList[i] < 1)
+                {
+                    toLoadId = j.ToString() + "-" + i.ToString();
+                }
+                else
+                {
+                    SceneManager.LoadScene(toLoadId);
+                    return;
+                }
+            }
+        }
+    }
+
     #region cheatcodes
 
 
