@@ -416,10 +416,11 @@ public class Menu : MonoBehaviour
     }
 
 
-    private string toLoadId = "";
 
     public void LoadLastLevel()
     {
+        string toLoadId = "3-14";
+
         for (int j = 4; j-->0;)
         {
             int[] currentList = starsMonde1;
