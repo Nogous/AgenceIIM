@@ -8,7 +8,12 @@ public class SceneUI : MonoBehaviour
     public Text idLevelTrad;
     public Text idLevelEnd;
 
-    // Start is called before the first frame update
+    void Start()
+    {
+        idLevelTrad = GameObject.Find("levelIdTrad").GetComponent<Text>();
+        idLevelEnd = GameObject.Find("LevelIdEnd").GetComponent<Text>();
+    }
+
     void Update()
     {
         int i = 0;

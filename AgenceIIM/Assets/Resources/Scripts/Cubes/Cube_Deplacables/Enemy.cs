@@ -195,6 +195,9 @@ public class Enemy : CubeMovable
 
     public override void SetModeMove(Vector3 vector)
     {
+        if (isDashing) return;
+        if (isSliding) return;
+
         if (DoAction == DoActionFall) return;
 
         if (isEnemyMoving) projection.SetActive(false);
