@@ -135,29 +135,29 @@ public class GameManager : MonoBehaviour
 
     public void DeterminPlatform()
     {
+        GameObject.Find("Scene_UI_PC").SetActive(false);
+        GameObject.Find("Scene_UI_Mobile").SetActive(false);
 #if UNITY_EDITOR
         if (!(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android))
         {
             //Code Spécifique PC
-            GameObject.Find("Mobile_Canvas").SetActive(false);
-            GetComponent<SwipeDetector>().enabled = false;
+            GameObject.Find("Scene_UI_PC").SetActive(true);
         }
         else
         {
             // Code Spécifique Mobile
-            GameObject.Find("Controles_PC").SetActive(false);
+            GameObject.Find("Scene_UI_Mobile").SetActive(true);
         }
 #else
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC
-            GameObject.Find("Mobile_Canvas").SetActive(false);
-            GetComponent<SwipeDetector>().enabled = false;
+            GameObject.Find("Scene_UI_PC").SetActive(true);
         }
         else
         {
             //Code Spécifique Mobile 
-            GameObject.Find("Controles_PC").SetActive(false);
+            GameObject.Find("Scene_UI_Mobile").SetActive(true);
         }
 #endif
     }
