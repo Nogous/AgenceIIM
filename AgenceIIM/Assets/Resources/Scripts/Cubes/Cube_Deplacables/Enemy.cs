@@ -462,7 +462,10 @@ public class Enemy : CubeMovable
 
         if (Physics.Raycast(ray, out hit,  0.51f, layerMask))
         {
-
+            if (hit.transform.parent == null)
+            {
+                return;
+            }
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
                 if (hit.transform.gameObject.GetComponent<Renderer>().material.color == color)
@@ -491,6 +494,10 @@ public class Enemy : CubeMovable
 
         if (Physics.Raycast(ray, out hit, 2f, layerMask))
         {
+            if (hit.transform.parent == null)
+            {
+                return false;
+            }
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
                 playerInRange = hit.transform.parent.gameObject.GetComponent<Player>();

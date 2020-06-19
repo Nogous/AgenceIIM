@@ -273,8 +273,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveVerticalQwerty) < -0.1f || MobileAxeVerNeg)
                 {
@@ -286,8 +284,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) > 0.1f || MobileAxeHorPos)
                 {
@@ -299,8 +295,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) < -0.1f || MobileAxeHorNeg)
                 {
@@ -312,8 +306,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
             }
             else
@@ -328,8 +320,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) < -0.1f || MobileAxeVerNeg)
                 {
@@ -342,7 +332,6 @@ public class Player : CubeMovable
 
                     else return;
 
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) > 0.1f || MobileAxeHorPos)
                 {
@@ -354,8 +343,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) < -0.1f || MobileAxeHorNeg)
                 {
@@ -367,8 +354,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
             }
         }
@@ -388,8 +373,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveVerticalQwerty) * -1 < -0.1f || MobileAxeVerPos)
                 {
@@ -401,8 +384,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) * -1 > 0.1f || MobileAxeHorNeg)
                 {
@@ -414,8 +395,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) * -1 < -0.1f || MobileAxeHorPos)
                 {
@@ -427,8 +406,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
             }
             else
@@ -444,8 +421,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 < -0.1f || MobileAxeVerPos)
                 {
@@ -457,8 +432,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 > 0.1f || MobileAxeHorNeg)
                 {
@@ -470,8 +443,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 < -0.1f || MobileAxeHorPos)
                 {
@@ -483,8 +454,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
             }
         }
@@ -564,6 +533,8 @@ public class Player : CubeMovable
         {
             return;
         }
+
+        OnMove?.Invoke(orientation);
 
         RotationCheck();
 
