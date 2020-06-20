@@ -43,28 +43,36 @@ public class SwipeDetector : MonoBehaviour
     {
         if (SwipeDistanceCheckMet())
         {
-            SwipeDirection direction;
-            if((fingerDownPosition.x <= (Screen.width / 2)) && (fingerDownPosition.y <= (Screen.height / 2)) && (fingerUpPosition.x > (Screen.width / 2)) && (fingerUpPosition.y > (Screen.height / 2)))
+            SwipeDirection directionData;
+            //true is horrizontal, false is vertical
+            bool direction = HorizontalMovementDistance() > VerticalMovementDistance();
+            if(direction)
             {
-                direction = SwipeDirection.Left;
-            }
-            else if((fingerDownPosition.x > (Screen.width / 2)) && (fingerDownPosition.y > (Screen.height / 2)) && (fingerUpPosition.x <= (Screen.width / 2)) && (fingerUpPosition.y <= (Screen.height / 2)))
-            {
-                direction = SwipeDirection.Right;
-            }
-            else if((fingerDownPosition.x > (Screen.width / 2)) && (fingerDownPosition.y <= (Screen.height / 2)) && (fingerUpPosition.x <= (Screen.width / 2)) && (fingerUpPosition.y > (Screen.height / 2)))
-            {
-                direction = SwipeDirection.Down;
-            }
-            else if((fingerDownPosition.x <= (Screen.width / 2)) && (fingerDownPosition.y > (Screen.height / 2)) && (fingerUpPosition.x > (Screen.width / 2)) && (fingerUpPosition.y <= (Screen.height / 2)))
-            {
-                direction = SwipeDirection.Up;
+                //true is Right, false is Left
+                bool signHor = SignofHorizontalDistance();
+                if(signHor)
+                {
+                    directionData = SwipeDirection.Right;
+                }
+                else
+                {
+                    directionData = SwipeDirection.Left;
+                }
             }
             else
             {
-                return;
+                //true is Up, false is Down
+                bool signVer = SignofVerticalDistance();
+                if(signVer)
+                {
+                    directionData = SwipeDirection.Up;
+                }
+                else
+                {
+                    directionData = SwipeDirection.Down;
+                }
             }
-            SendSwipe(direction);     
+        SendSwipe(directionData);     
         fingerUpPosition = fingerDownPosition;
         }
     }
@@ -78,17 +86,25 @@ public class SwipeDetector : MonoBehaviour
     {
         return VerticalMovementDistance() > minDistanceForSwipe || HorizontalMovementDistance() > minDistanceForSwipe;
     }
-
+    
     private float VerticalMovementDistance()
     {
-        return Mathf.Abs(fingerDownPosition.y - fingerUpPosition.y);
+        return Mathf.Abs(fingerUpPosition.y - fingerDownPosition.y);
     }
-
+    //true is Right, false is Left
     private float HorizontalMovementDistance()
     {
-        return Mathf.Abs(fingerDownPosition.x - fingerUpPosition.x);
+        return Mathf.Abs(fingerUpPosition.x - fingerDownPosition.x);
     }
-
+    //true is Up, false is Down
+    private bool SignofHorizontalDistance()
+    {
+        return fingerUpPosition.x > fingerDownPosition.x;
+    }
+    private bool SignofVerticalDistance()
+    {
+        return fingerUpPosition.y > fingerDownPosition.y;
+    }
     private void SendSwipe(SwipeDirection direction)
     {
         SwipeData swipeData = new SwipeData()
