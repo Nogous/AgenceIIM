@@ -23,7 +23,21 @@ public class UIEndLevel : MonoBehaviour
 
     public void OnClickRestartLevel()
     {
-        SceneManager.LoadScene("1-" + GameManager.instance.idLevel.ToString());
+        switch (GameManager.instance.idMonde)
+        {
+            case Monde.Monde1:
+                SceneManager.LoadScene("1-" + GameManager.instance.idLevel.ToString());
+                break;
+            case Monde.Monde2:
+                SceneManager.LoadScene("2-" + GameManager.instance.idLevel.ToString());
+                break;
+            case Monde.Monde3:
+                SceneManager.LoadScene("3-" + GameManager.instance.idLevel.ToString());
+                break;
+            default:
+                break;
+        }
+
         //GameManager.instance.ResetParty();
         gameObject.SetActive(false);
     }

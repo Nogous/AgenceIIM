@@ -7,6 +7,7 @@ public class LevelUI : MonoBehaviour
 {
     public int idLevel;
     public Text idLevelText;
+    public Image image;
 
     public GameObject starUnlock1;
     public GameObject starUnlock2;

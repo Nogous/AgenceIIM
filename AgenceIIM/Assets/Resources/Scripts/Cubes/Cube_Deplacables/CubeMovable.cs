@@ -50,6 +50,8 @@ public class CubeMovable : Cube
     [SerializeField] protected ParticleSystem particleDeath = null;
     public Color color = Color.white;
 
+    protected bool isSliding;
+
     public override void OnAwake()
     {
         base.OnAwake();
@@ -103,11 +105,13 @@ public class CubeMovable : Cube
 
     protected virtual void DoActionVoid()
     {
-
+        isDashing = false;
+        isSliding = false;
     }
 
     virtual public void SetModeMove(Vector3 vector)
     {
+        if (isSliding) return;
         RotationCheck();
 
         _elapsedTime = 0;
@@ -125,7 +129,7 @@ public class CubeMovable : Cube
 
     protected virtual void SetModeSlid()
     {
-
+        isSliding = true;
         _elapsedTime = 0;
         direction = transform.position + orientation;
 
@@ -167,6 +171,8 @@ public class CubeMovable : Cube
         }
     }
 
+    protected bool isDashing;
+
     virtual protected void DoActionDash()
     {
         DoActionMove();
@@ -184,6 +190,7 @@ public class CubeMovable : Cube
 
     virtual public void SetModeDash()
     {
+        isDashing = true;
         RotationCheck();
 
         _elapsedTime = 0;

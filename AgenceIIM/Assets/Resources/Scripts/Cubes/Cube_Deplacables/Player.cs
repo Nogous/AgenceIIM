@@ -77,9 +77,7 @@ public class Player : CubeMovable
         {
             initColors[i] = faceColor[i].material.color;
         }
-
         crossUI = GameObject.Find("ControlIcon").GetComponent<Image>();
-        SwipeDetector.OnSwipe += ProcessMobileInput;
     }
 
     public void resetOnMove()
@@ -126,7 +124,7 @@ public class Player : CubeMovable
 
     void OnDestroy()
     {
-        SwipeDetector.OnSwipe -= ProcessMobileInput;
+
     }
 
     void UpdateControlImage()
@@ -190,7 +188,7 @@ public class Player : CubeMovable
                 break;
         }
 
-        if (Physics.Raycast(ray, out hit, 0.49f))
+        if (Physics.Raycast(ray, out hit, 0.51f))
         {
             if (hit.transform.gameObject.GetComponent<Enemy>())
             {
@@ -233,26 +231,7 @@ public class Player : CubeMovable
         TestTile();
     }
 
-    private void ProcessMobileInput(SwipeData data)
-    {
-        if (data.Direction == SwipeDirection.Up)
-        {
-            StartCoroutine(MobileUpAxisBehaviour());
-        }
-        else if (data.Direction == SwipeDirection.Down)
-        {
-            StartCoroutine(MobileDownAxisBehaviour());
-        }
-        else if (data.Direction == SwipeDirection.Right)
-        {
-            StartCoroutine(MobileRightAxisBehaviour());
-        }
-        else if (data.Direction == SwipeDirection.Left)
-        {
-            StartCoroutine(MobileLeftAxisBehaviour());
-        }
-    }
-
+   
     public void ResetPlayer()
     {
         trail.gameObject.SetActive(false);
@@ -294,8 +273,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveVerticalQwerty) < -0.1f || MobileAxeVerNeg)
                 {
@@ -307,8 +284,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) > 0.1f || MobileAxeHorPos)
                 {
@@ -320,8 +295,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) < -0.1f || MobileAxeHorNeg)
                 {
@@ -333,8 +306,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
             }
             else
@@ -349,8 +320,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) < -0.1f || MobileAxeVerNeg)
                 {
@@ -363,7 +332,6 @@ public class Player : CubeMovable
 
                     else return;
 
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) > 0.1f || MobileAxeHorPos)
                 {
@@ -375,8 +343,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) < -0.1f || MobileAxeHorNeg)
                 {
@@ -388,8 +354,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
             }
         }
@@ -409,8 +373,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveVerticalQwerty) * -1 < -0.1f || MobileAxeVerPos)
                 {
@@ -422,8 +384,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) * -1 > 0.1f || MobileAxeHorNeg)
                 {
@@ -435,8 +395,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHorizontalQwerty) * -1 < -0.1f || MobileAxeHorPos)
                 {
@@ -448,8 +406,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
             }
             else
@@ -465,8 +421,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveVert) * -1 < -0.1f || MobileAxeVerPos)
                 {
@@ -478,8 +432,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 > 0.1f || MobileAxeHorNeg)
                 {
@@ -491,8 +443,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
                 else if (replayer.GetAxis(RewiredConsts.Action.MoveHor) * -1 < -0.1f || MobileAxeHorPos)
                 {
@@ -504,8 +454,6 @@ public class Player : CubeMovable
                     if (!TestWall()) SetModeMove(Vector3.zero);
 
                     else return;
-
-                    OnMove?.Invoke(orientation);
                 }
             }
         }
@@ -563,7 +511,6 @@ public class Player : CubeMovable
 
         SetModeVoid();
 
-
         CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakePlayer, MagnShakePlayer));
         
         AudioManager.instance.Play("Death");
@@ -578,6 +525,17 @@ public class Player : CubeMovable
 
     public override void SetModeMove(Vector3 vector)
     {
+        RaycastHit hit;
+
+        //Debug.DrawLine((transform.position + orientation), (transform.position + orientation) + Vector3.down, Color.blue, 10f);
+
+        if (!Physics.Raycast((transform.position + orientation), Vector3.down, out hit, 1f))
+        {
+            return;
+        }
+
+        OnMove?.Invoke(orientation);
+
         RotationCheck();
 
         _elapsedTime = 0;
@@ -596,8 +554,6 @@ public class Player : CubeMovable
     protected override void DoActionMove()
     {
         base.DoActionMove();
-
-        TestEnemy();
     }
 
     protected override void DoActionDash()
@@ -814,7 +770,7 @@ public class Player : CubeMovable
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 0.5f))
+        if (Physics.Raycast(ray, out hit, 0.51f))
         {
             if (hit.transform.gameObject.GetComponent<CubeStatic>())
             {
@@ -892,28 +848,28 @@ public class Player : CubeMovable
         if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
     
-    private IEnumerator MobileUpAxisBehaviour()
+    public IEnumerator MobileUpAxisBehaviour()
     {
         MobileAxeVerPos = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeVerPos = false;
     }
 
-    private IEnumerator MobileDownAxisBehaviour()
+    public IEnumerator MobileDownAxisBehaviour()
     {
         MobileAxeVerNeg = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeVerNeg = false;
     }
 
-    private IEnumerator MobileRightAxisBehaviour()
+    public IEnumerator MobileRightAxisBehaviour()
     {
         MobileAxeHorPos = true;
         yield return new WaitForSeconds(DuréeActivationAxe);
         MobileAxeHorPos = false;
     }
 
-    private IEnumerator MobileLeftAxisBehaviour()
+    public IEnumerator MobileLeftAxisBehaviour()
     {
         MobileAxeHorNeg = true;
         yield return new WaitForSeconds(DuréeActivationAxe);

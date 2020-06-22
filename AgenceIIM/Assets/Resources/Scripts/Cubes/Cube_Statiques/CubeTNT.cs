@@ -12,9 +12,13 @@ public class CubeTNT : CubeStatic
     public float explosionRayon = 4f;
     public float explosionUpward = 0.04f;
 
+    public bool asExplod = false;
+    public bool asReset = false;
+
     [SerializeField] private float tntDelay = 1f;
     [SerializeField] private ParticleSystem particleTnt = null;
 
+    private ParticleSystem tntExplosion;
 
     public override void OnAwake()
     {
@@ -31,26 +35,44 @@ public class CubeTNT : CubeStatic
         gameObject.GetComponent<MeshRenderer>().enabled = true;
         gameObject.GetComponent<BoxCollider>().enabled = true;
         gameObject.SetActive(true);
+        asExplod = false;
+        asReset = true;
+        AudioManager.instance.Stop("TNT");
     }
 
     public void Explode(bool isPlayer = false)
     {
+        if (asExplod) return;
+        asExplod = true;
         AudioManager.instance.Play("TNT");
         StartCoroutine(DetonateTnt());
+        asReset = false;
+        if (tntExplosion != false)
+        {
+            Destroy(tntExplosion.gameObject);
+        }
     }
 
     private IEnumerator DetonateTnt()
     {
         yield return new WaitForSeconds(tntDelay);
-        DestroySurroundings();
+        if (!asReset)
+        {
 
-        ParticleSystem tntExplosion = Instantiate(particleTnt, transform.position, Quaternion.identity);
-        tntExplosion.Play();
+            DestroySurroundings();
 
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<BoxCollider>().enabled = false;
-        yield return new WaitForSeconds(6.0f);
-        gameObject.SetActive(false);
+            tntExplosion = Instantiate(particleTnt, transform.position, Quaternion.identity);
+            tntExplosion.Play();
+            Destroy(tntExplosion.gameObject, 10f);
+
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            yield return new WaitForSeconds(6.0f);
+            if (!asReset)
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 
     private void DestroySurroundings()

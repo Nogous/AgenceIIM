@@ -47,11 +47,9 @@ public class GameManager : MonoBehaviour
 
     public event Action OnResetLevel;
     public UIEndLevel uiEndLevel;
-
-    public bool doCamTravel = false;
-
-    private void Awake()
+    void Awake()
     {
+        DeterminPlatform();
         if (instance == null)
         {
             instance = this;
@@ -60,8 +58,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DeterminPlatform();
-
         uiEndLevel.gameObject.SetActive(false);
     }
 
@@ -106,11 +102,16 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            player.resetOnMove();
-            SceneManager.LoadScene(0);
+            GoToMainMenu();
         }
 
         UpdateColorRainbow();
+    }
+
+    public void GoToMainMenu()
+    {
+        player.resetOnMove();
+        SceneManager.LoadScene(0);
     }
 
     public void UpdateColorRainbow()
@@ -133,29 +134,29 @@ public class GameManager : MonoBehaviour
 
     public void DeterminPlatform()
     {
+        GameObject.Find("UI_PC").SetActive(true);
+        GameObject.Find("UI_Mobile").SetActive(true);
 #if UNITY_EDITOR
         if (!(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android))
         {
             //Code Spécifique PC
-            GameObject.Find("Mobile_Canvas").SetActive(false);
-            GetComponent<SwipeDetector>().enabled = false;
+            Destroy(GameObject.Find("UI_Mobile"));
         }
         else
         {
             // Code Spécifique Mobile
-            GameObject.Find("Controles_PC").SetActive(false);
+            Destroy(GameObject.Find("UI_PC"));
         }
 #else
         if (!(Application.platform == RuntimePlatform.Android))
         {
             //Code Spécifique PC
-            GameObject.Find("Mobile_Canvas").SetActive(false);
-            GetComponent<SwipeDetector>().enabled = false;
+            Destroy(GameObject.Find("UI_Mobile"));
         }
         else
         {
             //Code Spécifique Mobile 
-            GameObject.Find("Controles_PC").SetActive(false);
+            Destroy(GameObject.Find("UI_PC"));
         }
 #endif
     }

@@ -29,6 +29,7 @@ public class CubePush : CubeMovable
         }
 
         SetModeVoid();
+        TestTile();
     }
 
     // Update is called once per frame
@@ -133,6 +134,10 @@ public class CubePush : CubeMovable
                 CubeTeleporter tmpCube = hit.transform.gameObject.GetComponent<CubeTeleporter>();
 
                 gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
+            }
+            else if (hit.transform.gameObject.GetComponent<CubeSlid>())
+            {
+                if (!TestWall()) SetModeSlid();
             }
         }
         else
