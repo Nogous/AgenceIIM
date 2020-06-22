@@ -54,6 +54,7 @@ public class Player : CubeMovable
 
     [HideInInspector] public int nbMove = 0;
 
+    
     public override void OnAwake()
     {
         videoEnded = true;
@@ -125,7 +126,7 @@ public class Player : CubeMovable
 
     void OnDestroy()
     {
-
+        SwipeDetector.OnSwipe -= ReciveSwipe;
     }
 
     void UpdateControlImage()
