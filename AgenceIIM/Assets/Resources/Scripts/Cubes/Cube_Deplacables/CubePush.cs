@@ -84,7 +84,7 @@ public class CubePush : CubeMovable
         if (Physics.Raycast(ray, out hit, 0.5f))
         {
 
-            if (hit.transform.gameObject.GetComponent<CubeWall>() || hit.transform.gameObject.GetComponent<Enemy>())
+            if (hit.transform.gameObject.GetComponent<CubeWall>() || hit.transform.gameObject.GetComponent<Enemy>() || hit.transform.gameObject.GetComponent<CubePush>())
             {
                 return true;
             }
@@ -137,6 +137,7 @@ public class CubePush : CubeMovable
             }
             else if (hit.transform.gameObject.GetComponent<CubeSlid>())
             {
+                if (orientation != Vector3.zero)
                 if (!TestWall()) SetModeSlid();
             }
         }
