@@ -58,7 +58,7 @@ public class Player : CubeMovable
     {
         videoEnded = true;
         base.OnAwake();
-
+        SwipeDetector.OnSwipe += ReciveSwipe;
         SetModeVoid();
     }
 
@@ -162,6 +162,30 @@ public class Player : CubeMovable
         }
 
         TestEnemy();
+    }
+
+    void ReciveSwipe(SwipeData data)
+    {
+        if(data.Direction == SwipeDirection.Up)
+        {
+            Debug.Log("Swipe Up");
+            ProcessMobileInputUp();
+        }
+        else if (data.Direction == SwipeDirection.Left)
+        {
+            Debug.Log("Swipe Left");
+            ProcessMobileInputLeft();
+        }
+        else if (data.Direction == SwipeDirection.Right)
+        {
+            Debug.Log("Swipe Right");
+            ProcessMobileInputRight();
+        }
+        else if (data.Direction == SwipeDirection.Down)
+        {
+            Debug.Log("Swipe Down");
+            ProcessMobileInputDown();
+        }
     }
 
     private void TestEnemy()
@@ -848,6 +872,26 @@ public class Player : CubeMovable
         if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
     
+    public void ProcessMobileInputLeft()
+    {
+        StartCoroutine(MobileLeftAxisBehaviour());
+    }
+
+    public void ProcessMobileInputRight()
+    {
+        StartCoroutine(MobileRightAxisBehaviour());
+    }
+
+    public void ProcessMobileInputDown()
+    {
+        StartCoroutine(MobileDownAxisBehaviour());
+    }
+
+    public void ProcessMobileInputUp()
+    {
+        StartCoroutine(MobileUpAxisBehaviour());
+    }
+
     public IEnumerator MobileUpAxisBehaviour()
     {
         MobileAxeVerPos = true;
