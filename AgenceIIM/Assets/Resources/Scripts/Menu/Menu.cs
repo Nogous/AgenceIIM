@@ -7,14 +7,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-[System.Serializable]
-public class StarPoints
-{
-    public int minPoints3Star;
-    public int minPoints2Star;
-    public Sprite sprite;
-}
-
 public class Menu : MonoBehaviour
 {
     public EventSystem eventSystem;
@@ -463,3 +455,13 @@ public class Menu : MonoBehaviour
 
     #endregion
 }
+
+[System.Serializable]
+public class StarPoints
+{
+    public int minPoints3Star;
+    public int minPoints2Star;
+    public Sprite sprite;
+}
+
+
