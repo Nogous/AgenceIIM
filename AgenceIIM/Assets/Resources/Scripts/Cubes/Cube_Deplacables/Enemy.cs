@@ -513,8 +513,9 @@ public class Enemy : CubeMovable
         int layerMask = 1 << 12;
         layerMask = ~layerMask;
 
-        if (Physics.Raycast(ray, out hit,  1f, layerMask))
+        if (Physics.Raycast(ray, out hit, 1f, layerMask))
         {
+            if (hit.transform.parent == null) return;
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
                 if (hit.transform.gameObject.GetComponent<Renderer>().material.color == color)

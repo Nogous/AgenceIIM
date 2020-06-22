@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.UI;
 
 [System.Serializable]
 public enum Monde
@@ -47,7 +48,10 @@ public class GameManager : MonoBehaviour
 
     public event Action OnResetLevel;
     public UIEndLevel uiEndLevel;
-    void Awake()
+
+    public Text txtNbCoups;
+
+    private void Awake()
     {
         DeterminPlatform();
         if (instance == null)
