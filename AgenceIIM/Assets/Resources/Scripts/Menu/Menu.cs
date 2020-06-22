@@ -39,6 +39,8 @@ public class Menu : MonoBehaviour
     public Text nbStarToUnlockText3;
     private bool level3Unlock = false;
 
+    public Text nbStarTotal;
+
     [Header("Level Info")]
     public LevelUI[] levelUIMonde1;
     private int currentId = 0;
@@ -216,6 +218,8 @@ public class Menu : MonoBehaviour
             {
                 nbStarToUnlockText3.text = tmpCount + " / " + minPointsToUnlockWorld3;
             }
+
+            nbStarTotal.text = tmpCount + " / " + 90;
         }
 
         if (world2Button != null)
