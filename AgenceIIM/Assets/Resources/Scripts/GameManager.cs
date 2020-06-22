@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.UI;
 
 [System.Serializable]
 public enum Monde
@@ -47,7 +48,12 @@ public class GameManager : MonoBehaviour
 
     public event Action OnResetLevel;
     public UIEndLevel uiEndLevel;
-    void Awake()
+
+    public Text txtNbCoups;
+
+    public float timeEndLevelWin = 1f;
+
+    private void Awake()
     {
         DeterminPlatform();
         if (instance == null)
@@ -170,7 +176,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         SpawnLevel.Instance.StartUnPopLevel();
         DATASaveData();
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(timeEndLevelWin);
 
         // save points
         switch (idMonde)

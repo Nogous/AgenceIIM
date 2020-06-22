@@ -99,11 +99,11 @@ public class SwipeDetector : MonoBehaviour
     //true is Up, false is Down
     private bool SignofHorizontalDistance()
     {
-        return fingerUpPosition.x > fingerDownPosition.x;
+        return fingerUpPosition.x < fingerDownPosition.x;
     }
     private bool SignofVerticalDistance()
     {
-        return fingerUpPosition.y > fingerDownPosition.y;
+        return fingerUpPosition.y < fingerDownPosition.y;
     }
     private void SendSwipe(SwipeDirection direction)
     {

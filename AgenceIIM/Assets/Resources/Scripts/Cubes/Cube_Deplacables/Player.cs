@@ -54,11 +54,12 @@ public class Player : CubeMovable
 
     [HideInInspector] public int nbMove = 0;
 
+    
     public override void OnAwake()
     {
         videoEnded = true;
         base.OnAwake();
-
+        SwipeDetector.OnSwipe += ReciveSwipe;
         SetModeVoid();
     }
 
@@ -91,6 +92,7 @@ public class Player : CubeMovable
         resetOnMove();
 
         nbMove = 0;
+        GameManager.instance.txtNbCoups.text = "Coups : " + nbMove;
 
         StartPlayer();
         for (int i = 6; i-->0;)
@@ -124,7 +126,7 @@ public class Player : CubeMovable
 
     void OnDestroy()
     {
-
+        SwipeDetector.OnSwipe -= ReciveSwipe;
     }
 
     void UpdateControlImage()
@@ -162,6 +164,30 @@ public class Player : CubeMovable
         }
 
         TestEnemy();
+    }
+
+    void ReciveSwipe(SwipeData data)
+    {
+        if(data.Direction == SwipeDirection.Up)
+        {
+            Debug.Log("Swipe Up");
+            ProcessMobileInputUp();
+        }
+        else if (data.Direction == SwipeDirection.Left)
+        {
+            Debug.Log("Swipe Left");
+            ProcessMobileInputLeft();
+        }
+        else if (data.Direction == SwipeDirection.Right)
+        {
+            Debug.Log("Swipe Right");
+            ProcessMobileInputRight();
+        }
+        else if (data.Direction == SwipeDirection.Down)
+        {
+            Debug.Log("Swipe Down");
+            ProcessMobileInputDown();
+        }
     }
 
     private void TestEnemy()
@@ -666,7 +692,11 @@ public class Player : CubeMovable
     public override void TestTile()
     {
         // test tile d'arriver
-        nbMove++;
+        if (!isSliding || !isDashing)
+        {
+            nbMove++;
+        }
+        GameManager.instance.txtNbCoups.text = "Coups : " + nbMove;
 
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
@@ -752,9 +782,13 @@ public class Player : CubeMovable
                 CubeTeleporter tmpTeleporter = hit.transform.gameObject.GetComponent<CubeTeleporter>();
                 tmpTeleporter.TeleportPlayer(this);
             }
-            else if (hit.transform.gameObject.GetComponent<CubeSlid>())
+            if (hit.transform.gameObject.GetComponent<CubeSlid>())
             {
                 if (!TestWall()) SetModeSlid();
+            }
+            else
+            {
+                isSliding = false;
             }
         }
         else
@@ -848,6 +882,26 @@ public class Player : CubeMovable
         if (transform.position.y <= initialPosition.y - 2) SetDeath();
     }
     
+    public void ProcessMobileInputLeft()
+    {
+        StartCoroutine(MobileLeftAxisBehaviour());
+    }
+
+    public void ProcessMobileInputRight()
+    {
+        StartCoroutine(MobileRightAxisBehaviour());
+    }
+
+    public void ProcessMobileInputDown()
+    {
+        StartCoroutine(MobileDownAxisBehaviour());
+    }
+
+    public void ProcessMobileInputUp()
+    {
+        StartCoroutine(MobileUpAxisBehaviour());
+    }
+
     public IEnumerator MobileUpAxisBehaviour()
     {
         MobileAxeVerPos = true;
