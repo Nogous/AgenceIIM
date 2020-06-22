@@ -27,7 +27,7 @@ public class CubeMovable : Cube
     protected float _elapsedTime = 0;
     public Rewired.Player replayer;
     protected Vector3 direction;
-    public Vector3 orientation = Vector3.forward;
+    [HideInInspector] public Vector3 orientation = Vector3.zero;
     protected Vector3 axis = Vector3.right;
 
     protected Quaternion addedRotation;

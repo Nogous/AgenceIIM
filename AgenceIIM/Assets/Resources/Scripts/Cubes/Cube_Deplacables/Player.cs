@@ -54,6 +54,7 @@ public class Player : CubeMovable
 
     [HideInInspector] public int nbMove = 0;
 
+    
     public override void OnAwake()
     {
         videoEnded = true;
@@ -91,6 +92,7 @@ public class Player : CubeMovable
         resetOnMove();
 
         nbMove = 0;
+        GameManager.instance.txtNbCoups.text = "Coups : " + nbMove;
 
         StartPlayer();
         for (int i = 6; i-->0;)
@@ -124,7 +126,7 @@ public class Player : CubeMovable
 
     void OnDestroy()
     {
-
+        SwipeDetector.OnSwipe -= ReciveSwipe;
     }
 
     void UpdateControlImage()
@@ -690,7 +692,11 @@ public class Player : CubeMovable
     public override void TestTile()
     {
         // test tile d'arriver
-        nbMove++;
+        if (!isSliding || !isDashing)
+        {
+            nbMove++;
+        }
+        GameManager.instance.txtNbCoups.text = "Coups : " + nbMove;
 
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
@@ -776,9 +782,13 @@ public class Player : CubeMovable
                 CubeTeleporter tmpTeleporter = hit.transform.gameObject.GetComponent<CubeTeleporter>();
                 tmpTeleporter.TeleportPlayer(this);
             }
-            else if (hit.transform.gameObject.GetComponent<CubeSlid>())
+            if (hit.transform.gameObject.GetComponent<CubeSlid>())
             {
                 if (!TestWall()) SetModeSlid();
+            }
+            else
+            {
+                isSliding = false;
             }
         }
         else
