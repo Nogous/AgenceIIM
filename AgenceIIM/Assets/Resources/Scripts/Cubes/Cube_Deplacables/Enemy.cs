@@ -491,6 +491,7 @@ public class Enemy : CubeMovable
 
         if (Physics.Raycast(ray, out hit, 2f, layerMask))
         {
+            if (hit.transform.parent == null) return false;
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
                 playerInRange = hit.transform.parent.gameObject.GetComponent<Player>();
