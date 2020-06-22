@@ -29,7 +29,7 @@ public class CubePush : CubeMovable
         }
 
         SetModeVoid();
-        TestTile();
+        //TestTile();
     }
 
     // Update is called once per frame
