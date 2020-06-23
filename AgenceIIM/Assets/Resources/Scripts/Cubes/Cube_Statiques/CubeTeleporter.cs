@@ -19,17 +19,28 @@ public class CubeTeleporter : CubeStatic
         return teleportDestination;
     }
 
-    public void TeleportPlayer(Player player){
-        StartCoroutine(Teleporter(player)); 
+    public void TeleportPlayer(CubeMovable cube){
+        StartCoroutine(Teleporter(cube)); 
     }
 
-    private IEnumerator Teleporter(Player player){
+    private IEnumerator Teleporter(CubeMovable cube)
+    {
         float timeElapsed = 0f;
         while(timeElapsed < dislovationAnimationDuration){
             timeElapsed+= Time.deltaTime;
             //*shader value* = dislovationAnimationCurve.Evaluate(timeElapsed);
         }
-        player.gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
+        cube.gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
+
+        if (cube.gameObject.GetComponent<CubePush>())
+        {
+            if (!cube.gameObject.GetComponent<CubePush>().TestWall()) cube.SetModeMove(Vector3.zero);
+            else
+            {
+                cube.orientation *= -1;
+                cube.SetModeMove(Vector3.zero);
+            }
+        }
         /*Ligne de code pour le son de teleport
         AudioManager.instance.Play(pouet); 
         */
