@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2390,6 +2390,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube_Detonator
       objectReference: {fileID: 0}
+    - target: {fileID: 8681370395756825908, guid: c284ae8feaf31e747877d7419cc2258d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e711e63db4fb8914990b98fd433bebb7, type: 2}
     - target: {fileID: 8681370395756825910, guid: c284ae8feaf31e747877d7419cc2258d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3277,7 +3282,7 @@ PrefabInstance:
     - target: {fileID: 7603161749229499338, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7603161749229499339, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
         type: 3}
@@ -7776,6 +7781,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube_TNT
       objectReference: {fileID: 0}
+    - target: {fileID: 8681370395756825908, guid: d146c79678cbcfc4a9891de0b0c20487,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 51262a2d5dc7ba745afa6e293a1410a9, type: 2}
     - target: {fileID: 8681370395756825910, guid: d146c79678cbcfc4a9891de0b0c20487,
         type: 3}
       propertyPath: m_LocalPosition.x
