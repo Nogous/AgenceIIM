@@ -244,8 +244,6 @@ public class Player : CubeMovable
             trail.gameObject.SetActive(false);
         }
 
-        SetModeStretch();
-
         transform.eulerAngles = Vector3.zero;
         if (!slid)
         {
@@ -255,6 +253,8 @@ public class Player : CubeMovable
         SplashPaint();
 
         TestTile();
+
+        SetModeStretch();
     }
 
    
