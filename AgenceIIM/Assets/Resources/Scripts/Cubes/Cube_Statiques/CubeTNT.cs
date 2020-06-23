@@ -67,11 +67,11 @@ public class CubeTNT : CubeStatic
 
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
-            yield return new WaitForSeconds(6.0f);
             if (!asReset)
             {
                 gameObject.SetActive(false);
             }
+            GameManager.instance.TNTExplode();
         }
     }
 
@@ -236,6 +236,9 @@ public class CubeTNT : CubeStatic
                 }
             }
         }
+
+
+        GameManager.instance.TNTExplode();
     }
 
 }
