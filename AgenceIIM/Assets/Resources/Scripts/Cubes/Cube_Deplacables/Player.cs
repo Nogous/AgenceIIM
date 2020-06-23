@@ -254,7 +254,8 @@ public class Player : CubeMovable
 
         TestTile();
 
-        SetModeStretch();
+        if (DoAction == DoActionDash || DoAction == DoActionFall) return;
+        else SetModeStretch();
     }
 
    
