@@ -219,7 +219,7 @@ public class Menu : MonoBehaviour
                 nbStarToUnlockText3.text = tmpCount + " / " + minPointsToUnlockWorld3;
             }
 
-            nbStarTotal.text = tmpCount + " / " + 90;
+            nbStarTotal.text = tmpCount + " / " + 135;
         }
 
         if (world2Button != null)
