@@ -692,9 +692,6 @@ public class Player : CubeMovable
 
     public override void TestTile()
     {
-        // test tile d'arriver
-        GameManager.instance.txtNbCoups.text = "Coups : " + nbMove;
-
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
 
@@ -803,6 +800,9 @@ public class Player : CubeMovable
 
             StartCoroutine(Death("fall"));
         }
+
+        // test tile d'arriver
+        GameManager.instance.txtNbCoups.text = "Coups : " + nbMove;
     }
 
     public override bool TestWall()
