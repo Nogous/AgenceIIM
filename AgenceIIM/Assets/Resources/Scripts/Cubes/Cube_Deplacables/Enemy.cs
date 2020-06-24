@@ -52,7 +52,6 @@ public class Enemy : CubeMovable
     void Start()
     {
         GameManager.instance.cubesEnnemy.Add(this);
-        Debug.Log(GameManager.instance.cubesEnnemy.Count);
         GameManager.instance.OnResetLevel += ResetCube;
 
         if (isEnemyMirror || isEnemyMoving)Player.OnMove += SetModeMove;
@@ -410,6 +409,10 @@ public class Enemy : CubeMovable
             else if (hit.transform.gameObject.GetComponent<CubeSlid>())
             {
                 if (!TestWall()) SetModeSlid();
+                else
+                {
+                    DoAction = DoActionVoid;
+                }
             }
         }
         else
@@ -464,7 +467,7 @@ public class Enemy : CubeMovable
 
         if (Physics.Raycast(ray, out hit,  0.51f, layerMask))
         {
-
+            if (hit.transform.parent == null) return;
             if (hit.transform.parent.gameObject.GetComponent<Player>())
             {
                 if (hit.transform.gameObject.GetComponent<Renderer>().material.color == color)
