@@ -254,7 +254,7 @@ public class Player : CubeMovable
 
         TestTile();
 
-        if (DoAction == DoActionDash || DoAction == DoActionFall) return;
+        if (DoAction == DoActionDash || DoAction == DoActionFall || DoAction == DoActionSlid) return;
         else SetModeStretch();
     }
 
@@ -692,13 +692,6 @@ public class Player : CubeMovable
 
     public override void TestTile()
     {
-        // test tile d'arriver
-        if (!isSliding || !isDashing)
-        {
-            nbMove++;
-        }
-        GameManager.instance.txtNbCoups.text = "Coups : " + nbMove;
-
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
 
@@ -744,7 +737,8 @@ public class Player : CubeMovable
             {
                 CubeCleaner tmpCleaner = hit.transform.gameObject.GetComponent<CubeCleaner>();
                 tmpCleaner.Clean(this);
-                
+
+                nbMove++;
             }
             else if (hit.transform.gameObject.GetComponent<CubeDash>())
             {
@@ -777,19 +771,27 @@ public class Player : CubeMovable
             {
                 CubeDetonator tmpDetonator = hit.transform.gameObject.GetComponent<CubeDetonator>();
                 tmpDetonator.ActivateTnt();
+                nbMove++;
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
                 CubeTeleporter tmpTeleporter = hit.transform.gameObject.GetComponent<CubeTeleporter>();
                 tmpTeleporter.TeleportPlayer(this);
+                nbMove++;
             }
-            if (hit.transform.gameObject.GetComponent<CubeSlid>())
+            else if (hit.transform.gameObject.GetComponent<CubeSlid>())
             {
                 if (!TestWall()) SetModeSlid();
+                else
+                {
+                    SetModeWait();
+                    nbMove++;
+                }
             }
             else
             {
-                isSliding = false;
+                SetModeWait();
+                nbMove++;
             }
         }
         else
@@ -798,6 +800,9 @@ public class Player : CubeMovable
 
             StartCoroutine(Death("fall"));
         }
+
+        // test tile d'arriver
+        GameManager.instance.txtNbCoups.text = "Coups : " + nbMove;
     }
 
     public override bool TestWall()

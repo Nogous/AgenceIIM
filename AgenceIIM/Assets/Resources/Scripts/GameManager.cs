@@ -240,7 +240,6 @@ public class GameManager : MonoBehaviour
         player.MobileAxeVerNeg = false;
         player.MobileAxeVerPos = false;
         player.gameObject.SetActive(true);
-        Debug.Log("Reset");
     }
 
     #region analitics
