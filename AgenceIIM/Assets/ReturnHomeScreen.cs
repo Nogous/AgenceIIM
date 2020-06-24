@@ -8,4 +8,14 @@ public class ReturnHomeScreen : MonoBehaviour
     {
         GameManager.instance.GoToMainMenu();
     }
+
+    public void CameraTravel()
+    {
+        CameraHandler.instance.Travel();
+    }
+
+    public void ResetLevel()
+    {
+        GameManager.instance.ResetParty();
+    }
 }

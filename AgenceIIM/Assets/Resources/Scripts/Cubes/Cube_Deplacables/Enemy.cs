@@ -51,6 +51,8 @@ public class Enemy : CubeMovable
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.cubesEnnemy.Add(this);
+        Debug.Log(GameManager.instance.cubesEnnemy.Count);
         GameManager.instance.OnResetLevel += ResetCube;
 
         if (isEnemyMirror || isEnemyMoving)Player.OnMove += SetModeMove;
@@ -403,7 +405,7 @@ public class Enemy : CubeMovable
             {
                 CubeTeleporter tmpCube = hit.transform.gameObject.GetComponent<CubeTeleporter>();
 
-                gameObject.transform.position = new Vector3(teleportDestination.transform.position.x, teleportDestination.transform.position.y + 1f, teleportDestination.transform.position.z);
+                
             }
             else if (hit.transform.gameObject.GetComponent<CubeSlid>())
             {

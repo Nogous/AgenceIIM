@@ -15,8 +15,8 @@ public class SwipeDrawer : MonoBehaviour
     private void SwipeDetector_OnSwipe(SwipeData data)
     {
         Vector3[] positions = new Vector3[2];
-        positions[0] = Camera.main.ScreenToWorldPoint(new Vector3(data.StartPosition.x, data.StartPosition.y, zOffset));
-        positions[1] = Camera.main.ScreenToWorldPoint(new Vector3(data.EndPosition.x, data.EndPosition.y, zOffset));
+        positions[0] = Camera.main.ScreenToWorldPoint(new Vector3(data.fingerDownPosition.x, data.fingerDownPosition.y, zOffset));
+        positions[1] = Camera.main.ScreenToWorldPoint(new Vector3(data.fingerUpPosition.x, data.fingerUpPosition.y, zOffset));
         lineRenderer.positionCount = 2;
         lineRenderer.SetPositions(positions);
     }

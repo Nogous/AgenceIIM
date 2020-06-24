@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public Rewired.Player replayer;
     public bool useWASDLayout;
     public Player player = null;
-    private List<Cube> cubes = new List<Cube>();
+    [HideInInspector] public List<Enemy> cubesEnnemy = new List<Enemy>();
     public float fallDuration = 1f;
     public float fallSpeed = 1f;
     public int nbEnnemyInit = 1;
@@ -135,6 +135,16 @@ public class GameManager : MonoBehaviour
         if (nbEnnemy <= 0)
         {
             StartCoroutine(YouWin());
+        }
+    }
+
+    public void TNTExplode()
+    {
+        player.TestTile();
+
+        for (int i = cubesEnnemy.Count; i-->0;)
+        {
+            cubesEnnemy[i].TestTile();
         }
     }
 
