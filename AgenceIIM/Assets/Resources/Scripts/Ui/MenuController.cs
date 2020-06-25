@@ -27,5 +27,19 @@ public class MenuController : MonoBehaviour
             if (animator.GetBool(Bool)) animator.SetBool(Bool, false);
         }
     }
-    
+
+    public void OnEndAnimToOptions()
+    { 
+        FindObjectOfType<Menu>().OnClickOption();
+    }
+
+    public void OnEndAnimToLevels()
+    { 
+        FindObjectOfType<Menu>().OnClickSelectWorldMenu();
+    }
+
+    public void OnEndAnimToMain()
+    {
+        FindObjectOfType<Menu>().OnClickMainMenu();
+    }
 }
