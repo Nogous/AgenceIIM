@@ -7,6 +7,8 @@ public class MenuController : MonoBehaviour
 {
     private Animator animator;
 
+    private int WorldInt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,14 +30,24 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    public void SetWorldId(int id)
+    {
+        WorldInt = id;
+    }
+
     public void OnEndAnimToOptions()
     { 
         FindObjectOfType<Menu>().OnClickOption();
     }
 
-    public void OnEndAnimToLevels()
+    public void OnEndAnimToWorlds()
     { 
         FindObjectOfType<Menu>().OnClickSelectWorldMenu();
+    }
+
+    public void OnEndAnimToLevels()
+    {
+        FindObjectOfType<Menu>().OnClickSelectLevelMenu(WorldInt);
     }
 
     public void OnEndAnimToMain()

@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 3867357798599172156}
   - component: {fileID: 2749129370599927319}
   - component: {fileID: 3538141047610212438}
+  - component: {fileID: 224941734}
   m_Layer: 5
   m_Name: Button Level Selection
   m_TagString: Untagged
@@ -711,10 +712,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 549699814297788040}
+    m_SelectOnUp: {fileID: 4865537461175413461}
+    m_SelectOnDown: {fileID: 7398682832443174754}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 549699814297788040}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -737,17 +738,61 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3507841342347742332}
-        m_MethodName: OnClickSelectWorldMenu
-        m_Mode: 1
+      - m_Target: {fileID: 118620841}
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: TriggerLevels
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &224941734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222976695354187370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 118620840}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverButtonLevel
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 118620840}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverButtonLevel
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &224053559680712777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,7 +1161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7837776709520320456
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2667,7 +2712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21.8, y: 29}
+  m_AnchoredPosition: {x: 0, y: 29}
   m_SizeDelta: {x: 1631, y: 740.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6158147101647136195
@@ -2975,6 +3020,7 @@ GameObject:
   - component: {fileID: 7061374363892302240}
   - component: {fileID: 5156669816553035821}
   - component: {fileID: 7398682832443174754}
+  - component: {fileID: 764946877}
   m_Layer: 5
   m_Name: Button Exit
   m_TagString: Untagged
@@ -3051,10 +3097,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 549699814297788040}
+    m_SelectOnUp: {fileID: 4865537461175413461}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 3538141047610212438}
+    m_SelectOnRight: {fileID: 549699814297788040}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3088,6 +3134,50 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &764946877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043191733446449588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 118620840}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverButtonExit
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 118620840}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverButtonExit
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &1123518352742437845
 GameObject:
   m_ObjectHideFlags: 0
@@ -3525,6 +3615,7 @@ GameObject:
   - component: {fileID: 8528888536716081189}
   - component: {fileID: 7391430874454626568}
   - component: {fileID: 1648617195808018355}
+  - component: {fileID: 1650277708}
   m_Layer: 5
   m_Name: Button Russian
   m_TagString: Untagged
@@ -3547,9 +3638,9 @@ RectTransform:
   m_Father: {fileID: 6678625861177924242}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -216}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 333, y: 62.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8528888536716081189
@@ -3638,6 +3729,50 @@ MonoBehaviour:
           m_StringArgument: Russian
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1650277708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244632311131649300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2133903056}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverRussianButton
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2133903056}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverRussianButton
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &1259955644624686261
 GameObject:
   m_ObjectHideFlags: 0
@@ -3650,6 +3785,7 @@ GameObject:
   - component: {fileID: 3097457012052029107}
   - component: {fileID: 6647248349033494346}
   - component: {fileID: 7512305724310350604}
+  - component: {fileID: 1927808702}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -3751,8 +3887,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3507841342347742332}
-        m_MethodName: OnClickSelectLevelMenu
+      - m_Target: {fileID: 48061100}
+        m_MethodName: SetWorldId
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3762,6 +3898,61 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 48061095}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SelectWorld
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1927808702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259955644624686261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 48061100}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverW1
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 48061100}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverW1
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &1314324821252176081
 GameObject:
   m_ObjectHideFlags: 0
@@ -3899,8 +4090,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408470847104494892}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12.5}
-  m_LocalScale: {x: 1.3334454, y: 1.3334454, z: 1.3334454}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children:
   - {fileID: 7894802039381990128}
   - {fileID: 8484961025183238183}
@@ -3909,10 +4100,10 @@ RectTransform:
   m_Father: {fileID: 2633046917742503317}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 268.49, y: 5}
-  m_SizeDelta: {x: 536.98, y: -10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1455607593012862587
 GameObject:
@@ -5271,7 +5462,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back
+  m_Text: Retour
 --- !u!114 &2302669036139449716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5942,6 +6133,7 @@ GameObject:
   - component: {fileID: 6473119228791938874}
   - component: {fileID: 1189731612362847204}
   - component: {fileID: 7262189491938358385}
+  - component: {fileID: 818293159}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -6043,8 +6235,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3507841342347742332}
-        m_MethodName: OnClickSelectLevelMenu
+      - m_Target: {fileID: 48061100}
+        m_MethodName: SetWorldId
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6054,6 +6246,61 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 48061095}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SelectWorld
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &818293159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131734682936466247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 48061100}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverW3
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 48061100}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverW3
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &2197756239786299725
 GameObject:
   m_ObjectHideFlags: 0
@@ -6653,6 +6900,7 @@ GameObject:
   - component: {fileID: 5304605033872643155}
   - component: {fileID: 98372523708509643}
   - component: {fileID: 2811758342392942383}
+  - component: {fileID: 777076417}
   m_Layer: 5
   m_Name: CanvasDebug
   m_TagString: Untagged
@@ -6740,6 +6988,25 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!95 &777076417
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2373032721907916812}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6931e2249cfd61145818ce54fa24277b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2388251327341639554
 GameObject:
   m_ObjectHideFlags: 0
@@ -7301,8 +7568,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2718885726219574027}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -13}
-  m_LocalScale: {x: 1.3334454, y: 1.3334454, z: 1.3334454}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children:
   - {fileID: 7378195030284476568}
   - {fileID: 2493645800767985333}
@@ -7311,10 +7578,10 @@ RectTransform:
   m_Father: {fileID: 2633046917742503317}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 785.47, y: 5}
-  m_SizeDelta: {x: 536.98, y: -10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2867111407537204835
 GameObject:
@@ -7495,8 +7762,8 @@ RectTransform:
   m_Father: {fileID: 7837776709520320456}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -998.99994, y: -15.350098}
   m_SizeDelta: {x: 1816.1, y: -30.7}
   m_Pivot: {x: 0, y: 0.5}
@@ -7890,6 +8157,7 @@ GameObject:
   - component: {fileID: 4556498593859582959}
   - component: {fileID: 2944629720053167298}
   - component: {fileID: 7706428086004202353}
+  - component: {fileID: 1729721354}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -7991,8 +8259,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3507841342347742332}
-        m_MethodName: OnClickSelectLevelMenu
+      - m_Target: {fileID: 48061100}
+        m_MethodName: SetWorldId
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8002,6 +8270,61 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 48061095}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SelectWorld
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1729721354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3192648207294840032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 48061100}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverW2
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 48061100}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverW2
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &3225018292795393071
 GameObject:
   m_ObjectHideFlags: 0
@@ -8026,8 +8349,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3225018292795393071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12.507}
-  m_LocalScale: {x: 1.3334454, y: 1.3334454, z: 1.3334454}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children:
   - {fileID: 3759102866359148908}
   - {fileID: 1042786930813663346}
@@ -8036,10 +8359,10 @@ RectTransform:
   m_Father: {fileID: 2633046917742503317}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1302.45, y: 5}
-  m_SizeDelta: {x: 536.98, y: -10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3264331547816315343
 GameObject:
@@ -8257,6 +8580,7 @@ GameObject:
   - component: {fileID: 7158500732922392878}
   - component: {fileID: 2590425370606807296}
   - component: {fileID: 4865537461175413461}
+  - component: {fileID: 1599024481}
   m_Layer: 5
   m_Name: Button Play
   m_TagString: Untagged
@@ -8334,9 +8658,9 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 549699814297788040}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 7398682832443174754}
+    m_SelectOnLeft: {fileID: 3538141047610212438}
+    m_SelectOnRight: {fileID: 549699814297788040}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -8370,6 +8694,50 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1599024481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3363037765126333692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 118620840}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverButtonPlay
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 118620840}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverButtonPlay
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &3365658145627176331
 GameObject:
   m_ObjectHideFlags: 0
@@ -9145,13 +9513,15 @@ GameObject:
   - component: {fileID: 3789004940503747672}
   - component: {fileID: 8901581470753284243}
   - component: {fileID: 4793491304127970613}
+  - component: {fileID: 48061095}
+  - component: {fileID: 48061100}
   m_Layer: 5
   m_Name: Canvas worlds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9111889137832508473
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9159,8 +9529,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4042591093392175938}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2883848351443447275}
@@ -9174,7 +9544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 9.067417, y: -4.519537}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!223 &3789004940503747672
@@ -9237,6 +9607,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!95 &48061095
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042591093392175938}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb4a4c89fceb7474fba299f0992b7f76, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &48061100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042591093392175938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9790e02e8eb1d92449ee52d5cc9c3059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4053199219626946631
 GameObject:
   m_ObjectHideFlags: 0
@@ -10629,7 +11030,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: Lancer
 --- !u!114 &6258696251965575551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10820,6 +11221,7 @@ GameObject:
   - component: {fileID: 933812207365071148}
   - component: {fileID: 3813661892694445862}
   - component: {fileID: 549699814297788040}
+  - component: {fileID: 19170824}
   m_Layer: 5
   m_Name: Button Option
   m_TagString: Untagged
@@ -10898,7 +11300,7 @@ MonoBehaviour:
     m_Mode: 4
     m_SelectOnUp: {fileID: 4865537461175413461}
     m_SelectOnDown: {fileID: 7398682832443174754}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 3538141047610212438}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -10922,28 +11324,61 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5583147185664356216}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 118620841}
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: TriggerOption
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6946920807764590203}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+--- !u!114 &19170824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4646223262551914778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 118620840}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverButtonOptions
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 118620840}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverButtonOptions
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &4664901690533154020
 GameObject:
   m_ObjectHideFlags: 0
@@ -11774,15 +12209,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3507841342347742332}
-        m_MethodName: OnClickMainMenu
-        m_Mode: 1
+      - m_Target: {fileID: 48061095}
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: ExitTrigger
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &4947335327727825472
@@ -12342,7 +12777,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Language
+  m_Text: Langue
 --- !u!114 &5803875795769795469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13024,6 +13459,8 @@ GameObject:
   - component: {fileID: 661422919788114902}
   - component: {fileID: 7814189572478496557}
   - component: {fileID: 3218778601842912085}
+  - component: {fileID: 118620841}
+  - component: {fileID: 118620840}
   m_Layer: 5
   m_Name: Canvas main menu
   m_TagString: Untagged
@@ -13114,6 +13551,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!95 &118620841
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583147185664356216}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6931e2249cfd61145818ce54fa24277b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &118620840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583147185664356216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9790e02e8eb1d92449ee52d5cc9c3059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5652401220210156898
 GameObject:
   m_ObjectHideFlags: 0
@@ -14091,7 +14559,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Exit
+  m_Text: Quitter
 --- !u!114 &184330794844432449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14190,6 +14658,7 @@ GameObject:
   - component: {fileID: 1081078564120272735}
   - component: {fileID: 2264803355222159076}
   - component: {fileID: 8912943152221265372}
+  - component: {fileID: 2111728788}
   m_Layer: 5
   m_Name: Button English
   m_TagString: Untagged
@@ -14212,9 +14681,9 @@ RectTransform:
   m_Father: {fileID: 6678625861177924242}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -31.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 333, y: 62.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1081078564120272735
@@ -14303,6 +14772,50 @@ MonoBehaviour:
           m_StringArgument: English
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2111728788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6304072676190628613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2133903056}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverEnglishButton
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2133903056}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverEnglishButton
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &6336832473798597246
 GameObject:
   m_ObjectHideFlags: 0
@@ -14519,6 +15032,7 @@ GameObject:
   - component: {fileID: 7969016987035684926}
   - component: {fileID: 4635089757173085160}
   - component: {fileID: 6740642806290544708}
+  - component: {fileID: 1044077724}
   m_Layer: 5
   m_Name: Button Qwerty
   m_TagString: Untagged
@@ -14541,9 +15055,9 @@ RectTransform:
   m_Father: {fileID: 6678625861177924242}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -308.40002}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 333, y: 62.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7969016987035684926
@@ -14632,6 +15146,50 @@ MonoBehaviour:
           m_StringArgument: Russian
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1044077724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6514337839163092849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2133903056}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverAzertButton
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2133903056}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverAzertButton
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &6523845492582694525
 GameObject:
   m_ObjectHideFlags: 0
@@ -15248,6 +15806,8 @@ GameObject:
   - component: {fileID: 3616461705847636185}
   - component: {fileID: 1208124387264445928}
   - component: {fileID: 280433835488860539}
+  - component: {fileID: 2133903051}
+  - component: {fileID: 2133903056}
   m_Layer: 5
   m_Name: Canvas Option
   m_TagString: Untagged
@@ -15262,8 +15822,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6946920807764590203}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 6400528069704105918}
@@ -15276,7 +15836,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 9.067417, y: -4.519537}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!223 &3616461705847636185
@@ -15339,6 +15899,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!95 &2133903051
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6946920807764590203}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 30585e096147d7d4db87a6550cf9643e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2133903056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6946920807764590203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9790e02e8eb1d92449ee52d5cc9c3059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7057453199086870027
 GameObject:
   m_ObjectHideFlags: 0
@@ -15987,7 +16578,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level selection
+  m_Text: "S\xE9lection de niveau"
 --- !u!114 &9164927102044259600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16110,7 +16701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 108, y: 74}
+  m_AnchoredPosition: {x: 124, y: 86}
   m_SizeDelta: {x: 253.09998, y: 75.899994}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &5088183052026967315
@@ -16188,15 +16779,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3507841342347742332}
-        m_MethodName: OnClickMainMenu
-        m_Mode: 1
+      - m_Target: {fileID: 2133903051}
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: ExitTrigger
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7296743157621327870
@@ -17520,6 +18111,7 @@ GameObject:
   - component: {fileID: 3609962882505512713}
   - component: {fileID: 676632086370127031}
   - component: {fileID: 6056077747176171848}
+  - component: {fileID: 675894254}
   m_Layer: 5
   m_Name: Button French
   m_TagString: Untagged
@@ -17542,9 +18134,9 @@ RectTransform:
   m_Father: {fileID: 6678625861177924242}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -123.600006}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 333, y: 62.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3609962882505512713
@@ -17633,6 +18225,50 @@ MonoBehaviour:
           m_StringArgument: French
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &675894254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7697182174101573329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2133903056}
+          m_MethodName: OnHoverBnt
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverFrenchButton
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2133903056}
+          m_MethodName: OnHoverExit
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: HoverFrenchButton
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []
 --- !u!1 &7704809059072454112
 GameObject:
   m_ObjectHideFlags: 0
@@ -19172,7 +19808,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: Lancer
 --- !u!114 &5305657237262869994
 MonoBehaviour:
   m_ObjectHideFlags: 0
