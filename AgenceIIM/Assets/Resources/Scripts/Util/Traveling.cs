@@ -19,6 +19,7 @@ public class Traveling : MonoBehaviour
 
     private void Start()
     {
+        ObjToMove.position = initPos.position;
         if (playOnStart)
         StartTravel();
     }
