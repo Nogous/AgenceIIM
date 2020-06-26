@@ -16,9 +16,33 @@ public class UIEndLevel : MonoBehaviour
     public Text textStar3;
     public Text textStar3End;
 
+    public Animator animStar1;
+    public Animator animStar2;
+    public Animator animStar3;
+
     public void OnClickLoadNextLevel()
     {
         GameManager.instance.LoadNextScene();
+    }
+
+    public void LoadStars(int nbMove, int minPoints2Star, int minPoints3Star)
+    {
+        star1.SetActive(false);
+        star2.SetActive(false);
+        star3.SetActive(false);
+        StartCoroutine(WaitASecound(nbMove, minPoints2Star, minPoints3Star));
+    }
+
+    public IEnumerator WaitASecound(int nbMove, int minPoints2Star, int minPoints3Star)
+    {
+        star1.SetActive(true);
+        animStar1.Play("Star1");
+        yield return new WaitForSeconds(1f);
+        star2.SetActive(nbMove <= minPoints2Star ? true : false);
+        animStar2.Play("Star2");
+        yield return new WaitForSeconds(1f);
+        star3.SetActive(nbMove <= minPoints3Star ? true : false);
+        animStar3.Play("Star3");
     }
 
     public void OnClickRestartLevel()

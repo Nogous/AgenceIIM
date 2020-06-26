@@ -77,7 +77,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Finished level
+  m_Text: Niveau fini
 --- !u!114 &8941952831294660017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 2602813663409506452}
   - component: {fileID: 2602813663409506454}
   - component: {fileID: 2602813663409506455}
+  - component: {fileID: 208398246}
   m_Layer: 5
   m_Name: PNG
   m_TagString: Untagged
@@ -164,6 +165,25 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!95 &208398246
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2602813663409506453}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f1ef07dfed47ee44a98b421c7c292fcf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2602813663458726430
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +353,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '{0} strokes'
+  m_Text: '{0} coups'
 --- !u!114 &2602813663183331108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +483,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '{0} strokes'
+  m_Text: '{0} coups'
 --- !u!114 &2602813663183331106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,6 +871,9 @@ MonoBehaviour:
   textStar2End: {fileID: 4203584156914689526}
   textStar3: {fileID: 2602813663535883333}
   textStar3End: {fileID: 1461425088663736981}
+  animStar1: {fileID: 208398246}
+  animStar2: {fileID: 208398245}
+  animStar3: {fileID: 208398244}
 --- !u!1 &2602813664246759647
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,7 +951,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next
+  m_Text: Suivant
 --- !u!114 &2602813663183331114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,6 +1049,7 @@ GameObject:
   - component: {fileID: 2602813664519621600}
   - component: {fileID: 2602813664519621602}
   - component: {fileID: 2602813664519621603}
+  - component: {fileID: 208398245}
   m_Layer: 5
   m_Name: PNG
   m_TagString: Untagged
@@ -1087,6 +1111,25 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!95 &208398245
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2602813664519621601}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f3de840ba22b274da82100ea2cc7697, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2602813664777346806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1428,7 @@ GameObject:
   - component: {fileID: 2602813665136816609}
   - component: {fileID: 2602813665136816611}
   - component: {fileID: 2602813665136816608}
+  - component: {fileID: 208398244}
   m_Layer: 5
   m_Name: PNG
   m_TagString: Untagged
@@ -1446,6 +1490,25 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!95 &208398244
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2602813665136816614}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de62a334f0ebc454e9c8190c1b976e65, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2602813665150781901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,7 +1586,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: niveau fini
+  m_Text: Niveau fini
 --- !u!114 &2602813663183331104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1615,7 +1678,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Reset
+  m_Text: Recommencer
 --- !u!114 &2602813663183331112
 MonoBehaviour:
   m_ObjectHideFlags: 0
