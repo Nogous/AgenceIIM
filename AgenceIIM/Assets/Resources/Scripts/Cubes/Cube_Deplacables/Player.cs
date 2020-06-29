@@ -258,7 +258,6 @@ public class Player : CubeMovable
         else SetModeStretch();
     }
 
-   
     public void ResetPlayer()
     {
         trail.gameObject.SetActive(false);
@@ -717,6 +716,7 @@ public class Player : CubeMovable
                             SetModeVoid();
                             StartCoroutine(Death());
                             Explode();
+                            return;
                         }
                     }
                     else
@@ -731,7 +731,8 @@ public class Player : CubeMovable
                         tmpCube.mask.transform.localScale = Vector3.Lerp(tmpCube.initalScale, Vector3.zero, 1 - (float)tmpCube.colorPotencial / 100);
                     }
                 }
-                
+
+                SetModeWait();
             }
             else if (hit.transform.gameObject.GetComponent<CubeCleaner>())
             {
@@ -739,6 +740,8 @@ public class Player : CubeMovable
                 tmpCleaner.Clean(this);
 
                 nbMove++;
+
+                SetModeWait();
             }
             else if (hit.transform.gameObject.GetComponent<CubeDash>())
             {
