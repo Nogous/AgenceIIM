@@ -50,6 +50,16 @@ public class MenuController : MonoBehaviour
         FindObjectOfType<Menu>().OnClickSelectLevelMenu(WorldInt);
     }
 
+    public void OnEndAnimStartLevel()
+    {
+        FindObjectOfType<Menu>().OnClickStartLevel();
+    }
+
+    public void OnEndAnimStartLastLevel()
+    {
+        FindObjectOfType<Menu>().LoadLastLevel();
+    }
+
     public void OnEndAnimToMain()
     {
         FindObjectOfType<Menu>().OnClickMainMenu();
