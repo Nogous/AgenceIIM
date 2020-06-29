@@ -8,6 +8,7 @@ public class CubePaint : CubeStatic
     [SerializeField] private Color color = Color.white;
     public ParticleSystem takeColor = null;
     public float colorPotencial = 100;
+    public float colorLost = 25;
     public float initColorPotencial;
 
     public GameObject mask;

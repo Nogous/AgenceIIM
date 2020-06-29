@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4184,6 +4184,11 @@ PrefabInstance:
       value: 'Monde {0}
 
         Niveau {1}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005232283003843406, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 105.3999
       objectReference: {fileID: 0}
     - target: {fileID: 5272743355053713179, guid: 7daf1a6dbed61fc4982fa49e7eeb0183,
         type: 3}

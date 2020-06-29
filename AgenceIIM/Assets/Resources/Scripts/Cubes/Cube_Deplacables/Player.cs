@@ -727,7 +727,7 @@ public class Player : CubeMovable
                         tmpCube.GetComponent<Renderer>().material.color = Color.Lerp(tmpCube.GetComponent<Renderer>().material.color, Color.white, 1 - (float)tmpCube.colorPotencial / 100);*/
                         //Hide Color
 
-                        tmpCube.colorPotencial -= 25;
+                        tmpCube.colorPotencial -= tmpCube.colorLost;
                         tmpCube.mask.transform.localScale = Vector3.Lerp(tmpCube.initalScale, Vector3.zero, 1 - (float)tmpCube.colorPotencial / 100);
                     }
                 }
