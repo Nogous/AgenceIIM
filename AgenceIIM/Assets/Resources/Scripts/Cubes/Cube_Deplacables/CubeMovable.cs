@@ -135,6 +135,8 @@ public class CubeMovable : Cube
         direction = transform.position + orientation;
 
         previousPos = transform.position;
+
+        StartMoveBehavior();
         
         DoAction = DoActionSlid;
     }
