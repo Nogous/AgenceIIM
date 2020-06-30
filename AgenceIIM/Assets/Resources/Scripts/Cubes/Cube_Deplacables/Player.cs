@@ -235,6 +235,51 @@ public class Player : CubeMovable
         }
     }
 
+    private void TestEnemyDash()
+    {
+        Ray ray = new Ray(transform.position, Vector3.forward);
+        RaycastHit hit;
+
+        frontColor = faceColor[4].GetComponent<Renderer>().material.color;
+
+        // test si enemy sur le passage du joueur
+        switch (moveDir)
+        {
+            case MoveDir.down:
+                ray = new Ray(transform.position, Vector3.back);
+                frontColor = faceColor[3].GetComponent<Renderer>().material.color;
+                break;
+            case MoveDir.right:
+                ray = new Ray(transform.position, Vector3.right);
+                frontColor = faceColor[2].GetComponent<Renderer>().material.color;
+                break;
+            case MoveDir.left:
+                ray = new Ray(transform.position, Vector3.left);
+                frontColor = faceColor[5].GetComponent<Renderer>().material.color;
+                break;
+        }
+
+        if (Physics.Raycast(ray, out hit, 0.49f))
+        {
+            if (hit.transform.gameObject.GetComponent<Enemy>())
+            {
+                Enemy tmpCube = hit.transform.gameObject.GetComponent<Enemy>();
+
+                if (frontColor == tmpCube.initColor)
+                {
+                    CameraHandler.instance.StartCoroutine(CameraHandler.instance.Shake(TimeShakeEnnemy, MagnShakeEnnemy));
+                    tmpCube.Explode();
+                }
+                else
+                {
+                    SetModeVoid();
+                    StartCoroutine(Death());
+                    Explode();
+                }
+            }
+        }
+    }
+
     public override void EndMoveBehavior(bool slid = false)
     {
         transform.position = new Vector3((int)transform.position.x, initialPosition.y, (int)transform.position.z);
@@ -586,7 +631,7 @@ public class Player : CubeMovable
     {
         base.DoActionDash();
 
-        TestEnemy();
+        TestEnemyDash();
     }
 
     public AnimationCurve stretchCube;
