@@ -746,7 +746,7 @@ public class Player : CubeMovable
             else if (hit.transform.gameObject.GetComponent<CubeDash>())
             {
                 CubeDash tmpCube = hit.transform.gameObject.GetComponent<CubeDash>();
-
+                AudioManager.instance.Play("Bloc Glissant");
                 if ((int)tmpCube.dashOrientation == 0)
                 {
                     orientation = Vector3.forward;

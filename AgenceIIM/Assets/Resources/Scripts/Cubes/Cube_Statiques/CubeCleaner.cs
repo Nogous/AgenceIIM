@@ -18,7 +18,7 @@ public class CubeCleaner : CubeStatic
         if(playertoclean.faceColor[1].GetComponent<Renderer>().material.color != playertoclean.baseColor)
         {
             playertoclean.faceColor[1].GetComponent<Renderer>().material.color = playertoclean.baseColor;
-            AudioManager.instance.Play("cleanSFX");
+            AudioManager.instance.Play("Bloc Cleaner");
         }
     }
 }
