@@ -22,6 +22,9 @@ public class Menu : MonoBehaviour
     private int[] starsMonde2;
     private int[] starsMonde3;
 
+    private int[] unlockWorld;
+    public GameObject[] unlockWorldObj;
+
     [Header("Pages")]
     public GameObject mainMenuCanvas = null;
     public GameObject worldCanvas = null;
@@ -60,6 +63,8 @@ public class Menu : MonoBehaviour
 
     private void Awake()
     {
+        unlockWorld = SaveSystem.LoadWorld();
+
         starsMonde1 = SaveSystem.LoadPoints("starsMonde1");
         starsMonde2 = SaveSystem.LoadPoints("starsMonde2");
         starsMonde3 = SaveSystem.LoadPoints("starsMonde3");
@@ -152,6 +157,17 @@ public class Menu : MonoBehaviour
         eventSystem.SetSelectedGameObject(MainMenuFirstSelectedObj);
     }
 
+    public void UnlockWorld(int id)
+    {
+        unlockWorld[id] = 1;
+        Debug.Log("jyreftesvdyfdbyrd");
+    }
+
+    public void ResetLockWorld(int id)
+    {
+        unlockWorld[id] = 0;
+    }
+
     public void OnClickSelectWorldMenu()
     {
         if (!level2Unlock || !level3Unlock)
@@ -201,6 +217,8 @@ public class Menu : MonoBehaviour
 
             if (tmpCount >= minPointsToUnlockWorld2)
             {
+                if (unlockWorld[0] == 0) return;
+
                 level2Unlock = true;
                 nbStarToUnlockText2.text = conte[1].ToString();
             }
@@ -210,8 +228,9 @@ public class Menu : MonoBehaviour
             }
             if (tmpCount >= minPointsToUnlockWorld3)
             {
-                level3Unlock = true;
+                if (unlockWorld[1] == 0) return;
 
+                level3Unlock = true;
                 nbStarToUnlockText3.text = conte[2].ToString() ;
             }
             else
