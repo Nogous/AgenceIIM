@@ -52,6 +52,7 @@ MonoBehaviour:
   cameraTravel: {fileID: 0}
   useWASDLayout: 0
   player: {fileID: 0}
+  cubesEnnemy: []
   fallDuration: 1
   fallSpeed: 1
   nbEnnemyInit: 1
@@ -63,7 +64,8 @@ MonoBehaviour:
   rainbowMaterial: {fileID: 0}
   colorSpeed: 1
   uiEndLevel: {fileID: 0}
-  doCamTravel: 1
+  txtNbCoups: {fileID: 0}
+  timeEndLevelWin: 1
   DATAnbMoveCam: 0
 --- !u!114 &7196673271184115746
 MonoBehaviour:
@@ -97,32 +99,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: TouchSolPaint
+    clip: {fileID: 8300000, guid: 2f983fa6bc506034ebb0a7e464160996, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: TouchSolNeutre
+    clip: {fileID: 8300000, guid: 6c04023f5e93dc24181ad4d455f9498a, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: AddPaint
+    clip: {fileID: 8300000, guid: 6f781351af85bb340a2a6072877fc8de, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: Death
+    clip: {fileID: 8300000, guid: 394ff775215ba1a4e9565a8b65229916, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
   - name: TNT
     clip: {fileID: 8300000, guid: a45df8647b67d6a44bf65b6fe6b85f52, type: 3}
     source: {fileID: 0}
     volume: 0.75
     pitch: 1
     loop: 0
-  - name: TouchSolPaint
-    clip: {fileID: 8300000, guid: 2f983fa6bc506034ebb0a7e464160996, type: 3}
+  - name: Dash
+    clip: {fileID: 8300000, guid: 7e79d84ab423c874589b6217bded7be5, type: 3}
     source: {fileID: 0}
     volume: 0.75
     pitch: 1
     loop: 0
-  - name: TouchSolNeutre
-    clip: {fileID: 8300000, guid: 6c04023f5e93dc24181ad4d455f9498a, type: 3}
+  - name: Destru
+    clip: {fileID: 8300000, guid: 98efe19ba24963643a3fbcea64b58277, type: 3}
     source: {fileID: 0}
     volume: 0.75
     pitch: 1
     loop: 0
-  - name: AddPaint
-    clip: {fileID: 8300000, guid: 6f781351af85bb340a2a6072877fc8de, type: 3}
+  - name: Bloc Cleaner
+    clip: {fileID: 8300000, guid: d1902cc019b98e7459554c292db0af2f, type: 3}
     source: {fileID: 0}
     volume: 0.75
     pitch: 1
     loop: 0
-  - name: Death
-    clip: {fileID: 8300000, guid: 394ff775215ba1a4e9565a8b65229916, type: 3}
+  - name: Bloc Glissant
+    clip: {fileID: 8300000, guid: e76e701633eb8b74092e12da0083c911, type: 3}
     source: {fileID: 0}
     volume: 0.75
     pitch: 1

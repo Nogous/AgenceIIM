@@ -72,6 +72,9 @@ public class Enemy : CubeMovable
         isProjectionMove = false;
         timerTime = 0;
 
+        isDestroy = false;
+        isDestroying = false;
+
         projection.transform.localPosition = Vector3.zero;
         projection.SetActive(false);
     }
@@ -119,6 +122,8 @@ public class Enemy : CubeMovable
     public override void SetModeVoid()
     {
         base.SetModeVoid();
+
+        initialPosition.y = transform.position.y;
 
         if (isEnemyMoving)
         {
@@ -191,6 +196,7 @@ public class Enemy : CubeMovable
                 projectionPos = projection.transform.position;
             }
             else if(isProjectionMove) MoveProjection();
+            
         }
     }
 
@@ -285,7 +291,7 @@ public class Enemy : CubeMovable
             return;
         }
 
-        if (testPlayerFar())
+        if (TestPlayerFar())
         {
             if (vector == -orientation)
             {
@@ -486,7 +492,7 @@ public class Enemy : CubeMovable
 
     private bool isGoingToDie = false;
 
-    private bool testPlayerFar()
+    private bool TestPlayerFar()
     {
         Ray ray = new Ray(transform.position, orientation);
         RaycastHit hit;

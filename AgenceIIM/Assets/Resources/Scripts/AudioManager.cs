@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError(this + " in " + gameObject.name + " hase be destroyed because an other " + this + " already exists");
+            Debug.LogError(this + " in " + gameObject.name + " has be destroyed because another " + this + " already exists");
             Destroy(gameObject);
             return;
         }
