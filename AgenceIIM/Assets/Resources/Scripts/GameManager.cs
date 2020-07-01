@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
     {
         player.resetOnMove();
         SceneManager.LoadScene(0);
+        Destroy(GameObject.Find("Musique"));
     }
 
     public void UpdateColorRainbow()
