@@ -160,12 +160,14 @@ public class Menu : MonoBehaviour
     public void UnlockWorld(int id)
     {
         unlockWorld[id] = 1;
+        OnClickSelectWorldMenu();
+        SaveSystem.SaveWorld(unlockWorld);
         Debug.Log("jyreftesvdyfdbyrd");
     }
 
-    public void ResetLockWorld(int id)
+    public void ResetLockWorld()
     {
-        unlockWorld[id] = 0;
+        SaveSystem.SaveWorld(new int[2] { 0, 0 });
     }
 
     public void OnClickSelectWorldMenu()
@@ -217,24 +219,39 @@ public class Menu : MonoBehaviour
 
             if (tmpCount >= minPointsToUnlockWorld2)
             {
-                if (unlockWorld[0] == 0) return;
-
-                level2Unlock = true;
-                nbStarToUnlockText2.text = conte[1].ToString();
+                if (unlockWorld[0] == 0)
+                {
+                    unlockWorldObj[0].SetActive(true);
+                }
+                else
+                {
+                    unlockWorldObj[0].SetActive(false);
+                    level2Unlock = true;
+                    nbStarToUnlockText2.text = conte[1].ToString();
+                }
             }
             else
             {
+                unlockWorldObj[0].SetActive(false);
                 nbStarToUnlockText2.text = tmpCount+ " / " + minPointsToUnlockWorld2;
             }
             if (tmpCount >= minPointsToUnlockWorld3)
             {
-                if (unlockWorld[1] == 0) return;
+                if (unlockWorld[1] == 0)
+                {
+                    unlockWorldObj[1].SetActive(true);
+                }
+                else
+                {
+                    unlockWorldObj[1].SetActive(false);
 
-                level3Unlock = true;
-                nbStarToUnlockText3.text = conte[2].ToString() ;
+                    level3Unlock = true;
+                    nbStarToUnlockText3.text = conte[2].ToString();
+                }
             }
             else
             {
+                unlockWorldObj[1].SetActive(false);
                 nbStarToUnlockText3.text = tmpCount + " / " + minPointsToUnlockWorld3;
             }
 
