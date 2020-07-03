@@ -28,13 +28,12 @@ public class AudioManager : MonoBehaviour
         {
             if(s.source == null)
             {
-                s.source = gameObject.AddComponent<AudioSource>();
+                s.source = FindObjectOfType<Camera>().gameObject.AddComponent<AudioSource>();
             }
             s.source.clip = s.clip;
             if(s.playOnAwake)
             {
                 s.source.playOnAwake = true;
-                s.source.Play();
             }
             s.source.volume = volumeGainGlobal;
             s.source.pitch = s.pitch;
@@ -42,6 +41,17 @@ public class AudioManager : MonoBehaviour
         }
         MusicPrefab = Resources.Load<GameObject>("Prefab/Musique");
         SpawnMusic();
+    }
+
+    public void Start()
+    {
+        foreach (Sound s in sounds)
+        {
+            if(s.playOnAwake)
+            {
+                s.source.Play();
+            }
+        }
     }
 
     public void SpawnMusic()
