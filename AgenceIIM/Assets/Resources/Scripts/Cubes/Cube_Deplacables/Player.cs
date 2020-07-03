@@ -819,12 +819,16 @@ public class Player : CubeMovable
             {
                 CubeDetonator tmpDetonator = hit.transform.gameObject.GetComponent<CubeDetonator>();
                 tmpDetonator.ActivateTnt();
+
+                SetModeWait();
                 nbMove++;
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
                 CubeTeleporter tmpTeleporter = hit.transform.gameObject.GetComponent<CubeTeleporter>();
                 tmpTeleporter.TeleportPlayer(this);
+
+                SetModeWait();
                 nbMove++;
             }
             else if (hit.transform.gameObject.GetComponent<CubeSlid>())
