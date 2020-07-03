@@ -24,6 +24,7 @@ public class Menu : MonoBehaviour
 
     private int[] unlockWorld;
     public GameObject[] unlockWorldObj;
+    public GameObject[] unlockWorldObj2;
 
     [Header("Pages")]
     public GameObject mainMenuCanvas = null;
@@ -71,7 +72,6 @@ public class Menu : MonoBehaviour
 
         if (starsMonde1.Length != levelUIMonde1.Length)
         {
-            Debug.Log("reset points Mode 1");
             starsMonde1 = new int[levelUIMonde1.Length];
             for (int i = 0; i < starsMonde1.Length; i++)
             {
@@ -162,7 +162,6 @@ public class Menu : MonoBehaviour
         unlockWorld[id] = 1;
         OnClickSelectWorldMenu();
         SaveSystem.SaveWorld(unlockWorld);
-        Debug.Log("jyreftesvdyfdbyrd");
     }
 
     public void ResetLockWorld()
@@ -222,10 +221,12 @@ public class Menu : MonoBehaviour
                 if (unlockWorld[0] == 0)
                 {
                     unlockWorldObj[0].SetActive(true);
+                    unlockWorldObj2[0].SetActive(false);
                 }
                 else
                 {
                     unlockWorldObj[0].SetActive(false);
+                    unlockWorldObj2[0].SetActive(false);
                     level2Unlock = true;
                     nbStarToUnlockText2.text = conte[1].ToString();
                 }
@@ -233,6 +234,7 @@ public class Menu : MonoBehaviour
             else
             {
                 unlockWorldObj[0].SetActive(false);
+                unlockWorldObj2[0].SetActive(true);
                 nbStarToUnlockText2.text = tmpCount+ " / " + minPointsToUnlockWorld2;
             }
             if (tmpCount >= minPointsToUnlockWorld3)
@@ -240,10 +242,12 @@ public class Menu : MonoBehaviour
                 if (unlockWorld[1] == 0)
                 {
                     unlockWorldObj[1].SetActive(true);
+                    unlockWorldObj2[1].SetActive(false);
                 }
                 else
                 {
                     unlockWorldObj[1].SetActive(false);
+                    unlockWorldObj2[1].SetActive(false);
 
                     level3Unlock = true;
                     nbStarToUnlockText3.text = conte[2].ToString();
@@ -252,6 +256,7 @@ public class Menu : MonoBehaviour
             else
             {
                 unlockWorldObj[1].SetActive(false);
+                unlockWorldObj2[1].SetActive(true);
                 nbStarToUnlockText3.text = tmpCount + " / " + minPointsToUnlockWorld3;
             }
 
@@ -322,10 +327,6 @@ public class Menu : MonoBehaviour
                 currentList = starsMonde3;
                 tmpPoints = StarPointsMonde3;
                 break;
-        }
-        for (int i = 0; i < currentList.Length; i++)
-        {
-            Debug.Log(currentList[i]);
         }
 
         for (int i = 0; i < currentList.Length; i++)
