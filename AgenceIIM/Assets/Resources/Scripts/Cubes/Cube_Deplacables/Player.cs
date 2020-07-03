@@ -777,6 +777,7 @@ public class Player : CubeMovable
                     }
                 }
 
+                nbMove++;
                 SetModeWait();
             }
             else if (hit.transform.gameObject.GetComponent<CubeCleaner>())
