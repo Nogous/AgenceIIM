@@ -20,6 +20,9 @@ public class CubeTNT : CubeStatic
 
     private ParticleSystem tntExplosion;
 
+    [SerializeField] private List<CubeStatic> destroyables = new List<CubeStatic>();
+    private List<CubeMovable> movingDestroyables = new List<CubeMovable>();
+
     public override void OnAwake()
     {
         base.OnAwake();
@@ -27,6 +30,18 @@ public class CubeTNT : CubeStatic
         cubeType = CubeType.TNT;
     }
 
+    private void Start()
+    {
+        if(FindObjectsOfType<Enemy>().Length > 0)
+        {
+            for (int i = FindObjectsOfType<Enemy>().Length - 1; i >= 0; i--)
+            {
+                movingDestroyables.Add(FindObjectsOfType<Enemy>()[i]);
+            }
+        }
+
+        movingDestroyables.Add(FindObjectOfType<Player>());
+    }
 
     public override void ResetCube()
     {
@@ -77,9 +92,24 @@ public class CubeTNT : CubeStatic
 
     private void DestroySurroundings()
     {
-        bool isPlayerDestroyed = false;
+        //bool isPlayerDestroyed = false;
 
-        RaycastHit hit;
+        for(int i = destroyables.Count - 1; i >= 0; i--)
+        {
+            if (destroyables[i].GetComponent<CubeTNT>()) destroyables[i].GetComponent<CubeTNT>().DetonateTnt();
+            else destroyables[i].gameObject.SetActive(false);
+        }
+
+        for (int j = movingDestroyables.Count - 1; j >= 0; j--)
+        {
+            if(Vector3.Distance(transform.position, movingDestroyables[j].transform.position) <= 1 && movingDestroyables[j].gameObject.activeSelf)
+            {
+                if (movingDestroyables[j].GetComponent<Player>()) movingDestroyables[j].GetComponent<Player>().SetDeath();
+                else if (movingDestroyables[j].GetComponent<Enemy>()) movingDestroyables[j].GetComponent<Enemy>().Explode();
+            }
+        }
+
+        /*RaycastHit hit;
 
         for (int i = 0; i < 4; i++)
         {
@@ -235,7 +265,7 @@ public class CubeTNT : CubeStatic
                     isPlayerDestroyed = true;
                 }
             }
-        }
+        }*/
 
 
         GameManager.instance.TNTExplode();
