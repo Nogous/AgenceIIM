@@ -21,6 +21,8 @@ public class Enemy : CubeMovable
     [SerializeField] private GameObject projection = null;
     [SerializeField] private float projectTimer = 2.5f;
 
+    private Vector3 projectionInitPos;
+
     private bool isProjecting = false;
     private bool isProjectionMove = false;
 
@@ -122,8 +124,9 @@ public class Enemy : CubeMovable
     public override void SetModeVoid()
     {
         base.SetModeVoid();
+        projectionInitPos = initialPosition;
 
-        initialPosition.y = transform.position.y;
+        projectionInitPos.y = transform.position.y;
 
         if (isEnemyMoving)
         {
@@ -153,7 +156,7 @@ public class Enemy : CubeMovable
             {
                 if (CurrentMoveProject == MoveList.Count && !revertMoveProject)
                 {
-                    if (projection.transform.position == initialPosition)
+                    if (projection.transform.position == projectionInitPos)
                     {
                         CurrentMoveProject = 0;
                     }
