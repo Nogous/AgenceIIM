@@ -23,6 +23,8 @@ public class MenuEditor : Editor
             SaveSystem.SavePoints(new int[0], "starsMonde1");
             SaveSystem.SavePoints(new int[0], "starsMonde2");
             SaveSystem.SavePoints(new int[0], "starsMonde3");
+
+            SaveSystem.SaveWorld(new int[2] {0,0});
         }
 
         if (GUILayout.Button("Unlock All"))
@@ -38,6 +40,11 @@ public class MenuEditor : Editor
 
         if (GUILayout.Button("SetQwerty"))
         {
+            GameManager.isQwerty = true;
+            Debug.Log(GameManager.isQwerty);
+
+            myMenu.managerAzerty.enabled = false;
+            myMenu.managerQwerty.enabled = true;
         }
         if (GUILayout.Button("SetAzerty"))
         {

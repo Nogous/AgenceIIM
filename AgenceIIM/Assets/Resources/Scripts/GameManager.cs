@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         DATATimeInTheGame();
 
-        if (replayer.GetButtonDown("Reset"))
+        if (replayer.GetButtonDown("Reset") && player.canReset)
         {
             if (!isWining && !player.isDeaing)
             {
@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
     {
         player.resetOnMove();
         SceneManager.LoadScene(0);
+        Destroy(GameObject.Find("Musique"));
     }
 
     public void UpdateColorRainbow()

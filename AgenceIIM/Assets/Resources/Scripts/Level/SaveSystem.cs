@@ -61,6 +61,41 @@ public static class SaveSystem
 
     #endregion
 
+    #region world
+
+    public static void SaveWorld(int[] worldsUnlock)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/world.save";
+
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, worldsUnlock);
+        stream.Close();
+
+
+    }
+
+    public static int[] LoadWorld()
+    {
+        string path = Application.persistentDataPath + "/world.save";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            int[] points = formatter.Deserialize(stream) as int[];
+            stream.Close();
+            return points;
+        }
+        else
+        {
+            SaveWorld(new int[2] {0,0});
+            return LoadWorld();
+        }
+    }
+    #endregion
+
     #region level
     public static void SaveLevel(Level level, string _name = null)
     {

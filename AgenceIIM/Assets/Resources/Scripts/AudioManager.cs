@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    [Range(0f,1f)] public float volumeGainSetting = 0.7f;
+    public GameObject MusicPrefab;
+    public static float volumeGainGlobal;
     public Sound[] sounds;
-
     public static AudioManager instance;
+    
 
     private void Awake()
     {
@@ -20,18 +23,90 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        volumeGainGlobal = volumeGainSetting;
         foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
+            if(s.source == null)
+            {
+                s.source = FindObjectOfType<Camera>().gameObject.AddComponent<AudioSource>();
+            }
             s.source.clip = s.clip;
-
-            s.source.volume = s.volume;
+            if(s.playOnAwake)
+            {
+                s.source.playOnAwake = true;
+            }
+            s.source.volume = volumeGainGlobal;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+        MusicPrefab = Resources.Load<GameObject>("Prefab/Musique");
+        SpawnMusic();
     }
 
+    public void Start()
+    {
+        foreach (Sound s in sounds)
+        {
+            if(s.playOnAwake)
+            {
+                s.source.Play();
+            }
+        }
+    }
+
+    public void SpawnMusic()
+    {
+        if(GameManager.instance != null)
+        {
+            switch(GameManager.instance.idMonde)
+            {
+                case Monde.Monde1 :
+                {
+                    GameObject musicGO = Instantiate(MusicPrefab);
+                    musicGO.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("/Audio/Musique/Music_Monde1");
+                    musicGO.GetComponent<AudioSource>().volume = volumeGainGlobal;
+                    musicGO.GetComponent<AudioSource>().loop = true;
+                    DontDestroyOnLoad(musicGO);
+                    musicGO.GetComponent<AudioSource>().Play();
+
+                }
+                break;
+                case Monde.Monde2 :
+                {
+                    GameObject musicGO = Instantiate(MusicPrefab);
+                    musicGO.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("/Audio/Musique/Music_Monde2");
+                    musicGO.GetComponent<AudioSource>().volume = volumeGainGlobal;
+                    musicGO.GetComponent<AudioSource>().loop = true;
+                    DontDestroyOnLoad(musicGO);
+                    musicGO.GetComponent<AudioSource>().Play();
+                }
+                break;
+                case Monde.Monde3 :
+                {
+                    GameObject musicGO = Instantiate(MusicPrefab);
+                    musicGO.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("/Audio/Musique/Music_Monde3");
+                    musicGO.GetComponent<AudioSource>().volume = volumeGainGlobal;
+                    musicGO.GetComponent<AudioSource>().loop = true;
+                    DontDestroyOnLoad(musicGO);
+                    musicGO.GetComponent<AudioSource>().Play();
+                }
+                break;
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void ChangeGainValue(Single param)
+    {
+        volumeGainSetting = param;
+        volumeGainGlobal = volumeGainSetting;
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = volumeGainGlobal;
+        }
+    }
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -90,10 +165,12 @@ public class Sound
     public string name;
 
     public AudioClip clip;
-
+    
     [HideInInspector] public AudioSource source;
-    [Range(0f, 1f)] public float volume = 1f;
+    [Range(0f, 1f)] public float volume = 0.7f;
     [Range(.1f, 3f)] public float pitch = 1f;
-
+    public bool playOnAwake;
     public bool loop;
 }
+
+
