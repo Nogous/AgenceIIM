@@ -67,11 +67,6 @@ public class SpawnLevel : MonoBehaviour
             UpdateFallLevel();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartSpawnLevel();
-        }
-
         if (!isUnPopConpleat)
         {
             UpdateFloatLevel();
