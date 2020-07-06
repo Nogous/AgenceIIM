@@ -156,7 +156,7 @@ public class Enemy : CubeMovable
             {
                 if (CurrentMoveProject == MoveList.Count && !revertMoveProject)
                 {
-                    if (projection.transform.position == initialPosition)
+                    if (projection.transform.position == projectionInitPos)
                     {
                         CurrentMoveProject = 0;
                     }
