@@ -373,7 +373,7 @@ public class Enemy : CubeMovable
         }
     }
 
-    public override void TestTile()
+    public override void TestTile(bool isTNT = false)
     {
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
