@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         DATATimeInTheGame();
 
-        if (replayer.GetButtonDown("Reset"))
+        if (replayer.GetButtonDown("Reset") && player.canReset)
         {
             if (!isWining && !player.isDeaing)
             {
