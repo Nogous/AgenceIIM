@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -354,6 +354,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1605237471}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &87062171 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114865479709440612, guid: c02affec0ff714b4d85448903c4eef37,
+    type: 3}
+  m_PrefabInstance: {fileID: 1605237471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87062170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c605decfff5881247ab920cd4605801b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &87167316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -591,6 +603,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6614239426459797552}
     m_Modifications:
+    - target: {fileID: 1350833571919295869, guid: d146c79678cbcfc4a9891de0b0c20487,
+        type: 3}
+      propertyPath: destroyables.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350833571919295869, guid: d146c79678cbcfc4a9891de0b0c20487,
+        type: 3}
+      propertyPath: destroyables.Array.data[0]
+      value: 
+      objectReference: {fileID: 2112206569}
+    - target: {fileID: 1350833571919295869, guid: d146c79678cbcfc4a9891de0b0c20487,
+        type: 3}
+      propertyPath: destroyables.Array.data[1]
+      value: 
+      objectReference: {fileID: 87062171}
     - target: {fileID: 8681370395756825898, guid: d146c79678cbcfc4a9891de0b0c20487,
         type: 3}
       propertyPath: m_Name
@@ -10306,6 +10333,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1438067475}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2112206569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114865479709440612, guid: c02affec0ff714b4d85448903c4eef37,
+    type: 3}
+  m_PrefabInstance: {fileID: 1438067475}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112206565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c605decfff5881247ab920cd4605801b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2140027926
 GameObject:
   m_ObjectHideFlags: 0
