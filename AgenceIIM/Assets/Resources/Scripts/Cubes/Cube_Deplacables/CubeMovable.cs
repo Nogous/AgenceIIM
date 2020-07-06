@@ -45,7 +45,7 @@ public class CubeMovable : Cube
 
     public GameObject teleportDestination = null;
 
-    protected Action DoAction;
+    public Action DoAction;
 
     [SerializeField] protected ParticleSystem particleDeath = null;
     public Color color = Color.white;

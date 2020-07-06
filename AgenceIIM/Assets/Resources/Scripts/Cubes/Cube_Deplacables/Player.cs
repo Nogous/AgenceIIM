@@ -333,7 +333,7 @@ public class Player : CubeMovable
         canReset = true;
     }
 
-    private void DoActionWait()
+    public void DoActionWait()
     {
         #region normal
         if (!CameraHandler.instance.position)

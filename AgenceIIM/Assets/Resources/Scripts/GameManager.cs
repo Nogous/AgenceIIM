@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
 
     public void TNTExplode()
     {
-        player.TestTile();
+        if(player.DoAction == player.DoActionWait)player.TestTile();
 
         for (int i = cubesEnnemy.Count; i-->0;)
         {
