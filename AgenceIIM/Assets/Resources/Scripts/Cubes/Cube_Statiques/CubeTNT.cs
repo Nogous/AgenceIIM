@@ -104,7 +104,7 @@ public class CubeTNT : CubeStatic
 
         for (int j = movingDestroyables.Count - 1; j >= 0; j--)
         {
-            if(Vector3.Distance(transform.position, movingDestroyables[j].transform.position) <= 1 && movingDestroyables[j].gameObject.activeSelf)
+            if(Vector3.Distance(transform.position, movingDestroyables[j].transform.position) <= 1.5 && movingDestroyables[j].gameObject.activeSelf)
             {
                 if (movingDestroyables[j].GetComponent<Player>()) movingDestroyables[j].GetComponent<Player>().SetDeath();
                 else if (movingDestroyables[j].GetComponent<Enemy>()) movingDestroyables[j].GetComponent<Enemy>().Explode();
