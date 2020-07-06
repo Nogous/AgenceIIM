@@ -54,6 +54,7 @@ public class Player : CubeMovable
 
     [HideInInspector] public int nbMove = 0;
 
+    public bool canReset = true;
     
     public override void OnAwake()
     {
@@ -284,6 +285,8 @@ public class Player : CubeMovable
     {
         transform.position = new Vector3((int)transform.position.x, initialPosition.y, (int)transform.position.z);
 
+        canReset = true;
+
         if (trail != null)
         {
             trail.gameObject.SetActive(false);
@@ -314,6 +317,8 @@ public class Player : CubeMovable
         }
         gameObject.SetActive(true);
 
+        transform.localScale = Vector3.one;
+
         SetModeWait();
     }
 
@@ -324,7 +329,8 @@ public class Player : CubeMovable
     private void SetModeWait()
     {
         DoAction = DoActionWait;
-        
+
+        canReset = true;
     }
 
     private void DoActionWait()
@@ -605,6 +611,8 @@ public class Player : CubeMovable
             return;
         }
 
+        canReset = false;
+
         OnMove?.Invoke(orientation);
 
         RotationCheck();
@@ -678,6 +686,7 @@ public class Player : CubeMovable
         {
             trail.gameObject.SetActive(true);
         }
+        canReset = false;
 
         RotationCheck();
 
@@ -697,6 +706,13 @@ public class Player : CubeMovable
     }
 
     #endregion
+
+    protected override void SetModeSlid()
+    {
+        canReset = false;
+
+        base.SetModeSlid();
+    }
 
     #endregion
 
