@@ -750,7 +750,7 @@ public class Player : CubeMovable
     }
 
 
-    public override void TestTile()
+    public override void TestTile(bool isTNT = false)
     {
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
@@ -792,7 +792,7 @@ public class Player : CubeMovable
                         tmpCube.mask.transform.localScale = Vector3.Lerp(tmpCube.initalScale, Vector3.zero, 1 - (float)tmpCube.colorPotencial / 100);
                     }
                 }
-
+                if(!isTNT)
                 nbMove++;
                 SetModeWait();
             }
@@ -801,7 +801,8 @@ public class Player : CubeMovable
                 CubeCleaner tmpCleaner = hit.transform.gameObject.GetComponent<CubeCleaner>();
                 tmpCleaner.Clean(this);
 
-                nbMove++;
+                if (!isTNT)
+                    nbMove++;
 
                 SetModeWait();
             }
@@ -838,7 +839,8 @@ public class Player : CubeMovable
                 tmpDetonator.ActivateTnt();
 
                 SetModeWait();
-                nbMove++;
+                if (!isTNT)
+                    nbMove++;
             }
             else if (hit.transform.gameObject.GetComponent<CubeTeleporter>())
             {
@@ -846,7 +848,8 @@ public class Player : CubeMovable
                 tmpTeleporter.TeleportPlayer(this);
 
                 SetModeWait();
-                nbMove++;
+                if (!isTNT)
+                    nbMove++;
             }
             else if (hit.transform.gameObject.GetComponent<CubeSlid>())
             {
@@ -854,13 +857,15 @@ public class Player : CubeMovable
                 else
                 {
                     SetModeWait();
-                    nbMove++;
+                    if (!isTNT)
+                        nbMove++;
                 }
             }
             else
             {
                 SetModeWait();
-                nbMove++;
+                if (!isTNT)
+                    nbMove++;
             }
         }
         else

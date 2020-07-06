@@ -209,7 +209,7 @@ public class CubeMovable : Cube
         return false;
     }
 
-    virtual public void TestTile()
+    virtual public void TestTile(bool isTNT = false)
     {
 
     }
