@@ -32,7 +32,9 @@ public class CubeTNT : CubeStatic
 
     private void Start()
     {
-        if(FindObjectsOfType<Enemy>().Length > 0)
+        GameManager.instance.OnResetLevel += ResetCube;
+
+        if (FindObjectsOfType<Enemy>().Length > 0)
         {
             for (int i = FindObjectsOfType<Enemy>().Length - 1; i >= 0; i--)
             {
