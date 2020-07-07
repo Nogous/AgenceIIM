@@ -44,7 +44,7 @@ public class CameraHandler : MonoBehaviour
         {
             Travel();
         }
-        else if (GameManager.instance.replayer.GetButtonDown("Camera_Travel") || StartTravel())
+        else if (GameManager.instance.replayer.GetButtonDown("Camera_Travel"))
         {
             GameManager.instance.cameraTravel.MoveToNextPoint();
             GameManager.instance.DATAnbMoveCam++;
@@ -52,9 +52,11 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
-    public bool StartTravel()
+    public void StartTravel()
     {
-       return true;
+            GameManager.instance.cameraTravel.MoveToNextPoint();
+            GameManager.instance.DATAnbMoveCam++;
+            InitTravel();
     }
 
     public void InitTravel()
