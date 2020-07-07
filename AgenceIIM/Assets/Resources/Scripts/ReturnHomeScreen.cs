@@ -11,7 +11,7 @@ public class ReturnHomeScreen : MonoBehaviour
 
     public void CameraTravel()
     {
-        CameraHandler.instance.Travel();
+        CameraHandler.instance.StartTravel();
     }
 
     public void ResetLevel()
