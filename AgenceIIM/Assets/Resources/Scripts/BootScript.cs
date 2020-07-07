@@ -38,9 +38,11 @@ public class BootScript : MonoBehaviour
     }
 
     void Awake()
-    {   
-        menuPC = GameObject.Find("Scene_Menu_PC");
-        menuMobile = GameObject.Find("Scene_Menu_Android");
+    {
+        if (menuPC == null)
+            menuPC = GameObject.Find("Scene_Menu_PC");
+        if (menuMobile == null)
+            menuMobile = GameObject.Find("Scene_Menu_Android");
         DeterminPlatform();
     }
 

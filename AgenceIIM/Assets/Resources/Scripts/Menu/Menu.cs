@@ -390,6 +390,7 @@ public class Menu : MonoBehaviour
         }
 
         eventSystem.SetSelectedGameObject(levelFirstSelectedObj);
+        OnclikSelecteLevel(1);
     }
 
     public void OnClickStartLevel()
@@ -412,20 +413,21 @@ public class Menu : MonoBehaviour
     {
         currentId = i-1;
         
-        nameLeveltextEnd.text = string.Format(nameLeveltextTrad.text, currentWorld.ToString(), currentId.ToString());
+        nameLeveltextEnd.text = string.Format(nameLeveltextTrad.text, currentWorld.ToString(), (currentId+1).ToString());
         
-        nbcouptextEnd.text = string.Format(nbcouptextTrad.text, i);
-        nbEnnemietextEnd.text = string.Format(nbEnnemietextTrad.text, i);
 
 
         LevelMenu[] currentList = levelObjMonde1;
+        StarPoints[] currenPoint = StarPointsMonde1;
         switch (currentWorld)
         {
             case 2:
                 currentList = levelObjMonde2;
+                currenPoint = StarPointsMonde2;
                 break;
             case 3:
                 currentList = levelObjMonde3;
+                currenPoint = StarPointsMonde3;
                 break;
         }
 
@@ -439,9 +441,15 @@ public class Menu : MonoBehaviour
 
         if (currentList.Length > currentId)
         {
+
             currentLevel = currentList[currentId];
             if (currentLevel != null)
             {
+                // info level
+                nbcouptextEnd.text = string.Format(nbcouptextTrad.text, currenPoint[currentId].nbblock);
+                nbEnnemietextEnd.text = string.Format(nbEnnemietextTrad.text, currenPoint[currentId].nbenemie);
+
+                // spawn level
                 currentLevel.gameObject.SetActive(true);
                 currentLevel.LoadLevel();
             }
@@ -512,6 +520,8 @@ public class StarPoints
     public int minPoints3Star;
     public int minPoints2Star;
     public Sprite sprite;
+    public int nbenemie;
+    public int nbblock;
 }
 
 
