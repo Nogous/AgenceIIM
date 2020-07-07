@@ -73,7 +73,6 @@ public class CameraHandler : MonoBehaviour
         pipCameraGO.transform.position = positionTargetPip;
         mainCameraGO.transform.position = positionTargetMain;
         travel = false;
-        position = !position;
     }
 
     public IEnumerator Shake(float duration, float magnitude)

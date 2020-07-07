@@ -73,6 +73,7 @@ public class CameraTravel : MonoBehaviour
         {
             moveEnd = true;
             start = false;
+            CameraHandler.instance.position = !CameraHandler.instance.position;
         }
 
         Vector3 tmpPos = Vector3.Lerp(
