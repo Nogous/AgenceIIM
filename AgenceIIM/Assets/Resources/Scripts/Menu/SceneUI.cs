@@ -30,6 +30,6 @@ public class SceneUI : MonoBehaviour
                 break;
         }
 
-        idLevelEnd.text = string.Format(idLevelTrad.text, i, GameManager.instance.idLevel);
+        idLevelEnd.text = string.Format(idLevelTrad.text, i, (GameManager.instance.idLevel+1).ToString());
     }
 }
