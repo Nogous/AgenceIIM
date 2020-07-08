@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 public class SceneUI : MonoBehaviour
 {
-    public Text idLevelTrad;
-    public Text idLevelEnd;
+    [SerializeField]private Text idLevelTrad;
+    [SerializeField] private Text idLevelEnd;
 
-    public Text idLevelTradMobile;
-    public Text idLevelEndMobile;
+    [SerializeField] private Text idLevelTradMobile;
+    [SerializeField] private Text idLevelEndMobile;
 
     void Start()
     {
-
         if (Application.platform == RuntimePlatform.Android)
         {
             idLevelTrad = idLevelTradMobile;
