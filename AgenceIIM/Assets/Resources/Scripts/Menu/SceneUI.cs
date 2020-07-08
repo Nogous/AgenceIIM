@@ -8,10 +8,22 @@ public class SceneUI : MonoBehaviour
     public Text idLevelTrad;
     public Text idLevelEnd;
 
+    public Text idLevelTradMobile;
+    public Text idLevelEndMobile;
+
     void Start()
     {
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            idLevelTrad = idLevelTradMobile;
+            idLevelEnd = idLevelEndMobile;
+        }
+
+        if (idLevelTrad == null)
         idLevelTrad = GameObject.Find("levelIdTrad").GetComponent<Text>();
-        idLevelEnd = GameObject.Find("LevelIdEnd").GetComponent<Text>();
+        if (idLevelEnd == null)
+            idLevelEnd = GameObject.Find("LevelIdEnd").GetComponent<Text>();
     }
 
     void Update()
