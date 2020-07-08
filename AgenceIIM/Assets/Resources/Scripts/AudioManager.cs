@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [Range(0f,1f)] public float volumeGainSetting = 0.7f;
+    [Range(0f,1f)] public float volumeGainSetting = volumeGainGlobal;
     public GameObject MusicPrefab;
     public static float volumeGainGlobal;
     public Sound[] sounds;
