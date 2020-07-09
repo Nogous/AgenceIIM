@@ -317,6 +317,13 @@ public class Enemy : CubeMovable
         DoAction = DoActionMove;
     }
 
+    public override void DoActionSlid()
+    {
+        base.DoActionSlid();
+
+        TestPlayer();
+    }
+
     private bool isDestroy = false;
     private bool isDestroying = false;
 
