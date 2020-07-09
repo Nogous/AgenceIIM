@@ -64,6 +64,11 @@ public class Menu : MonoBehaviour
 
     private void Awake()
     {
+        loadSaves();
+    }
+
+    public void loadSaves()
+    {
         unlockWorld = SaveSystem.LoadWorld();
 
         starsMonde1 = SaveSystem.LoadPoints("starsMonde1");
@@ -106,7 +111,16 @@ public class Menu : MonoBehaviour
             levelUIMonde1[i].idLevel = index;
             index++;
         }
+    }
 
+    public void ResetScore()
+    {
+        SaveSystem.SavePoints(new int[0], "starsMonde1");
+        SaveSystem.SavePoints(new int[0], "starsMonde2");
+        SaveSystem.SavePoints(new int[0], "starsMonde3");
+
+        SaveSystem.SaveWorld(new int[2] { 0, 0 });
+        loadSaves();
     }
 
     public void ChangeKeyBind(Text _myText = null)
