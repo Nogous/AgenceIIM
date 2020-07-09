@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
     {
         player.resetOnMove();
         SceneManager.LoadScene(0);
-        Destroy(GameObject.Find("Musique"));
+        Destroy(GameObject.Find("Musique(Clone)"));
     }
 
     public void UpdateColorRainbow()

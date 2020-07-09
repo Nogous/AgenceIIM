@@ -38,11 +38,12 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
         MusicPrefab = Resources.Load<GameObject>("Prefab/Musique");
-        SpawnMusic();
+        
     }
 
     public void Start()
     {
+        SpawnMusic();
         foreach (Sound s in sounds)
         {
             if(s.playOnAwake)
@@ -61,7 +62,7 @@ public class AudioManager : MonoBehaviour
                 case Monde.Monde1 :
                 {
                     GameObject musicGO = Instantiate(MusicPrefab);
-                    musicGO.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("/Audio/Musique/Music_Monde1");
+                    musicGO.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Audio/Musique/MusicMonde1");
                     musicGO.GetComponent<AudioSource>().volume = volumeGainGlobal;
                     musicGO.GetComponent<AudioSource>().loop = true;
                     DontDestroyOnLoad(musicGO);
@@ -72,7 +73,7 @@ public class AudioManager : MonoBehaviour
                 case Monde.Monde2 :
                 {
                     GameObject musicGO = Instantiate(MusicPrefab);
-                    musicGO.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("/Audio/Musique/Music_Monde2");
+                    musicGO.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Audio/Musique/MusicMonde2");
                     musicGO.GetComponent<AudioSource>().volume = volumeGainGlobal;
                     musicGO.GetComponent<AudioSource>().loop = true;
                     DontDestroyOnLoad(musicGO);
@@ -82,7 +83,7 @@ public class AudioManager : MonoBehaviour
                 case Monde.Monde3 :
                 {
                     GameObject musicGO = Instantiate(MusicPrefab);
-                    musicGO.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("/Audio/Musique/Music_Monde3");
+                    musicGO.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Audio/Musique/MusicMonde3");
                     musicGO.GetComponent<AudioSource>().volume = volumeGainGlobal;
                     musicGO.GetComponent<AudioSource>().loop = true;
                     DontDestroyOnLoad(musicGO);
@@ -93,6 +94,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Could not spawn music");
             return;
         }
     }
