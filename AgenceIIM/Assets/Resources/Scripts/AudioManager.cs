@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [Range(0f,1f)] public float volumeGainSetting = volumeGainGlobal;
     public GameObject MusicPrefab;
-    public static float volumeGainGlobal;
+    public static float volumeGainGlobal = 0.7f;
     public Sound[] sounds;
     public static AudioManager instance;
     
@@ -23,7 +22,6 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        volumeGainGlobal = volumeGainSetting;
         foreach (Sound s in sounds)
         {
             if(s.source == null)
@@ -100,8 +98,7 @@ public class AudioManager : MonoBehaviour
     }
     public void ChangeGainValue(Single param)
     {
-        volumeGainSetting = param;
-        volumeGainGlobal = volumeGainSetting;
+        volumeGainGlobal = param;
         foreach (Sound s in sounds)
         {
             s.source.volume = volumeGainGlobal;
