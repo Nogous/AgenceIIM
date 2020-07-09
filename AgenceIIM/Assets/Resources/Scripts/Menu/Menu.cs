@@ -466,13 +466,67 @@ public class Menu : MonoBehaviour
                 // spawn level
                 currentLevel.gameObject.SetActive(true);
                 currentLevel.LoadLevel();
-                
-                if(stars[0]!= null)
-                stars[0].SetActive(true);
+
+                if (true)
+                {
+                    if (stars[0] != null)
+                        stars[0].SetActive(true);
+                    if (stars[1] != null)
+                        stars[1].SetActive(true);
+                    if (stars[2] != null)
+                        stars[2].SetActive(true);
+                }
+                /////////////////////////////////////////////////////////////////
+                int[] currentListi = new int[0];
+
+
+                StarPoints[] tmpPointsi = new StarPoints[0];
+
+                switch (currentWorld)
+                {
+                    case 1:
+                        currentListi = starsMonde1;
+                        tmpPointsi = StarPointsMonde1;
+                        break;
+                    case 2:
+                        currentListi = starsMonde2;
+                        tmpPointsi = StarPointsMonde2;
+                        break;
+                    case 3:
+                        currentListi = starsMonde3;
+                        tmpPointsi = StarPointsMonde3;
+                        break;
+                }
+
+                if (stars[0] != null)
+                    stars[0].SetActive(false);
                 if (stars[1] != null)
-                    stars[1].SetActive(true);
+                    stars[1].SetActive(false);
                 if (stars[2] != null)
-                    stars[2].SetActive(true);
+                    stars[2].SetActive(false);
+
+                i = i - 1;
+                //Debug.Log(currentListi[i] +" , " + tmpPointsi[i].minPoints2Star + " , " + tmpPointsi[i].minPoints3Star);
+
+                if (currentListi[i] >= 0)
+                {
+                    if (stars[0] != null)
+                        stars[0].SetActive(true);
+
+                    if (currentListi[i] <= tmpPointsi[i].minPoints2Star)
+                    {
+                        if (stars[1] != null)
+                            stars[1].SetActive(true);
+
+                        if (currentListi[i] <= tmpPointsi[i].minPoints3Star)
+                        {
+                            if (stars[2] != null)
+                                stars[2].SetActive(true);
+                        }
+                    }
+                }
+
+                /////////////////////////////////////////////////////////////////
             }
         }
     }
