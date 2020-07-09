@@ -20,11 +20,7 @@ public class MenuEditor : Editor
 
         if (GUILayout.Button("Reset Score"))
         {
-            SaveSystem.SavePoints(new int[0], "starsMonde1");
-            SaveSystem.SavePoints(new int[0], "starsMonde2");
-            SaveSystem.SavePoints(new int[0], "starsMonde3");
-
-            SaveSystem.SaveWorld(new int[2] {0,0});
+            myMenu.ResetScore();
         }
 
         if (GUILayout.Button("Unlock All"))
