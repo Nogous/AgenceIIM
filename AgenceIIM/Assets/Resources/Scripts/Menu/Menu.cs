@@ -54,6 +54,8 @@ public class Menu : MonoBehaviour
     public LevelMenu[] levelObjMonde2;
     public LevelMenu[] levelObjMonde3;
 
+    public GameObject[] stars;
+
     public Text nameLeveltextTrad = null;
     public Text nameLeveltextEnd = null;
     public Text nbcouptextTrad = null;
@@ -428,8 +430,6 @@ public class Menu : MonoBehaviour
         currentId = i-1;
         
         nameLeveltextEnd.text = string.Format(nameLeveltextTrad.text, currentWorld.ToString(), (currentId+1).ToString());
-        
-
 
         LevelMenu[] currentList = levelObjMonde1;
         StarPoints[] currenPoint = StarPointsMonde1;
@@ -466,6 +466,13 @@ public class Menu : MonoBehaviour
                 // spawn level
                 currentLevel.gameObject.SetActive(true);
                 currentLevel.LoadLevel();
+                
+                if(stars[0]!= null)
+                stars[0].SetActive(true);
+                if (stars[1] != null)
+                    stars[1].SetActive(true);
+                if (stars[2] != null)
+                    stars[2].SetActive(true);
             }
         }
     }

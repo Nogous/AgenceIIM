@@ -29,10 +29,6 @@ public static class SaveSystem
         if (idLevel >= points.Length)
         {
             Debug.LogError("Save error");
-
-            SavePoints(new int[0], _nameMonde);
-            LoadPoints(_nameMonde);
-            SetPoints(_nameMonde, idLevel, score);
         }
         else
         {
